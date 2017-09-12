@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Kidoo</string>
+
+    <string name="tip_double_click_exit">再次点击退出应用</string>
+
+    <string name="copy_success">复制成功</string>
+</resources>
