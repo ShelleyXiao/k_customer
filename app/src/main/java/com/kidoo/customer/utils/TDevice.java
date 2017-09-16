@@ -177,32 +177,7 @@ public class TDevice {
         gotoMarket(context, pckName);
     }
 
-    public static int getVersionCode() {
-        return getVersionCode(AppContext.context().getPackageName());
-    }
 
-    public static int getVersionCode(String packageName) {
-        try {
-            return AppContext.context()
-                    .getPackageManager()
-                    .getPackageInfo(packageName, 0)
-                    .versionCode;
-        } catch (PackageManager.NameNotFoundException ex) {
-            return 0;
-        }
-    }
-
-    public static String getVersionName() {
-        try {
-            return AppContext
-                    .context()
-                    .getPackageManager()
-                    .getPackageInfo(AppContext.context().getPackageName(), 0)
-                    .versionName;
-        } catch (PackageManager.NameNotFoundException ex) {
-            return "undefined version name";
-        }
-    }
 
     public static void installAPK(Context context, File file) {
         if (file == null || !file.exists())
