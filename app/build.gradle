@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'bugly'
 
+apply from: '../config/properties-util.gradle'
+
 bugly {
     appId = '182ff3e5bd'
     appKey = '1b97ca4f-0fd0-4cad-af31-c49d64592774'
@@ -34,6 +36,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    //signing files settings
+    signingConfigs {
+        if (propertyHaveSigningConfigs) {
+            debug {
+                storeFile file(propertyStoreFileStr)
+                storePassword propertyStorePwdStr
+                keyAlias propertyKeyAliasStr
+                keyPassword propertyKeyPwdStr
+            }
+
+            release {
+                storeFile file(propertyStoreFileStr)
+                storePassword propertyStorePwdStr
+                keyAlias propertyKeyAliasStr
+                keyPassword propertyKeyPwdStr
+            }
+        }
+    }
 }
 
 dependencies {
@@ -60,4 +82,7 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'
 
     compile 'com.google.zxing:core:3.3.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+    compile 'net.oschina.common:common:0.1.6'
 }
