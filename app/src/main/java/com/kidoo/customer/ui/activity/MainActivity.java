@@ -1,44 +1,49 @@
 package com.kidoo.customer.ui;
 
-import android.os.Bundle;
+import android.Manifest;
 import android.os.SystemClock;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.kidoo.customer.R;
 import com.kidoo.customer.ui.base.BaseActivity;
-import com.tencent.bugly.crashreport.CrashReport;
+import com.kidoo.customer.ui.fragment.NavigationFragement;
+import com.kidoo.customer.widget.NavButtomButton;
+
+import java.util.List;
+
+import butterknife.Bind;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener
+,NavigationFragement.OnNavigationReselectListener, EasyPermissions.PermissionCallbacks{
 
     private long mBackPressedTime;
 
-    private Button btnTestJavaCrash;
-    private Button btnTestANRCrash;
-    private Button btnTestNativeCrash;
+    private NavigationFragement mNavBar;
 
+    @Bind(R.id.activity_main_ui)
+    LinearLayout mMainUi;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getContentView() {
+        return R.layout.activity_main;
+    }
 
-        btnTestJavaCrash = (Button) findViewById(R.id.btnTestJavaCrash);
-        btnTestANRCrash = (Button) findViewById(R.id.btnTestANRCrash);
-        btnTestNativeCrash = (Button)findViewById(R.id.btnTestNativeCrash);
-        btnTestJavaCrash.setOnClickListener(this);
-        btnTestANRCrash.setOnClickListener(this);
-        btnTestNativeCrash.setOnClickListener(this);
-
-
+    @Override
+    protected void initWidget() {
+        super.initWidget();
+        FragmentManager manager = getSupportFragmentManager();
+        mNavBar = ((NavigationFragement) manager.findFragmentById(R.id.fag_nav));
+        mNavBar.setup(this, manager, R.id.main_container, this);
     }
 
     @Override
     public void onBackPressed() {
-
-
         long curTime = SystemClock.uptimeMillis();
         if ((curTime - mBackPressedTime) < (3 * 1000)) {
             finish();
@@ -52,15 +57,36 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnTestJavaCrash: // 点击测试Java Crash
-                CrashReport.testJavaCrash();
-                break;
-            case R.id.btnTestANRCrash: // 点击测试ANR Crash
-                CrashReport.testANRCrash();
-                break;
-            case R.id.btnTestNativeCrash: // 点击测试Native Crash
-                CrashReport.testNativeCrash();
-                break;
+
         }
+    }
+
+    @Override
+    public void onReselect(NavButtomButton navigationButton) {
+
+    }
+
+    /**
+     * proxy request permission
+     */
+    @AfterPermissionGranted(NearbyActivity.LOCATION_PERMISSION)
+    private void requestLocationPermission() {
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.READ_PHONE_STATE)) {
+//            startLbs();
+        } else {
+            EasyPermissions.requestPermissions(this, getString(R.string.need_lbs_permission_hint), LOCATION_PERMISSION,
+                    Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_PHONE_STATE);
+        }
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
     }
 }

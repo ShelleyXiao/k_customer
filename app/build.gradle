@@ -42,14 +42,14 @@ android {
     signingConfigs {
         if (propertyHaveSigningConfigs) {
             debug {
-                storeFile file(propertyStoreFileStr)
+                storeFile file("../keystore/customer_key.jks")
                 storePassword propertyStorePwdStr
                 keyAlias propertyKeyAliasStr
                 keyPassword propertyKeyPwdStr
             }
 
             release {
-                storeFile file(propertyStoreFileStr)
+                storeFile file("../keystore/customer_key.jks")
                 storePassword propertyStorePwdStr
                 keyAlias propertyKeyAliasStr
                 keyPassword propertyKeyPwdStr
@@ -85,4 +85,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
 
     compile 'net.oschina.common:common:0.1.6'
+
 }

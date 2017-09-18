@@ -21,7 +21,7 @@
 
         <fragment
             android:id="@+id/fag_nav"
-            android:name="com.kidoo.customer.ui.fragment.NavFragment"
+            android:name="com.kidoo.customer.ui.fragment.NavigationFragement"
             android:layout_width="match_parent"
             android:layout_height="48dp" />
     </LinearLayout>

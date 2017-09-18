@@ -1,5 +1,6 @@
 package com.kidoo.customer.ui.fragment;
 
+import com.kidoo.customer.R;
 import com.kidoo.customer.ui.base.BaseFragment;
 
 /**
@@ -9,6 +10,6 @@ import com.kidoo.customer.ui.base.BaseFragment;
 public class ExporeTabFragment extends BaseFragment {
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.layout_main_tab_explore;
     }
 }

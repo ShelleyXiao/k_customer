@@ -4,4 +4,19 @@
     <string name="tip_double_click_exit">再次点击退出应用</string>
 
     <string name="copy_success">复制成功</string>
+
+    <string name="main_tab_name_broadcast">广播</string>
+    <string name="main_tab_name_message">信息</string>
+    <string name="main_tab_name_explore">发现</string>
+    <string name="main_tab_name_me">个人</string>
+
+    <string name="need_lbs_permission_hint">需要定位权限</string>
+    <string name="clear_bodies_failed_hint">清除位置信息失败</string>
+    <string name="no_permission_hint">现在去「设置」打开定位服务并允许Kidoo获取位置信息吗?</string>
+    <string name="no_location_hint">无法定位</string>
+    <string name="server_no_have_permission_hint">服务器定位失败，请检查权限</string>
+    <string name="network_exception_hint">网络异常</string>
+    <string name="key_is_invalid_hint">非法或无效的APP KEY</string>
+
+
 </resources>
