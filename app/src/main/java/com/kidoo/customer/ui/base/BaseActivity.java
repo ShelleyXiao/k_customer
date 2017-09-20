@@ -30,7 +30,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         if(initBundle(getIntent().getExtras())) {
             setContentView(getContentView());
-
             initWindow();
 
             ButterKnife.bind(this);

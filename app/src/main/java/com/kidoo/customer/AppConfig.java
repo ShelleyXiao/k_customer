@@ -169,6 +169,11 @@ public class AppConfig {
         SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
     }
 
+    /**
+     * 当前版本
+     *
+     */
+
     public static int hasLocationAppCode(Context context) {
         SharedPreferences sp = getSettingPreferences(context);
         return sp.getInt(KEY_LOCATION_APP_CODE, 0);

@@ -1,4 +1,4 @@
-package com.kidoo.customer.ui;
+package com.kidoo.customer.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
 import com.kidoo.customer.R;
-import com.kidoo.customer.ui.base.BaseActivity;
 import com.kidoo.customer.utils.SharePrefUtil;
 
 /**
@@ -84,7 +83,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
         }
-        intent.setClass(this, com.kidoo.customer.ui.MainActivity.class);
+        intent.setClass(this, MainActivity.class);
         this.startActivity(intent);
         this.finish();
     }

@@ -46,7 +46,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="qWriyGnGBERoFTkvvqQ0anXnFMiMsjUL" />
 
-        <activity android:name=".ui.SplashActivity">
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -54,12 +54,18 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <service
+          android:name= "com.baidu.location.f"
+          android:enabled= "true"
+          android:process= ":remote" >
+        </service >
     </application>
 
 </manifest>
