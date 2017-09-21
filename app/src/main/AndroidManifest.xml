@@ -61,6 +61,17 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.activity.account.LoginActivity">
+            android:configChanges="keyboardHidden|orientation"
+            android:label="Login"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Account_Base.App.Theme.NoTitle"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        </activity>
+
+        <activity android:name=".ui.activity.account.SigninInActivity"></activity>
+
         <service
           android:name= "com.baidu.location.f"
           android:enabled= "true"

@@ -12,6 +12,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
 import com.kidoo.customer.R;
+import com.kidoo.customer.ui.activity.account.LoginActivity;
 import com.kidoo.customer.utils.SharePrefUtil;
 
 /**
@@ -83,7 +84,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
         }
-        intent.setClass(this, MainActivity.class);
+        intent.setClass(this, LoginActivity.class);
         this.startActivity(intent);
         this.finish();
     }
