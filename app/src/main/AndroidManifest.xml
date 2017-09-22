@@ -31,6 +31,7 @@
     <!-- 该权限用于访问GPS定位，比如基于百度lbs雷达功能附近的程序员模块-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
 
     <application
