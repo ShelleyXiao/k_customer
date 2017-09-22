@@ -1,6 +1,11 @@
 package com.kidoo.customer.ui.activity.account;
 
+import android.graphics.drawable.AnimationDrawable;
+import android.widget.ImageView;
+
 import com.kidoo.customer.R;
+
+import butterknife.Bind;
 
 /**
  * User: ShaudXiao
@@ -14,7 +19,8 @@ import com.kidoo.customer.R;
 
 public class LoginActivity extends AccountBaseActivity {
 
-
+    @Bind(R.id.test)
+    ImageView test;
 
     @Override
     public int getContentView() {
@@ -23,6 +29,9 @@ public class LoginActivity extends AccountBaseActivity {
 
     @Override
     public void initWidget() {
+        AnimationDrawable am = (AnimationDrawable) test.getBackground();
+        am.start();
+
     }
 
 

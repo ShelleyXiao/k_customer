@@ -25,6 +25,7 @@
     <string name="permission_dlg_save_no">取消</string>
 
     <string name="sign_in_tilte">注册</string>
+    <string name="login_in_tilte">登陆</string>
     <string name="menu_firends_list_title">好友列表</string>
 
     <!-- 个人信息-->
