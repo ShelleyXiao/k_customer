@@ -19,6 +19,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -34,18 +35,6 @@ import java.util.List;
 public class TDevice {
 
     /**
-     * Change SP to PX
-     *
-     * @param resources Resources
-     * @param sp        SP
-     * @return PX
-     */
-    public static float spToPx(Resources resources, float sp) {
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, metrics);
-    }
-
-    /**
      * Change Dip to PX
      *
      * @param resources Resources
@@ -55,6 +44,18 @@ public class TDevice {
     public static float dipToPx(Resources resources, float dp) {
         DisplayMetrics metrics = resources.getDisplayMetrics();
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, metrics);
+    }
+
+    /**
+     * Change SP to PX
+     *
+     * @param resources Resources
+     * @param sp        SP
+     * @return PX
+     */
+    public static float spToPx(Resources resources, float sp) {
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, metrics);
     }
 
     public static float dp2px(float dp) {
@@ -257,6 +258,28 @@ public class TDevice {
         } else {
             return resources.getColor(id);
         }
+    }
+
+    /**
+     * 获取状态栏高度＋标题栏高度
+     */
+    public static int getTopBarHeight(Activity activity) {
+        return activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
+    }
+
+    /**
+     * 获取状态栏高度
+     */
+    public static int getOnlyTopBarHeight(Context context) {
+        int statusBarHeight;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = context.getResources().getDimensionPixelSize(resourceId);
+        } else {
+            //拿不到给一个默认值
+            statusBarHeight = (int) dp2px(20.0f);
+        }
+        return statusBarHeight;
     }
 
 }

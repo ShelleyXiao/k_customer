@@ -21,6 +21,7 @@ import com.kidoo.customer.utils.AppSystemUtils;
 import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.Logger;
 import com.kidoo.customer.widget.NavButtomButton;
+import com.kidoo.customer.widget.boardcastFloatBtn.contorl.FloatActionController;
 
 import java.util.List;
 
@@ -62,6 +63,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         Logger.getLogger().d("**************init data");
         checkUpdate();
         checkLocation();
+
+        FloatActionController.getInstance().startMonkServer(this);
     }
 
     @Override
