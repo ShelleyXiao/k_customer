@@ -31,7 +31,7 @@ ext {
     compileSdkVersion = 25
     buildToolsVersion = "25.0.3"
     applicationId = "com.kidoo.customer"
-    minSdkVersion = 16
+    minSdkVersion = 19
     targetSdkVersion = 25
     versionCode = 1
     versionName = "v1.0"
