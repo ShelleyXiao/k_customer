@@ -1,16 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/boardcast_breath_anim"
-        android:contentDescription="@string/app_name"
+    <include
+        android:id="@+id/id_toolbar"
+        layout="@layout/toolbar_login" />
+
+    <com.kidoo.customer.widget.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/lay_32"
+        android:src="@drawable/def_user"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/white"
         />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/lay_24"
+        android:layout_marginRight="@dimen/lay_24"
+        android:layout_marginTop="@dimen/lay_48">
+
+        <TextView
+            android:id="@+id/acount_id_tilte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text='@string/login_acount_id_title'
+            android:textColor="@color/kidoo_9fa0a4"
+            android:textSize="@dimen/font_20" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/acount_id_tilte"
+            android:layout_toRightOf="@+id/acount_id_tilte"
+            android:layout_marginLeft="@dimen/lay_24"
+            android:layout_marginRight="@dimen/lay_8"
+            >
+
+            <EditText android:id="@+id/acnount_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_account_hint"
+                android:textSize="@dimen/font_20"
+                android:background="@null"
+                android:textColorHint="#669fa0a4"
+                />
+
+            <ImageView android:id="@+id/clean_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit_clear_btn"
+                android:layout_gravity="right"
+                android:visibility="invisible"
+                />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/acount_id_tilte"
+            android:background="#696969" />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/lay_24"
+        android:layout_marginRight="@dimen/lay_24"
+        android:layout_marginTop="@dimen/lay_32">
+
+        <TextView
+            android:id="@+id/acount_pwd_tilte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text='@string/login_account_pwd_title'
+            android:textColor="@color/kidoo_9fa0a4"
+            android:textSize="@dimen/font_20" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/acount_pwd_tilte"
+            android:layout_toRightOf="@+id/acount_pwd_tilte"
+            android:layout_marginLeft="@dimen/lay_24"
+            android:layout_marginRight="@dimen/lay_8"
+            >
+
+            <EditText android:id="@+id/acnount_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_password_hint"
+                android:textSize="@dimen/font_20"
+                android:background="@null"
+                android:textColorHint="#669fa0a4"
+                android:textColor="@color/kidoo_9fa0a4"
+                android:inputType="textPassword"
+                />
+
+            <ImageView android:id="@+id/show_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_closekey"
+                android:layout_gravity="right"
+                />
+
+        </FrameLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/acount_pwd_tilte"
+            android:background="#696969" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bottom_button_bg"
+            android:text="@string/login_in_tilte"
+            android:textSize="@dimen/font_18"
+            android:textColor="@color/kidoo_gren"/>
+
+    </LinearLayout>
+
+
+
 
 </LinearLayout>

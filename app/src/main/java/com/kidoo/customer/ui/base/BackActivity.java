@@ -24,16 +24,8 @@ public abstract class BackActivity extends BaseActivity {
     @Override
     protected void initWindow() {
         super.initWindow();
-        mToolBar = (Toolbar) findViewById(R.id.id_toolbar);
-        if (mToolBar != null) {
-            setSupportActionBar(mToolBar);
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-                actionBar.setHomeButtonEnabled(false);
-            }
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
+
+        initToolbar();
     }
 
     @Override

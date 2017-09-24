@@ -4,21 +4,25 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
+ * description: 与悬浮窗交互的控制类，真正的实现逻辑不在这
+ * modify: ShaudXiao
  * Author:xishuang
- * Date:2017.08.01
- * Des:与悬浮窗交互的控制类，真正的实现逻辑不在这
+ * date: 2017/9/17
+ * update: 2017/9/22
+ * version:
  */
+
 public class FloatActionController {
 
     private FloatActionController() {
     }
 
     public static FloatActionController getInstance() {
-        return LittleMonkProviderHolder.sInstance;
+        return FloatWMProviderHolder.sInstance;
     }
 
     // 静态内部类
-    private static class LittleMonkProviderHolder {
+    private static class FloatWMProviderHolder {
         private static final FloatActionController sInstance = new FloatActionController();
     }
 
@@ -27,7 +31,7 @@ public class FloatActionController {
     /**
      * 开启服务悬浮窗
      */
-    public void startMonkServer(Context context) {
+    public void startFloatWMServer(Context context) {
         Intent intent = new Intent(context, FloatBoradcastWMService.class);
         context.startService(intent);
     }

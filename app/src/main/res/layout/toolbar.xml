@@ -14,8 +14,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="16dp"
         android:textColor="#fff"
-        android:text="@string/sign_in_tilte"
-        android:textSize="24sp" />
+        android:textSize="@dimen/font_18" />
 
 
     <ImageView

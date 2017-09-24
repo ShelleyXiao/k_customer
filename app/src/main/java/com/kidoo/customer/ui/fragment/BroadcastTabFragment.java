@@ -27,6 +27,8 @@ import com.kidoo.customer.ui.base.BaseFragment;
 import com.kidoo.customer.utils.LocationUtils;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.Logger;
+import com.kidoo.customer.widget.boardcastFloatBtn.contorl.FloatActionController;
+import com.kidoo.customer.widget.boardcastFloatBtn.permission.FloatPermissionManager;
 
 import butterknife.Bind;
 
@@ -80,6 +82,8 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
         // MapView的生命周期与Activity同步，当activity挂起时需调用MapView.onPause()
         mMapView.onPause();
         super.onPause();
+
+        FloatActionController.getInstance().hide();
     }
 
     @Override
@@ -114,6 +118,7 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
                 initOverlay(location.getLongitude(), location.getLatitude(), bdSSelf);
             }
         });
+        FloatActionController.getInstance().show();
     }
 
     @Override
@@ -126,6 +131,7 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
 
         bdSSelf.recycle();
         bdGround.recycle();
+        FloatActionController.getInstance().stopMonkServer(getActivity());
     }
 
     @Override
@@ -139,6 +145,14 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
         mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
                 MyLocationConfiguration.LocationMode.NORMAL, true, mCurrentMarker,
                 accuracyCircleFillColor, accuracyCircleStrokeColor));
+
+        boolean isPermission = FloatPermissionManager.getInstance().applyFloatWindow(getActivity());
+        if(isPermission) {
+            FloatActionController.getInstance().startFloatWMServer(this.getActivity());
+        } else {
+            LogUtils.i("Float have no peimisson!!!");
+        }
+
     }
 
     @Override

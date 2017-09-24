@@ -7,8 +7,6 @@ import android.widget.Toast;
 
 import com.kidoo.customer.utils.CommonUtils;
 import com.kidoo.customer.widget.SimplexToast;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import com.baidu.mapapi.CoordType;
@@ -27,7 +25,7 @@ public class AppContext extends Application{
 
     private static Context _context;
 
-    private RefWatcher mRefWatcher;
+//    private RefWatcher mRefWatcher;
     private static AppContext instance;
 
     @Override
@@ -43,7 +41,7 @@ public class AppContext extends Application{
         //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
         SDKInitializer.setCoordType(CoordType.BD09LL);
 
-        mRefWatcher = BuildConfig.DEBUG ? LeakCanary.install(this) : RefWatcher.DISABLED;
+//        mRefWatcher = BuildConfig.DEBUG ? LeakCanary.install(this) : RefWatcher.DISABLED;
 
     }
 

@@ -71,7 +71,27 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         </activity>
 
-        <activity android:name=".ui.activity.account.SigninInActivity"></activity>
+        <activity android:name=".ui.activity.account.SigninInOneStepActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="Login"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            >
+
+        </activity>
+
+        <activity android:name=".ui.activity.account.SigninInTwoStepActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="Login"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            >
+
+        </activity>
+
+        <service android:name=".widget.boardcastFloatBtn.contorl.FloatBoradcastWMService"></service>
 
         <service
           android:name= "com.baidu.location.f"
