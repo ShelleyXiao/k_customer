@@ -75,4 +75,7 @@
     <dimen name="size_92">92dp</dimen>
     <dimen name="size_96">96dp</dimen>
 
+    <!--toast y offset  官方默认是64dip-->
+    <dimen name="toast_y_offset">35dp</dimen>
+
 </resources>

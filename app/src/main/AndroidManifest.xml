@@ -13,11 +13,25 @@
     <!-- 文件访问权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- 允许一个程序访问CellID或WiFi热点来获取粗略的位置 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <!-- 精确位置权限 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+
+    <!--该权限允许使用ActivityManager访问当前运行的任务栈-->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!--该权限允许使用PowerManager WakeLocks防止处理器休眠或屏幕变暗，比如百度地图在定位时会用到-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!--该权限用于读取系统设置的，百度地图lbs需要读取一些系统设置信息-->
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+
+    <!-- 该权限用于进行网络定位，比如基于百度lbs雷达功能附近的程序员模块-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 该权限用于访问GPS定位，比如基于百度lbs雷达功能附近的程序员模块-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
 
     <application
@@ -29,21 +43,41 @@
         android:theme="@style/AppTheme"
         android:name=".AppContext">
 
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="qWriyGnGBERoFTkvvqQ0anXnFMiMsjUL" />
 
-        <activity android:name=".ui.SplashActivity">
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
+
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-            </intent-filter>
+        <activity android:name=".ui.activity.account.LoginActivity">
+            android:configChanges="keyboardHidden|orientation"
+            android:label="Login"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Account_Base.App.Theme.NoTitle"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         </activity>
+
+        <activity android:name=".ui.activity.account.SigninInActivity"></activity>
+
+        <service
+          android:name= "com.baidu.location.f"
+          android:enabled= "true"
+          android:process= ":remote" >
+        </service >
     </application>
 
 </manifest>

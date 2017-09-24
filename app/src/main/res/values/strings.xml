@@ -4,4 +4,68 @@
     <string name="tip_double_click_exit">再次点击退出应用</string>
 
     <string name="copy_success">复制成功</string>
+
+    <string name="main_tab_name_broadcast">广播</string>
+    <string name="main_tab_name_message">信息</string>
+    <string name="main_tab_name_explore">发现</string>
+    <string name="main_tab_name_me">个人</string>
+
+    <string name="need_lbs_permission_hint">需要定位权限</string>
+    <string name="clear_bodies_failed_hint">清除位置信息失败</string>
+    <string name="no_permission_hint">现在去「设置」打开定位服务并允许Kidoo获取位置信息吗?</string>
+    <string name="no_location_hint">无法定位</string>
+    <string name="server_no_have_permission_hint">服务器定位失败，请检查权限</string>
+    <string name="network_exception_hint">网络异常</string>
+    <string name="key_is_invalid_hint">非法或无效的APP KEY</string>
+
+    <string name="permission_dlg_tilte">温馨提示</string>
+    <string name="permission_dlg_save_update">需要开启Kidoo对您手机的存储权限才能下载安装，是否现在开启</string>
+    <string name="permission_dlg_save_location">需要开启Kidoo对您手机的定位权限才提供精确定位服务，是否现在开启</string>
+    <string name="permission_dlg_save_goto">去开启</string>
+    <string name="permission_dlg_save_no">取消</string>
+
+    <string name="sign_in_tilte">注册</string>
+    <string name="login_in_tilte">登陆</string>
+    <string name="menu_firends_list_title">好友列表</string>
+
+    <!-- 个人信息-->
+    <string name="action_select">选择操作</string>
+    <string name="title_icon_null">图像不存在，上传失败</string>
+    <string name="title_update_fail_status">个人信息更新失败&#8230;</string>
+
+    <!--新版登录专用-->
+    <string name="login_input_username_hint">手机号或邮箱</string>
+    <string name="login_input_username_hint_error">请输入正确的手机号或邮箱&#8230;</string>
+    <string name="login_hold_hint">记住密码</string>
+    <string name="login_forget_hint">忘记密码？</string>
+    <string name="login_register_hint">注册</string>
+    <string name="login_other_hint">其他方式登录</string>
+    <string name="register_input_username_hint">手机号</string>
+    <string name="register_username_hint">用户名</string>
+    <string name="register_sms_auth_code">短信验证码</string>
+    <string name="register_sms_hint">获取验证码</string>
+    <string name="register_sms_wait_hint">别激动,休息一下呗&#8230;</string>
+    <string name="register_done_hint">完成</string>
+    <string name="register_man_hint">男士</string>
+    <string name="register_female_hint">女士</string>
+    <string name="retrieve_pwd_step_hint">下一步</string>
+    <string name="retrieve_pwd_email_label_one">邮箱用户找回密码，请</string>
+    <string name="retrieve_pwd_email_label"><a>点击这里</a></string>
+    <string name="reset_pwd_hint">请输入至少六位新密码</string>
+    <string name="register_username_error">用户名太长&#8230;</string>
+    <string name="hint_password">密码</string>
+    <string name="register_pwd_hint">请输入至少六位数密码</string>
+    <string name="hint_username_ok">请输入正确的手机号码</string>
+    <string name="user_hint_login">点击头像登录</string>
+    <string name="reset_pwd_label">重置密码</string>
+    <string name="retrieve_pwd_label">找回密码</string>
+    <string name="reset_pwd_submit">确认</string>
+    <string name="request_error_hint">网络请求失败,请重试&#8230;</string>
+    <string name="login_success_hint">登录成功</string>
+    <string name="send_sms_code_success_hint">已成功发送验证码</string>
+    <string name="reset_success_hint">密码重置成功</string>
+    <string name="register_success_hint">注册成功</string>
+    <string name="message_pwd_error">密码错误</string>
+    <string name="message_username_null">用户名未填写！！！</string>
+    <string name="progress_submit">正在提交…</string>
 </resources>

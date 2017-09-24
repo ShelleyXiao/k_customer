@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/friends_list"
+            android:icon="@drawable/friends_list_action_meu_cion"
+             android:enabled="true"
+          android:visible="true"
+          android:title="@string/menu_firends_list_title"
+          app:showAsAction="ifRoom"
+
+        />
+</menu>

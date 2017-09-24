@@ -1,17 +1,17 @@
-package com.kidoo.customer.ui;
+package com.kidoo.customer.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
 import com.kidoo.customer.R;
-import com.kidoo.customer.ui.base.BaseActivity;
 import com.kidoo.customer.utils.SharePrefUtil;
 
 /**
@@ -24,7 +24,7 @@ import com.kidoo.customer.utils.SharePrefUtil;
  */
 
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends AppCompatActivity {
 
     private Handler handler = new Handler() {
 
@@ -83,7 +83,7 @@ public class SplashActivity extends BaseActivity {
 
 
         }
-        intent.setClass(this, com.kidoo.customer.ui.MainActivity.class);
+        intent.setClass(this, MainActivity.class);
         this.startActivity(intent);
         this.finish();
     }
