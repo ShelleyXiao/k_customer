@@ -1,7 +1,7 @@
 package com.kidoo.customer.ui.fragment;
 
 import com.kidoo.customer.R;
-import com.kidoo.customer.ui.base.BaseFragment;
+import com.kidoo.customer.ui.base.fragment.BaseFragment;
 
 /**
  * Created by Shelley on 2017/9/17.

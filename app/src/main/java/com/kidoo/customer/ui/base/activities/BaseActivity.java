@@ -1,4 +1,4 @@
-package com.kidoo.customer.ui.base;
+package com.kidoo.customer.ui.base.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

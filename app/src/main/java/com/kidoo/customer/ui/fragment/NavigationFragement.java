@@ -12,7 +12,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.view.View;
 
 import com.kidoo.customer.R;
-import com.kidoo.customer.ui.base.BaseFragment;
+import com.kidoo.customer.ui.base.fragment.BaseFragment;
 import com.kidoo.customer.widget.BorderShaper;
 import com.kidoo.customer.widget.NavButtomButton;
 

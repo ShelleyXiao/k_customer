@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kidoo.customer.R;
-import com.kidoo.customer.ui.base.BackActivity;
+import com.kidoo.customer.ui.base.activities.BackActivity;
 import com.kidoo.customer.utils.parser.RichTextParser;
 
 import butterknife.Bind;

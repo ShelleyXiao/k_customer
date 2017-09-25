@@ -1,4 +1,4 @@
-package com.kidoo.customer.ui.base;
+package com.kidoo.customer.ui.base.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,7 +8,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.kidoo.customer.utils.ImageLoader;
 
 import java.io.Serializable;
 
@@ -30,6 +35,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected LayoutInflater mInflater;
 
+    private RequestManager mImgLoader;
 
 
     @Override
@@ -186,5 +192,59 @@ public abstract class BaseFragment extends Fragment {
 
     protected void onRestartInstance(Bundle bundle) {
 
+    }
+
+    /**
+     * 获取一个图片加载管理器
+     *
+     * @return RequestManager
+     */
+    public synchronized RequestManager getImgLoader() {
+        if (mImgLoader == null)
+            mImgLoader = Glide.with(this);
+        return mImgLoader;
+    }
+
+    /***
+     * 从网络中加载数据
+     *
+     * @param viewId   view的id
+     * @param imageUrl 图片地址
+     */
+    protected void setImageFromNet(int viewId, String imageUrl) {
+        setImageFromNet(viewId, imageUrl, 0);
+    }
+
+    /***
+     * 从网络中加载数据
+     *
+     * @param viewId      view的id
+     * @param imageUrl    图片地址
+     * @param placeholder 图片地址为空时的资源
+     */
+    protected void setImageFromNet(int viewId, String imageUrl, int placeholder) {
+        ImageView imageView = findView(viewId);
+        setImageFromNet(imageView, imageUrl, placeholder);
+    }
+
+    /***
+     * 从网络中加载数据
+     *
+     * @param imageView imageView
+     * @param imageUrl  图片地址
+     */
+    protected void setImageFromNet(ImageView imageView, String imageUrl) {
+        setImageFromNet(imageView, imageUrl, 0);
+    }
+
+    /***
+     * 从网络中加载数据
+     *
+     * @param imageView   imageView
+     * @param imageUrl    图片地址
+     * @param placeholder 图片地址为空时的资源
+     */
+    protected void setImageFromNet(ImageView imageView, String imageUrl, int placeholder) {
+        ImageLoader.loadImage(getImgLoader(), imageView, imageUrl, placeholder);
     }
 }

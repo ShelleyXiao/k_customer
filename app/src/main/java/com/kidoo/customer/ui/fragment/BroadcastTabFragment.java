@@ -23,7 +23,7 @@ import com.kidoo.customer.AppContext;
 import com.kidoo.customer.R;
 import com.kidoo.customer.interf.LocationFace;
 import com.kidoo.customer.interf.OnTabReselectListener;
-import com.kidoo.customer.ui.base.BaseFragment;
+import com.kidoo.customer.ui.base.fragment.BaseFragment;
 import com.kidoo.customer.utils.LocationUtils;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.Logger;

@@ -1,4 +1,4 @@
-package com.kidoo.customer.ui.base;
+package com.kidoo.customer.ui.base.activities;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;

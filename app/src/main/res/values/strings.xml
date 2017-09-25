@@ -81,4 +81,33 @@
 
 
     <string name="menu_firends_list_title">好友列表</string>
+
+    <string name="media_select_image_store_perm_hint">没有权限, 你需要去设置中开启读取手机存储权限.</string>
+    <string name="media_select_image_camera_perm_hint">没有权限, 你需要去设置中开启相机权限.</string>
+    <string name="media_select_image_perm_setting_ok">去设置</string>
+    <string name="media_select_image_perm_setting_cancel">取消</string>
+    <string name="media_select_image_toolbar_title">选择图片</string>
+
+    <string name="gallery_save_file_not_have_external_storage_permission">没有外部存储权限!</string>
+    <string name="gallery_save_file_not_have_external_storage">没有外部存储!</string>
+    <string name="gallery_save_file_success">保存成功!</string>
+    <string name="gallery_save_file_failed">存储失败!</string>
+    <string name="media_image_select_opt_done">完成</string>
+    <string name="media_image_select_opt_preview">预览</string>
+
+    <!-- quick option -->
+
+    <string name="loading">加载中…</string>
+    <string name="loading_no_more">已加载全部</string>
+
+    <!-- Error View -->
+    <string name="error_view_no_data">暂无内容</string>
+    <string name="error_view_loading">加载中…</string>
+    <string name="error_view_loading_friend">数据初始化中…</string>
+    <string name="error_view_load_error_click_to_refresh">内容加载失败\r\n点击重新加载</string>
+    <string name="error_view_network_error_click_to_refresh">没有可用的网络</string>
+    <string name="tip_network_error">没有可用的网络</string>
+
+    <string name="unlogin_tip">您还未登录\r\n或网络延迟</string>
+
 </resources>

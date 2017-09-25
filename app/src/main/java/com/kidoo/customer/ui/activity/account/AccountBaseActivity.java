@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kidoo.customer.R;
-import com.kidoo.customer.ui.base.BaseActivity;
+import com.kidoo.customer.ui.base.activities.BaseActivity;
 import com.kidoo.customer.utils.DialogHelper;
 
 /**
