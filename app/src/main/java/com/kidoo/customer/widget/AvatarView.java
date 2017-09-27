@@ -6,8 +6,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.R;
 import com.kidoo.customer.utils.UIHelper;
 
@@ -74,10 +73,9 @@ public class AvatarView extends CircleImageView {
 //        }
 
         if (aty != null) {
-            Glide.with(aty).load(headUrl)
-                    .apply(new RequestOptions()
-                            .placeholder(R.drawable.def_user)
-                            .error(R.drawable.def_user))
+            GlideApp.with(aty).load(headUrl)
+                    .placeholder(R.drawable.def_user)
+                    .error(R.drawable.def_user)
                     .into(this);
 
         }

@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.kidoo.customer.R;
+import com.kidoo.customer.media.SelectImageActivity;
+import com.kidoo.customer.media.config.SelectOption;
 import com.kidoo.customer.utils.LogUtils;
 
 import butterknife.Bind;
@@ -104,7 +106,15 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.forget_pwd:
+                SelectImageActivity.show(this, new SelectOption.Builder()
+                        .setHasCam(true)
+                        .setSelectCount(1)
+                        .setCallback(new SelectOption.Callback() {
+                            @Override
+                            public void doSelected(String[] images) {
 
+                            }
+                        }).build());
                 break;
 
         }

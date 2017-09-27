@@ -51,6 +51,11 @@ public class SelectImageActivity extends BaseBackActivity implements EasyPermiss
         return R.layout.activity_select_image;
     }
 
+    @Override
+    protected void initWidget() {
+        super.initWidget();
+        requestExternalStorage();
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

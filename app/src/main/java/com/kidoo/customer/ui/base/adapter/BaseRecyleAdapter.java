@@ -351,6 +351,15 @@ public abstract class  BaseRecyleAdapter<T> extends RecyclerView.Adapter {
     }
 
     /**
+     * 添加项点击事件
+     *
+     * @param onItemClickListener the RecyclerView item click listener
+     */
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    /**
      * 添加项点长击事件
      *
      * @param onItemLongClickListener the RecyclerView item long click listener

@@ -27,4 +27,9 @@
         <attr name="color1" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="SquareLayout">
+        <attr name="accordTo" format="integer"/>
+
+    </declare-styleable>
+
 </resources>

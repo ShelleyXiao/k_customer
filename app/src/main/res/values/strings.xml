@@ -95,6 +95,11 @@
     <string name="media_image_select_opt_done">完成</string>
     <string name="media_image_select_opt_preview">预览</string>
 
+    <string name="media_image_menu_aullof">全部照片</string>
+    <string name="media_image_selected_done">完成</string>
+    <string name="media_image_selected_count_hint">最多只能选择 </string>
+    <string name="media_image_selected_count_hint_1"> 张照片</string>
+    <string name="media_image_store_image_capacity">无法保存照片，请检查SD卡是否挂载</string>
     <!-- quick option -->
 
     <string name="loading">加载中…</string>

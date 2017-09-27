@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
+import com.kidoo.customer.GlideApp;
+import com.kidoo.customer.GlideRequests;
 import com.kidoo.customer.utils.ImageLoader;
 
 import java.io.Serializable;
@@ -35,7 +35,8 @@ public abstract class BaseFragment extends Fragment {
 
     protected LayoutInflater mInflater;
 
-    private RequestManager mImgLoader;
+  //  private RequestManager mImgLoader;
+    private GlideRequests mGlideRequests;
 
 
     @Override
@@ -199,10 +200,11 @@ public abstract class BaseFragment extends Fragment {
      *
      * @return RequestManager
      */
-    public synchronized RequestManager getImgLoader() {
-        if (mImgLoader == null)
-            mImgLoader = Glide.with(this);
-        return mImgLoader;
+    public synchronized GlideRequests getImgLoader() {
+        if (mGlideRequests == null)
+            mGlideRequests = GlideApp.with(this);
+
+        return mGlideRequests;
     }
 
     /***

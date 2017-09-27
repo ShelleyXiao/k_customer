@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+
 import butterknife.ButterKnife;
 
 /**
@@ -20,6 +23,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    protected RequestManager mImageLoader;
     private boolean mIsDestroy;
     private Fragment mFragment;
 
@@ -103,6 +107,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void initData() {
+    }
+
+    public synchronized RequestManager getImageLoader() {
+        if (mImageLoader == null)
+            mImageLoader = Glide.with(this);
+        return mImageLoader;
     }
 
 

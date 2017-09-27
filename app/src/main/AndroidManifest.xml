@@ -47,6 +47,17 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <!--该权限允许应用程序管理对文档的访问，通常作为文档选择器的一部分,比如对文档，多媒体文件的访问和管理-->
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+
+    <!--该权限用于获取手机相机使用权限，比如发送图片动弹需要拍照-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--该权限用于获取手机相机使用闪光灯权限，比如二维码扫描需打开闪光灯-->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
 
     <application
         android:allowBackup="true"
@@ -69,21 +80,26 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.SplashActivity">
+        <activity android:name=".ui.activity.SplashActivity"
+            android:theme="@style/App.Theme.Launch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.account.LoginActivity">
-            android:configChanges="keyboardHidden|orientation"
-            android:label="Login"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/Account_Base.App.Theme.NoTitle"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity android:name=".ui.activity.account.LoginActivity"
+                  android:configChanges="keyboardHidden|orientation"
+                  android:label="Login"
+                  android:launchMode="singleTop"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/Account_Base.App.Theme.NoTitle"
+                  android:windowSoftInputMode="stateHidden|adjustResize">
+
         </activity>
+
+
 
         <activity android:name=".ui.activity.account.SigninInOneStepActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -95,6 +111,8 @@
 
         </activity>
 
+
+
         <activity android:name=".ui.activity.account.SigninInTwoStepActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="Login"
@@ -105,6 +123,27 @@
 
         </activity>
 
+        <activity
+            android:name=".media.SelectImageActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="Select Image"
+            android:screenOrientation="portrait"
+            android:theme="@style/Base.App.Theme.NoTitle" />
+        <!--<activity-->
+            <!--android:name=".improve.media.ImageGalleryActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation"-->
+            <!--android:label="图片预览"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@style/Theme.Dialog.NoTitle.Translucent" />-->
+        <activity
+            android:name=".media.crop.CropActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="image crop"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Dialog.NoTitle.Translucent" />
+
         <service android:name=".widget.boardcastFloatBtn.contorl.FloatBoradcastWMService"></service>
 
         <service
@@ -112,6 +151,16 @@
           android:enabled= "true"
           android:process= ":remote" >
         </service >
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.kidoo.customer.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>
