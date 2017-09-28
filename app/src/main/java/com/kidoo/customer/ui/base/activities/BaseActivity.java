@@ -6,8 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
+import com.kidoo.customer.GlideApp;
+import com.kidoo.customer.GlideRequests;
+import com.kidoo.customer.utils.LogUtils;
 
 import butterknife.ButterKnife;
 
@@ -23,7 +24,8 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected RequestManager mImageLoader;
+//    protected RequestManager mImageLoader;
+    protected GlideRequests mGlideRequests;
     private boolean mIsDestroy;
     private Fragment mFragment;
 
@@ -42,6 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             initData();
 
         } else {
+            LogUtils.w("INIT BUNDLE FALSE , FINISH THIS");
             finish();
         }
     }
@@ -109,10 +112,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void initData() {
     }
 
-    public synchronized RequestManager getImageLoader() {
-        if (mImageLoader == null)
-            mImageLoader = Glide.with(this);
-        return mImageLoader;
+    public synchronized GlideRequests getImageLoader() {
+        if (mGlideRequests == null)
+            mGlideRequests = GlideApp.with(this);
+        return mGlideRequests;
     }
 
 

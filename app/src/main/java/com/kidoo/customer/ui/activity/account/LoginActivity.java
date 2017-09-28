@@ -108,7 +108,8 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
             case R.id.forget_pwd:
                 SelectImageActivity.show(this, new SelectOption.Builder()
                         .setHasCam(true)
-                        .setSelectCount(1)
+                        .setSelectCount(3)
+                        .setCrop(200, 200)
                         .setCallback(new SelectOption.Callback() {
                             @Override
                             public void doSelected(String[] images) {

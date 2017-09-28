@@ -88,10 +88,7 @@
     <string name="media_select_image_perm_setting_cancel">取消</string>
     <string name="media_select_image_toolbar_title">选择图片</string>
 
-    <string name="gallery_save_file_not_have_external_storage_permission">没有外部存储权限!</string>
-    <string name="gallery_save_file_not_have_external_storage">没有外部存储!</string>
-    <string name="gallery_save_file_success">保存成功!</string>
-    <string name="gallery_save_file_failed">存储失败!</string>
+
     <string name="media_image_select_opt_done">完成</string>
     <string name="media_image_select_opt_preview">预览</string>
 
@@ -100,6 +97,15 @@
     <string name="media_image_selected_count_hint">最多只能选择 </string>
     <string name="media_image_selected_count_hint_1"> 张照片</string>
     <string name="media_image_store_image_capacity">无法保存照片，请检查SD卡是否挂载</string>
+
+    <string name="gallery_save_file_permmison_grant">请授予保存图片权限</string>
+    <string name="gallery_save_file_not_have_external_storage_permission">没有外部存储权限!</string>
+    <string name="gallery_save_file_not_have_external_storage">没有外部存储!</string>
+    <string name="gallery_save_file_success">保存成功!</string>
+    <string name="gallery_save_file_failed">存储失败!</string>
+    <string name="image_select_opt_done">完成</string>
+    <string name="image_select_opt_preview">预览</string>
+
     <!-- quick option -->
 
     <string name="loading">加载中…</string>
@@ -123,5 +129,8 @@
     <string name="state_load_error">加载失败</string>
     <string name="state_refreshing">正在刷新</string>
     <string name="state_loading_error">数据加载中&#8230;</string>
+
+    <string name="acton_ok">确定</string>
+    <string name="acton_cancel">取消</string>
 
 </resources>

@@ -129,13 +129,15 @@
             android:label="Select Image"
             android:screenOrientation="portrait"
             android:theme="@style/Base.App.Theme.NoTitle" />
-        <!--<activity-->
-            <!--android:name=".improve.media.ImageGalleryActivity"-->
-            <!--android:configChanges="keyboardHidden|orientation"-->
-            <!--android:label="图片预览"-->
-            <!--android:launchMode="singleTop"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:theme="@style/Theme.Dialog.NoTitle.Translucent" />-->
+
+        <activity
+            android:name=".media.ImageGalleryActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="image priview"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Dialog.NoTitle.Translucent" />
+
         <activity
             android:name=".media.crop.CropActivity"
             android:configChanges="keyboardHidden|orientation"

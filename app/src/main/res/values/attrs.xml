@@ -32,4 +32,15 @@
 
     </declare-styleable>
 
+    <declare-styleable name="Loading">
+        <attr name="gAutoRun" format="boolean"/>
+        <attr name="gBackgroundColor" format="reference"/>
+        <attr name="gBackgroundLineSize" format="integer"/>
+        <attr name="gForegroundColor" format="reference"/>
+        <attr name="gForegroundLineSize" format="integer"/>
+        <attr name="gProgressFloat" format="float"/>
+
+
+    </declare-styleable>
+
 </resources>

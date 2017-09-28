@@ -160,13 +160,15 @@ public class SelectFragment extends BaseFragment implements SelectImageContract.
     @OnClick({R.id.btn_preview, R.id.icon_back, R.id.btn_title_select, R.id.btn_done})
     @Override
     public void onClick(View v) {
+
        switch (v.getId()) {
            case R.id.icon_back:
                mOperator.onBack();
                break;
            case R.id.btn_preview:
-               if(mSelectedImage.size() > 0) {
-                   //goto preview
+               LogUtils.w("onclick size = " + mSelectedImage.size());
+               if (mSelectedImage.size() > 0) {
+                   ImageGalleryActivity.show(getActivity(), Util.toArray(mSelectedImage), 0, false);
                }
                break;
            case R.id.btn_title_select:
@@ -224,6 +226,9 @@ public class SelectFragment extends BaseFragment implements SelectImageContract.
 
     @Override
     public void onItemClick(int position, long itemId) {
+
+        LogUtils.w("******w***** 0");
+
         if (mOption.isHasCam()) {
             if (position != 0) {
                 handleSelectChange(position);
@@ -235,7 +240,7 @@ public class SelectFragment extends BaseFragment implements SelectImageContract.
                 }
             }
         } else {
-            LogUtils.d("*********** 0");
+
             handleSelectChange(position);
         }
     }
@@ -281,7 +286,9 @@ public class SelectFragment extends BaseFragment implements SelectImageContract.
     }
 
     private void handleResult() {
+
         if(mSelectedImage.size() != 0) {
+            LogUtils.e("*********** 1" + mOption.isCrop());
             if(mOption.isCrop()) {
                 List<String> selectedImage = mOption.getSelectedImages();
                 selectedImage.clear();
@@ -311,7 +318,7 @@ public class SelectFragment extends BaseFragment implements SelectImageContract.
         Image image = mImageAdapter.getItem(position);
         if(image == null)
             return;
-        LogUtils.d("*********** 1");
+
         //如果是多选模式
         final int selectCount = mOption.getSelectCount();
         if (selectCount > 1) {
