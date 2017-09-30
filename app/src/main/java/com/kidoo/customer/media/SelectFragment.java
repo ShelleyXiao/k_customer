@@ -40,7 +40,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -56,20 +56,20 @@ import butterknife.OnClick;
 public class SelectFragment extends BaseFragment implements SelectImageContract.View, View.OnClickListener,
         ImageLoaderListener, BaseRecyleAdapter.OnItemClickListener  {
 
-    @Bind(R.id.rv_image)
+    @BindView(R.id.rv_image)
     RecyclerView mContentView;
-    @Bind(R.id.btn_title_select)
+    @BindView(R.id.btn_title_select)
     Button mSelectFolderView;
-    @Bind(R.id.iv_title_select)
+    @BindView(R.id.iv_title_select)
     ImageView mSelectFolderIcon;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     View mToolbar;
-    @Bind(R.id.btn_done)
+    @BindView(R.id.btn_done)
     Button mDoneView;
-    @Bind(R.id.btn_preview)
+    @BindView(R.id.btn_preview)
     Button mPreviewView;
 
-    @Bind(R.id.error_layout)
+    @BindView(R.id.error_layout)
     EmptyLayout mErrorLayout;
 
     private static SelectOption mOption;

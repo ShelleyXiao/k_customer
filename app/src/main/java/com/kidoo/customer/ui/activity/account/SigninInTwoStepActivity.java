@@ -15,7 +15,7 @@ import com.kidoo.customer.R;
 import com.kidoo.customer.ui.base.activities.BackActivity;
 import com.kidoo.customer.utils.parser.RichTextParser;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 import static com.kidoo.customer.R.id.clean_phone;
@@ -33,15 +33,15 @@ import static com.kidoo.customer.R.id.clean_phone;
 public class SigninInTwoStepActivity extends BackActivity implements View.OnClickListener {
 
 
-    @Bind(R.id.phone)
+    @BindView(R.id.phone)
     EditText mPhoneEdit;
-    @Bind(clean_phone)
+    @BindView(clean_phone)
     ImageView mCleanPhoneImg;
-    @Bind(R.id.sign_in_identifying_code)
+    @BindView(R.id.sign_in_identifying_code)
     EditText mIddentifyingCodeEdit;
-    @Bind(R.id.sign_in_identifying_code_sms_call)
+    @BindView(R.id.sign_in_identifying_code_sms_call)
     TextView mIdentifyingCodeText;
-    @Bind(R.id.sigin_in_btn)
+    @BindView(R.id.sigin_in_btn)
     Button mSigninBtn;
 
     private boolean mMachPhoneNum;

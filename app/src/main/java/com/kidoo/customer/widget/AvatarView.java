@@ -10,7 +10,6 @@ import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.R;
 import com.kidoo.customer.utils.UIHelper;
 
-
 /** 
  * description: 通讯模块用户头像
  * autour: ShaudXiao

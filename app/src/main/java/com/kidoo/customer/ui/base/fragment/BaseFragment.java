@@ -18,6 +18,7 @@ import com.kidoo.customer.utils.ImageLoader;
 import java.io.Serializable;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /** 
  * description: Fragmetn基础类
@@ -32,7 +33,7 @@ public abstract class BaseFragment extends Fragment {
     protected Context mContext;
     protected View mRoot;
     protected Bundle mBundle;
-
+    private Unbinder mUnbinder;
     protected LayoutInflater mInflater;
 
   //  private RequestManager mImgLoader;
@@ -67,7 +68,7 @@ public abstract class BaseFragment extends Fragment {
             // Do somethings
             onBindViewBefore(mRoot);
             //Bind View
-            ButterKnife.bind(this, mRoot);
+            mUnbinder = ButterKnife.bind(this, mRoot);
 
             if(savedInstanceState != null) {
                 onRestartInstance(savedInstanceState);
@@ -114,7 +115,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
         mBundle = null;
     }
 

@@ -26,7 +26,6 @@ public class KidooAppGlideModule extends AppGlideModule {
     @Override
     public void applyOptions(Context context, GlideBuilder builder) {
 
-        //重新设置内存限制
         builder.setMemoryCache(new LruResourceCache(20*1024*1024));
 
     }

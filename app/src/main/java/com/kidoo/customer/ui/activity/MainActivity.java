@@ -24,7 +24,7 @@ import com.kidoo.customer.widget.NavButtomButton;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
 
     private NavigationFragement mNavBar;
 
-    @Bind(R.id.activity_main_ui)
+    @BindView(R.id.activity_main_ui)
     LinearLayout mMainUi;
 
     @Override

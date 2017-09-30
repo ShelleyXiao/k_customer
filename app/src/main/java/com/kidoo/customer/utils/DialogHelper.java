@@ -1,12 +1,18 @@
 package com.kidoo.customer.utils;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.kidoo.customer.R;
 
@@ -408,5 +414,22 @@ public final class DialogHelper {
                 .setPositiveButton(null, null);
     }
 */
+
+    public static Dialog getLoadingDialog(Context context) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View v = inflater.inflate(R.layout.layout_kidoo_loading, null);
+        FrameLayout layout = (FrameLayout) v.findViewById(R.id.dialog_view);
+        ImageView loadingImage = (ImageView) v.findViewById(R.id.img);
+        AnimationDrawable drawable = (AnimationDrawable) loadingImage.getBackground();
+              // 使用ImageView显示动画
+        Dialog loadingDialog = new Dialog(context, R.style.kidoo_loading_dialog);
+
+        //loadingDialog.setCancelable(false);// 不可以用"返回键"取消
+        loadingDialog.setContentView(layout, new FrameLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT));
+        drawable.start();
+
+        return loadingDialog;
+    }
 
 }

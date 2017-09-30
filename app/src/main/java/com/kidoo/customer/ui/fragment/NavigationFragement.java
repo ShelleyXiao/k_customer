@@ -1,14 +1,14 @@
 package com.kidoo.customer.ui.fragment;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.kidoo.customer.R;
@@ -18,7 +18,7 @@ import com.kidoo.customer.widget.NavButtomButton;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -30,13 +30,13 @@ import butterknife.OnClick;
  */
 public class NavigationFragement extends BaseFragment implements View.OnClickListener{
 
-    @Bind(R.id.nav_item_broadcast)
+    @BindView(R.id.nav_item_broadcast)
     NavButtomButton mBroadcast;
-    @Bind(R.id.nav_item_message)
+    @BindView(R.id.nav_item_message)
     NavButtomButton mMessage;
-    @Bind(R.id.nav_item_explore)
+    @BindView(R.id.nav_item_explore)
     NavButtomButton mNavExplore;
-    @Bind(R.id.nav_item_me)
+    @BindView(R.id.nav_item_me)
     NavButtomButton mNavMe;
 
 

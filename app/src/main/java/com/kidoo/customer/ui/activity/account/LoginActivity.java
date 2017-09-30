@@ -1,21 +1,22 @@
 package com.kidoo.customer.ui.activity.account;
 
-import android.content.Intent;
+import android.app.Dialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.kidoo.customer.R;
-import com.kidoo.customer.media.SelectImageActivity;
-import com.kidoo.customer.media.config.SelectOption;
+import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.LogUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
+
 
 /**
  * User: ShaudXiao
@@ -30,17 +31,22 @@ import butterknife.OnClick;
 public class LoginActivity extends AccountBaseActivity implements View.OnClickListener {
 
 
-    @Bind(R.id.acnount_id)
+    @BindView(R.id.acnount_id)
     EditText mAccountIdInput;
-    @Bind(R.id.acnount_pwd)
+    @BindView(R.id.acnount_pwd)
     EditText mAccountPwdInput;
 
-    @Bind(R.id.clean_id)
+    @BindView(R.id.clean_id)
     ImageView mCleanAcnountIdEdit;
-    @Bind(R.id.show_pwd)
+    @BindView(R.id.show_pwd)
     ImageView mShowPwdImg;
 
+    @BindView(R.id.bt_login)
+    Button mLoginBtn;
+
     private boolean showPwd = false;
+
+    private Dialog mLoadingDialog;
 
     @Override
     public int getContentView() {
@@ -77,12 +83,16 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
                 }
 
         );
+        mLoadingDialog = DialogHelper.getLoadingDialog(this);
     }
 
-    @OnClick({R.id.show_pwd, R.id.clean_id, R.id.sigin_in, R.id.forget_pwd})
+    @OnClick({R.id.show_pwd, R.id.clean_id, R.id.sigin_in, R.id.forget_pwd, R.id.bt_login})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.bt_login:
+                break;
+
             case R.id.clean_id:
                 mAccountIdInput.setText("");
                 break;
@@ -102,20 +112,23 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
                 }
                 break;
             case R.id.sigin_in:
-                Intent intent = new Intent(LoginActivity.this, SigninInOneStepActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(LoginActivity.this, SigninInOneStepActivity.class);
+//                startActivity(intent);
+                mLoadingDialog.hide();
                 break;
             case R.id.forget_pwd:
-                SelectImageActivity.show(this, new SelectOption.Builder()
-                        .setHasCam(true)
-                        .setSelectCount(3)
-                        .setCrop(200, 200)
-                        .setCallback(new SelectOption.Callback() {
-                            @Override
-                            public void doSelected(String[] images) {
+//                SelectImageActivity.show(this, new SelectOption.Builder()
+//                        .setHasCam(true)
+//                        .setSelectCount(3)
+//                        .setCrop(200, 200)
+//                        .setCallback(new SelectOption.Callback() {
+//                            @Override
+//                            public void doSelected(String[] images) {
+//
+//                            }
+//                        }).build());
 
-                            }
-                        }).build());
+                mLoadingDialog.show();
                 break;
 
         }

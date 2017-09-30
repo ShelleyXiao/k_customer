@@ -5,10 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white">
-
+<!--
     <include
         android:id="@+id/id_toolbar"
         layout="@layout/toolbar_login" />
+    -->
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
 
     <com.kidoo.customer.widget.CircleImageView
         android:id="@+id/profile_image"
@@ -131,22 +136,74 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/lay_20"/>
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_login_register"
+        android:elevation="0dp"
+        android:outlineProvider="none"
+        android:text="@string/login_in_tilte"
+        android:textColor="@color/kidoo_gren"
+        android:textSize="@dimen/font_18"
+        android:translationZ="0dp"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lay_12"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/lay_12">
+
+        <TextView
+            android:id="@+id/sigin_in"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@drawable/bottom_button_bg"
-            android:text="@string/login_in_tilte"
-            android:textSize="@dimen/font_18"
-            android:textColor="@color/kidoo_gren"/>
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/lay_12"
+            android:textColor="@color/kidoo_0EC68D"
+            android:text="@string/sign_in_tilte"
+            android:textSize="@dimen/font_18" />
 
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/forget_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/lay_12"
+            android:textColor="@color/kidoo_0EC68D"
+            android:text="@string/forget_password"
+            android:textSize="@dimen/font_18" />
+
+    </RelativeLayout>
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/button"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:background="@drawable/bottom_button_bg"-->
+            <!--android:text="@string/login_in_tilte"-->
+            <!--android:textSize="@dimen/font_18"-->
+            <!--android:textColor="@color/kidoo_gren"/>-->
+
+    <!--</LinearLayout>-->
 
 
 

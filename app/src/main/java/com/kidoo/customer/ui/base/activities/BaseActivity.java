@@ -11,6 +11,7 @@ import com.kidoo.customer.GlideRequests;
 import com.kidoo.customer.utils.LogUtils;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * User: ShaudXiao
@@ -28,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected GlideRequests mGlideRequests;
     private boolean mIsDestroy;
     private Fragment mFragment;
+    private Unbinder mUnbinder;
 
 
     @Override
@@ -38,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             setContentView(getContentView());
             initWindow();
 
-            ButterKnife.bind(this);
+            mUnbinder = ButterKnife.bind(this);
 
             initWidget();
             initData();
@@ -62,6 +64,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         mIsDestroy = true;
         super.onDestroy();
+        mUnbinder.unbind();
     }
 
     protected void addFragment(int frameLayoutId, Fragment fragment) {

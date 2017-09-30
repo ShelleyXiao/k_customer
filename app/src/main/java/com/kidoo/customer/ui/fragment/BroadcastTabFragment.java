@@ -30,7 +30,8 @@ import com.kidoo.customer.utils.Logger;
 import com.kidoo.customer.widget.boardcastFloatBtn.contorl.FloatActionController;
 import com.kidoo.customer.widget.boardcastFloatBtn.permission.FloatPermissionManager;
 
-import butterknife.Bind;
+import butterknife.BindView;
+
 
 /**
  * User: ShaudXiao
@@ -46,7 +47,7 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
     private static final int accuracyCircleFillColor = 0xAAFFFF88;
     private static final int accuracyCircleStrokeColor = 0xAA00FF00;
 
-    @Bind(R.id.bmapView)
+    @BindView(R.id.bmapView)
     MapView mMapView;
     private BaiduMap mBaiduMap;
     private Marker mMarkerSelf;
