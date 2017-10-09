@@ -5,12 +5,19 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import com.baidu.mapapi.CoordType;
+import com.baidu.mapapi.SDKInitializer;
+import com.kidoo.customer.api.http.HttpManager;
+import com.kidoo.customer.api.ApiService;
+import com.kidoo.customer.api.http.model.HttpHeaders;
+import com.kidoo.customer.api.http.model.HttpParams;
+import com.kidoo.customer.utils.AppSystemUtils;
 import com.kidoo.customer.utils.CommonUtils;
+import com.kidoo.customer.utils.TDevice;
 import com.kidoo.customer.widget.SimplexToast;
 import com.tencent.bugly.crashreport.CrashReport;
 
-import com.baidu.mapapi.CoordType;
-import com.baidu.mapapi.SDKInitializer;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * User: ShaudXiao
@@ -53,6 +60,37 @@ public class AppContext extends Application{
         CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);
         strategy.setUploadProcess(processName == null || processName.equals(packageName));
         CrashReport.initCrashReport(context, "182ff3e5bd", true, strategy);
+    }
+
+    private void initHttp() {
+        HttpManager.init(this);
+
+        //这里涉及到安全我把url去掉了，demo都是调试通的
+        String Url = "http://www.xxx.com";
+
+
+        //设置请求头
+        HttpHeaders headers = new HttpHeaders();
+        //设置公共请求参数
+        HttpParams params = new HttpParams();
+        params.put("mobile", TDevice.getTelephoneNumber(this));
+        params.put("version", String.valueOf(AppSystemUtils.getVersionCode()));
+        params.put("mobileModel", "2");
+        params.put("modelDetail", TDevice.getSystemModel());
+
+        HttpManager.getInstance()
+                .debug("KidooHttp", true)
+                .setReadTimeOut(60 * 1000)
+                .setWriteTimeOut(60 * 1000)
+                .setConnectTimeout(60 * 1000)
+                .setRetryCount(3)//默认网络不好自动重试3次
+                .setRetryDelay(500)//每次延时500ms重试
+                .setRetryIncreaseDelay(500)//每次延时叠加500ms
+                .setBaseUrl(ApiService.BASE_API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCommonHeaders(headers)//设置全局公共头
+                .addCommonParams(params);//设置全局公共参数
+
     }
 
     public static synchronized AppContext context() {
