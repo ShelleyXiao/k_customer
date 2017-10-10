@@ -46,7 +46,8 @@
     <string name="title_update_fail_status">个人信息更新失败&#8230;</string>
 
     <string name="login_input_username_hint">手机号或邮箱</string>
-    <string name="login_input_username_hint_error">请输入正确的手机号或邮箱&#8230;</string>
+    <string name="login_input_username_hint_error">请输入正确的手机号&#8230;</string>
+    <string name="login_input_username_pwd_hint_error">请输入正确的手机号和密码&#8230;</string>
     <string name="login_hold_hint">记住密码</string>
     <string name="login_forget_hint">忘记密码？</string>
     <string name="login_register_hint">注册</string>
@@ -79,6 +80,7 @@
     <string name="message_username_null">用户名未填写！！！</string>
     <string name="progress_submit">正在提交…</string>
 
+    <string name="footer_type_net_error">网络错误</string>
 
     <string name="menu_firends_list_title">好友列表</string>
 

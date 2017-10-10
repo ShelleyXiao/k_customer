@@ -1,7 +1,10 @@
 package com.kidoo.customer.ui.activity.account;
 
 import android.app.Dialog;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -10,9 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.R;
+import com.kidoo.customer.mvp.contract.LoginContract;
+import com.kidoo.customer.mvp.presenter.LoginPresenter;
 import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.LogUtils;
+import com.kidoo.customer.utils.TDevice;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,8 +35,12 @@ import butterknife.OnClick;
  */
 
 
-public class LoginActivity extends AccountBaseActivity implements View.OnClickListener {
+public class LoginActivity extends AccountBaseActivity implements View.OnClickListener , View.OnFocusChangeListener, LoginContract.View{
 
+    private static final int TEMP_KEY_TIME = 10 * 60 * 1000;
+
+    private static final int REFRESH_TEMP_KEY_MSG = 0X01;
+    private static final int LOGIN_MSG = 0X02;
 
     @BindView(R.id.acnount_id)
     EditText mAccountIdInput;
@@ -48,13 +59,43 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
 
     private Dialog mLoadingDialog;
 
+    private LoginContract.Presenter mPresenter;
+
+    private long refreshkeyTimeStamp;
+
+    private Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case LOGIN_MSG:
+                    requestLogin();
+                    break;
+                case REFRESH_TEMP_KEY_MSG:
+                    requestTempToken();
+                    break;
+            }
+        }
+    };
+
     @Override
     public int getContentView() {
         return R.layout.activity_login;
     }
 
     @Override
+    public void initData() {
+        super.initData();
+
+        mAccountIdInput.setText(AccountHelper.getAccount(this));
+    }
+
+    @Override
     public void initWidget() {
+
+        mPresenter = new LoginPresenter(this);
+
         mAccountIdInput.addTextChangedListener(
                 new TextWatcher() {
                     @Override
@@ -77,8 +118,6 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
                     public void afterTextChanged(Editable s) {
                         int length = s.length();
                         String input = s.toString();
-
-
                     }
                 }
 
@@ -91,6 +130,7 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_login:
+                requestLogin();
                 break;
 
             case R.id.clean_id:
@@ -102,19 +142,19 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
                 if(showPwd){
                     //显示密码
                     mAccountPwdInput.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    mShowPwdImg.setImageDrawable(getDrawable(R.drawable.btn_closekey));
+                    mShowPwdImg.setImageDrawable(getDrawable(R.drawable.btn_openkey));
                     showPwd = false;
                 }else{
                     //否则隐藏密码
                     mAccountPwdInput.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    mShowPwdImg.setImageDrawable(getDrawable(R.drawable.btn_openkey));
+                    mShowPwdImg.setImageDrawable(getDrawable(R.drawable.btn_closekey));
                     showPwd = true;
                 }
                 break;
             case R.id.sigin_in:
 //                Intent intent = new Intent(LoginActivity.this, SigninInOneStepActivity.class);
 //                startActivity(intent);
-                mLoadingDialog.hide();
+
                 break;
             case R.id.forget_pwd:
 //                SelectImageActivity.show(this, new SelectOption.Builder()
@@ -128,9 +168,81 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
 //                            }
 //                        }).build());
 
-                mLoadingDialog.show();
+
                 break;
 
+        }
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+        showToastForKeyBord(msg);
+    }
+
+    @Override
+    public void showProgressDialog() {
+        mLoadingDialog.show();
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        mLoadingDialog.hide();
+    }
+
+    @Override
+    public void refreshTempKeyNotify(boolean success, final String errorMsg) {
+        if(success) {
+            refreshkeyTimeStamp = System.currentTimeMillis();
+            mHandler.sendEmptyMessage(LOGIN_MSG);
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    showToastForKeyBord(errorMsg);
+                }
+            });
+        }
+    }
+
+    private void requestTempToken() {
+        String accoutId = mAccountIdInput.getText().toString().trim();
+        String pwd = mAccountPwdInput.getText().toString().trim();
+
+        if (!TextUtils.isEmpty(accoutId) && !TextUtils.isEmpty(pwd) && TDevice.isMobileNO(accoutId)) {
+            if (TDevice.hasInternet()) {
+                mPresenter.refreshTempToken(accoutId);
+            } else {
+                showToastForKeyBord(R.string.footer_type_net_error);
+            }
+
+        }  else {
+            showToastForKeyBord(R.string.login_input_username_pwd_hint_error);
+        }
+    }
+
+    private void requestLogin() {
+        if(System.currentTimeMillis() - refreshkeyTimeStamp > TEMP_KEY_TIME) {
+            mHandler.sendEmptyMessage(REFRESH_TEMP_KEY_MSG);
+            return;
+        }
+        String accoutId = mAccountIdInput.getText().toString().trim();
+        String pwd = mAccountPwdInput.getText().toString().trim();
+
+        if (!TextUtils.isEmpty(pwd) && !TextUtils.isEmpty(accoutId)) {
+
+            if (TDevice.hasInternet()) {
+                mPresenter.loginAction(accoutId, pwd);
+            } else {
+                showToastForKeyBord(R.string.footer_type_net_error);
+            }
+
+        } else {
+            showToastForKeyBord(R.string.login_input_username_pwd_hint_error);
         }
     }
 

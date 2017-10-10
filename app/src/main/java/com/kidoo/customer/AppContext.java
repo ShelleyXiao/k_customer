@@ -2,6 +2,7 @@ package com.kidoo.customer;
 
 import android.app.Application;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -42,6 +43,8 @@ public class AppContext extends Application{
 
         initBugly();
 
+        initHttp();
+
         // 在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
         SDKInitializer.initialize(this);
         //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
@@ -73,9 +76,11 @@ public class AppContext extends Application{
         HttpHeaders headers = new HttpHeaders();
         //设置公共请求参数
         HttpParams params = new HttpParams();
-        params.put("mobile", TDevice.getTelephoneNumber(this));
+        if(!TextUtils.isEmpty(String.valueOf(TDevice.getTelephoneNumber(this)))) {
+//            params.put("mobile", TDevice.getTelephoneNumber(this));
+        }
         params.put("version", String.valueOf(AppSystemUtils.getVersionCode()));
-        params.put("mobileModel", "2");
+        params.put("mobileModel", "1");
         params.put("modelDetail", TDevice.getSystemModel());
 
         HttpManager.getInstance()

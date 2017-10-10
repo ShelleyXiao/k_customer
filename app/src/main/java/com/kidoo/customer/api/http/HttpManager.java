@@ -4,18 +4,42 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.kidoo.customer.api.http.cache.RxCache;
+import com.kidoo.customer.api.http.cache.converter.IDiskConverter;
+import com.kidoo.customer.api.http.cache.converter.SerializableDiskConverter;
+import com.kidoo.customer.api.http.cache.model.CacheMode;
 import com.kidoo.customer.api.http.cookie.CookieManger;
+import com.kidoo.customer.api.http.https.HttpsUtils;
 import com.kidoo.customer.api.http.interceptor.HttpLoggingInterceptor;
 import com.kidoo.customer.api.http.model.HttpHeaders;
 import com.kidoo.customer.api.http.model.HttpParams;
+import com.kidoo.customer.api.http.request.CustomRequest;
+import com.kidoo.customer.api.http.request.DeleteRequest;
+import com.kidoo.customer.api.http.request.DownloadRequest;
+import com.kidoo.customer.api.http.request.GetRequest;
+import com.kidoo.customer.api.http.request.PostRequest;
+import com.kidoo.customer.api.http.request.PutRequest;
+import com.kidoo.customer.api.http.utils.HttpLog;
+import com.kidoo.customer.api.http.utils.RxUtil;
+import com.kidoo.customer.api.http.utils.Utils;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.Proxy;
+import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import okhttp3.Cache;
+import okhttp3.ConnectionPool;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 
@@ -24,44 +48,35 @@ import retrofit2.Retrofit;
  * Date: 2017-10-09
  * Time: 10:42
  * Company: zx
- * Description:
+ * Description: 网络请求组件 (来自网络开源组件)
  * FIXME
  */
 
 
 public class HttpManager {
 
+    private static Application sContext;
     public static final int DEFAULT_MILLISECONDS = 60000;             //默认的超时时间
     private static final int DEFAULT_RETRY_COUNT = 3;                 //默认重试次数
     private static final int DEFAULT_RETRY_INCREASEDELAY = 0;         //默认重试叠加时间
     private static final int DEFAULT_RETRY_DELAY = 500;               //默认重试延时
     public static final int DEFAULT_CACHE_NEVER_EXPIRE = -1;          //缓存过期时间，默认永久缓存
-
-    private static Application mContext;
-
+    private Cache mCache = null;                                      //Okhttp缓存对象
+    private CacheMode mCacheMode = CacheMode.NO_CACHE;                //缓存类型
+    private long mCacheTime = -1;                                     //缓存时间
+    private File mCacheDirectory;                                     //缓存目录
+    private long mCacheMaxSize;                                       //缓存大小
     private String mBaseUrl;                                          //全局BaseUrl
     private int mRetryCount = DEFAULT_RETRY_COUNT;                    //重试次数默认3次
     private int mRetryDelay = DEFAULT_RETRY_DELAY;                    //延迟xxms重试
     private int mRetryIncreaseDelay = DEFAULT_RETRY_INCREASEDELAY;    //叠加延迟
-
     private HttpHeaders mCommonHeaders;                               //全局公共请求头
     private HttpParams mCommonParams;                                 //全局公共请求参数
-
-    private static HttpManager sApiManager;
     private OkHttpClient.Builder okHttpClientBuilder;                 //okhttp请求的客户端
     private Retrofit.Builder retrofitBuilder;                         //Retrofit请求Builder
+    private RxCache.Builder rxCacheBuilder;                           //RxCache请求的Builder
     private CookieManger cookieJar;                                   //Cookie管理
-
-    public static HttpManager getInstance() {
-        if(sApiManager == null) {
-            synchronized (HttpManager.class) {
-                if(sApiManager == null) {
-                    sApiManager = new HttpManager();
-                }
-            }
-        }
-        return sApiManager;
-    }
+    private volatile static HttpManager singleton = null;
 
     private HttpManager() {
         okHttpClientBuilder = new OkHttpClient.Builder();
@@ -70,30 +85,100 @@ public class HttpManager {
         okHttpClientBuilder.readTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
         okHttpClientBuilder.writeTimeout(DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
         retrofitBuilder = new Retrofit.Builder();
+        rxCacheBuilder = new RxCache.Builder().init(sContext)
+                .diskConverter(new SerializableDiskConverter());      //目前只支持Serializable和Gson缓存其它可以自己扩展
+    }
+
+    public static HttpManager getInstance() {
+        testInitialize();
+        if (singleton == null) {
+            synchronized (HttpManager.class) {
+                if (singleton == null) {
+                    singleton = new HttpManager();
+                }
+            }
+        }
+        return singleton;
     }
 
     /**
      * 必须在全局Application先调用，获取context上下文，否则缓存无法使用
      */
     public static void init(Application app) {
-        mContext = app;
+        sContext = app;
     }
 
     /**
      * 获取全局上下文
      */
     public static Context getContext() {
-        return mContext;
+        testInitialize();
+        return sContext;
     }
 
+    private static void testInitialize() {
+        if (sContext == null)
+            throw new ExceptionInInitializerError("请先在全局Application中调用 HttpManager.init() 初始化！");
+    }
+
+    public static OkHttpClient getOkHttpClient() {
+        return getInstance().okHttpClientBuilder.build();
+    }
+
+    public static Retrofit getRetrofit() {
+        return getInstance().retrofitBuilder.build();
+    }
+
+    public static RxCache getRxCache() {
+        return getInstance().rxCacheBuilder.build();
+    }
+
+    /**
+     * 对外暴露 OkHttpClient,方便自定义
+     */
+    public static OkHttpClient.Builder getOkHttpClientBuilder() {
+        return getInstance().okHttpClientBuilder;
+    }
+
+    /**
+     * 对外暴露 Retrofit,方便自定义
+     */
+    public static Retrofit.Builder getRetrofitBuilder() {
+        return getInstance().retrofitBuilder;
+    }
+
+    /**
+     * 对外暴露 RxCache,方便自定义
+     */
+    public static RxCache.Builder getRxCacheBuilder() {
+        return getInstance().rxCacheBuilder;
+    }
+
+    /**
+     * 调试模式,默认打开所有的异常调试
+     */
+    public HttpManager debug(String tag) {
+        debug(tag, true);
+        return this;
+    }
+
+    /**
+     * 调试模式,第二个参数表示所有catch住的log是否需要打印<br>
+     * 一般来说,这些异常是由于不标准的数据格式,或者特殊需要主动产生的,
+     * 并不是框架错误,如果不想每次打印,这里可以关闭异常显示
+     */
     public HttpManager debug(String tag, boolean isPrintException) {
-        String tempTag = TextUtils.isEmpty(tag)? "kidooHttp_": tag;
+        String tempTag = TextUtils.isEmpty(tag)?"RxHttpManager_":tag;
         if(isPrintException){
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(tempTag, isPrintException);
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             okHttpClientBuilder.addInterceptor(loggingInterceptor);
         }
-
+        HttpLog.customTagPrefix = tempTag;
+        HttpLog.allowE = isPrintException;
+        HttpLog.allowD = isPrintException;
+        HttpLog.allowI = isPrintException;
+        HttpLog.allowV = isPrintException;
         return this;
     }
 
@@ -110,18 +195,29 @@ public class HttpManager {
     }
 
     /**
-     * 全局设置baseurl
+     * https的全局访问规则
      */
-    public HttpManager setBaseUrl(String baseUrl) {
-        mBaseUrl = Utils.checkNotNull(baseUrl, "baseUrl == null");
+    public HttpManager setHostnameVerifier(HostnameVerifier hostnameVerifier) {
+        okHttpClientBuilder.hostnameVerifier(hostnameVerifier);
         return this;
     }
 
     /**
-     * 获取全局baseurl
+     * https的全局自签名证书
      */
-    public static String getBaseUrl() {
-        return getInstance().mBaseUrl;
+    public HttpManager setCertificates(InputStream... certificates) {
+        HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(null, null, certificates);
+        okHttpClientBuilder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
+        return this;
+    }
+
+    /**
+     * https双向认证证书
+     */
+    public HttpManager setCertificates(InputStream bksFile, String password, InputStream... certificates) {
+        HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(bksFile, password, certificates);
+        okHttpClientBuilder.sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager);
+        return this;
     }
 
     /**
@@ -213,21 +309,99 @@ public class HttpManager {
         return getInstance().mRetryIncreaseDelay;
     }
 
-
     /**
-     * 获取全局公共请求头
+     * 全局的缓存模式
      */
-    public HttpHeaders getCommonHeaders() {
-        return mCommonHeaders;
+    public HttpManager setCacheMode(CacheMode cacheMode) {
+        mCacheMode = cacheMode;
+        return this;
     }
 
     /**
-     * 添加全局公共请求参数
+     * 获取全局的缓存模式
      */
-    public HttpManager addCommonHeaders(HttpHeaders commonHeaders) {
-        if (mCommonHeaders == null) mCommonHeaders = new HttpHeaders();
-        mCommonHeaders.put(commonHeaders);
+    public static CacheMode getCacheMode() {
+        return getInstance().mCacheMode;
+    }
+
+    /**
+     * 全局的缓存过期时间
+     */
+    public HttpManager setCacheTime(long cacheTime) {
+        if (cacheTime <= -1) cacheTime = DEFAULT_CACHE_NEVER_EXPIRE;
+        mCacheTime = cacheTime;
         return this;
+    }
+
+    /**
+     * 获取全局的缓存过期时间
+     */
+    public static long getCacheTime() {
+        return getInstance().mCacheTime;
+    }
+
+    /**
+     * 全局的缓存大小,默认50M
+     */
+    public HttpManager setCacheMaxSize(long maxSize) {
+        mCacheMaxSize = maxSize;
+        return this;
+    }
+
+    /**
+     * 获取全局的缓存大小
+     */
+    public static long getCacheMaxSize() {
+        return getInstance().mCacheMaxSize;
+    }
+
+    /**
+     * 全局设置缓存的版本，默认为1，缓存的版本号
+     */
+    public HttpManager setCacheVersion(int cacheersion) {
+        if (cacheersion < 0)
+            throw new IllegalArgumentException("cacheersion must > 0");
+        rxCacheBuilder.appVersion(cacheersion);
+        return this;
+    }
+
+    /**
+     * 全局设置缓存的路径，默认是应用包下面的缓存
+     */
+    public HttpManager setCacheDirectory(File directory) {
+        mCacheDirectory = Utils.checkNotNull(directory, "directory == null");
+        rxCacheBuilder.diskDir(directory);
+        return this;
+    }
+
+    /**
+     * 获取缓存的路劲
+     */
+    public static File getCacheDirectory() {
+        return getInstance().mCacheDirectory;
+    }
+
+    /**
+     * 全局设置缓存的转换器
+     */
+    public HttpManager setCacheDiskConverter(IDiskConverter converter) {
+        rxCacheBuilder.diskConverter(Utils.checkNotNull(converter, "converter == null"));
+        return this;
+    }
+
+    /**
+     * 全局设置OkHttp的缓存,默认是3天
+     */
+    public HttpManager setHttpCache(Cache cache) {
+        this.mCache = cache;
+        return this;
+    }
+
+    /**
+     * 获取OkHttp的缓存<br>
+     */
+    public static Cache getHttpCache() {
+        return getInstance().mCache;
     }
 
     /**
@@ -247,6 +421,22 @@ public class HttpManager {
     }
 
     /**
+     * 获取全局公共请求头
+     */
+    public HttpHeaders getCommonHeaders() {
+        return mCommonHeaders;
+    }
+
+    /**
+     * 添加全局公共请求参数
+     */
+    public HttpManager addCommonHeaders(HttpHeaders commonHeaders) {
+        if (mCommonHeaders == null) mCommonHeaders = new HttpHeaders();
+        mCommonHeaders.put(commonHeaders);
+        return this;
+    }
+
+    /**
      * 添加全局拦截器
      */
     public HttpManager addInterceptor(Interceptor interceptor) {
@@ -262,8 +452,156 @@ public class HttpManager {
         return this;
     }
 
-    public HttpManager addConverterFactory(Converter.Factory factory) {
-        retrofitBuilder.addConverterFactory(factory);
+    /**
+     * 全局设置代理
+     */
+    public HttpManager setOkproxy(Proxy proxy) {
+        okHttpClientBuilder.proxy(Utils.checkNotNull(proxy, "proxy == null"));
         return this;
+    }
+
+    /**
+     * 全局设置请求的连接池
+     */
+    public HttpManager setOkconnectionPool(ConnectionPool connectionPool) {
+        okHttpClientBuilder.connectionPool(Utils.checkNotNull(connectionPool, "connectionPool == null"));
+        return this;
+    }
+
+    /**
+     * 全局为Retrofit设置自定义的OkHttpClient
+     */
+    public HttpManager setOkclient(OkHttpClient client) {
+        retrofitBuilder.client(Utils.checkNotNull(client, "client == null"));
+        return this;
+    }
+
+    /**
+     * 全局设置Converter.Factory,默认GsonConverterFactory.create()
+     */
+    public HttpManager addConverterFactory(Converter.Factory factory) {
+        retrofitBuilder.addConverterFactory(Utils.checkNotNull(factory, "factory == null"));
+        return this;
+    }
+
+    /**
+     * 全局设置CallAdapter.Factory,默认RxJavaCallAdapterFactory.create()
+     */
+    public HttpManager addCallAdapterFactory(CallAdapter.Factory factory) {
+        retrofitBuilder.addCallAdapterFactory(Utils.checkNotNull(factory, "factory == null"));
+        return this;
+    }
+
+    /**
+     * 全局设置Retrofit callbackExecutor
+     */
+    public HttpManager setCallbackExecutor(Executor executor) {
+        retrofitBuilder.callbackExecutor(Utils.checkNotNull(executor, "executor == null"));
+        return this;
+    }
+
+    /**
+     * 全局设置Retrofit对象Factory
+     */
+    public HttpManager setCallFactory(okhttp3.Call.Factory factory) {
+        retrofitBuilder.callFactory(Utils.checkNotNull(factory, "factory == null"));
+        return this;
+    }
+
+    /**
+     * 全局设置baseurl
+     */
+    public HttpManager setBaseUrl(String baseUrl) {
+        mBaseUrl = Utils.checkNotNull(baseUrl, "baseUrl == null");
+        return this;
+    }
+
+    /**
+     * 获取全局baseurl
+     */
+    public static String getBaseUrl() {
+        return getInstance().mBaseUrl;
+    }
+
+    /**
+     * get请求
+     */
+    public static GetRequest get(String url) {
+        return new GetRequest(url);
+    }
+
+    /**
+     * post请求
+     */
+    public static PostRequest post(String url) {
+        return new PostRequest(url);
+    }
+
+
+    /**
+     * delete请求
+     */
+    public static DeleteRequest delete(String url) {
+
+        return new DeleteRequest(url);
+    }
+
+    /**
+     * 自定义请求
+     */
+    public static CustomRequest custom() {
+        return new CustomRequest();
+    }
+
+    public static DownloadRequest downLoad(String url) {
+        return new DownloadRequest(url);
+    }
+
+    public static PutRequest put(String url) {
+        return new PutRequest(url);
+    }
+
+    /**
+     * 取消订阅
+     */
+    public static void cancelSubscription(Disposable disposable) {
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
+    }
+
+    /**
+     * 清空缓存
+     */
+    public static void clearCache() {
+        getRxCache().clear().compose(RxUtil.<Boolean>io_main())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(@NonNull Boolean aBoolean) throws Exception {
+                        HttpLog.i("clearCache success!!!");
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        HttpLog.i("clearCache err!!!");
+                    }
+                });
+    }
+
+    /**
+     * 移除缓存（key）
+     */
+    public static void removeCache(String key) {
+        getRxCache().remove(key).compose(RxUtil.<Boolean>io_main()).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(@NonNull Boolean aBoolean) throws Exception {
+                HttpLog.i("removeCache success!!!");
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable throwable) throws Exception {
+                HttpLog.i("removeCache err!!!");
+            }
+        });
     }
 }

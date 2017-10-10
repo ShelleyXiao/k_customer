@@ -1,6 +1,8 @@
 package com.kidoo.customer.api.http.model;
 
 
+import com.kidoo.customer.bean.PageInfo;
+
 /**
  * User: ShaudXiao
  * Date: 2017-10-09
@@ -11,24 +13,28 @@ package com.kidoo.customer.api.http.model;
  */
 
 public class ApiResult<T> {
-    private int code;
-    private String msg;
+    boolean success;
+    private String errorCode;
+    private String errorMsg;
+    private int showType;
     private T data;
 
-    public int getCode() {
-        return code;
+    private PageInfo pageInfo;
+
+    public String getCode() {
+        return errorCode;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setCode(String code) {
+        this.errorCode = code;
     }
 
     public String getMsg() {
-        return msg;
+        return errorMsg;
     }
 
     public void setMsg(String msg) {
-        this.msg = msg;
+        this.errorMsg = msg;
     }
 
     public T getData() {
@@ -40,14 +46,30 @@ public class ApiResult<T> {
     }
 
     public boolean isOk() {
-        return code == 0;
+        return success;
+    }
+
+    public int getShowType() {
+        return showType;
+    }
+
+    public void setShowType(int showType) {
+        this.showType = showType;
+    }
+
+    public PageInfo getPageInfo() {
+        return pageInfo;
+    }
+
+    public void setPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
     }
 
     @Override
     public String toString() {
         return "ApiResult{" +
-                "code='" + code + '\'' +
-                ", msg='" + msg + '\'' +
+                "code='" + errorCode + '\'' +
+                ", msg='" + errorMsg + '\'' +
                 ", data=" + data +
                 '}';
     }

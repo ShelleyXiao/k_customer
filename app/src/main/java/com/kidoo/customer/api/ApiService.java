@@ -1,6 +1,6 @@
 package com.kidoo.customer.api;
 
-import com.kidoo.customer.api.model.KeypairResult;
+import com.kidoo.customer.mvp.model.KeypairResult;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

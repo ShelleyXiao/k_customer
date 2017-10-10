@@ -1,6 +1,8 @@
 package com.kidoo.customer.api.http.model;
 
 
+import com.kidoo.customer.api.http.body.ProgressResponseCallBack;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -67,43 +69,43 @@ public class HttpParams implements Serializable {
         urlParamsMap.put(key, value);
     }
 
-    public <T extends File> void put(String key, T file) {
-        put(key, file, file.getName());
+    public <T extends File> void put(String key, T file, ProgressResponseCallBack responseCallBack) {
+        put(key, file, file.getName(), responseCallBack);
     }
 
-    public <T extends File> void put(String key, T file, String fileName) {
-        put(key, file, fileName, guessMimeType(fileName));
+    public <T extends File> void put(String key, T file, String fileName, ProgressResponseCallBack responseCallBack) {
+        put(key, file, fileName, guessMimeType(fileName), responseCallBack);
     }
 
-    public <T extends InputStream> void put(String key, T file, String fileName) {
-        put(key, file, fileName, guessMimeType(fileName));
+    public <T extends InputStream> void put(String key, T file, String fileName, ProgressResponseCallBack responseCallBack) {
+        put(key, file, fileName, guessMimeType(fileName), responseCallBack);
     }
 
-    public void put(String key, byte[] bytes, String fileName) {
-        put(key, bytes, fileName, guessMimeType(fileName));
+    public void put(String key, byte[] bytes, String fileName, ProgressResponseCallBack responseCallBack) {
+        put(key, bytes, fileName, guessMimeType(fileName), responseCallBack);
     }
 
     public void put(String key, FileWrapper fileWrapper) {
         if (key != null && fileWrapper != null) {
-            put(key, fileWrapper.file, fileWrapper.fileName, fileWrapper.contentType);
+            put(key, fileWrapper.file, fileWrapper.fileName, fileWrapper.contentType, fileWrapper.responseCallBack);
         }
     }
 
-    public <T> void put(String key, T countent, String fileName, MediaType contentType) {
+    public <T> void put(String key, T countent, String fileName, MediaType contentType, ProgressResponseCallBack responseCallBack) {
         if (key != null) {
             List<FileWrapper> fileWrappers = fileParamsMap.get(key);
             if (fileWrappers == null) {
                 fileWrappers = new ArrayList<>();
                 fileParamsMap.put(key, fileWrappers);
             }
-            fileWrappers.add(new FileWrapper(countent, fileName, contentType));
+            fileWrappers.add(new FileWrapper(countent, fileName, contentType, responseCallBack));
         }
     }
 
-    public <T extends File> void putFileParams(String key, List<T> files) {
+    public <T extends File> void putFileParams(String key, List<T> files, ProgressResponseCallBack responseCallBack) {
         if (key != null && files != null && !files.isEmpty()) {
             for (File file : files) {
-                put(key, file);
+                put(key, file, responseCallBack);
             }
         }
     }
@@ -152,9 +154,9 @@ public class HttpParams implements Serializable {
         public String fileName;
         public MediaType contentType;
         public long fileSize;
+        public ProgressResponseCallBack responseCallBack;
 
-
-        public FileWrapper(T file, String fileName, MediaType contentType) {
+        public FileWrapper(T file, String fileName, MediaType contentType, ProgressResponseCallBack responseCallBack) {
             this.file = file;
             this.fileName = fileName;
             this.contentType = contentType;
@@ -163,6 +165,7 @@ public class HttpParams implements Serializable {
             } else if (file instanceof byte[]) {
                 this.fileSize = ((byte[]) file).length;
             }
+            this.responseCallBack = responseCallBack;
         }
 
         @Override
