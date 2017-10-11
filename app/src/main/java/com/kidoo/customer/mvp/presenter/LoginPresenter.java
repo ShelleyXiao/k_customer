@@ -23,7 +23,7 @@ import com.kidoo.customer.utils.LogUtils;
  * FIXME
  */
 
-public class LoginPresenter implements LoginContract.Presenter{
+public class LoginPresenter implements LoginContract.Presenter {
 
     private LoginContract.View view;
     private KeypairResult mTempKeypairResult;
@@ -34,7 +34,7 @@ public class LoginPresenter implements LoginContract.Presenter{
 
     @Override
     public void refreshTempToken(String account) {
-        HttpManager.get(ComParamContact.TempKey.PATH)
+        HttpManager.post(ComParamContact.TempKey.PATH)
                 .params("mobile", account)
                 .execute(new SimpleCallBack<KeypairResult>() {
                     @Override
@@ -55,16 +55,18 @@ public class LoginPresenter implements LoginContract.Presenter{
     @Override
     public void loginAction(String account, String pwd) {
         LogUtils.w(account + " " + pwd);
-        if(null != mTempKeypairResult && !TextUtils.isEmpty(mTempKeypairResult.getPublicKey())) {
-            String sha1Pwd = EncryptUtils.encryptSHA1ToString(pwd);
-
+        if (null != mTempKeypairResult && !TextUtils.isEmpty(mTempKeypairResult.getPublicKey())) {
+            String sha1Pwd = EncryptUtils.encryptSHA1ToString(pwd).toLowerCase();
+            LogUtils.w(sha1Pwd);
             try {
+                LogUtils.w(mTempKeypairResult.getPublicKey());
+
                 byte[] b_rsapwd = RSAUtil.encryptByPublicKey(sha1Pwd, mTempKeypairResult.getPublicKey());
                 String finalPwd = Base64Utils.encode(b_rsapwd);
 
                 HttpManager.post(ComParamContact.Login.PATH)
                         .params(ComParamContact.Login.ACCOUNT, account)
-                        .params(ComParamContact.Login.PASSWORD, finalPwd)
+                        .params(ComParamContact.Login.PASSWORD, (finalPwd))
                         .params(ComParamContact.Login.LOGINTYPE, "1")
                         .execute(new SimpleCallBack<LoginResult>() {
                             @Override
@@ -76,7 +78,6 @@ public class LoginPresenter implements LoginContract.Presenter{
                             @Override
                             public void onSuccess(LoginResult loginResult) {
                                 LogUtils.w(loginResult.toString());
-
                             }
                         });
 

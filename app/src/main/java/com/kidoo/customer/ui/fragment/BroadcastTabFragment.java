@@ -26,7 +26,6 @@ import com.kidoo.customer.interf.OnTabReselectListener;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
 import com.kidoo.customer.utils.LocationUtils;
 import com.kidoo.customer.utils.LogUtils;
-import com.kidoo.customer.utils.Logger;
 import com.kidoo.customer.widget.boardcastFloatBtn.contorl.FloatActionController;
 import com.kidoo.customer.widget.boardcastFloatBtn.permission.FloatPermissionManager;
 
@@ -73,7 +72,6 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Logger.getLogger().d("****************** onActivityCreated");
     }
 
 

@@ -25,6 +25,16 @@ public class StringUtils {
     }
 
     /**
+     * 判断字符串是否为空或空字符
+     *
+     * @param strSource 源字符串
+     * @return true表示为空，false表示不为空
+     */
+    public static boolean isNull(final String strSource) {
+        return strSource == null || "".equals(strSource.trim());
+    }
+
+    /**
      * 判断字符串是否为null或全为空格
      *
      * @param s 待校验字符串

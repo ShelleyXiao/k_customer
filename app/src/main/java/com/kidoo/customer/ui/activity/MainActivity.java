@@ -19,7 +19,6 @@ import com.kidoo.customer.ui.base.activities.BaseActivity;
 import com.kidoo.customer.ui.fragment.NavigationFragement;
 import com.kidoo.customer.utils.AppSystemUtils;
 import com.kidoo.customer.utils.DialogHelper;
-import com.kidoo.customer.utils.Logger;
 import com.kidoo.customer.widget.NavButtomButton;
 
 import java.util.List;
@@ -59,7 +58,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void initData() {
         super.initData();
-        Logger.getLogger().d("**************init data");
         checkUpdate();
         checkLocation();
 
@@ -142,10 +140,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         if (EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.READ_PHONE_STATE)) {
             //有权限，do something
-            Logger.getLogger().d("has ACCESS_FINE_LOCATION, do someting.............");
 //            startLbs();
         } else {
-            Logger.getLogger().d("requestPermissions.............");
             EasyPermissions.requestPermissions(this, getString(R.string.need_lbs_permission_hint), RC_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_PHONE_STATE);
         }
