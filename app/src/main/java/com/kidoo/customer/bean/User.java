@@ -11,4 +11,5 @@ package com.kidoo.customer.bean;
 
 
 public class User {
+
 }

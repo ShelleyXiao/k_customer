@@ -18,11 +18,9 @@ public interface LoginContract {
     interface View extends BaseView {
         void showToast(String msg);
 
-        void showProgressDialog();
-
-        void hideProgressDialog();
-
         void refreshTempKeyNotify(boolean success, String errorMsg);
+
+        void loginResultNotify(boolean success) ;
     }
 
     interface Presenter extends BasePresenter<View> {

@@ -52,7 +52,7 @@ public class AppContext extends Application{
         SDKInitializer.setCoordType(CoordType.BD09LL);
 
 //        mRefWatcher = BuildConfig.DEBUG ? LeakCanary.install(this) : RefWatcher.DISABLED;
-
+        AccountHelper.init(this);
     }
 
     private void initBugly() {
@@ -67,10 +67,6 @@ public class AppContext extends Application{
 
     private void initHttp() {
         HttpManager.init(this);
-
-        //这里涉及到安全我把url去掉了，demo都是调试通的
-        String Url = "http://www.xxx.com";
-
 
         //设置请求头
         HttpHeaders headers = new HttpHeaders();

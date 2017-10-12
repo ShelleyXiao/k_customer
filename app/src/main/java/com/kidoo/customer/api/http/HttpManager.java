@@ -53,7 +53,7 @@ import retrofit2.Retrofit;
  */
 
 
-public class HttpManager {
+public final class HttpManager {
 
     private static Application sContext;
     public static final int DEFAULT_MILLISECONDS = 60000;             //默认的超时时间

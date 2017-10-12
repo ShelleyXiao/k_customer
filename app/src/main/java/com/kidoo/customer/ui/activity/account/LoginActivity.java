@@ -1,6 +1,6 @@
 package com.kidoo.customer.ui.activity.account;
 
-import android.app.Dialog;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
@@ -17,7 +17,7 @@ import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.R;
 import com.kidoo.customer.mvp.contract.LoginContract;
 import com.kidoo.customer.mvp.presenter.LoginPresenter;
-import com.kidoo.customer.utils.DialogHelper;
+import com.kidoo.customer.ui.activity.MainActivity;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.TDevice;
 
@@ -57,7 +57,6 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
 
     private boolean showPwd = false;
 
-    private Dialog mLoadingDialog;
 
     private LoginContract.Presenter mPresenter;
 
@@ -122,7 +121,7 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
                 }
 
         );
-        mLoadingDialog = DialogHelper.getLoadingDialog(this);
+
     }
 
     @OnClick({R.id.show_pwd, R.id.clean_id, R.id.sigin_in, R.id.forget_pwd, R.id.bt_login})
@@ -139,16 +138,16 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
 
             case R.id.show_pwd:
                 LogUtils.d("show passwd");
-                if(showPwd){
+                if(!showPwd){
                     //显示密码
                     mAccountPwdInput.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     mShowPwdImg.setImageDrawable(getDrawable(R.drawable.btn_openkey));
-                    showPwd = false;
+                    showPwd = true;
                 }else{
                     //否则隐藏密码
                     mAccountPwdInput.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     mShowPwdImg.setImageDrawable(getDrawable(R.drawable.btn_closekey));
-                    showPwd = true;
+                    showPwd = false;
                 }
                 break;
             case R.id.sigin_in:
@@ -185,16 +184,6 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
     }
 
     @Override
-    public void showProgressDialog() {
-        mLoadingDialog.show();
-    }
-
-    @Override
-    public void hideProgressDialog() {
-        mLoadingDialog.hide();
-    }
-
-    @Override
     public void refreshTempKeyNotify(boolean success, final String errorMsg) {
         if(success) {
             refreshkeyTimeStamp = System.currentTimeMillis();
@@ -206,6 +195,19 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
                     showToastForKeyBord(errorMsg);
                 }
             });
+        }
+    }
+
+    @Override
+    public void loginResultNotify(boolean success) {
+        if(success) {
+            showToastForKeyBord(R.string.login_success_hint);
+            AccountHelper.holdAccount(this, mAccountIdInput.getText().toString().trim());
+            // 执行通知，广播消息，登陆成功
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+            finish();
         }
     }
 
@@ -228,6 +230,7 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
     private void requestLogin() {
         if(System.currentTimeMillis() - refreshkeyTimeStamp > TEMP_KEY_TIME) {
             mHandler.sendEmptyMessage(REFRESH_TEMP_KEY_MSG);
+            LogUtils.w("refresh token");
             return;
         }
         String accoutId = mAccountIdInput.getText().toString().trim();

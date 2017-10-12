@@ -39,7 +39,7 @@ public class ComParamContact {
     }
 
     public final static class Token {
-
+        public final static String AUTH_MODEL = "authModel";
     }
 
     public final static class UserStatus {

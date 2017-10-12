@@ -3,11 +3,15 @@ package com.kidoo.customer;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.SystemClock;
 import android.support.v4.content.SharedPreferencesCompat;
 import android.text.TextUtils;
 
-import com.kidoo.customer.bean.User;
+import com.kidoo.customer.api.token.TokenManger;
+import com.kidoo.customer.mvp.model.Customer;
 import com.kidoo.customer.utils.LogUtils;
+
+import net.oschina.common.helper.SharedPreferencesHelper;
 
 /**
  * User: ShaudXiao
@@ -25,28 +29,76 @@ public class AccountHelper {
     public static final String HOLD_USERNAME_KEY = "holdUsernameKey";
 
     private static final String TAG = AccountHelper.class.getSimpleName();
-    private User mUser;
-    private Application mApplication;
+    private Application application;
+
+    private Customer mCustomer;
 
     private static AccountHelper sInstance;
 
     public AccountHelper(Application application) {
-        this.mApplication = application;
+        this.application = application;
     }
 
-    public static AccountHelper getInstance(Application application) {
+    public static AccountHelper init(Application application) {
         if(sInstance == null) {
             sInstance = new AccountHelper(application);
         } else {
             LogUtils.d(TAG, "init reload:");
+            sInstance.mCustomer = SharedPreferencesHelper.loadFormSource(sInstance.application, Customer.class);
         }
 
         return sInstance;
     }
 
     public static boolean isLogin() {
-        return true;
+        return getUserId() > 0 && TokenManger.getInstance().isTokenVaild();
     }
+
+    public static long getUserId() {
+        return getUser().getId();
+    }
+
+    public synchronized static Customer getUser() {
+        if (sInstance == null) {
+            LogUtils.w("AccountHelper instances is null, you need call init() method.");
+            return new Customer();
+        }
+        if (sInstance.mCustomer == null)
+            sInstance.mCustomer = SharedPreferencesHelper.loadFormSource(sInstance.application, Customer.class);
+        if (sInstance.mCustomer == null)
+            sInstance.mCustomer = new Customer();
+        return sInstance.mCustomer;
+    }
+
+    public static boolean updateUserCache(Customer customer) {
+        if (customer == null)
+            return false;
+
+        sInstance.mCustomer = customer;
+        return SharedPreferencesHelper.save(sInstance.application, customer);
+    }
+
+    private static void clearUserCache() {
+        sInstance.mCustomer = null;
+        SharedPreferencesHelper.remove(sInstance.application, Customer.class);
+    }
+
+    public static boolean login(final Customer customer) {
+        LogUtils.w("login:" + customer);
+        int count = 10;
+        boolean saveOk;
+        // 保存缓存
+        while (!(saveOk = updateUserCache(customer)) && count-- > 0) {
+            SystemClock.sleep(100);
+        }
+
+        if(saveOk) {
+            // 登陆成功后的动作
+        }
+
+        return saveOk;
+    }
+
 
     public static String getAccount(Context context) {
         SharedPreferences sp = context.getSharedPreferences(AccountHelper.HOLD_ACCOUNT, Context.MODE_PRIVATE);

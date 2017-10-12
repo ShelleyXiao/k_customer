@@ -1,16 +1,26 @@
 package com.kidoo.customer.mvp.presenter;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.text.TextUtils;
 
+import com.kidoo.customer.AccountHelper;
+import com.kidoo.customer.R;
 import com.kidoo.customer.api.ComParamContact;
 import com.kidoo.customer.api.http.HttpManager;
+import com.kidoo.customer.api.http.callback.ProgressDialogCallBack;
 import com.kidoo.customer.api.http.callback.SimpleCallBack;
 import com.kidoo.customer.api.http.exception.ApiException;
+import com.kidoo.customer.api.http.subsciber.IProgressDialog;
+import com.kidoo.customer.api.token.TokenManger;
 import com.kidoo.customer.cipher.rsa.Base64Utils;
 import com.kidoo.customer.cipher.rsa.RSAUtil;
 import com.kidoo.customer.mvp.contract.LoginContract;
+import com.kidoo.customer.mvp.model.AuthModel;
+import com.kidoo.customer.mvp.model.Customer;
 import com.kidoo.customer.mvp.model.KeypairResult;
 import com.kidoo.customer.mvp.model.LoginResult;
+import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.EncryptUtils;
 import com.kidoo.customer.utils.LogUtils;
 
@@ -28,8 +38,16 @@ public class LoginPresenter implements LoginContract.Presenter {
     private LoginContract.View view;
     private KeypairResult mTempKeypairResult;
 
-    public LoginPresenter(LoginContract.View view) {
+    private IProgressDialog mDialog;
+
+    public LoginPresenter(final LoginContract.View view) {
         attachView(view);
+        mDialog = new IProgressDialog() {
+            @Override
+            public Dialog getDialog() {
+                return  DialogHelper.getLoadingDialog((Activity)view);
+            }
+        };
     }
 
     @Override
@@ -68,16 +86,33 @@ public class LoginPresenter implements LoginContract.Presenter {
                         .params(ComParamContact.Login.ACCOUNT, account)
                         .params(ComParamContact.Login.PASSWORD, (finalPwd))
                         .params(ComParamContact.Login.LOGINTYPE, "1")
-                        .execute(new SimpleCallBack<LoginResult>() {
+                        .execute(new ProgressDialogCallBack<LoginResult>(mDialog) {
                             @Override
                             public void onError(ApiException e) {
-                                LogUtils.w("Error: " + e.getMessage());
+                                super.onError(e);
                                 view.showToast(e.getMessage());
                             }
 
                             @Override
-                            public void onSuccess(LoginResult loginResult) {
-                                LogUtils.w(loginResult.toString());
+                            public void onSuccess(LoginResult result) {
+                                if (result != null) {
+                                    Customer customer = result.getCustomer();
+                                    AuthModel authModel = new AuthModel();
+                                    authModel.setAccessToken(result.getTokenId());
+                                    authModel.setAccessTokenExpires(String.valueOf(result.getServerTime()));
+
+//                                    LogUtils.w(customer);
+
+                                    if (AccountHelper.login(customer)) {
+                                        view.loginResultNotify(true);
+                                        TokenManger.getInstance().setAuthModel(authModel);
+                                    } else {
+                                        view.showToast(((Activity)view).getString(R.string.login_exception_hint));
+                                    }
+                                } else {
+
+                                }
+
                             }
                         });
 

@@ -81,9 +81,13 @@ public class SplashActivity extends AppCompatActivity {
 //            intent.setClass(this, GuideActivity.class);
         } else {
 
-
-
         }
+//        if(AccountHelper.isLogin()) {
+//            intent.setClass(this, MainActivity.class);
+//        } else {
+//            intent.setClass(this, LoginActivity.class);
+//        }
+
         intent.setClass(this, LoginActivity.class);
         this.startActivity(intent);
         this.finish();

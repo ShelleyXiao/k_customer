@@ -45,6 +45,7 @@
     <string name="title_icon_null">图像不存在，上传失败</string>
     <string name="title_update_fail_status">个人信息更新失败&#8230;</string>
 
+    <string name="login_exception_hint">登录异常</string>
     <string name="login_input_username_hint">手机号或邮箱</string>
     <string name="login_input_username_hint_error">请输入正确的手机号&#8230;</string>
     <string name="login_input_username_pwd_hint_error">请输入正确的手机号和密码&#8230;</string>
