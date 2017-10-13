@@ -17,7 +17,7 @@ public class FloatBoradcastWMService extends Service implements FloatCallBack {
     @Override
     public void onCreate() {
         super.onCreate();
-        FloatActionController.getInstance().registerCallLittleMonk(this);
+        FloatActionController.getInstance().registerCallBack(this);
         //注册广播接收者
         mHomeKeyReceiver = new HomeWatcherReceiver();
         final IntentFilter homeFilter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
@@ -49,12 +49,6 @@ public class FloatBoradcastWMService extends Service implements FloatCallBack {
         }
     }
 
-    /////////////////////////////////////////////////////////实现接口////////////////////////////////////////////////////
-    @Override
-    public void guideUser(int type) {
-        FloatWindowManager.updataRedAndDialog(this);
-    }
-
 
     /**
      * 悬浮窗的隐藏
@@ -73,4 +67,8 @@ public class FloatBoradcastWMService extends Service implements FloatCallBack {
     }
 
 
+    @Override
+    public void setClickIntent(Intent intent) {
+        FloatWindowManager.setmClickIntent(intent);
+    }
 }

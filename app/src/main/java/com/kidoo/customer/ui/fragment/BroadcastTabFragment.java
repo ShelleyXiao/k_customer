@@ -1,9 +1,9 @@
 package com.kidoo.customer.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
@@ -18,11 +18,13 @@ import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.R;
 import com.kidoo.customer.interf.LocationFace;
 import com.kidoo.customer.interf.OnTabReselectListener;
+import com.kidoo.customer.ui.activity.MyBroadcastDetailActivity;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
 import com.kidoo.customer.utils.LocationUtils;
 import com.kidoo.customer.utils.LogUtils;
@@ -74,8 +76,6 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
         super.onActivityCreated(savedInstanceState);
     }
 
-
-
     @Override
     public void onPause() {
         // MapView的生命周期与Activity同步，当activity挂起时需调用MapView.onPause()
@@ -114,7 +114,25 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
                     builder.target(ll).zoom(18.0f);
                     mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
                 }
-                initOverlay(location.getLongitude(), location.getLatitude(), bdSSelf);
+
+                //定义Maker坐标点
+                LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
+                //构建Marker图标  ，这里可以自己替换
+                BitmapDescriptor bitmap = BitmapDescriptorFactory
+                        .fromResource(R.drawable.gb_gr_icon);
+                //构建MarkerOption，用于在地图上添加Marker
+                OverlayOptions option = new MarkerOptions()
+                        .position(point)
+                        .icon(bitmap)
+                        .zIndex(12)
+                        .draggable(true);
+                //在地图上添加Marker，并显示
+                mBaiduMap.addOverlay(option);
+
+                MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(point);//使输入的点位于地图中心
+                mBaiduMap.setMapStatus(u);
+
+//                initOverlay(location.getLongitude(), location.getLatitude(), bdSSelf);
             }
         });
         FloatActionController.getInstance().show();
@@ -130,24 +148,28 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
 
         bdSSelf.recycle();
         bdGround.recycle();
+
         FloatActionController.getInstance().stopMonkServer(getActivity());
     }
 
     @Override
-    public  void initWidget(View root) {
+    public void initWidget(View root) {
         mBaiduMap = mMapView.getMap();
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(14.0f);
         mBaiduMap.setMapStatus(msu);
         // 开启定位图层
-  //      mBaiduMap.setMyLocationEnabled(true);
+        mBaiduMap.setMyLocationEnabled(true);
+        mBaiduMap.setOnMarkerClickListener(this);
 
         mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
                 MyLocationConfiguration.LocationMode.NORMAL, true, mCurrentMarker,
                 accuracyCircleFillColor, accuracyCircleStrokeColor));
 
         boolean isPermission = FloatPermissionManager.getInstance().applyFloatWindow(getActivity());
-        if(isPermission) {
+        if (isPermission) {
             FloatActionController.getInstance().startFloatWMServer(this.getActivity());
+            Intent intent = new Intent(getActivity(), MyBroadcastDetailActivity.class);
+            FloatActionController.getInstance().setClickIntent(intent);
         } else {
             LogUtils.i("Float have no peimisson!!!");
         }
@@ -161,7 +183,6 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
 
     @Override
     protected int getLayoutId() {
-
         return R.layout.layout_main_tab_broadcast;
     }
 
@@ -171,13 +192,13 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
         LogUtils.d("tab relect");
     }
 
-    public void initOverlay(double longitude, double latitude, BitmapDescriptor bd ) {
+    public void initOverlay(double longitude, double latitude, BitmapDescriptor bd) {
         // add marker overlay
         LatLng ll = new LatLng(longitude, latitude);
         MarkerOptions ooA = new MarkerOptions().position(ll).icon(bd)
-                .zIndex(9).draggable(true);
+                .zIndex(9).draggable(false);
         // 掉下动画
-        ooA.animateType(MarkerOptions.MarkerAnimateType.drop);
+//        ooA.animateType(MarkerOptions.MarkerAnimateType.drop);
 
         Marker marker = (Marker) (mBaiduMap.addOverlay(ooA));
 /*
@@ -195,21 +216,6 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
                 .newLatLng(bounds.getCenter());
         mBaiduMap.setMapStatus(u);
 */
-        mBaiduMap.setOnMarkerDragListener(new BaiduMap.OnMarkerDragListener() {
-            public void onMarkerDrag(Marker marker) {
-            }
-
-            public void onMarkerDragEnd(Marker marker) {
-                Toast.makeText(
-                        BroadcastTabFragment.this.getActivity(),
-                        "拖拽结束，新位置：" + marker.getPosition().latitude + ", "
-                                + marker.getPosition().longitude,
-                        Toast.LENGTH_LONG).show();
-            }
-
-            public void onMarkerDragStart(Marker marker) {
-            }
-        });
     }
 
     /*

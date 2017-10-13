@@ -1,19 +1,13 @@
 package com.kidoo.customer.widget.boardcastFloatBtn.contorl;
 
 
-/**
- * Author:xishuang
- * Date:2017.08.01
- * Des:暴露一些与悬浮窗交互的接口
- */
-public interface FloatCallBack {
-    void guideUser(int type);
+import android.content.Intent;
 
+public interface FloatCallBack {
     void show();
 
     void hide();
 
-   // void addObtainNumer();
+    void setClickIntent(Intent intent);
 
-   // void setObtainNumber(int number);
 }

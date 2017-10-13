@@ -137,7 +137,6 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
                 break;
 
             case R.id.show_pwd:
-                LogUtils.d("show passwd");
                 if(!showPwd){
                     //显示密码
                     mAccountPwdInput.setTransformationMethod(HideReturnsTransformationMethod.getInstance());

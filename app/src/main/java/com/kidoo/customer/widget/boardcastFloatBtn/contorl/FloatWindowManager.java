@@ -1,6 +1,7 @@
 package com.kidoo.customer.widget.boardcastFloatBtn.contorl;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.os.Build;
@@ -8,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.WindowManager;
 
+import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.boardcastFloatBtn.view.FloatLayout;
 
 
@@ -16,7 +18,7 @@ import com.kidoo.customer.widget.boardcastFloatBtn.view.FloatLayout;
  * Date:2017.08.01
  * Des:悬浮窗统一管理，与悬浮窗交互的真正实现
  */
-public class FloatWindowManager {
+public class FloatWindowManager  {
     /**
      * 悬浮窗
      */
@@ -25,12 +27,14 @@ public class FloatWindowManager {
     private static WindowManager.LayoutParams wmParams;
     private static boolean mHasShown;
 
+    private static Intent mClickIntent;
+
     /**
      * 创建一个小悬浮窗。初始位置为屏幕的右部中间位置。
      *
      * @param context 必须为应用程序的Context.
      */
-    public static void createFloatWindow(Context context) {
+    public static void createFloatWindow(final Context context) {
         wmParams = new WindowManager.LayoutParams();
         WindowManager windowManager = getWindowManager(context);
         mFloatLayout = new FloatLayout(context);
@@ -71,8 +75,22 @@ public class FloatWindowManager {
         mFloatLayout.setParams(wmParams);
         windowManager.addView(mFloatLayout, wmParams);
         mHasShown = true;
-        //是否展示小红点展示
-//        checkRedDot(context);
+
+        mFloatLayout.setOnFloatViewClickListener(new FloatLayout.OnFloatViewClickListener() {
+            @Override
+            public void onClickAction() {
+                LogUtils.w("start activity");
+                if(mClickIntent != null) {
+                    LogUtils.w("start activity");
+                    mClickIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(mClickIntent);
+                }
+//                LogUtils.w("start activity");
+//                Intent intent = new Intent(context, MyBroadcastDetailActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                context.startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -98,64 +116,6 @@ public class FloatWindowManager {
         return mWindowManager;
     }
 
-    /**
-     * 小红点展示
-     */
-//    public static void checkRedDot(Context context) {
-//        if (mFloatLayout == null) return;
-//        //是否展示小红点展示
-//        int num = getObtainNumber(context);
-//        if (num > 0) {
-//            mFloatLayout.setDragFlagViewVisibility(View.VISIBLE);
-//            mFloatLayout.setDragFlagViewText(getObtainNumber(context));
-//        } else {
-//            mFloatLayout.setDragFlagViewVisibility(View.GONE);
-//        }
-//    }
-
-    /**
-     * 添加小红点
-     */
-//    public static void addObtainNumer(Context context) {
-//        int number = (int) SpUtil.get(context, Constants_LM.OBTAIN_NUMBER, 0);
-//        if (number < 0) {
-//            number = 0;
-//        }
-//        number = number + 1;
-//        SpUtil.put(context, Constants_LM.OBTAIN_NUMBER, number);
-//        if (mFloatLayout != null) {
-//            mFloatLayout.setDragFlagViewVisibility(View.VISIBLE);
-//            mFloatLayout.setDragFlagViewText(number);
-//        }
-//    }
-
-    /**
-     * 获取小红点展示的数量
-     */
-//    private static int getObtainNumber(Context context) {
-//        return (int) SpUtil.get(context, Constants_LM.OBTAIN_NUMBER, 0);
-//    }
-
-    /**
-     * 设置小红点数字
-     */
-//    public static void setObtainNumber(Context context, int number) {
-//        if (number < 0) {
-//            number = 0;
-//        }
-//        SpUtil.put(context, Constants_LM.OBTAIN_NUMBER, number);
-//        FloatWindowManager.checkRedDot(context);
-//    }
-
-    /**
-     * 隐藏对话栏，是否小红点
-     */
-    public static void updataRedAndDialog(Context context) {
-//        mFloatLayout.setDragFlagViewVisibility(View.VISIBLE);
-        //是否展示小红点展示
-//        checkRedDot(context);
-    }
-
     public static void hide() {
         if (mHasShown)
             mWindowManager.removeViewImmediate(mFloatLayout);
@@ -166,5 +126,9 @@ public class FloatWindowManager {
         if (!mHasShown)
             mWindowManager.addView(mFloatLayout, wmParams);
         mHasShown = true;
+    }
+
+    public static void setmClickIntent(Intent intent) {
+        mClickIntent = intent;
     }
 }

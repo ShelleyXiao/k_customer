@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.kidoo.customer.R;
+import com.kidoo.customer.utils.LogUtils;
 
 
 /**
@@ -28,6 +29,8 @@ public class FloatLayout extends FrameLayout {
     private WindowManager.LayoutParams mWmParams;
     private Context mContext;
     private long endTime;
+
+    private OnFloatViewClickListener mOnFloatViewClickListener;
 
     public FloatLayout(Context context) {
         this(context, null);
@@ -93,9 +96,16 @@ public class FloatLayout extends FrameLayout {
         }
         //响应点击事件
         if(isclick) {
-
+            LogUtils.w("click");
+            if(null != mOnFloatViewClickListener) {
+                mOnFloatViewClickListener.onClickAction();
+            }
         }
         return true;
+    }
+
+    public void setOnFloatViewClickListener(OnFloatViewClickListener onFloatViewClickListener) {
+        mOnFloatViewClickListener = onFloatViewClickListener;
     }
 
     /**
@@ -107,17 +117,8 @@ public class FloatLayout extends FrameLayout {
         mWmParams = params;
     }
 
-    /**
-     * 设置小红点显示
-     */
-//    public void setDragFlagViewVisibility(int visibility) {
-//        mDraggableFlagView.setVisibility(visibility);
-//    }
+    public interface OnFloatViewClickListener {
+        void onClickAction();
+    }
 
-    /**
-     * 设置小红点数量
-     */
-//    public void setDragFlagViewText(int number) {
-//        mDraggableFlagView.setText(number + "");
-//    }
 }

@@ -47,17 +47,10 @@ public class FloatActionController {
     /**
      * 注册监听
      */
-    public void registerCallLittleMonk(FloatCallBack callLittleMonk) {
+    public void registerCallBack(FloatCallBack callLittleMonk) {
         mFloatCallBack = callLittleMonk;
     }
 
-    /**
-     * 调用引导的方法
-     */
-    public void callGuide(int type) {
-        if (mFloatCallBack == null) return;
-        mFloatCallBack.guideUser(type);
-    }
 
     /**
      * 悬浮窗的显示
@@ -74,5 +67,11 @@ public class FloatActionController {
         if (mFloatCallBack == null) return;
         mFloatCallBack.hide();
     }
+
+    public void setClickIntent(Intent intent) {
+        if (mFloatCallBack == null) return;
+        mFloatCallBack.setClickIntent(intent);
+    }
+
 
 }
