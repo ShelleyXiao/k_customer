@@ -1,12 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
+    <com.kidoo.customer.widget.RecyclerRefreshLayout
+        android:id="@+id/swiperefreshlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/lay_8">
+
+                <ImageView
+                    android:id="@+id/send_broadcast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/photo_upload"
+                    android:scaleType="fitCenter" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/send_broadcast"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/lay_8"
+                    android:text="@string/my_broadcast_send"
+                    android:textSize="@dimen/font_20" />
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lay_8" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+
+        </LinearLayout>
+
+    </com.kidoo.customer.widget.RecyclerRefreshLayout>
+
+    <com.kidoo.customer.widget.EmptyLayout
+        android:id="@+id/fragment_content_empty"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="broadcast"/>
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
-</LinearLayout>
+</RelativeLayout>

@@ -42,6 +42,12 @@ public class ComParamContact {
         public final static String AUTH_MODEL = "authModel";
     }
 
+    public final static class QnToken {
+        public final static String AUTH_MODEL = "qn_authModel";
+
+        public final static String PATH = "/customer/common/getInitData";
+    }
+
     public final static class UserStatus {
         public final static String PATH = "";
     }

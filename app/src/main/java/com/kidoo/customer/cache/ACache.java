@@ -37,7 +37,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * Date: 2017-10-12
  * Time: 15:40
  * Company: zx
- * Description: 简单缓存
+ * Description: TOKEN简单缓存
  * FIXME
  */
 

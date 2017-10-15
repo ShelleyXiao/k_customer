@@ -90,7 +90,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                             @Override
                             public void onError(ApiException e) {
                                 super.onError(e);
-                                view.showToast(e.getMessage());
+                                view.showNetworkError(e.getMessage());
                             }
 
                             @Override
@@ -105,9 +105,9 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                                     if (AccountHelper.login(customer)) {
                                         view.loginResultNotify(true);
-                                        TokenManger.getInstance().setAuthModel(authModel);
+                                        TokenManger.getInstance().setAuthModel(ComParamContact.Token.AUTH_MODEL, authModel);
                                     } else {
-                                        view.showToast(((Activity)view).getString(R.string.login_exception_hint));
+                                        view.showNetworkError(((Activity)view).getString(R.string.login_exception_hint));
                                     }
                                 } else {
 

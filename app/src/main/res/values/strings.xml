@@ -140,4 +140,6 @@
     <string name="my_broadcast_detail_broadcast_title">我的广播</string>
     <string name="my_broadcast_detail_game_title">我的赛事</string>
 
+    <string name="my_broadcast_send">发送广播</string>
+
 </resources>

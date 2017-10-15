@@ -15,7 +15,7 @@ import android.widget.PopupWindow;
 import com.kidoo.customer.R;
 import com.kidoo.customer.media.adapter.ImageFolderAdapter;
 import com.kidoo.customer.media.bean.ImageFolder;
-import com.kidoo.customer.ui.base.adapter.BaseRecyleAdapter;
+import com.kidoo.customer.ui.base.adapter.BaseRecyclerAdapter;
 
 /**
  * User: ShaudXiao
@@ -28,7 +28,7 @@ import com.kidoo.customer.ui.base.adapter.BaseRecyleAdapter;
 
 
 public class ImageFolderPopupWindow  extends PopupWindow implements View.OnAttachStateChangeListener ,
-        BaseRecyleAdapter.OnItemClickListener{
+        BaseRecyclerAdapter.OnItemClickListener{
 
 
     private ImageFolderAdapter mAdapter;

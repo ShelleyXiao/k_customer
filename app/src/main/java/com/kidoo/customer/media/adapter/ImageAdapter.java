@@ -10,7 +10,7 @@ import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.R;
 import com.kidoo.customer.media.bean.Image;
 import com.kidoo.customer.media.config.ImageLoaderListener;
-import com.kidoo.customer.ui.base.adapter.BaseRecyleAdapter;
+import com.kidoo.customer.ui.base.adapter.BaseRecyclerAdapter;
 
 
 /**
@@ -21,7 +21,7 @@ import com.kidoo.customer.ui.base.adapter.BaseRecyleAdapter;
  * Description:
  * FIXME
  */
-public class ImageAdapter extends BaseRecyleAdapter<Image> {
+public class ImageAdapter extends BaseRecyclerAdapter<Image> {
     private ImageLoaderListener loader;
     private boolean isSingleSelect;
 

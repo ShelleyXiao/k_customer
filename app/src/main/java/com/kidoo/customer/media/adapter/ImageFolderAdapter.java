@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.kidoo.customer.R;
 import com.kidoo.customer.media.bean.ImageFolder;
 import com.kidoo.customer.media.config.ImageLoaderListener;
-import com.kidoo.customer.ui.base.adapter.BaseRecyleAdapter;
+import com.kidoo.customer.ui.base.adapter.BaseRecyclerAdapter;
 
 /**
  * User: ShaudXiao
@@ -22,7 +22,7 @@ import com.kidoo.customer.ui.base.adapter.BaseRecyleAdapter;
  */
 
 
-public class ImageFolderAdapter extends BaseRecyleAdapter<ImageFolder> {
+public class ImageFolderAdapter extends BaseRecyclerAdapter<ImageFolder> {
 
     private ImageLoaderListener loader;
 

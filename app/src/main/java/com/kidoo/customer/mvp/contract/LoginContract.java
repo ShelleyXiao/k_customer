@@ -16,7 +16,7 @@ import com.kidoo.customer.mvp.view.BaseView;
 public interface LoginContract {
 
     interface View extends BaseView {
-        void showToast(String msg);
+//        void showToast(String msg);
 
         void refreshTempKeyNotify(boolean success, String errorMsg);
 

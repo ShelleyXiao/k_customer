@@ -3,7 +3,6 @@ package com.kidoo.customer.api.token;
 import android.text.TextUtils;
 
 import com.kidoo.customer.AppContext;
-import com.kidoo.customer.api.ComParamContact;
 import com.kidoo.customer.cache.ACache;
 import com.kidoo.customer.mvp.model.AuthModel;
 
@@ -51,36 +50,33 @@ public class TokenManger {
         this.timestamep = timestamep;
     }
 
-    public AuthModel getAuthModel() {
-        if (this.mAuthModel == null
-                || this.mAuthModel.getAccessToken() == null
-                || this.mAuthModel.getAccessToken().equals("")) {
-            Object object = mACache.getAsObject(ComParamContact.Token.AUTH_MODEL);
-            if (object != null) {
-                this.mAuthModel = (AuthModel) object;
-            }
+    public AuthModel getAuthModel(String key) {
+        Object object = mACache.getAsObject(key);
+        AuthModel authModel = new AuthModel();
+        if (object != null) {
+            authModel = (AuthModel) object;
         }
 
-        return this.mAuthModel;
+
+        return authModel;
     }
 
-    public void setAuthModel(AuthModel model) {
-        if(null != model) {
-            this.mAuthModel = model;
-            mACache.put(ComParamContact.Token.AUTH_MODEL, this.mAuthModel);
+    public void setAuthModel(String key, AuthModel model) {
+        if (null != model) {
+            mACache.put(key, model);
         }
     }
 
-    public void clearAuth() {
+    public void clearAuth(String key) {
         AuthModel auth = new AuthModel();
         auth.setAccessToken("");
         this.mAuthModel = auth;
-        mACache.put(ComParamContact.Token.AUTH_MODEL, this.mAuthModel);
+        mACache.put(key, this.mAuthModel);
         mACache.clear();
     }
 
-    public boolean isTokenVaild() {
-        if (getAuthModel() != null && !TextUtils.isEmpty(getAuthModel().getAccessToken())) {
+    public boolean isTokenVaild(String key) {
+        if (getAuthModel(key) != null && !TextUtils.isEmpty(getAuthModel(key).getAccessToken())) {
             return true;
         }
         return false;

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.R;
 import com.kidoo.customer.mvp.contract.LoginContract;
+import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.mvp.presenter.LoginPresenter;
 import com.kidoo.customer.ui.activity.MainActivity;
 import com.kidoo.customer.utils.LogUtils;
@@ -56,7 +57,6 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
     Button mLoginBtn;
 
     private boolean showPwd = false;
-
 
     private LoginContract.Presenter mPresenter;
 
@@ -177,9 +177,15 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
 
     }
 
+
     @Override
-    public void showToast(String msg) {
-        showToastForKeyBord(msg);
+    public void setPresenter(BasePresenter presenter) {
+        this.mPresenter = (LoginContract.Presenter)presenter;
+    }
+
+    @Override
+    public void showNetworkError(String str) {
+        showToastForKeyBord(str);
     }
 
     @Override

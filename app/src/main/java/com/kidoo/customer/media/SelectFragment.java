@@ -30,7 +30,7 @@ import com.kidoo.customer.media.config.ImageLoaderListener;
 import com.kidoo.customer.media.config.SelectOption;
 import com.kidoo.customer.media.contract.SelectImageContract;
 import com.kidoo.customer.media.crop.CropActivity;
-import com.kidoo.customer.ui.base.adapter.BaseRecyleAdapter;
+import com.kidoo.customer.ui.base.adapter.BaseRecyclerAdapter;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.TDevice;
@@ -54,7 +54,7 @@ import butterknife.OnClick;
 
 
 public class SelectFragment extends BaseFragment implements SelectImageContract.View, View.OnClickListener,
-        ImageLoaderListener, BaseRecyleAdapter.OnItemClickListener  {
+        ImageLoaderListener, BaseRecyclerAdapter.OnItemClickListener  {
 
     @BindView(R.id.rv_image)
     RecyclerView mContentView;
