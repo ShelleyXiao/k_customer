@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="broadcast_type_name">
+        <item>个人</item>
+        <item>商家</item>
+        <item>报名</item>
+        <item>比赛</item>
+    </string-array>
+
+    <string-array name="broadcast_status_str">
+        <item>等待中</item>
+        <item>进行中</item>
+    </string-array>
+</resources>

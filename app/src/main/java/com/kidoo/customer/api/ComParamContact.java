@@ -62,4 +62,19 @@ public class ComParamContact {
         public final static String PASSWORD = "pwd";
         public final static String LOGINTYPE = "loginType";
     }
+
+    public final static class MyBroadcast {
+        public final static String PATH = "/customer/broadcast/queryMyBroadcast";
+        public final static String USER_ID = "customerId";
+    }
+
+    public final static class MyCompaign {
+        public final static String PATH = "/customer/campaign/queryMyCampaign";
+        public final static String USER_ID = "customerId";
+    }
+
+    public final static class TeamBaseInfo {
+        public final static String PATH = "/customer/org/queryTeamBaseInfo";
+        public final static String USER_ID = "customerId";
+    }
 }

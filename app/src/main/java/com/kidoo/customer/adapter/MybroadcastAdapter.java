@@ -23,20 +23,22 @@ import butterknife.ButterKnife;
  * update: 2017/10/15
  * version: 
 */
-/**
- * Created by Shelley on 2017/10/15.
- */
+
 
 public class MybroadcastAdapter extends BaseRecyclerAdapter<Broadcast> {
 
 
     private GlideRequests mGlideRequests;
+    private String[] typeStrArr;
+    private String[] statusStrArr;
 
     public MybroadcastAdapter(Context context, int mode) {
         super(context, mode);
         mGlideRequests = GlideApp.with(context);
 
         setState(BaseRecyclerAdapter.STATE_LOADING, false);
+        typeStrArr = context.getResources().getStringArray(R.array.broadcast_type_name);
+        statusStrArr = context.getResources().getStringArray(R.array.broadcast_status_str);
 
     }
 
@@ -49,6 +51,9 @@ public class MybroadcastAdapter extends BaseRecyclerAdapter<Broadcast> {
     protected void onBindDefaultViewHolder(RecyclerView.ViewHolder holder, Broadcast item, int position) {
         MyBroadcastViewholder viewHolder = (MyBroadcastViewholder) holder;
 
+        viewHolder.broadcast_type.setText("(" + typeStrArr[item.getType()] + ")");
+        viewHolder.broadcastName.setText(item.getName());
+        viewHolder.broadcastStatus.setText(statusStrArr[item.getStatus()]);
 
     }
 
@@ -56,6 +61,9 @@ public class MybroadcastAdapter extends BaseRecyclerAdapter<Broadcast> {
 
         @BindView(R.id.broadcast_feature_pic)
         ImageView broadcastFeature;
+
+        @BindView(R.id.broadcast_type)
+        TextView broadcast_type;
 
         @BindView(R.id.broadcast_name)
         TextView broadcastName;

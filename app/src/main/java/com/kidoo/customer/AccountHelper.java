@@ -8,7 +8,7 @@ import android.support.v4.content.SharedPreferencesCompat;
 import android.text.TextUtils;
 
 import com.kidoo.customer.api.ComParamContact;
-import com.kidoo.customer.api.token.TokenManger;
+import com.kidoo.customer.api.token.TokenManager;
 import com.kidoo.customer.mvp.model.Customer;
 import com.kidoo.customer.utils.LogUtils;
 
@@ -52,7 +52,7 @@ public class AccountHelper {
     }
 
     public static boolean isLogin() {
-        return getUserId() > 0 && TokenManger.getInstance().isTokenVaild(ComParamContact.Token.AUTH_MODEL);
+        return getUserId() > 0 && TokenManager.getInstance().isTokenVaild(ComParamContact.Token.AUTH_MODEL);
     }
 
     public static long getUserId() {

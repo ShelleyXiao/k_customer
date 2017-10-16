@@ -12,7 +12,7 @@ import com.kidoo.customer.api.http.callback.ProgressDialogCallBack;
 import com.kidoo.customer.api.http.callback.SimpleCallBack;
 import com.kidoo.customer.api.http.exception.ApiException;
 import com.kidoo.customer.api.http.subsciber.IProgressDialog;
-import com.kidoo.customer.api.token.TokenManger;
+import com.kidoo.customer.api.token.TokenManager;
 import com.kidoo.customer.cipher.rsa.Base64Utils;
 import com.kidoo.customer.cipher.rsa.RSAUtil;
 import com.kidoo.customer.mvp.contract.LoginContract;
@@ -105,7 +105,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                                     if (AccountHelper.login(customer)) {
                                         view.loginResultNotify(true);
-                                        TokenManger.getInstance().setAuthModel(ComParamContact.Token.AUTH_MODEL, authModel);
+                                        TokenManager.getInstance().setAuthModel(ComParamContact.Token.AUTH_MODEL, authModel);
                                     } else {
                                         view.showNetworkError(((Activity)view).getString(R.string.login_exception_hint));
                                     }

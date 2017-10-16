@@ -1,7 +1,8 @@
 package com.kidoo.customer.mvp.contract;
 
-import com.kidoo.customer.mvp.presenter.BasePresenter;
-import com.kidoo.customer.mvp.view.BaseView;
+import com.kidoo.customer.mvp.model.Broadcast;
+import com.kidoo.customer.mvp.presenter.BaseListPresenter;
+import com.kidoo.customer.mvp.view.BaseListView;
 
 /**
  * Created by Shelley on 2017/10/15.
@@ -9,13 +10,13 @@ import com.kidoo.customer.mvp.view.BaseView;
 
 public interface MyBroadcastContract {
 
-    interface  View extends BaseView {
-        void executeOnLoadDataError(String error);
+    interface  View extends BaseListView<MyBroadcastContract.Presenter, Broadcast> {
+
+        void updateSendBroadcastView(int status);
     }
 
-    interface Presenter extends BasePresenter<MyBroadcastContract.View> {
-        void queryMyBroadcast(int customerId);
-
+    interface Presenter extends BaseListPresenter {
+//        void queryMyBroadcast(int customerId);
     }
 
 }

@@ -33,8 +33,8 @@ public class MyBroadcastDetailActivity extends BaseViewPagerActivity {
     @Override
     protected ArrayList<CustomTabEntity> getTabEntity() {
         ArrayList<CustomTabEntity> customTabEntities = new ArrayList<>();
-        customTabEntities.add(new TabEntity(getString(R.string.my_broadcast_detail_game_title), R.drawable.tab_icon_me, R.drawable.tab_icon_me));
         customTabEntities.add(new TabEntity(getString(R.string.my_broadcast_detail_broadcast_title), R.drawable.tab_icon_me, R.drawable.tab_icon_me));
+        customTabEntities.add(new TabEntity(getString(R.string.my_broadcast_detail_game_title), R.drawable.tab_icon_me, R.drawable.tab_icon_me));
         return customTabEntities;
     }
 

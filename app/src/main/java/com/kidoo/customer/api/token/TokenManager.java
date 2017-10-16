@@ -16,25 +16,25 @@ import com.kidoo.customer.mvp.model.AuthModel;
  */
 
 
-public class TokenManger {
+public class TokenManager {
 
     private final String KEY = "auth_model_key";
-    private static TokenManger instance = null;
+    private static TokenManager instance = null;
     private ACache mACache;
     private AuthModel mAuthModel;
     private Long timestamep = System.currentTimeMillis();
 
-    public TokenManger() {
+    public TokenManager() {
         mACache = ACache.get(AppContext.context(), KEY);
         this.mAuthModel = new AuthModel();
         this.mAuthModel.setAccessToken("");
     }
 
-    public static TokenManger getInstance() {
+    public static TokenManager getInstance() {
         if (null == instance) {
-            synchronized (TokenManger.class) {
+            synchronized (TokenManager.class) {
                 if (null == instance) {
-                    instance = new TokenManger();
+                    instance = new TokenManager();
                 }
             }
         }
