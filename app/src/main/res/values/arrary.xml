@@ -11,4 +11,28 @@
         <item>等待中</item>
         <item>进行中</item>
     </string-array>
+    
+    <string-array name="campaign_level">
+        <item>业余</item>
+        <item>初级</item>
+        <item>半职业</item>
+        <item>职业</item>
+    </string-array>
+
+    <string-array name="campaign_playertype">
+        <item>个人</item>
+        <item>战队</item>
+    </string-array>
+
+    <string-array name="campaign_format">
+        <item>淘汰赛</item>
+        <item>积分赛</item>
+    </string-array>
+
+    <string-array name="eposide_status">
+        <item>未进行</item>
+        <item>进行中</item>
+        <item>已完结</item>
+    </string-array>
+
 </resources>

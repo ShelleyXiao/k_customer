@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/list_item_background"
+              android:orientation="vertical"
+    >
+
+
+    <!--android:drawableLeft="@drawable/item_campaign_title_icon"-->
+    <RelativeLayout
+        android:id="@+id/campaign_scroe_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/font_8"
+        >
+
+        <View
+            android:layout_width="@dimen/lay_4"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/campaign_title"
+            android:layout_alignTop="@+id/campaign_title"
+            android:background="@color/kidoo_gren"
+            />
+
+        <TextView
+            android:id="@+id/campaign_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/lay_12"
+            android:layout_marginTop="@dimen/lay_12"
+            android:text="@string/app_name"
+            android:textColor="@color/kidoo_gray"
+            android:textSize="@dimen/font_18"
+
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/lay_8"
+        android:layout_marginLeft="@dimen/lay_24"
+        android:layout_marginTop="@dimen/lay_8"
+        >
+
+
+        <com.kidoo.customer.widget.CircleImageView
+            android:id="@+id/team_logo"
+            android:layout_width="@dimen/lay_48"
+            android:layout_height="@dimen/lay_48"
+            android:scaleType="centerCrop"
+            />
+
+        <TextView
+            android:id="@+id/team_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/lay_8"
+            android:layout_toRightOf="@+id/team_logo"
+            android:text="test"
+            android:textColor="@color/kidoo_gray"
+            android:textSize="@dimen/font_18"
+
+            />
+
+        <TextView
+            android:id="@+id/team_scroe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/lay_24"
+            android:text="test"
+            android:textColor="@color/kidoo_gray"
+            android:textSize="@dimen/font_18"
+
+            />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

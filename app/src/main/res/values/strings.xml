@@ -118,7 +118,9 @@
     <string name="error_view_no_data">暂无内容</string>
     <string name="error_view_loading">加载中…</string>
     <string name="error_view_loading_friend">数据初始化中…</string>
-    <string name="error_view_load_error_click_to_refresh">内容加载失败\r\n点击重新加载</string>
+    <string name="error_view_load_error_click_to_refresh">内容加载失败\r\n <![CDATA[
+        点击重新加载<font color="#c5663e">%s</font>
+        ]]>  </string>
     <string name="error_view_network_error_click_to_refresh">没有可用的网络</string>
     <string name="tip_network_error">没有可用的网络</string>
 
@@ -142,6 +144,24 @@
 
     <string name="my_broadcast_send">发送广播</string>
 
+    <string name="have_no_capmaign_content">暂时没有比赛内容，赶快去参加吧</string>
+
+    <string name="campaign_scroe_title">积分信息</string>
+    <string name="campaign_all_round_title">所有场次信息</string>
+    <string name="campaign_my_round_title">我的场次信息</string>
+
+    <string name="campaign_level_title">比赛级别</string>
+    <string name="campaign_time_title">赛事进行时间</string>
+    <string name="campaign_formart_title">赛制</string>
+    <string name="campaign_info_title">赛事信息</string>
+    <string name="campaign_prompt_title">提示信息</string>
+    <string name="campaign_address_title">比赛地址</string>
+
+    <string name="campaign_format_session_num">共 %1$d 轮, 共 %2$d 场</string>
+    <string name="campaign_format_session_ongoing">目前处于第 %1$d 轮, 第 %2$d 场</string>
+    <string name="campaign_session_num">第 %1$d 轮, 第 %2$d 场</string>
+    <string name="campaign_session_startTime">开始时间%1$s: </string>
+    <string name="campaign_session_endTime">结束时间%1$s: </string>
 
 
 </resources>

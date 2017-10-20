@@ -2,6 +2,7 @@ package com.kidoo.customer.mvp.presenter;
 
 import android.content.Context;
 
+import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.api.ComParamContact;
 import com.kidoo.customer.api.http.HttpManager;
 import com.kidoo.customer.api.http.callback.SimpleCallBack;
@@ -25,11 +26,11 @@ public class MyBroadcastPresenter implements MyBroadcastContract.Presenter {
 
     private Context mContext;
     private MyBroadcastContract.View mView;
-    private int customerId;
+    private String customerId;
     private int pageNum = 0;
     private int mMaxPage = 0;
 
-    public MyBroadcastPresenter(Context context, MyBroadcastContract.View view, int customerId) {
+    public MyBroadcastPresenter(Context context, MyBroadcastContract.View view, String customerId) {
         this.mContext = context;
         attachView(view);
         this.mView.setPresenter(this);
@@ -68,10 +69,10 @@ public class MyBroadcastPresenter implements MyBroadcastContract.Presenter {
 
     }
 
-    private void queryMyBroadcast(int customerId, int pageNum) {
+    private void queryMyBroadcast(String customerId, int pageNum) {
 
         HttpManager.get(ComParamContact.MyBroadcast.PATH)
-                .params(ComParamContact.MyBroadcast.USER_ID, "7")
+                .params(ComParamContact.MyBroadcast.USER_ID, AccountHelper.getUserId() + "")
                 .execute(new SimpleCallBack<MyBroadcastResult>() {
 
                     @Override

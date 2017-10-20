@@ -3,7 +3,7 @@ package com.kidoo.customer.ui.activity;
 import com.kidoo.customer.R;
 import com.kidoo.customer.ui.base.activities.BaseViewPagerActivity;
 import com.kidoo.customer.ui.fragment.MyBroadcastFragment;
-import com.kidoo.customer.ui.fragment.MyGameFragment;
+import com.kidoo.customer.ui.fragment.MyCampaignFragment;
 import com.kidoo.customer.widget.tablayout.CustomTabEntity;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class MyBroadcastDetailActivity extends BaseViewPagerActivity {
     protected PagerInfo[] getPagers() {
         return new PagerInfo[] {
                 new PagerInfo(getString(R.string.my_broadcast_detail_broadcast_title), MyBroadcastFragment.class, null),
-                new PagerInfo(getString(R.string.my_broadcast_detail_game_title), MyGameFragment.class, null),
+                new PagerInfo(getString(R.string.my_broadcast_detail_game_title), MyCampaignFragment.class, null),
 
         };
     }

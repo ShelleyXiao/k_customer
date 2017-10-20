@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/img_error_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/lay_72"
+        android:layout_height="@dimen/lay_72"
         android:background="@drawable/sorry_nth_icon_02"
         android:visibility="gone"
         tools:visibility="visible" />

@@ -15,10 +15,12 @@ import com.kidoo.customer.mvp.model.Broadcast;
 import com.kidoo.customer.mvp.presenter.MyBroadcastPresenter;
 import com.kidoo.customer.ui.base.adapter.BaseRecyclerAdapter;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
+import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.TDevice;
 import com.kidoo.customer.widget.EmptyLayout;
 import com.kidoo.customer.widget.RecyclerRefreshLayout;
+import com.kidoo.customer.widget.dialog.CommonDialog;
 
 import java.util.List;
 
@@ -53,7 +55,6 @@ public class MyBroadcastFragment extends BaseFragment implements BaseRecyclerAda
     @BindView(R.id.swiperefreshlayout)
     RecyclerRefreshLayout mRefreshLayout;
 
-
     private MyBroadcastPresenter mPresenter;
     private MybroadcastAdapter mMybroadcastAdapter;
 
@@ -79,7 +80,7 @@ public class MyBroadcastFragment extends BaseFragment implements BaseRecyclerAda
                 R.color.swiperefresh_color3, R.color.swiperefresh_color4);
         mSendBroadcastBtn.setOnClickListener(this);
         mEmpty.setOnLayoutClickListener(this);
-        mPresenter = new MyBroadcastPresenter(getActivity(), this, (int) AccountHelper.getUserId());
+        mPresenter = new MyBroadcastPresenter(getActivity(), this,  AccountHelper.getUserId() +"");
 
     }
 
@@ -135,7 +136,7 @@ public class MyBroadcastFragment extends BaseFragment implements BaseRecyclerAda
 
     @Override
     public void onRefreshSuccess(List<Broadcast> data) {
-        LogUtils.w("onRefreshSuccess " + data.size());
+//        LogUtils.w("onRefreshSuccess " + data.size());
         mMybroadcastAdapter.resetItem(data);
     }
 
@@ -170,6 +171,11 @@ public class MyBroadcastFragment extends BaseFragment implements BaseRecyclerAda
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fragment_content_empty:
+                if(!TDevice.hasInternet()) {
+                    CommonDialog dialog = DialogHelper.getNetworkErrorDialog(getActivity());
+                    dialog.show();
+                    return;
+                }
                 mEmpty.setErrorType(EmptyLayout.NETWORK_LOADING);
                 onRefreshing();
                 break;

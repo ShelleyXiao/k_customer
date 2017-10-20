@@ -56,7 +56,8 @@ public class AccountHelper {
     }
 
     public static long getUserId() {
-        return getUser().getId();
+//        return getUser().getId();
+        return 7;
     }
 
     public synchronized static Customer getUser() {

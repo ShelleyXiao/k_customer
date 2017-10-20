@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.kidoo.customer.R;
+import com.kidoo.customer.widget.dialog.CommonDialog;
 
 
 /**
@@ -31,7 +32,6 @@ public final class DialogHelper {
     public static AlertDialog.Builder getDialog(Context context) {
         return new AlertDialog.Builder(context, R.style.App_Theme_Dialog_Alert);
     }
-
 
     /**
      * 获取一个普通的消息对话框，没有取消按钮
@@ -430,6 +430,26 @@ public final class DialogHelper {
         drawable.start();
 
         return loadingDialog;
+    }
+
+    public static CommonDialog getNetworkErrorDialog(Context context) {
+        final CommonDialog commonDialog = new CommonDialog(context);
+        commonDialog.setMessage(R.string.tip_network_error);
+        commonDialog.setNegativeButton(R.string.acton_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        commonDialog.setPositiveButton(R.string.acton_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        return commonDialog;
     }
 
 }

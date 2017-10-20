@@ -25,7 +25,7 @@ import java.util.List;
  */
 
 
-public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
+public abstract class BaseMultiTypeRecyclerAdapter<T> extends RecyclerView.Adapter {
 
     public static final int STATE_NO_MORE = 1;
     public static final int STATE_LOAD_MORE = 2;
@@ -43,7 +43,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
     public static final int VIEW_TYPE_NORMAL = 0;
     public static final int VIEW_TYPE_HEADER = -1;
     public static final int VIEW_TYPE_FOOTER = -2;
-
 
     public final int BEHAVIOR_MODE;
     protected int mState;
@@ -64,7 +63,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
 
     private OnLoadingHeaderCallBack onLoadingHeaderCallBack;
 
-    public BaseRecyclerAdapter(Context context, int mode) {
+    public BaseMultiTypeRecyclerAdapter(Context context, int mode) {
         mItems = new ArrayList<>();
         this.mContext = context;
         this.BEHAVIOR_MODE = mode;
@@ -280,7 +279,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
         return mItems.get(getIndex(position));
     }
 
-    public void resetItem(List<T> items) {
+    public final void resetItem(List<T> items) {
         if (items != null) {
             clear();
             addAll(items);
@@ -341,7 +340,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
     public interface OnItemLongClickListener {
         void onLongClick(int position, long itemId);
     }
-
 
     /**
      * 添加项点击事件

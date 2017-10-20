@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/channel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/lay_12">
+
+        <TextView
+            android:id="@+id/channelA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/lay_16"
+            android:text="test"
+            android:textColor="@color/black"
+            android:textSize="@dimen/lay_24"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/channelB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="test"
+            android:textColor="@color/black"
+            android:textSize="@dimen/lay_24"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/channelC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/lay_12"
+            android:text="test"
+            android:textColor="@color/black"
+            android:textSize="@dimen/lay_24"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/campaignPic"
+        android:layout_width="@dimen/lay_240"
+        android:layout_height="@dimen/lay_160"
+        android:layout_below="@+id/channel"
+        android:layout_margin="@dimen/lay_24"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        />
+
+</RelativeLayout>

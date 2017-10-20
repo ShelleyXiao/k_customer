@@ -43,6 +43,9 @@ public class ComParamContact {
     }
 
     public final static class QnToken {
+
+        public final static String TEST_BASE = "http://ouhstqlop.bkt.clouddn.com/";
+
         public final static String AUTH_MODEL = "qn_authModel";
 
         public final static String PATH = "/customer/common/getInitData";
@@ -76,5 +79,6 @@ public class ComParamContact {
     public final static class TeamBaseInfo {
         public final static String PATH = "/customer/org/queryTeamBaseInfo";
         public final static String USER_ID = "customerId";
+        public final static String TEAM_IDS = "teamIds";
     }
 }
