@@ -26,6 +26,7 @@
             app:tl_textsize="14sp"
             app:tl_underline_color="@color/kidoo_gren"
             app:tl_underline_height="1dp"
+            android:background="@color/white"
             />
 
 

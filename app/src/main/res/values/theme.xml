@@ -29,6 +29,14 @@
         <item name="elevation">0dp</item>
         <item name="android:windowBackground">@color/window_background</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="windows_bg">@color/window_background</item>
+
+        <item name="dividerVertical">@color/list_divider_color</item>
+        <item name="dividerHorizontal">@color/list_divider_color</item>
+
+        <item name="layout_item_bg">@drawable/list_item_background</item>
+
+        <item name="lineColor">@color/list_divider_color</item>
 
     </style>
 

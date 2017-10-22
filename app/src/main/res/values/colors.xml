@@ -56,4 +56,7 @@
     <color name="item_layout_bg_normal">#f6f6f6</color>
     <color name="item_layout_bg_pressed">#dfdfdf</color>
 
+    <color name="bg_press">#ebebeb</color>\
+    <color name="bg_press_material">#d4d4d4</color>
+
 </resources>

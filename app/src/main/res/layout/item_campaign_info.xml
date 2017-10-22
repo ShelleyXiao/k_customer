@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginLeft="@dimen/lay_12"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/lay_12">
 
     <TextView
         android:id="@+id/campaign_name"
@@ -12,22 +13,19 @@
         android:layout_gravity="center_horizontal"
         android:text="test"
         android:textColor="@color/kidoo_gray"
-        android:textSize="@dimen/font_18"
-        />
+        android:textSize="@dimen/font_18" />
 
     <!--android:drawableLeft="@drawable/item_campaign_title_icon"-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <View
             android:layout_width="@dimen/lay_4"
             android:layout_height="match_parent"
             android:layout_alignBottom="@+id/campaign_title"
             android:layout_alignTop="@+id/campaign_title"
-            android:background="@color/kidoo_gren"
-            />
+            android:background="@color/kidoo_gren" />
 
         <TextView
             android:id="@+id/campaign_title"

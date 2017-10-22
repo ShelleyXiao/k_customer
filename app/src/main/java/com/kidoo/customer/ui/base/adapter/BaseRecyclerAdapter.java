@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.kidoo.customer.R;
+import com.kidoo.customer.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -308,6 +309,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
         onClickListener = new OnClickListener() {
             @Override
             public void onClick(int position, long itemId) {
+                LogUtils.w("onclcik " + onItemClickListener);
                 if (onItemClickListener != null)
                     onItemClickListener.onItemClick(position, itemId);
             }

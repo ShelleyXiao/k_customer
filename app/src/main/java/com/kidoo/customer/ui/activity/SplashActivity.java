@@ -87,7 +87,7 @@ public class SplashActivity extends AppCompatActivity {
 //            intent.setClass(this, LoginActivity.class);
 //        }
 
-        intent.setClass(this, MyBroadcastDetailActivity.class);
+        intent.setClass(this, MyBroadcastActivity.class);
         this.startActivity(intent);
         this.finish();
     }

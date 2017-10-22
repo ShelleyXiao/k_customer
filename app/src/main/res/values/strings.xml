@@ -163,5 +163,9 @@
     <string name="campaign_session_startTime">开始时间%1$s: </string>
     <string name="campaign_session_endTime">结束时间%1$s: </string>
 
+    <string name="broadcast_detial_toolbar_title">广播详情</string>
+
+    <string name="broadcast_detail_toolbar_menu_title">群聊</string>
+
 
 </resources>

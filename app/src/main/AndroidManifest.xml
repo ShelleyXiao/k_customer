@@ -132,7 +132,14 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.MyBroadcastDetailActivity"
+            android:name=".ui.activity.MyBroadcastActivity"
+            android:label="My Game"
+            android:screenOrientation="portrait"
+            android:theme="@style/App.Theme.Main"
+            />
+
+        <activity
+            android:name=".ui.activity.BroadcastDetailActivity"
             android:label="My Game"
             android:screenOrientation="portrait"
             android:theme="@style/App.Theme.Main"

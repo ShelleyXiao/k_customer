@@ -81,4 +81,10 @@ public class ComParamContact {
         public final static String USER_ID = "customerId";
         public final static String TEAM_IDS = "teamIds";
     }
+
+    public final static class BroadcastDetail {
+        public final static String PATH = "/customer/broadcast/queryDetail";
+        public final static String USER_ID = "customerId";
+        public final static String BROADCAST_ID = "broadcastId";
+    }
 }

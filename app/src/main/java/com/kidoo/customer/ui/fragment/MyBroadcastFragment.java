@@ -36,8 +36,8 @@ import butterknife.BindView;
  */
 
 
-public class MyBroadcastFragment extends BaseFragment implements BaseRecyclerAdapter.OnItemClickListener
-        , RecyclerRefreshLayout.SuperRefreshLayoutListener
+public class MyBroadcastFragment extends BaseFragment implements
+         RecyclerRefreshLayout.SuperRefreshLayoutListener
         , MyBroadcastContract.View, View.OnClickListener {
 
     @BindView(R.id.send)
@@ -71,7 +71,7 @@ public class MyBroadcastFragment extends BaseFragment implements BaseRecyclerAda
         mRefreshLayout.setSuperRefreshLayoutListener(this);
         mBroadcastList.setLayoutManager(new LinearLayoutManager(mContext));
         mBroadcastList.setAdapter(mMybroadcastAdapter);
-        mMybroadcastAdapter.setOnItemClickListener(this);
+
 //        mBroadcastList.addItemDecoration(new KidooRlvItemDecoration(getActivity(), LinearLayoutManager.HORIZONTAL, KidooRlvItemDecoration.ONLY_FOOTER));
         mBroadcastList.addItemDecoration(new DividerItemDecoration(
                 getActivity(), DividerItemDecoration.HORIZONTAL_LIST));
@@ -80,7 +80,7 @@ public class MyBroadcastFragment extends BaseFragment implements BaseRecyclerAda
                 R.color.swiperefresh_color3, R.color.swiperefresh_color4);
         mSendBroadcastBtn.setOnClickListener(this);
         mEmpty.setOnLayoutClickListener(this);
-        mPresenter = new MyBroadcastPresenter(getActivity(), this,  AccountHelper.getUserId() +"");
+        mPresenter = new MyBroadcastPresenter(getActivity(), this, AccountHelper.getUserId() + "");
 
     }
 
@@ -102,10 +102,6 @@ public class MyBroadcastFragment extends BaseFragment implements BaseRecyclerAda
         });
     }
 
-    @Override
-    public void onItemClick(int position, long itemId) {
-
-    }
 
     @Override
     public void onRefreshing() {
@@ -171,7 +167,7 @@ public class MyBroadcastFragment extends BaseFragment implements BaseRecyclerAda
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fragment_content_empty:
-                if(!TDevice.hasInternet()) {
+                if (!TDevice.hasInternet()) {
                     CommonDialog dialog = DialogHelper.getNetworkErrorDialog(getActivity());
                     dialog.show();
                     return;
@@ -180,9 +176,10 @@ public class MyBroadcastFragment extends BaseFragment implements BaseRecyclerAda
                 onRefreshing();
                 break;
             case R.id.send_broadcast:
-                
+
                 break;
-            default:break;
+            default:
+                break;
         }
     }
 }

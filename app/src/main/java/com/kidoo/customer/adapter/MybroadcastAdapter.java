@@ -11,7 +11,9 @@ import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.GlideRequests;
 import com.kidoo.customer.R;
 import com.kidoo.customer.mvp.model.Broadcast;
+import com.kidoo.customer.ui.activity.BroadcastDetailActivity;
 import com.kidoo.customer.ui.base.adapter.BaseRecyclerAdapter;
+import com.kidoo.customer.utils.LogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +27,7 @@ import butterknife.ButterKnife;
 */
 
 
-public class MybroadcastAdapter extends BaseRecyclerAdapter<Broadcast> {
+public class MybroadcastAdapter extends BaseRecyclerAdapter<Broadcast> implements BaseRecyclerAdapter.OnItemClickListener {
 
 
     private GlideRequests mGlideRequests;
@@ -36,10 +38,11 @@ public class MybroadcastAdapter extends BaseRecyclerAdapter<Broadcast> {
         super(context, mode);
         mGlideRequests = GlideApp.with(context);
 
-        setState(BaseRecyclerAdapter.STATE_LOADING, false);
+//        setState(BaseRecyclerAdapter.STATE_LOADING, false);
         typeStrArr = context.getResources().getStringArray(R.array.broadcast_type_name);
         statusStrArr = context.getResources().getStringArray(R.array.broadcast_status_str);
 
+        setOnItemClickListener(this);
     }
 
     @Override
@@ -56,6 +59,16 @@ public class MybroadcastAdapter extends BaseRecyclerAdapter<Broadcast> {
         viewHolder.broadcastStatus.setText(statusStrArr[item.getStatus()]);
 
     }
+
+
+    @Override
+    public void onItemClick(int position, long itemId) {
+        LogUtils.w("on item click");
+        Broadcast broadcast = (Broadcast) getItem((int)itemId);
+
+        BroadcastDetailActivity.show(mContext, 0, 0, 0);
+    }
+
 
     public class MyBroadcastViewholder extends RecyclerView.ViewHolder {
 

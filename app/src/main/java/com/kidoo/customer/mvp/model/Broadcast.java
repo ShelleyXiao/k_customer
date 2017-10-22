@@ -1,6 +1,7 @@
 package com.kidoo.customer.mvp.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Shelley on 2017/10/15.
@@ -67,7 +68,7 @@ public class Broadcast implements Serializable {
     private long stopTime;
     private long createTime;
     private long updateTime;
-    private Object playerList;
+    private List<Player> playerList;
 
     public int getId() {
         return id;
@@ -285,11 +286,11 @@ public class Broadcast implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Object getPlayerList() {
+    public List<Player> getPlayerList() {
         return playerList;
     }
 
-    public void setPlayerList(Object playerList) {
+    public void setPlayerList(List<Player> playerList) {
         this.playerList = playerList;
     }
 

@@ -24,7 +24,7 @@ import com.kidoo.customer.AppContext;
 import com.kidoo.customer.R;
 import com.kidoo.customer.interf.LocationFace;
 import com.kidoo.customer.interf.OnTabReselectListener;
-import com.kidoo.customer.ui.activity.MyBroadcastDetailActivity;
+import com.kidoo.customer.ui.activity.MyBroadcastActivity;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
 import com.kidoo.customer.utils.LocationUtils;
 import com.kidoo.customer.utils.LogUtils;
@@ -168,7 +168,7 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
         boolean isPermission = FloatPermissionManager.getInstance().applyFloatWindow(getActivity());
         if (isPermission) {
             FloatActionController.getInstance().startFloatWMServer(this.getActivity());
-            Intent intent = new Intent(getActivity(), MyBroadcastDetailActivity.class);
+            Intent intent = new Intent(getActivity(), MyBroadcastActivity.class);
             FloatActionController.getInstance().setClickIntent(intent);
         } else {
             LogUtils.i("Float have no peimisson!!!");
