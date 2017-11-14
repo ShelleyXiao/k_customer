@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.kidoo.customer.widget.RecyclerRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/refreshLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:visibility="gone">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <com.kidoo.customer.widget.RecyclerRefreshLayout
+             android:id="@+id/refreshLayout"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+
+    </com.kidoo.customer.widget.RecyclerRefreshLayout>
+
+    <com.kidoo.customer.widget.EmptyLayout
+        android:id="@+id/error_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:visibility="gone" />
 
-
-</com.kidoo.customer.widget.RecyclerRefreshLayout>
+</FrameLayout>

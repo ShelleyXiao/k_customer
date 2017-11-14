@@ -3,14 +3,17 @@ package com.kidoo.customer.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.kidoo.customer.R;
+import com.kidoo.customer.mvp.model.Broadcast;
 import com.kidoo.customer.ui.base.activities.BackActivity;
-import com.kidoo.customer.ui.base.fragment.BaseBroadcastDetailFragment;
+import com.kidoo.customer.ui.fragment.GroupBroadcastDetilaFragment;
+import com.kidoo.customer.utils.LogUtils;
 
 /**
  * description: 广播详情
@@ -22,8 +25,17 @@ import com.kidoo.customer.ui.base.fragment.BaseBroadcastDetailFragment;
 
 public class BroadcastDetailActivity extends BackActivity {
 
+    public static final String BUNDLE_BROADCAST_KEY = "broadcast";
+    private Broadcast mBroadcast;
 
-    protected BaseBroadcastDetailFragment mDetailFragment;
+
+    public static void show(Context context, Broadcast broadcast) {
+        Intent intent = new Intent(context, BroadcastDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(BUNDLE_BROADCAST_KEY, broadcast);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
 
 
     public static void show(Context context, long broadcastId, int broadcastType, int playerType) {
@@ -46,6 +58,12 @@ public class BroadcastDetailActivity extends BackActivity {
     }
 
     @Override
+    public boolean initBundle(Bundle bundle) {
+        mBroadcast = (Broadcast) bundle.getSerializable(BUNDLE_BROADCAST_KEY);
+        return true;
+    }
+
+    @Override
     public void initWindow() {
         super.initWindow();
 
@@ -64,16 +82,16 @@ public class BroadcastDetailActivity extends BackActivity {
     @Override
     public void initWidget() {
         super.initWidget();
-
-        mDetailFragment = getDetailFragment();
-        addFragment(R.id.lay_container, mDetailFragment);
-
+        LogUtils.w("mBroadcast" + mBroadcast);
+        if(mBroadcast != null) {
+            Fragment detailFragment = GroupBroadcastDetilaFragment.instantiate(this,
+                    Integer.valueOf(mBroadcast.getId()).intValue());
+            addFragment(R.id.lay_container, detailFragment);
+        }
     }
 
 
-    protected BaseBroadcastDetailFragment getDetailFragment() {
-        return null;
-    }
+
 
 
 

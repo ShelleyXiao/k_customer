@@ -5,12 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
-import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
@@ -18,15 +16,11 @@ import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
-import com.kidoo.customer.AppContext;
 import com.kidoo.customer.R;
-import com.kidoo.customer.interf.LocationFace;
 import com.kidoo.customer.interf.OnTabReselectListener;
 import com.kidoo.customer.ui.activity.MyBroadcastActivity;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
-import com.kidoo.customer.utils.LocationUtils;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.boardcastFloatBtn.contorl.FloatActionController;
 import com.kidoo.customer.widget.boardcastFloatBtn.permission.FloatPermissionManager;
@@ -91,50 +85,6 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
         mMapView.onResume();
         super.onResume();
 
-        new LocationUtils(AppContext.context(), new LocationFace() {
-            @Override
-            public void locationResult(BDLocation location) {
-//                Logger.getLogger().e("****location = " + location.getCity() + " " + location.getAddrStr());
-                LogUtils.e("****location = " + location.getCity() + " " + location.getAddrStr());
-
-                mCurrentLat = location.getLatitude();
-                mCurrentLon = location.getLongitude();
-                mCurrentAccracy = location.getRadius();
-                locData = new MyLocationData.Builder()
-                        .accuracy(location.getRadius())
-                        // 此处设置开发者获取到的方向信息，顺时针0-360
-                        .direction(mCurrentDirection).latitude(location.getLatitude())
-                        .longitude(location.getLongitude()).build();
-                mBaiduMap.setMyLocationData(locData);
-                if (isFirstLoc) {
-                    isFirstLoc = false;
-                    LatLng ll = new LatLng(location.getLatitude(),
-                            location.getLongitude());
-                    MapStatus.Builder builder = new MapStatus.Builder();
-                    builder.target(ll).zoom(18.0f);
-                    mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-                }
-
-                //定义Maker坐标点
-                LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
-                //构建Marker图标  ，这里可以自己替换
-                BitmapDescriptor bitmap = BitmapDescriptorFactory
-                        .fromResource(R.drawable.gb_gr_icon);
-                //构建MarkerOption，用于在地图上添加Marker
-                OverlayOptions option = new MarkerOptions()
-                        .position(point)
-                        .icon(bitmap)
-                        .zIndex(12)
-                        .draggable(true);
-                //在地图上添加Marker，并显示
-                mBaiduMap.addOverlay(option);
-
-                MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(point);//使输入的点位于地图中心
-                mBaiduMap.setMapStatus(u);
-
-//                initOverlay(location.getLongitude(), location.getLatitude(), bdSSelf);
-            }
-        });
         FloatActionController.getInstance().show();
     }
 

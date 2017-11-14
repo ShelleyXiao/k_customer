@@ -1,7 +1,8 @@
 package com.kidoo.customer.mvp.contract;
 
-import com.kidoo.customer.mvp.presenter.BasePresenter;
-import com.kidoo.customer.mvp.view.BaseView;
+import com.kidoo.customer.adapter.broadcastDetail.model.IBroadcastDetailModel;
+import com.kidoo.customer.mvp.presenter.BaseListPresenter;
+import com.kidoo.customer.mvp.view.BaseListView;
 
 /**
  * description: 广播详情契约
@@ -18,26 +19,10 @@ public interface BroadcastDetailContract {
         void showErrorLayout(int errorType);
     }
 
-    interface View extends BaseView<BroadcastDetailContract.Presenter> {
+    interface View extends BaseListView<Presenter, IBroadcastDetailModel> {
 
     }
 
-    interface Presenter extends BasePresenter<BroadcastDetailContract.View> {
-        void getDetail();
-    }
-
-    //團隊賽
-    interface GroupPresenter extends Presenter {
-
-    }
-
-    // 個人賽
-    interface SinglePresenter extends Presenter {
-
-    }
-
-    //普通廣播
-    interface NormalPresenter extends Presenter {
-
+    interface Presenter extends BaseListPresenter {
     }
 }

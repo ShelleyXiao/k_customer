@@ -9,30 +9,35 @@ import com.kidoo.customer.mvp.presenter.BaseListPresenter;
 import com.kidoo.customer.mvp.view.BaseListView;
 import com.kidoo.customer.ui.base.adapter.BaseGeneralRecyclerAdapter;
 import com.kidoo.customer.ui.base.adapter.BaseRecyclerAdapter;
+import com.kidoo.customer.widget.EmptyLayout;
 import com.kidoo.customer.widget.RecyclerRefreshLayout;
 
 import java.util.Date;
 import java.util.List;
 
 
-/** 
+/**
  * description: MVP刷新列表基类，
  * autour: ShaudXiao
- * date: 2017/10/15  
+ * date: 2017/10/15
  * update: 2017/10/15
- * version: 
-*/
+ * version:
+ */
 
 
 public abstract class BaseRecyclerFragment<Presenter extends BaseListPresenter, Model> extends BaseFragment
         implements BaseListView<Presenter, Model>,
         BaseRecyclerAdapter.OnItemClickListener,
         RecyclerRefreshLayout.SuperRefreshLayoutListener,
-        BaseGeneralRecyclerAdapter.Callback {
+        BaseGeneralRecyclerAdapter.Callback,
+        View.OnClickListener {
+
     protected RecyclerRefreshLayout mRefreshLayout;
     protected RecyclerView mRecyclerView;
     protected BaseRecyclerAdapter<Model> mAdapter;
     protected Presenter mPresenter;
+
+    protected EmptyLayout mErrorLayout;
 
     @Override
     protected int getLayoutId() {
@@ -52,6 +57,8 @@ public abstract class BaseRecyclerFragment<Presenter extends BaseListPresenter, 
         mRefreshLayout.setColorSchemeResources(
                 R.color.swiperefresh_color1, R.color.swiperefresh_color2,
                 R.color.swiperefresh_color3, R.color.swiperefresh_color4);
+
+        mErrorLayout = (EmptyLayout) root.findViewById(R.id.error_layout);
     }
 
     @Override
@@ -60,12 +67,20 @@ public abstract class BaseRecyclerFragment<Presenter extends BaseListPresenter, 
         mRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
+                mErrorLayout.setErrorType(EmptyLayout.HIDE_LAYOUT);
+                mRefreshLayout.setVisibility(View.VISIBLE);
                 mRefreshLayout.setRefreshing(true);
-                if(mPresenter == null)
+                if (mPresenter == null)
                     return;
                 mPresenter.onRefreshing();
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        mErrorLayout.setErrorType(EmptyLayout.NETWORK_LOADING);
+        onRefreshing();
     }
 
     @Override
@@ -77,7 +92,7 @@ public abstract class BaseRecyclerFragment<Presenter extends BaseListPresenter, 
 
     @Override
     public void onRefreshing() {
-        if(mPresenter == null)
+        if (mPresenter == null)
             return;
         mAdapter.setState(BaseRecyclerAdapter.STATE_HIDE, true);
         mPresenter.onRefreshing();
@@ -92,11 +107,25 @@ public abstract class BaseRecyclerFragment<Presenter extends BaseListPresenter, 
     @Override
     public void onRefreshSuccess(List<Model> data) {
         mAdapter.resetItem(data);
+
+        if (mAdapter.getItems().size() > 0) {
+            mErrorLayout.setErrorType(EmptyLayout.HIDE_LAYOUT);
+            mRefreshLayout.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        } else {
+            mErrorLayout.setErrorType(
+                    EmptyLayout.NODATA
+            );
+        }
+
     }
 
     @Override
     public void onLoadMoreSuccess(List<Model> data) {
         mAdapter.addAll(data);
+        if(data.size() == 0) {
+            mAdapter.setState(BaseRecyclerAdapter.STATE_NO_MORE, true);
+        }
     }
 
     @Override
@@ -107,6 +136,10 @@ public abstract class BaseRecyclerFragment<Presenter extends BaseListPresenter, 
     @Override
     public void showNetworkError(String str) {
         mAdapter.setState(BaseRecyclerAdapter.STATE_INVALID_NETWORK, true);
+        mErrorLayout.setErrorType(
+                EmptyLayout.NETWORK_ERROR
+        );
+        mRefreshLayout.setVisibility(View.GONE);
     }
 
     @Override
@@ -131,4 +164,6 @@ public abstract class BaseRecyclerFragment<Presenter extends BaseListPresenter, 
     protected abstract BaseRecyclerAdapter<Model> getAdapter();
 
     protected abstract void onItemClick(Model model, int position);
+
+
 }

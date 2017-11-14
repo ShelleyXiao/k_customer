@@ -50,7 +50,7 @@ public abstract class BaseBroadcastDetailFragment extends BaseFragment implement
             public void onClick(View v) {
                 if (mEmptyLayout.getErrorState() != EmptyLayout.NETWORK_LOADING) {
                     mEmptyLayout.setErrorType(EmptyLayout.NETWORK_LOADING);
-                    mPresenter.getDetail();
+//                    mPresenter.getDetail();
                 }
             }
         });

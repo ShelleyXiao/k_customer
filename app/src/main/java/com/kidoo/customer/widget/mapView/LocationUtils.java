@@ -1,4 +1,4 @@
-package com.kidoo.customer.utils;
+package com.kidoo.customer.widget.mapView;
 
 import android.content.Context;
 
@@ -7,6 +7,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.kidoo.customer.interf.LocationFace;
+import com.kidoo.customer.utils.LogUtils;
 
 /**
  * User: ShaudXiao
@@ -17,26 +18,21 @@ import com.kidoo.customer.interf.LocationFace;
  * FIXME
  */
 
+public class LocationUtils  {
 
-public class LocationUtils extends BDAbstractLocationListener {
-
-    public LocationClient mLocationClient = null;
     private Context context;
-    private LocationFace locationFace;
+    private static LocationFace locationFace;
 
-    public LocationUtils(Context context, LocationFace locationFace) {
-        this.locationFace = locationFace;
-        this. context = context;
-        mLocationClient = new LocationClient(context);
-        mLocationClient.registerLocationListener(LocationUtils.this);
-        startLocation();
+    public static void setLocationFace(LocationFace locationFace) {
+        LocationUtils.locationFace = locationFace;
     }
 
-    private void startLocation() {
+    public static void getLocation(Context context) {
+        final LocationClient mLocationClient = new LocationClient(context);
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode. Hight_Accuracy); // 可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
         option.setCoorType( "bd09ll"); // 可选，默认gcj02，设置返回的定位结果坐标系
-        option.setScanSpan(0); // 可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
+        option.setScanSpan(5000); // 可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
         option.setIsNeedAddress( true); // 可选，设置是否需要地址信息，默认不需要
         option.setOpenGps( true); // 可选，默认false,设置是否使用 gps
         option.setLocationNotify( true); // 可选，默认false，设置是否当 gps有效时按照1S1次频率输出GPS结果
@@ -45,24 +41,37 @@ public class LocationUtils extends BDAbstractLocationListener {
         option.setIgnoreKillProcess( false); // 可选，默认false，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认杀死
         option.SetIgnoreCacheException( false); // 可选，默认false，设置是否收集CRASH信息，默认收集
         option.setEnableSimulateGps( false); // 可选，默认false，设置是否需要过滤 gps仿真结果，默认需要
+        option.setProdName("kidoo");
         mLocationClient.setLocOption(option);
 
-        mLocationClient.start();
-    }
+        mLocationClient.registerLocationListener(new BDAbstractLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+                LogUtils.d( "Location return : ************ " + bdLocation.getLocType());
+                //注意这里，一定要判断BdLocation的返回值，只有在getLocType（）==61或者161的情况下才表示定位成功，具体返回的错误码可参考http://lbsyun.baidu.com/index.php?title=android-locsdk/guide/ermsg
+                if (bdLocation.getLocType() == BDLocation.TypeGpsLocation
+                        || bdLocation.getLocType() == BDLocation.TypeNetWorkLocation && bdLocation.getLatitude() != 0.0) {
 
-    @Override
-    public void onReceiveLocation(BDLocation arg0) {
-        LogUtils.d( "Location return : ************ " + arg0.getLocType());
-        //注意这里，一定要判断BdLocation的返回值，只有在getLocType（）==61或者161的情况下才表示定位成功，具体返回的错误码可参考http://lbsyun.baidu.com/index.php?title=android-locsdk/guide/ermsg
-        if (arg0.getLocType() == 61 || arg0.getLocType() == 161 && arg0.getLatitude() != 0.0) {
+                    //将定位结果回调给locationFace的locationResult（）方法
+                    if(null != locationFace) {
 
-            //将定位结果回调给locationFace的locationResult（）方法
-            if(null != locationFace) {
+                        locationFace.locationResult(bdLocation);
+                        mLocationClient.stop();
+                    }
 
-                locationFace.locationResult(arg0);
+                }
             }
+        });
 
-        }
+        mLocationClient.start();
+        /*
+         * 当所设的整数值大于等于(option.setScanSpan)1000（ms）时，定位SDK内部使用定时定位模式。调用requestLocation(
+         * )后，每隔设定的时间，定位SDK就会进行一次定位。如果定位SDK根据定位依据发现位置没有发生变化，就不会发起网络请求，
+         * 返回上一次定位的结果；如果发现位置改变，就进行网络请求进行定位，得到新的定位结果。
+         * 定时定位时，调用一次requestLocation，会定时监听到定位结果。
+         */
+
+        mLocationClient.requestLocation();
     }
 
     /**

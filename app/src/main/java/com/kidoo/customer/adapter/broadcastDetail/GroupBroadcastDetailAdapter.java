@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.GlideRequests;
 import com.kidoo.customer.R;
+import com.kidoo.customer.adapter.broadcastDetail.model.IBroadcastDetailModel;
 import com.kidoo.customer.mvp.model.Broadcast;
 import com.kidoo.customer.ui.activity.BroadcastDetailActivity;
 import com.kidoo.customer.ui.base.adapter.BaseRecyclerAdapter;
@@ -27,14 +28,14 @@ import butterknife.ButterKnife;
 */
 
 
-public class MybroadcastAdapter extends BaseRecyclerAdapter<Broadcast> implements BaseRecyclerAdapter.OnItemClickListener {
+public class GroupBroadcastDetailAdapter extends BaseRecyclerAdapter<IBroadcastDetailModel> implements BaseRecyclerAdapter.OnItemClickListener {
 
 
     private GlideRequests mGlideRequests;
     private String[] typeStrArr;
     private String[] statusStrArr;
 
-    public MybroadcastAdapter(Context context, int mode) {
+    public GroupBroadcastDetailAdapter(Context context, int mode) {
         super(context, mode);
         mGlideRequests = GlideApp.with(context);
 
@@ -51,12 +52,9 @@ public class MybroadcastAdapter extends BaseRecyclerAdapter<Broadcast> implement
     }
 
     @Override
-    protected void onBindDefaultViewHolder(RecyclerView.ViewHolder holder, Broadcast item, int position) {
+    protected void onBindDefaultViewHolder(RecyclerView.ViewHolder holder, IBroadcastDetailModel item, int position) {
         MyBroadcastViewholder viewHolder = (MyBroadcastViewholder) holder;
 
-        viewHolder.broadcast_type.setText("(" + typeStrArr[item.getType()] + ")");
-        viewHolder.broadcastName.setText(item.getName());
-        viewHolder.broadcastStatus.setText(statusStrArr[item.getStatus()]);
 
     }
 
