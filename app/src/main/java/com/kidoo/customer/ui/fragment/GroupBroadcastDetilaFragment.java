@@ -41,6 +41,11 @@ public class GroupBroadcastDetilaFragment extends BaseRecyclerFragment<Broadcast
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.dropView();
+    }
 
     @Override
     public void initBundle(Bundle bundle) {

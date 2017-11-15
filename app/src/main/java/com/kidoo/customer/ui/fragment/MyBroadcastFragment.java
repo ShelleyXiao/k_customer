@@ -102,6 +102,11 @@ public class MyBroadcastFragment extends BaseFragment implements
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.dropView();
+    }
 
     @Override
     public void onRefreshing() {

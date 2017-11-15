@@ -130,6 +130,11 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
+    public void dropView() {
+        view = null;
+    }
+
+    @Override
     public void subscribe() {
 
     }

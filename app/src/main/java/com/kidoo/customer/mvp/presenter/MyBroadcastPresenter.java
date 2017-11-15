@@ -60,6 +60,11 @@ public class MyBroadcastPresenter implements MyBroadcastContract.Presenter {
     }
 
     @Override
+    public void dropView() {
+        mView = null;
+    }
+
+    @Override
     public void subscribe() {
 
     }

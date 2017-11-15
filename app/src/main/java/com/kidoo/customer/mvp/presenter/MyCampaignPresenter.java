@@ -48,6 +48,10 @@ public class MyCampaignPresenter implements MyCampaignContract.Presenter {
         this.mView = view;
     }
 
+    @Override
+    public void dropView() {
+        mView = null;
+    }
 
     @Override
     public void queryMyCampaign(String customerId) {

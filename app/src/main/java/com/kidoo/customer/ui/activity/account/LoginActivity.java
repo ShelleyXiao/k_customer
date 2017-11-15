@@ -124,6 +124,12 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.dropView();
+    }
+
     @OnClick({R.id.show_pwd, R.id.clean_id, R.id.sigin_in, R.id.forget_pwd, R.id.bt_login})
     @Override
     public void onClick(View v) {

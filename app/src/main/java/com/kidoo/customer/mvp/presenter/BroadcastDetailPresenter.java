@@ -120,6 +120,11 @@ public class BroadcastDetailPresenter implements BroadcastDetailContract.Present
     }
 
     @Override
+    public void dropView() {
+        mView = null;
+    }
+
+    @Override
     public void subscribe() {
 
     }

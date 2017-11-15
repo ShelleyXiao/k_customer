@@ -104,6 +104,12 @@ public class MyCampaignFragment extends BaseFragment implements RecyclerRefreshL
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.dropView();
+    }
+
 
     @Override
     public void onRefreshing() {
