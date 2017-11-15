@@ -27,6 +27,15 @@ allprojects {
             url 'https://dl.bintray.com/oschinaapp/maven/'
         }
     }
+
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+    }
+
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked"  << "-Xlint:deprecation"
+    }
 }
 
 task clean(type: Delete) {

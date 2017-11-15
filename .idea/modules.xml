@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Kidoo.iml" filepath="$PROJECT_DIR$/Kidoo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://D:\workspace\studystudio_worksapce\Kidoo\k_customer.iml" filepath="D:\workspace\studystudio_worksapce\Kidoo\k_customer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rxeasyhttp/rxeasyhttp.iml" filepath="$PROJECT_DIR$/rxeasyhttp/rxeasyhttp.iml" />
     </modules>
   </component>
 </project>
