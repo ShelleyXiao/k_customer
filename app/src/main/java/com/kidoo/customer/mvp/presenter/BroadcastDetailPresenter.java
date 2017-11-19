@@ -3,7 +3,6 @@ package com.kidoo.customer.mvp.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.kidoo.customer.R;
 import com.kidoo.customer.api.ComParamContact;
 import com.kidoo.customer.api.http.HttpManager;
 import com.kidoo.customer.mvp.contract.BroadcastDetailContract;
@@ -41,7 +40,7 @@ public class BroadcastDetailPresenter implements BroadcastDetailContract.Present
 
     public BroadcastDetailPresenter(Context context, BroadcastDetailContract.View view, int customId, int broadcastId) {
         attachView(view);
-        mView.setPresenter(this);
+//        mView.setPresenter(this);
 
         mCustomerId = customId;
         mBroadcastId = broadcastId;
@@ -78,7 +77,7 @@ public class BroadcastDetailPresenter implements BroadcastDetailContract.Present
                                 .execute(TeambaseResult.class);
                     }
                 } else {
-                    mView.showNetworkError(mContext.getString(R.string.error_view_load_error_click_to_refresh));
+//                    mView.showNetworkError(mContext.getString(R.string.error_view_load_error_click_to_refresh));
                 }
 
                 return null;

@@ -33,7 +33,6 @@ public class MyBroadcastPresenter implements MyBroadcastContract.Presenter {
     public MyBroadcastPresenter(Context context, MyBroadcastContract.View view, String customerId) {
         this.mContext = context;
         attachView(view);
-        this.mView.setPresenter(this);
         this.customerId = customerId;
     }
 
@@ -82,7 +81,7 @@ public class MyBroadcastPresenter implements MyBroadcastContract.Presenter {
 
                     @Override
                     public void onError(ApiException e) {
-                        mView.showNetworkError(e.getMessage());
+//                        mView.showNetworkError(e.getMessage());
                     }
 
                     @Override

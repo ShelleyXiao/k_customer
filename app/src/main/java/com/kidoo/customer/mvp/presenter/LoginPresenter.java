@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.text.TextUtils;
 
 import com.kidoo.customer.AccountHelper;
-import com.kidoo.customer.R;
 import com.kidoo.customer.api.ComParamContact;
 import com.kidoo.customer.api.http.HttpManager;
 import com.kidoo.customer.api.http.callback.ProgressDialogCallBack;
@@ -90,7 +89,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                             @Override
                             public void onError(ApiException e) {
                                 super.onError(e);
-                                view.showNetworkError(e.getMessage());
+//                                view.showNetworkError(e.getMessage());
                             }
 
                             @Override
@@ -107,7 +106,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                                         view.loginResultNotify(true);
                                         TokenManager.getInstance().setAuthModel(ComParamContact.Token.AUTH_MODEL, authModel);
                                     } else {
-                                        view.showNetworkError(((Activity)view).getString(R.string.login_exception_hint));
+//                                        view.showNetworkError(((Activity)view).getString(R.string.login_exception_hint));
                                     }
                                 } else {
 

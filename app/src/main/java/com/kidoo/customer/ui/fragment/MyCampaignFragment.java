@@ -145,12 +145,11 @@ public class MyCampaignFragment extends BaseFragment implements RecyclerRefreshL
 
     }
 
-    @Override
-    public void setPresenter(MyCampaignContract.Presenter presenter) {
-        this.mPresenter = presenter;
-    }
+//    @Override
+//    public void setPresenter(MyCampaignContract.Presenter presenter) {
+//        this.mPresenter = presenter;
+//    }
 
-    @Override
     public void showNetworkError(String str) {
         showEmptyView();
     }

@@ -19,7 +19,7 @@ import java.util.List;
 
 public interface MyCampaignContract {
 
-    interface  View extends BaseView<MyCampaignContract.Presenter> {
+    interface  View extends BaseView {
         void updateCampainInfo(MyCampaignResult myBroadcastResult);
         void updateTeambaseInfo(List<Teambase> teambases);
     }

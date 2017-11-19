@@ -9,7 +9,7 @@ import java.util.List;
  * on 2016/11/30.
  */
 
-public interface BaseListView<Presenter extends BaseListPresenter, M> extends BaseView<Presenter> {
+public interface BaseListView<Presenter extends BaseListPresenter, M> extends BaseView {
     /**
      * 刷新成功
      */

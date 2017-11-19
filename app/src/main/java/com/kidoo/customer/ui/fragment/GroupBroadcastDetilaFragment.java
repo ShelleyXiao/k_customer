@@ -58,11 +58,11 @@ public class GroupBroadcastDetilaFragment extends BaseRecyclerFragment<Broadcast
     public void initData() {
         mPresenter = new BroadcastDetailPresenter(getActivity(), this, (int)AccountHelper.getUserId(), mBroadcastId);
     }
-
-    @Override
-    public void setPresenter(BroadcastDetailContract.Presenter presenter) {
-        mPresenter = presenter;
-    }
+//
+//    @Override
+//    public void setPresenter(BroadcastDetailContract.Presenter presenter) {
+//        mPresenter = presenter;
+//    }
 
     @Override
     protected BaseRecyclerAdapter<IBroadcastDetailModel> getAdapter() {

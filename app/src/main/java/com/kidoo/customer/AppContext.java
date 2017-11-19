@@ -8,10 +8,13 @@ import android.widget.Toast;
 
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
-import com.kidoo.customer.api.http.HttpManager;
 import com.kidoo.customer.api.ApiService;
+import com.kidoo.customer.api.http.HttpManager;
 import com.kidoo.customer.api.http.model.HttpHeaders;
 import com.kidoo.customer.api.http.model.HttpParams;
+import com.kidoo.customer.di.Component.AppComponent;
+import com.kidoo.customer.di.Component.DaggerAppComponent;
+import com.kidoo.customer.di.module.AppModule;
 import com.kidoo.customer.utils.AppSystemUtils;
 import com.kidoo.customer.utils.CommonUtils;
 import com.kidoo.customer.utils.TDevice;
@@ -36,10 +39,14 @@ public class AppContext extends Application{
 //    private RefWatcher mRefWatcher;
     private static AppContext instance;
 
+    public AppComponent mAppComponent;
+
     @Override
     public void onCreate() {
         super.onCreate();
         _context = getApplicationContext();
+
+        initApplicationComponent();
 
         initBugly();
 
@@ -53,6 +60,8 @@ public class AppContext extends Application{
 
 //        mRefWatcher = BuildConfig.DEBUG ? LeakCanary.install(this) : RefWatcher.DISABLED;
         AccountHelper.init(this);
+
+
     }
 
     private void initBugly() {
@@ -145,6 +154,19 @@ public class AppContext extends Application{
         Context context = _context;
         if (context != null)
             SimplexToast.show(context, message, gravity, duration);
+    }
+
+    private void initApplicationComponent() {
+        mAppComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this)).build();
+    }
+
+    /**
+     * 对外提供AppComponent
+     * @return
+     */
+    public AppComponent getAppComponent(){
+        return mAppComponent;
     }
 
 

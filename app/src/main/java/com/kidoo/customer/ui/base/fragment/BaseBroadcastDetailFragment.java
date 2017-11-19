@@ -55,16 +55,12 @@ public abstract class BaseBroadcastDetailFragment extends BaseFragment implement
             }
         });
     }
+//
+//    @Override
+//    public void setPresenter(BroadcastDetailContract.Presenter presenter) {
+//        this.mPresenter =  presenter;
+//    }
 
-    @Override
-    public void setPresenter(BroadcastDetailContract.Presenter presenter) {
-        this.mPresenter =  presenter;
-    }
-
-    @Override
-    public void showNetworkError(String str) {
-
-    }
 
 
     @Override

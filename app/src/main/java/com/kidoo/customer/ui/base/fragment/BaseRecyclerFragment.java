@@ -133,7 +133,6 @@ public abstract class BaseRecyclerFragment<Presenter extends BaseListPresenter, 
         mAdapter.setState(BaseRecyclerAdapter.STATE_NO_MORE, true);
     }
 
-    @Override
     public void showNetworkError(String str) {
         mAdapter.setState(BaseRecyclerAdapter.STATE_INVALID_NETWORK, true);
         mErrorLayout.setErrorType(
@@ -147,10 +146,10 @@ public abstract class BaseRecyclerFragment<Presenter extends BaseListPresenter, 
         mRefreshLayout.onComplete();
     }
 
-    @Override
-    public void setPresenter(Presenter presenter) {
-        this.mPresenter = presenter;
-    }
+//    @Override
+//    public void setPresenter(Presenter presenter) {
+//        this.mPresenter = presenter;
+//    }
 
     protected RecyclerView.LayoutManager getLayoutManager() {
         return new LinearLayoutManager(mContext);

@@ -124,12 +124,11 @@ public class MyBroadcastFragment extends BaseFragment implements
         mMybroadcastAdapter.setState(BaseRecyclerAdapter.STATE_LOADING, true);
     }
 
-    @Override
-    public void setPresenter(MyBroadcastContract.Presenter presenter) {
-        this.mPresenter = (MyBroadcastPresenter) presenter;
-    }
+//    @Override
+//    public void setPresenter(MyBroadcastContract.Presenter presenter) {
+//        this.mPresenter = (MyBroadcastPresenter) presenter;
+//    }
 
-    @Override
     public void showNetworkError(String str) {
         mEmpty.setErrorType(EmptyLayout.NETWORK_ERROR);
         mEmpty.setErrorMessage(str);

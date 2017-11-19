@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.GlideRequests;
+import com.kidoo.customer.mvp.view.BaseView;
 import com.kidoo.customer.utils.LogUtils;
 
 import butterknife.ButterKnife;
@@ -23,9 +24,8 @@ import butterknife.Unbinder;
  */
 
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
-//    protected RequestManager mImageLoader;
     protected GlideRequests mGlideRequests;
     private boolean mIsDestroy;
     private Fragment mFragment;

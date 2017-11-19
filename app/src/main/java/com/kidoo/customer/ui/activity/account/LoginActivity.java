@@ -183,13 +183,12 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
 
     }
 
+//
+//    @Override
+//    public void setPresenter(BasePresenter presenter) {
+//        this.mPresenter = (LoginContract.Presenter)presenter;
+//    }
 
-    @Override
-    public void setPresenter(BasePresenter presenter) {
-        this.mPresenter = (LoginContract.Presenter)presenter;
-    }
-
-    @Override
     public void showNetworkError(String str) {
         showToastForKeyBord(str);
     }

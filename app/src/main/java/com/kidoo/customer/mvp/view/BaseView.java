@@ -1,7 +1,5 @@
 package com.kidoo.customer.mvp.view;
 
-import com.kidoo.customer.mvp.presenter.BasePresenter;
-
 /**
  * User: ShaudXiao
  * Date: 2017-09-30
@@ -12,11 +10,9 @@ import com.kidoo.customer.mvp.presenter.BasePresenter;
  */
 
 
-public interface BaseView<Presenter extends BasePresenter> {
+public interface BaseView {
 
 
-    void setPresenter(Presenter presenter);
-
-    void showNetworkError(String str);
+//    void showNetworkError(String str);
 
 }

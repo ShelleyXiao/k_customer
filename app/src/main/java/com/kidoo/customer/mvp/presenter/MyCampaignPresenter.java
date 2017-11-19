@@ -3,7 +3,6 @@ package com.kidoo.customer.mvp.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.kidoo.customer.R;
 import com.kidoo.customer.api.ComParamContact;
 import com.kidoo.customer.api.http.HttpManager;
 import com.kidoo.customer.mvp.contract.MyCampaignContract;
@@ -88,7 +87,7 @@ public class MyCampaignPresenter implements MyCampaignContract.Presenter {
                                 .execute(TeambaseResult.class);
                     }
                 } else {
-                    mView.showNetworkError(mContext.getString(R.string.error_view_load_error_click_to_refresh));
+//                    mView.showNetworkError(mContext.getString(R.string.error_view_load_error_click_to_refresh));
                 }
 
                 return null;
