@@ -71,7 +71,7 @@ public final class LogUtils {
     private static String          sDir;       // log存储目录
     private static String  sFilePrefix        = "KIDOO_LOG";// log文件前缀
     private static boolean sLogSwitch         = true;  // log总开关，默认开
-    private static boolean sLog2ConsoleSwitch = BuildConfig.DEBUG;  // logcat是否打印，默认打印
+    private static boolean sLog2ConsoleSwitch = BuildConfig.LOG_DEBUG;  // logcat是否打印，默认打印
     private static String  sGlobalTag         = "KIDOO_DEBUG";  // log标签
     private static boolean sTagIsSpace        = false;  // log标签是否为空白
     private static boolean sLogHeadSwitch     = true;  // log头部开关，默认开

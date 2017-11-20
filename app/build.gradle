@@ -46,12 +46,18 @@ android {
 //        }
 
         release {
+
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+
             minifyEnabled true//是否混淆（注：如果混淆文件未配置使用false）
             zipAlignEnabled true //是否支持Zip Align
             shrinkResources true //是否清理无用资源
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
+
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+
             minifyEnabled false
             zipAlignEnabled false
             shrinkResources false

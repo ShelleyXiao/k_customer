@@ -17,6 +17,7 @@ import com.kidoo.customer.utils.CommonUtils;
 import com.kidoo.customer.utils.TDevice;
 import com.kidoo.customer.widget.SimplexToast;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.zhouyou.http.EasyHttp;
 
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -66,7 +67,7 @@ public class AppContext extends Application{
     }
 
     private void initHttp() {
-        HttpManager.init(this);
+        EasyHttp.init(this);
 
         //设置请求头
         HttpHeaders headers = new HttpHeaders();
