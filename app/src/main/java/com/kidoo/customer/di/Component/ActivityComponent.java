@@ -6,6 +6,7 @@ import android.content.Context;
 import com.kidoo.customer.di.module.ActivityModule;
 import com.kidoo.customer.di.scope.ContextLife;
 import com.kidoo.customer.di.scope.PerActivity;
+import com.kidoo.customer.ui.activity.account.LoginActivity;
 
 import dagger.Component;
 
@@ -29,6 +30,8 @@ public interface ActivityComponent {
     Context getActivityContext();
 
     Activity getActivity();
+
+    void inject(LoginActivity activity);
 
 //    void inject(CategorySubscribeActivity activity);
 //    void inject(CategoryNecessaryActivity activity);

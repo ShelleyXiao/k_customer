@@ -18,7 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kidoo.customer.R;
-import com.kidoo.customer.ui.base.activities.BaseActivity;
+import com.kidoo.customer.mvp.presenter.BasePresenter;
+import com.kidoo.customer.ui.base.activities.BaseMvpActivity;
 import com.kidoo.customer.utils.DialogHelper;
 
 /**
@@ -31,7 +32,7 @@ import com.kidoo.customer.utils.DialogHelper;
  */
 
 
-public class AccountBaseActivity extends BaseActivity {
+public abstract class AccountBaseActivity<T extends BasePresenter> extends BaseMvpActivity<T> {
 
     private ProgressDialog mDialog;
     protected LocalBroadcastManager mManager;

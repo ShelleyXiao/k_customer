@@ -17,10 +17,13 @@ import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.R;
 import com.kidoo.customer.mvp.contract.LoginContract;
 import com.kidoo.customer.mvp.presenter.BasePresenter;
-import com.kidoo.customer.mvp.presenter.LoginPresenter;
+import com.kidoo.customer.mvp.presenter.LoginPresenterImpl;
 import com.kidoo.customer.ui.activity.MainActivity;
+import com.kidoo.customer.ui.base.activities.BaseMvpActivity;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.TDevice;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,7 +39,8 @@ import butterknife.OnClick;
  */
 
 
-public class LoginActivity extends AccountBaseActivity implements View.OnClickListener , View.OnFocusChangeListener, LoginContract.View{
+public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> implements View.OnClickListener , View.OnFocusChangeListener, LoginContract.View{
+
 
     private static final int TEMP_KEY_TIME = 10 * 60 * 1000;
 
@@ -58,7 +62,8 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
 
     private boolean showPwd = false;
 
-    private LoginContract.Presenter mPresenter;
+    @Inject
+    public LoginPresenterImpl mLoginPresenter;
 
     private long refreshkeyTimeStamp;
 
@@ -93,7 +98,6 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
     @Override
     public void initWidget() {
 
-        mPresenter = new LoginPresenter(this);
 
         mAccountIdInput.addTextChangedListener(
                 new TextWatcher() {
@@ -122,6 +126,12 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
 
         );
 
+    }
+
+    @Override
+    protected LoginPresenterImpl initInjector() {
+        mActivityComponent.inject(this);
+        return mLoginPresenter;
     }
 
     @Override
@@ -193,33 +203,33 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
         showToastForKeyBord(str);
     }
 
-    @Override
-    public void refreshTempKeyNotify(boolean success, final String errorMsg) {
-        if(success) {
-            refreshkeyTimeStamp = System.currentTimeMillis();
-            mHandler.sendEmptyMessage(LOGIN_MSG);
-        } else {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    showToastForKeyBord(errorMsg);
-                }
-            });
-        }
-    }
+//    @Override
+//    public void refreshTempKeyNotify(boolean success, final String errorMsg) {
+//        if(success) {
+//            refreshkeyTimeStamp = System.currentTimeMillis();
+//            mHandler.sendEmptyMessage(LOGIN_MSG);
+//        } else {
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    showToastForKeyBord(errorMsg);
+//                }
+//            });
+//        }
+//    }
 
     @Override
-    public void loginResultNotify(boolean success) {
-        if(success) {
-            showToastForKeyBord(R.string.login_success_hint);
-            AccountHelper.holdAccount(this, mAccountIdInput.getText().toString().trim());
-            // 执行通知，广播消息，登陆成功
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+    public void goMainPage() {
+        showToastForKeyBord(R.string.login_success_hint);
+        AccountHelper.holdAccount(this, mAccountIdInput.getText().toString().trim());
+        // 执行通知，广播消息，登陆成功
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
 
-            finish();
-        }
+        finish();
     }
+
+
 
     private void requestTempToken() {
         String accoutId = mAccountIdInput.getText().toString().trim();
@@ -227,7 +237,7 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
 
         if (!TextUtils.isEmpty(accoutId) && !TextUtils.isEmpty(pwd) && TDevice.isMobileNO(accoutId)) {
             if (TDevice.hasInternet()) {
-                mPresenter.refreshTempToken(accoutId);
+                mLoginPresenter.refreshTempToken(accoutId);
             } else {
                 showToastForKeyBord(R.string.footer_type_net_error);
             }
@@ -249,7 +259,7 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
         if (!TextUtils.isEmpty(pwd) && !TextUtils.isEmpty(accoutId)) {
 
             if (TDevice.hasInternet()) {
-                mPresenter.loginAction(accoutId, pwd);
+                mLoginPresenter.loginAction(accoutId, pwd);
             } else {
                 showToastForKeyBord(R.string.footer_type_net_error);
             }

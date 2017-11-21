@@ -3,7 +3,7 @@ package com.kidoo.customer.mvp.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.kidoo.customer.kidoohttp.ComParamContact;
+import com.kidoo.customer.kidoohttp.api.ComParamContact;
 import com.kidoo.customer.mvp.contract.BroadcastDetailContract;
 import com.kidoo.customer.bean.DetailResult;
 import com.kidoo.customer.bean.Player;

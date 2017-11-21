@@ -12,7 +12,7 @@ import com.kidoo.customer.adapter.myCampaignAdapter.model.CampaignHeader;
 import com.kidoo.customer.adapter.myCampaignAdapter.model.CampaignSession;
 import com.kidoo.customer.adapter.myCampaignAdapter.model.CampaignTeam;
 import com.kidoo.customer.adapter.myCampaignAdapter.model.ICampaignMode;
-import com.kidoo.customer.kidoohttp.ComParamContact;
+import com.kidoo.customer.kidoohttp.api.ComParamContact;
 import com.kidoo.customer.mvp.contract.MyCampaignContract;
 import com.kidoo.customer.bean.Campaign;
 import com.kidoo.customer.bean.CampaignScore;

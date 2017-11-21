@@ -31,6 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private Fragment mFragment;
     private Unbinder mUnbinder;
 
+//    protected Toast mToast;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,6 +121,71 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             mGlideRequests = GlideApp.with(this);
         return mGlideRequests;
     }
+
+//    /**
+//     * showToast
+//     *
+//     * @param text text
+//     */
+//    @SuppressLint("InflateParams")
+//    private void showToast(String text) {
+//        Toast toast = this.mToast;
+//        if (toast == null) {
+//            toast = initToast();
+//        }
+//        View rootView = LayoutInflater.from(this).inflate(R.layout.view_toast, null, false);
+//        TextView textView = (TextView) rootView.findViewById(R.id.title_tv);
+//        textView.setText(text);
+//        toast.setView(rootView);
+//        initToastGravity(toast);
+//        toast.show();
+//    }
+//
+//    /**
+//     * showToast
+//     *
+//     * @param id id
+//     */
+//    @SuppressLint("InflateParams")
+//    private void showToast(@StringRes int id) {
+//        Toast toast = this.mToast;
+//        if (toast == null) {
+//            toast = initToast();
+//        }
+//        View rootView = LayoutInflater.from(this).inflate(R.layout.view_toast, null, false);
+//        TextView textView = (TextView) rootView.findViewById(R.id.title_tv);
+//        textView.setText(id);
+//        toast.setView(rootView);
+//        initToastGravity(toast);
+//        toast.show();
+//    }
+//
+//    @NonNull
+//    private Toast initToast() {
+//        Toast toast;
+//        toast = new Toast(this);
+//        toast.setDuration(Toast.LENGTH_SHORT);
+//        this.mToast = toast;
+//        return toast;
+//    }
+//
+//    private void initToastGravity(Toast toast) {
+//        boolean isCenter = true;
+//        if (isCenter) {
+//            toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+//        } else {
+//            toast.setGravity(Gravity.BOTTOM, 0, getResources().getDimensionPixelSize(R.dimen.toast_y_offset));
+//        }
+//    }
+//
+//
+//    protected void showToastForKeyBord(@StringRes int id) {
+//        showToast(id);
+//    }
+//
+//    protected void showToastForKeyBord(String message) {
+//        showToast(message);
+//    }
 
 
 }

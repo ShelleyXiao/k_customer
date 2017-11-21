@@ -13,7 +13,7 @@ import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.R;
 import com.kidoo.customer.adapter.multitype.AdapterDelegate;
 import com.kidoo.customer.adapter.myCampaignAdapter.model.CampaignTeam;
-import com.kidoo.customer.kidoohttp.ComParamContact;
+import com.kidoo.customer.kidoohttp.api.ComParamContact;
 import com.kidoo.customer.widget.CircleImageView;
 
 import java.util.List;

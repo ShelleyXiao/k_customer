@@ -109,29 +109,6 @@
 
 
         <activity
-            android:name=".ui.activity.account.SigninInOneStepActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:label="Login"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            >
-
-        </activity>
-
-
-        <activity
-            android:name=".ui.activity.account.SigninInTwoStepActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:label="Login"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            >
-
-        </activity>
-
-        <activity
             android:name=".ui.activity.MyBroadcastActivity"
             android:label="My Game"
             android:screenOrientation="portrait"

@@ -16,19 +16,13 @@ import com.kidoo.customer.mvp.view.BaseView;
 public interface LoginContract {
 
     interface View extends BaseView {
-//        void showToast(String msg);
 
-        void refreshTempKeyNotify(boolean success, String errorMsg);
-
-        void loginResultNotify(boolean success) ;
+        void goMainPage();
     }
 
     interface Presenter extends BasePresenter<View> {
 
-        void refreshTempToken(String account);
-
         void loginAction(String account, String pwd);
-
 
     }
 

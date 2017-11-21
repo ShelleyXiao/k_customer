@@ -7,7 +7,7 @@ import android.os.SystemClock;
 import android.support.v4.content.SharedPreferencesCompat;
 import android.text.TextUtils;
 
-import com.kidoo.customer.kidoohttp.ComParamContact;
+import com.kidoo.customer.kidoohttp.api.ComParamContact;
 import com.kidoo.customer.api.token.TokenManager;
 import com.kidoo.customer.bean.Customer;
 import com.kidoo.customer.utils.LogUtils;
