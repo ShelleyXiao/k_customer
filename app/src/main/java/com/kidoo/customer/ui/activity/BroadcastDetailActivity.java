@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.kidoo.customer.R;
-import com.kidoo.customer.mvp.model.Broadcast;
+import com.kidoo.customer.bean.Broadcast;
 import com.kidoo.customer.ui.base.activities.BackActivity;
 import com.kidoo.customer.ui.fragment.GroupBroadcastDetilaFragment;
 import com.kidoo.customer.utils.LogUtils;

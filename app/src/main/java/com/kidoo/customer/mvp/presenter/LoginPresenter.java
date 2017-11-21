@@ -5,23 +5,23 @@ import android.app.Dialog;
 import android.text.TextUtils;
 
 import com.kidoo.customer.AccountHelper;
-import com.kidoo.customer.api.ComParamContact;
-import com.kidoo.customer.api.http.HttpManager;
-import com.kidoo.customer.api.http.callback.ProgressDialogCallBack;
-import com.kidoo.customer.api.http.callback.SimpleCallBack;
-import com.kidoo.customer.api.http.exception.ApiException;
-import com.kidoo.customer.api.http.subsciber.IProgressDialog;
+import com.kidoo.customer.kidoohttp.ComParamContact;
 import com.kidoo.customer.api.token.TokenManager;
 import com.kidoo.customer.cipher.rsa.Base64Utils;
 import com.kidoo.customer.cipher.rsa.RSAUtil;
 import com.kidoo.customer.mvp.contract.LoginContract;
-import com.kidoo.customer.mvp.model.AuthModel;
-import com.kidoo.customer.mvp.model.Customer;
-import com.kidoo.customer.mvp.model.KeypairResult;
-import com.kidoo.customer.mvp.model.LoginResult;
+import com.kidoo.customer.bean.AuthModel;
+import com.kidoo.customer.bean.Customer;
+import com.kidoo.customer.bean.KeypairResult;
+import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.EncryptUtils;
 import com.kidoo.customer.utils.LogUtils;
+import com.zhouyou.http.EasyHttp;
+import com.zhouyou.http.callback.ProgressDialogCallBack;
+import com.zhouyou.http.callback.SimpleCallBack;
+import com.zhouyou.http.exception.ApiException;
+import com.zhouyou.http.subsciber.IProgressDialog;
 
 /**
  * User: ShaudXiao
@@ -51,7 +51,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void refreshTempToken(String account) {
-        HttpManager.post(ComParamContact.TempKey.PATH)
+        EasyHttp.post(ComParamContact.TempKey.PATH)
                 .params("mobile", account)
                 .execute(new SimpleCallBack<KeypairResult>() {
                     @Override
@@ -81,7 +81,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                 byte[] b_rsapwd = RSAUtil.encryptByPublicKey(sha1Pwd, mTempKeypairResult.getPublicKey());
                 String finalPwd = Base64Utils.encode(b_rsapwd);
 
-                HttpManager.post(ComParamContact.Login.PATH)
+                EasyHttp.post(ComParamContact.Login.PATH)
                         .params(ComParamContact.Login.ACCOUNT, account)
                         .params(ComParamContact.Login.PASSWORD, (finalPwd))
                         .params(ComParamContact.Login.LOGINTYPE, "1")

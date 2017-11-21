@@ -9,12 +9,12 @@ import android.widget.Toast;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.kidoo.customer.api.ApiService;
-import com.kidoo.customer.api.http.HttpManager;
-import com.kidoo.customer.api.http.model.HttpHeaders;
-import com.kidoo.customer.api.http.model.HttpParams;
 import com.kidoo.customer.di.Component.AppComponent;
 import com.kidoo.customer.di.Component.DaggerAppComponent;
 import com.kidoo.customer.di.module.AppModule;
+import com.kidoo.customer.kidoohttp.KidooApiManager;
+import com.kidoo.customer.kidoohttp.model.HttpHeaders;
+import com.kidoo.customer.kidoohttp.model.HttpParams;
 import com.kidoo.customer.utils.AppSystemUtils;
 import com.kidoo.customer.utils.CommonUtils;
 import com.kidoo.customer.utils.TDevice;
@@ -75,7 +75,7 @@ public class AppContext extends Application{
     }
 
     private void initHttp() {
-        HttpManager.init(this);
+        KidooApiManager.init(this);
 
         //设置请求头
         HttpHeaders headers = new HttpHeaders();
@@ -88,7 +88,7 @@ public class AppContext extends Application{
         params.put("mobileModel", "1");
         params.put("modelDetail", TDevice.getSystemModel());
 
-        HttpManager.getInstance()
+        KidooApiManager.getInstance()
                 .debug("KidooHttp", true)
                 .setReadTimeOut(60 * 1000)
                 .setWriteTimeOut(60 * 1000)

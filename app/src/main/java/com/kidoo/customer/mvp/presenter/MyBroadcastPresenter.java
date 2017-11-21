@@ -3,14 +3,14 @@ package com.kidoo.customer.mvp.presenter;
 import android.content.Context;
 
 import com.kidoo.customer.AccountHelper;
-import com.kidoo.customer.api.ComParamContact;
-import com.kidoo.customer.api.http.HttpManager;
-import com.kidoo.customer.api.http.callback.SimpleCallBack;
-import com.kidoo.customer.api.http.exception.ApiException;
+import com.kidoo.customer.kidoohttp.ComParamContact;
 import com.kidoo.customer.mvp.contract.MyBroadcastContract;
-import com.kidoo.customer.mvp.model.MyBroadcastResult;
+import com.kidoo.customer.bean.MyBroadcastResult;
 import com.kidoo.customer.mvp.view.BaseView;
 import com.kidoo.customer.utils.LogUtils;
+import com.zhouyou.http.EasyHttp;
+import com.zhouyou.http.callback.SimpleCallBack;
+import com.zhouyou.http.exception.ApiException;
 
 /**
  * User: ShaudXiao
@@ -75,7 +75,7 @@ public class MyBroadcastPresenter implements MyBroadcastContract.Presenter {
 
     private void queryMyBroadcast(String customerId, int pageNum) {
 
-        HttpManager.get(ComParamContact.MyBroadcast.PATH)
+        EasyHttp.get(ComParamContact.MyBroadcast.PATH)
                 .params(ComParamContact.MyBroadcast.USER_ID, AccountHelper.getUserId() + "")
                 .execute(new SimpleCallBack<MyBroadcastResult>() {
 

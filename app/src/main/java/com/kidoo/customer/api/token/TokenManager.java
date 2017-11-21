@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.cache.ACache;
-import com.kidoo.customer.mvp.model.AuthModel;
+import com.kidoo.customer.bean.AuthModel;
 
 /**
  * User: ShaudXiao

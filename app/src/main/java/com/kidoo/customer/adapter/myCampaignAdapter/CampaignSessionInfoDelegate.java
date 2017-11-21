@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.kidoo.customer.R;
 import com.kidoo.customer.adapter.multitype.AdapterDelegate;
 import com.kidoo.customer.adapter.myCampaignAdapter.model.CampaignSession;
-import com.kidoo.customer.mvp.model.Episode;
+import com.kidoo.customer.bean.Episode;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.TimeUtils;
 

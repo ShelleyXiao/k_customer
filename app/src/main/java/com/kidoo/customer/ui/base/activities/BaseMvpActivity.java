@@ -1,8 +1,5 @@
 package com.kidoo.customer.ui.base.activities;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.di.Component.ActivityComponent;
 import com.kidoo.customer.di.Component.DaggerActivityComponent;
@@ -24,13 +21,6 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActiv
 
     protected T mPresenter;
 
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
 
     @Override
     protected void initWidget() {

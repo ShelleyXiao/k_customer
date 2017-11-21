@@ -1,7 +1,7 @@
 package com.kidoo.customer.mvp.contract;
 
-import com.kidoo.customer.mvp.model.MyCampaignResult;
-import com.kidoo.customer.mvp.model.Teambase;
+import com.kidoo.customer.bean.MyCampaignResult;
+import com.kidoo.customer.bean.Teambase;
 import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.mvp.view.BaseView;
 

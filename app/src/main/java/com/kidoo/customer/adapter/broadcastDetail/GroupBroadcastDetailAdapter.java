@@ -11,7 +11,7 @@ import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.GlideRequests;
 import com.kidoo.customer.R;
 import com.kidoo.customer.adapter.broadcastDetail.model.IBroadcastDetailModel;
-import com.kidoo.customer.mvp.model.Broadcast;
+import com.kidoo.customer.bean.Broadcast;
 import com.kidoo.customer.ui.activity.BroadcastDetailActivity;
 import com.kidoo.customer.ui.base.adapter.BaseRecyclerAdapter;
 import com.kidoo.customer.utils.LogUtils;

@@ -3,13 +3,13 @@ package com.kidoo.customer.mvp.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.kidoo.customer.api.ComParamContact;
-import com.kidoo.customer.api.http.HttpManager;
+import com.kidoo.customer.kidoohttp.ComParamContact;
 import com.kidoo.customer.mvp.contract.MyCampaignContract;
-import com.kidoo.customer.mvp.model.CampaignScore;
-import com.kidoo.customer.mvp.model.MyCampaignResult;
-import com.kidoo.customer.mvp.model.TeambaseResult;
+import com.kidoo.customer.bean.CampaignScore;
+import com.kidoo.customer.bean.MyCampaignResult;
+import com.kidoo.customer.bean.TeambaseResult;
 import com.kidoo.customer.utils.LogUtils;
+import com.zhouyou.http.EasyHttp;
 
 import java.util.List;
 
@@ -64,7 +64,7 @@ public class MyCampaignPresenter implements MyCampaignContract.Presenter {
 
     @Override
     public void onRefreshCampainInfo(final String customerId) {
-        Observable<MyCampaignResult> myCompaignResultObservable = HttpManager.get(ComParamContact.MyCompaign.PATH)
+        Observable<MyCampaignResult> myCompaignResultObservable = EasyHttp.get(ComParamContact.MyCompaign.PATH)
                 .params(ComParamContact.MyCompaign.USER_ID, customerId)
                 .execute(MyCampaignResult.class);
         myCompaignResultObservable.flatMap(new Function<MyCampaignResult, ObservableSource<TeambaseResult>>() {
@@ -81,7 +81,7 @@ public class MyCampaignPresenter implements MyCampaignContract.Presenter {
                     }
                     final String teamIds = builder.toString();
                     if(!TextUtils.isEmpty(teamIds)) {
-                        return   HttpManager.get(ComParamContact.TeamBaseInfo.PATH)
+                        return   EasyHttp.get(ComParamContact.TeamBaseInfo.PATH)
                                 .params(ComParamContact.TeamBaseInfo.USER_ID, customerId)
                                 .params(ComParamContact.TeamBaseInfo.TEAM_IDS, teamIds)
                                 .execute(TeambaseResult.class);

@@ -3,14 +3,14 @@ package com.kidoo.customer.mvp.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.kidoo.customer.api.ComParamContact;
-import com.kidoo.customer.api.http.HttpManager;
+import com.kidoo.customer.kidoohttp.ComParamContact;
 import com.kidoo.customer.mvp.contract.BroadcastDetailContract;
-import com.kidoo.customer.mvp.model.DetailResult;
-import com.kidoo.customer.mvp.model.Player;
-import com.kidoo.customer.mvp.model.TeambaseResult;
+import com.kidoo.customer.bean.DetailResult;
+import com.kidoo.customer.bean.Player;
+import com.kidoo.customer.bean.TeambaseResult;
 import com.kidoo.customer.mvp.view.BaseView;
 import com.kidoo.customer.utils.LogUtils;
+import com.zhouyou.http.EasyHttp;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class BroadcastDetailPresenter implements BroadcastDetailContract.Present
 
     @Override
     public void onRefreshing() {
-        Observable<DetailResult> myCompaignResultObservable = HttpManager.get(ComParamContact.BroadcastDetail.PATH)
+        Observable<DetailResult> myCompaignResultObservable = EasyHttp.get(ComParamContact.BroadcastDetail.PATH)
                 .params(ComParamContact.BroadcastDetail.USER_ID, mCustomerId + "")
                 .params(ComParamContact.BroadcastDetail.BROADCAST_ID, mBroadcastId + "")
                 .execute(DetailResult.class);
@@ -71,7 +71,7 @@ public class BroadcastDetailPresenter implements BroadcastDetailContract.Present
 
                     final String teamIds = builder.toString();
                     if (!TextUtils.isEmpty(teamIds)) {
-                        return HttpManager.get(ComParamContact.TeamBaseInfo.PATH)
+                        return EasyHttp.get(ComParamContact.TeamBaseInfo.PATH)
                                 .params(ComParamContact.TeamBaseInfo.USER_ID, mCustomerId + "")
                                 .params(ComParamContact.TeamBaseInfo.TEAM_IDS, teamIds)
                                 .execute(TeambaseResult.class);

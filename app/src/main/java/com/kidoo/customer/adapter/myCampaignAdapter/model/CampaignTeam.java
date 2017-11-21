@@ -1,7 +1,7 @@
 package com.kidoo.customer.adapter.myCampaignAdapter.model;
 
-import com.kidoo.customer.mvp.model.CampaignScore;
-import com.kidoo.customer.mvp.model.Teambase;
+import com.kidoo.customer.bean.CampaignScore;
+import com.kidoo.customer.bean.Teambase;
 
 import java.io.Serializable;
 

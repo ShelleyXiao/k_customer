@@ -1,6 +1,6 @@
 package com.kidoo.customer.adapter.myCampaignAdapter.model;
 
-import com.kidoo.customer.mvp.model.Episode;
+import com.kidoo.customer.bean.Episode;
 
 import java.io.Serializable;
 

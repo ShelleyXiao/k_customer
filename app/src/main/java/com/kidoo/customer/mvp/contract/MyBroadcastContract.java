@@ -1,6 +1,6 @@
 package com.kidoo.customer.mvp.contract;
 
-import com.kidoo.customer.mvp.model.Broadcast;
+import com.kidoo.customer.bean.Broadcast;
 import com.kidoo.customer.mvp.presenter.BaseListPresenter;
 import com.kidoo.customer.mvp.view.BaseListView;
 

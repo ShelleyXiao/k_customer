@@ -11,7 +11,7 @@ import com.kidoo.customer.R;
 import com.kidoo.customer.adapter.MybroadcastAdapter;
 import com.kidoo.customer.adapter.itemDecoration.DividerItemDecoration;
 import com.kidoo.customer.mvp.contract.MyBroadcastContract;
-import com.kidoo.customer.mvp.model.Broadcast;
+import com.kidoo.customer.bean.Broadcast;
 import com.kidoo.customer.mvp.presenter.MyBroadcastPresenter;
 import com.kidoo.customer.ui.base.adapter.BaseRecyclerAdapter;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
