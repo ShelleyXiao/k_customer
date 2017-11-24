@@ -1,5 +1,6 @@
 package com.kidoo.customer.mvp.contract;
 
+import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.mvp.view.BaseView;
 
@@ -24,6 +25,16 @@ public interface LoginContract {
 
         void loginAction(String account, String pwd);
 
+    }
+
+    interface Interactor {
+
+        void doLogin(String account, String pwd, LoginCallback callback);
+
+        interface LoginCallback {
+            void onSuccess(LoginResult result);
+            void onFailure(String msg);
+        }
     }
 
 }

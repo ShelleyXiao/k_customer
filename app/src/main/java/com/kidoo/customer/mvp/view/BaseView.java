@@ -12,7 +12,6 @@ package com.kidoo.customer.mvp.view;
 
 public interface BaseView {
 
-
-//    void showNetworkError(String str);
+    void showToast(String msg);
 
 }

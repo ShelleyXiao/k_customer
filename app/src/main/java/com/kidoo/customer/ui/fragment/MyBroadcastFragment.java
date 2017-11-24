@@ -186,4 +186,9 @@ public class MyBroadcastFragment extends BaseFragment implements
                 break;
         }
     }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
 }

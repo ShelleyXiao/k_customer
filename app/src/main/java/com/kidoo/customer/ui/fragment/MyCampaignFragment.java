@@ -290,4 +290,9 @@ public class MyCampaignFragment extends BaseFragment implements RecyclerRefreshL
         return sessionList;
     }
 
+    @Override
+    public void showToast(String msg) {
+
+    }
+
 }

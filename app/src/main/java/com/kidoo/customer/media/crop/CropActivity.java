@@ -104,4 +104,9 @@ public class CropActivity extends BaseActivity implements View.OnClickListener {
         mOption = null;
         super.onDestroy();
     }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
 }

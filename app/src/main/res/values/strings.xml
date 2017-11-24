@@ -34,6 +34,7 @@
     <string name="login_account_pwd_title">密码: </string>
     <string name="login_account_hint">请填写账号</string>
     <string name="login_password_hint">请填写密码</string>
+    <string name="account_empty_error">账户或密码为空</string>
 
 
     <string name="sign_in_phone_tilte">手机号码:</string>

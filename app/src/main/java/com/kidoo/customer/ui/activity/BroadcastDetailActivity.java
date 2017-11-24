@@ -106,4 +106,9 @@ public class BroadcastDetailActivity extends BackActivity {
         }
         return true;
     }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
 }

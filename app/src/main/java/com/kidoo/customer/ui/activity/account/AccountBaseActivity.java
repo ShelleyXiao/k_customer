@@ -82,7 +82,7 @@ public abstract class AccountBaseActivity<T extends BasePresenter> extends BaseM
      * @param text text
      */
     @SuppressLint("InflateParams")
-    private void showToast(String text) {
+    public void showToast(String text) {
         Toast toast = this.mToast;
         if (toast == null) {
             toast = initToast();
@@ -95,24 +95,7 @@ public abstract class AccountBaseActivity<T extends BasePresenter> extends BaseM
         toast.show();
     }
 
-    /**
-     * showToast
-     *
-     * @param id id
-     */
-    @SuppressLint("InflateParams")
-    private void showToast(@StringRes int id) {
-        Toast toast = this.mToast;
-        if (toast == null) {
-            toast = initToast();
-        }
-        View rootView = LayoutInflater.from(this).inflate(R.layout.view_toast, null, false);
-        TextView textView = (TextView) rootView.findViewById(R.id.title_tv);
-        textView.setText(id);
-        toast.setView(rootView);
-        initToastGravity(toast);
-        toast.show();
-    }
+
 
     @NonNull
     private Toast initToast() {
@@ -231,7 +214,7 @@ public abstract class AccountBaseActivity<T extends BasePresenter> extends BaseM
     }
 
     protected void showToastForKeyBord(@StringRes int id) {
-        showToast(id);
+        showToast(getResources().getString(id));
     }
 
     protected void showToastForKeyBord(String message) {

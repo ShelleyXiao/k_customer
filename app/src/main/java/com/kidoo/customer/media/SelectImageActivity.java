@@ -167,4 +167,9 @@ public class SelectImageActivity extends BaseBackActivity implements EasyPermiss
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
 }

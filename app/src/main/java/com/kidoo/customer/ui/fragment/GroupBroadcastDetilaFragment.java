@@ -73,4 +73,9 @@ public class GroupBroadcastDetilaFragment extends BaseRecyclerFragment<Broadcast
     protected void onItemClick(IBroadcastDetailModel iBroadcastDetailModel, int position) {
 
     }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
 }

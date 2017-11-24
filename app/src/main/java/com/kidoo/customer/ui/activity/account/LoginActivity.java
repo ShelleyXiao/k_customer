@@ -12,15 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.R;
 import com.kidoo.customer.mvp.contract.LoginContract;
-import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.mvp.presenter.LoginPresenterImpl;
 import com.kidoo.customer.ui.activity.MainActivity;
-import com.kidoo.customer.ui.base.activities.BaseMvpActivity;
-import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.TDevice;
 
 import javax.inject.Inject;
@@ -63,7 +61,7 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
     private boolean showPwd = false;
 
     @Inject
-    public LoginPresenterImpl mLoginPresenter;
+    public LoginPresenterImpl mPresenter;
 
     private long refreshkeyTimeStamp;
 
@@ -97,8 +95,7 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
 
     @Override
     public void initWidget() {
-
-
+        super.initWidget();
         mAccountIdInput.addTextChangedListener(
                 new TextWatcher() {
                     @Override
@@ -131,7 +128,7 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
     @Override
     protected LoginPresenterImpl initInjector() {
         mActivityComponent.inject(this);
-        return mLoginPresenter;
+        return mPresenter;
     }
 
     @Override
@@ -156,12 +153,12 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
                 if(!showPwd){
                     //显示密码
                     mAccountPwdInput.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    mShowPwdImg.setImageDrawable(getDrawable(R.drawable.btn_openkey));
+                    mShowPwdImg.setImageDrawable(getResources().getDrawable(R.drawable.btn_openkey));
                     showPwd = true;
                 }else{
                     //否则隐藏密码
                     mAccountPwdInput.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    mShowPwdImg.setImageDrawable(getDrawable(R.drawable.btn_closekey));
+                    mShowPwdImg.setImageDrawable(getResources().getDrawable(R.drawable.btn_closekey));
                     showPwd = false;
                 }
                 break;
@@ -237,7 +234,7 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
 
         if (!TextUtils.isEmpty(accoutId) && !TextUtils.isEmpty(pwd) && TDevice.isMobileNO(accoutId)) {
             if (TDevice.hasInternet()) {
-                mLoginPresenter.refreshTempToken(accoutId);
+//                mLoginPresenter.refreshTempToken(accoutId);
             } else {
                 showToastForKeyBord(R.string.footer_type_net_error);
             }
@@ -248,18 +245,18 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
     }
 
     private void requestLogin() {
-        if(System.currentTimeMillis() - refreshkeyTimeStamp > TEMP_KEY_TIME) {
-            mHandler.sendEmptyMessage(REFRESH_TEMP_KEY_MSG);
-            LogUtils.w("refresh token");
-            return;
-        }
+//        if(System.currentTimeMillis() - refreshkeyTimeStamp > TEMP_KEY_TIME) {
+//            mHandler.sendEmptyMessage(REFRESH_TEMP_KEY_MSG);
+//            LogUtils.w("refresh token");
+////            return;
+//        }
         String accoutId = mAccountIdInput.getText().toString().trim();
         String pwd = mAccountPwdInput.getText().toString().trim();
 
         if (!TextUtils.isEmpty(pwd) && !TextUtils.isEmpty(accoutId)) {
 
             if (TDevice.hasInternet()) {
-                mLoginPresenter.loginAction(accoutId, pwd);
+                mPresenter.loginAction(accoutId, pwd);
             } else {
                 showToastForKeyBord(R.string.footer_type_net_error);
             }
@@ -270,4 +267,8 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
     }
 
 
+    @Override
+    public void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
 }

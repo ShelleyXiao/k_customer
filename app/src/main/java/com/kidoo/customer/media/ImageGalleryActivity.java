@@ -309,12 +309,17 @@ public class ImageGalleryActivity extends BaseActivity implements ViewPager.OnPa
                     // notify
                     Uri uri = Uri.fromFile(savePath);
                     sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
-                    Toast.makeText(ImageGalleryActivity.this, R.string.gallery_save_file_success, Toast.LENGTH_SHORT).show();
+                    showToast(getString(R.string.gallery_save_file_success));
                 } else {
-                    Toast.makeText(ImageGalleryActivity.this, R.string.gallery_save_file_failed, Toast.LENGTH_SHORT).show();
+                    showToast(getString(R.string.gallery_save_file_failed));
                 }
             }
         });
+    }
+
+    @Override
+    public void showToast(String msg) {
+
     }
 
     private class ViewpaperAdapter extends PagerAdapter implements ImagePreviewView.OnReachBorderListener {
