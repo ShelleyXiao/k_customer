@@ -2,13 +2,12 @@ package com.kidoo.customer;
 
 import android.app.Application;
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.widget.Toast;
 
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
-import com.kidoo.customer.api.ApiService;
+import com.kidoo.customer.api.KidooApiService;
 import com.kidoo.customer.di.Component.AppComponent;
 import com.kidoo.customer.di.Component.DaggerAppComponent;
 import com.kidoo.customer.di.module.AppModule;
@@ -81,9 +80,9 @@ public class AppContext extends Application{
         HttpHeaders headers = new HttpHeaders();
         //设置公共请求参数
         HttpParams params = new HttpParams();
-        if(!TextUtils.isEmpty(String.valueOf(TDevice.getTelephoneNumber(this)))) {
-//            params.put("mobile", TDevice.getTelephoneNumber(this));
-        }
+//        if(!TextUtils.isEmpty(String.valueOf(TDevice.getTelephoneNumber(this)))) {
+////            params.put("mobile", TDevice.getTelephoneNumber(this));
+//        }
         params.put("version", String.valueOf(AppSystemUtils.getVersionCode()));
         params.put("mobileModel", "1");
         params.put("modelDetail", TDevice.getSystemModel());
@@ -96,7 +95,7 @@ public class AppContext extends Application{
                 .setRetryCount(3)//默认网络不好自动重试3次
                 .setRetryDelay(500)//每次延时500ms重试
                 .setRetryIncreaseDelay(500)//每次延时叠加500ms
-                .setBaseUrl(ApiService.BASE_API_URL)
+                .setBaseUrl(KidooApiService.BASE_API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCommonHeaders(headers)//设置全局公共头
                 .addCommonParams(params);//设置全局公共参数

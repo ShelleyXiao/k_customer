@@ -9,7 +9,7 @@ import com.kidoo.customer.mvp.view.BaseView;
  * Date: 2017-10-10
  * Time: 10:15
  * Company: zx
- * Description:
+ * Description: 登陆接口协议
  * FIXME
  */
 

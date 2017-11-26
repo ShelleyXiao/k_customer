@@ -43,4 +43,11 @@
 
     </declare-styleable>
 
+    <declare-styleable name="MyEnterLayout">
+
+        <attr name="itemIcon" format="reference"/>
+        <attr name="itemTitle" format="string"/>
+
+    </declare-styleable>
+
 </resources>

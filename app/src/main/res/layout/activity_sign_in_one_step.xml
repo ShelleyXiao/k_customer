@@ -30,10 +30,10 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/acount_id_tilte"
+            android:layout_alignBottom="@+id/phone_tilte"
             android:layout_marginLeft="@dimen/lay_24"
             android:layout_marginRight="@dimen/lay_8"
-            android:layout_toRightOf="@+id/acount_id_tilte">
+            android:layout_toRightOf="@+id/phone_tilte">
 
             <EditText
                 android:id="@+id/phone"
@@ -135,20 +135,84 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/lay_24"
+        android:layout_marginRight="@dimen/lay_32"
+        android:layout_marginTop="@dimen/lay_24">
+
+        <TextView
+            android:id="@+id/sgin_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text='@string/sign_in_identifying_pwd_title'
+            android:textColor="@color/kidoo_9fa0a4"
+            android:textSize="@dimen/font_20" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/sgin_pwd"
+            android:layout_marginLeft="@dimen/lay_24"
+            android:layout_marginRight="@dimen/lay_8"
+            android:layout_toRightOf="@+id/sgin_pwd">
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColorHint="#669fa0a4"
+                android:textSize="@dimen/font_20" />
+
+
+            <ImageView
+                android:id="@+id/show_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:src="@drawable/btn_closekey"
+                />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/sgin_pwd"
+            android:layout_alignLeft="@+id/sgin_pwd"
+            android:layout_alignRight="@+id/show_pwd"
+            android:background="#696969" />
+
+
+    </RelativeLayout>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/sigin_in_btn"
+            android:id="@+id/bt_signin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@drawable/bottom_button_bg"
-            android:text="@string/sign_in"
+            android:layout_height="48dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_login_register"
+            android:elevation="0dp"
+            android:outlineProvider="none"
+            android:text="@string/acton_ok"
             android:textColor="@color/kidoo_gren"
-            android:textSize="@dimen/font_18" />
+            android:textSize="@dimen/font_18"
+            android:translationZ="0dp"/>
 
     </LinearLayout>
 

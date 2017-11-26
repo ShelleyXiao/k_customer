@@ -128,5 +128,10 @@
         <item name="android:background">?attr/lineColor</item>
     </style>
 
+    <style name="item_title_true_15sp">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textColor">@color/kidoo_black_alpha_112</item>
+    </style>
+
 
 </resources>

@@ -95,7 +95,7 @@ public class Loading extends View {
 
         // Load attributes
         final TypedArray a = context.obtainStyledAttributes(
-                attrs, net.oschina.common.R.styleable.Loading, defStyleAttr, defStyleRes);
+                attrs, R.styleable.Loading, defStyleAttr, defStyleRes);
 
         int bgLineSize = a.getDimensionPixelOffset(R.styleable.Loading_gBackgroundLineSize, baseSize);
         int fgLineSize = a.getDimensionPixelOffset(R.styleable.Loading_gForegroundLineSize, baseSize);

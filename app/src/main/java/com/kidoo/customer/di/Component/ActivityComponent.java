@@ -7,6 +7,7 @@ import com.kidoo.customer.di.module.ActivityModule;
 import com.kidoo.customer.di.scope.ContextLife;
 import com.kidoo.customer.di.scope.PerActivity;
 import com.kidoo.customer.ui.activity.account.LoginActivity;
+import com.kidoo.customer.ui.activity.account.SigninInOneStepActivity;
 
 import dagger.Component;
 
@@ -32,6 +33,8 @@ public interface ActivityComponent {
     Activity getActivity();
 
     void inject(LoginActivity activity);
+
+    void inject(SigninInOneStepActivity activity);
 
 //    void inject(CategorySubscribeActivity activity);
 //    void inject(CategoryNecessaryActivity activity);

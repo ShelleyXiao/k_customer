@@ -1,10 +1,7 @@
 package com.kidoo.customer.api.token;
 
-import android.text.TextUtils;
-
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.cache.ACache;
-import com.kidoo.customer.bean.AuthModel;
 
 /**
  * User: ShaudXiao
@@ -18,16 +15,21 @@ import com.kidoo.customer.bean.AuthModel;
 
 public class TokenManager {
 
-    private final String KEY = "auth_model_key";
+    public static final String KEY_AUTH = "auth_model_key";
+    public static final String KEY_RSA = "RSA_key";
+
     private static TokenManager instance = null;
     private ACache mACache;
     private AuthModel mAuthModel;
+    private RSAKey mRSAKey;
+
+
     private Long timestamep = System.currentTimeMillis();
 
     public TokenManager() {
-        mACache = ACache.get(AppContext.context(), KEY);
+        mACache = ACache.get(AppContext.context(), KEY_AUTH);
         this.mAuthModel = new AuthModel();
-        this.mAuthModel.setAccessToken("");
+        this.mRSAKey = new RSAKey();
     }
 
     public static TokenManager getInstance() {
@@ -57,8 +59,17 @@ public class TokenManager {
             authModel = (AuthModel) object;
         }
 
-
         return authModel;
+    }
+
+    public RSAKey getRSAKey(String key) {
+        Object object = mACache.getAsObject(key);
+        RSAKey rsaKey = new RSAKey();
+        if (object != null) {
+            rsaKey = (RSAKey) object;
+        }
+
+        return rsaKey;
     }
 
     public void setAuthModel(String key, AuthModel model) {
@@ -67,19 +78,34 @@ public class TokenManager {
         }
     }
 
-    public void clearAuth(String key) {
-        AuthModel auth = new AuthModel();
-        auth.setAccessToken("");
-        this.mAuthModel = auth;
-        mACache.put(key, this.mAuthModel);
-        mACache.clear();
+    public void updateAuthModel(String key , AuthModel model) {
+        clearAuth(key);
+        setAuthModel(key, model);
     }
 
-    public boolean isTokenVaild(String key) {
-        if (getAuthModel(key) != null && !TextUtils.isEmpty(getAuthModel(key).getAccessToken())) {
-            return true;
+    public void setRSAKey(String key, RSAKey model) {
+        if (null != model) {
+            mACache.put(key, model);
         }
-        return false;
+    }
+
+    public void updateRSAKey(String key , RSAKey model) {
+        clearAuth(key);
+        setRSAKey(key, model);
+    }
+
+    public void clearAuth(String key) {
+        AuthModel auth = new AuthModel();
+        this.mAuthModel = auth;
+        mACache.put(key, this.mAuthModel);
+        mACache.remove(key);
+    }
+
+    public void clearRSAKey(String key) {
+        RSAKey rsaKey = new RSAKey();
+        this.mRSAKey = rsaKey;
+        mACache.put(key, this.mRSAKey);
+        mACache.remove(key);
     }
 
 }

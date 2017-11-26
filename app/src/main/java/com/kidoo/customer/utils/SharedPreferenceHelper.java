@@ -17,7 +17,7 @@ import java.util.Set;
  * Time: 11:11
  * Company: zx
  * Description:该辅助类能让SharedPreferences配合一个Bean使用，
- *              以简化复杂的"KEY"定义问题
+ *              以简化复杂的"KEY_AUTH"定义问题
  *              与SharePreUtil配合使用
  * FIXME
  */

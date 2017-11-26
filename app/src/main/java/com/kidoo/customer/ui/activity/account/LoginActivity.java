@@ -163,8 +163,8 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
                 }
                 break;
             case R.id.sigin_in:
-//                Intent intent = new Intent(LoginActivity.this, SigninInOneStepActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this, SigninInOneStepActivity.class);
+                startActivity(intent);
 
                 break;
             case R.id.forget_pwd:

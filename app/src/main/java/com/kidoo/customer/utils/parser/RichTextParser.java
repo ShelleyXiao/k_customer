@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 */
 public class RichTextParser {
 
+
     private static final Pattern PatternAtUserWithHtml = Pattern.compile(
             "<a href=['\"]http[s]?://my.oschina.net/(\\w+|u/([0-9]+))['\"][^<>]+>(@([^@<>]+))</a>"
     );
@@ -129,9 +130,21 @@ public class RichTextParser {
         return Pattern.matches(regex, phoneNumber);
     }
 
+    /**
+     * 判断密码（8-16位数字字母组合）输入合法
+     *
+     * @param password 密码
+     * @return true|false
+     */
+    public static boolean machPassword(CharSequence password) {
+        String regex = "^(?![^a-zA-Z]+$)(?!\\D+$).{8,15}$";
+        return Pattern.matches(regex, password);
+    }
+
     interface OnClickListener {
         void onClick(String str);
     }
+
 
     /**
      * 字符串转化为拼音

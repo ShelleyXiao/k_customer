@@ -29,6 +29,8 @@
     <color name="kidoo_gren_alpha">#550ec68d</color>
     <color name="kidoo_black_alpha_80">#50000000</color>
     <color name="kidoo_black_alpha_112">#70000000</color>
+    <color name="kidoo_black_alpha_03">#07000000</color>
+    <color name="kidoo_black_alpha_5">#ffefefef</color>
     <color name="kidoo__alpha_80">#50000000</color>
     <color name="kidoo_black_alpha_48">#30000000</color>
     <color name="kidoo_white_alpha_16">#10ffffff</color>

@@ -39,6 +39,11 @@
 
     <string name="sign_in_phone_tilte">手机号码:</string>
     <string name="sign_in_identifying_code_title">验证码:</string>
+    <string name="sign_in_identifying_pwd_title">密码:</string>
+    <string name="sign_in_pwd_hint">8-16位数字字母组合密码</string>
+    <string name="sign_in_pwd_simple_hint">请输入8-16位数字字母组合密码</string>
+    <string name="get_sms_call_success_hint">发送验证码成功,请在手机上查看</string>
+    <string name="get_sms_call_faild_hint">获取验证码失败,请稍后再试</string>
 
 
     <!-- 个人信息-->
