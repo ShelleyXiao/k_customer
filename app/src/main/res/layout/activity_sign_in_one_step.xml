@@ -51,6 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:paddingTop="@dimen/lay_4"
                 android:src="@drawable/edit_clear_btn"
                 android:visibility="gone"/>
 
@@ -186,7 +187,7 @@
             android:layout_height="1px"
             android:layout_below="@+id/sgin_pwd"
             android:layout_alignLeft="@+id/sgin_pwd"
-            android:layout_alignRight="@+id/show_pwd"
+            android:layout_alignRight="@+id/sgin_pwd"
             android:background="#696969" />
 
 
@@ -196,7 +197,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
@@ -215,6 +216,22 @@
             android:translationZ="0dp"/>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/disclaimer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textColor="@color/kidoo_bebebe"
+            android:textSize="@dimen/font_12"
+            />
+    </RelativeLayout>
 
 
 </LinearLayout>

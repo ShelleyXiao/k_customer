@@ -5,8 +5,8 @@
         android:id="@+id/item_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/lay_8"
-        android:layout_marginTop="@dimen/lay_8">
+        android:layout_marginBottom="@dimen/lay_12"
+        android:layout_marginTop="@dimen/lay_12">
 
         <ImageView
             android:id="@+id/arrowlayout"
@@ -15,7 +15,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/lay_8"
-            android:layout_marginRight="@dimen/lay_16"
+            android:layout_marginRight="@dimen/lay_8"
             android:src="@drawable/ic_public_arrow_right" />
 
         <ImageView android:id="@+id/itemIcon"
@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/arrowlayout"
             android:layout_toRightOf="@id/itemIcon"
+            android:layout_marginLeft="@dimen/lay_2"
             android:layout_centerVertical="true"
             android:text="" />
 

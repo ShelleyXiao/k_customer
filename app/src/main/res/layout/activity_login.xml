@@ -209,5 +209,21 @@
 
     <!--</LinearLayout>-->
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/disclaimer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:textColor="@color/kidoo_bebebe"
+            android:textSize="@dimen/font_12"
+            />
+    </RelativeLayout>
+
 
 </LinearLayout>

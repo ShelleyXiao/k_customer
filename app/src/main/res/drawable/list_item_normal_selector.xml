@@ -4,4 +4,7 @@
     <item android:state_pressed="true">
         <color android:color="@color/kidoo_black_alpha_5" />
     </item>
+
+    <item android:drawable="@color/white"/>
+
 </selector>

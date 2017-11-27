@@ -1,5 +1,8 @@
 package com.kidoo.customer.mvp.interactor;
 
+import android.app.Dialog;
+import android.content.Context;
+
 import com.kidoo.customer.api.GetTempRSAKeyPairApi;
 import com.kidoo.customer.api.LoginApi;
 import com.kidoo.customer.bean.KeypairResult;
@@ -7,15 +10,18 @@ import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.cipher.rsa.Base64Utils;
 import com.kidoo.customer.cipher.rsa.RSAUtil;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
+import com.kidoo.customer.kidoohttp.http.subsciber.ProgressSubscriber;
 import com.kidoo.customer.mvp.contract.LoginContract;
+import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.EncryptUtils;
 import com.kidoo.customer.utils.LogUtils;
+import com.zhouyou.http.exception.ApiException;
+import com.zhouyou.http.subsciber.IProgressDialog;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
 /**
@@ -36,7 +42,7 @@ public class LoginInteractor implements LoginContract.Interactor {
     }
 
     @Override
-    public void doLogin(final String account, final String pwd, final LoginCallback callback) {
+    public void doLogin(final Context context, final String account, final String pwd, final LoginCallback callback) {
         LogUtils.i("interactor login");
         Observable<KidooApiResult<KeypairResult>> keyObservable = GetTempRSAKeyPairApi.getTempRSAKeyPair(account);
         keyObservable.flatMap(new Function<KidooApiResult<KeypairResult>, ObservableSource<KidooApiResult<LoginResult>>>() {
@@ -55,17 +61,42 @@ public class LoginInteractor implements LoginContract.Interactor {
                     return  null;
                 }
             }
-        }).subscribe(new Consumer<KidooApiResult<LoginResult>>() {
+        })
+//                .subscribe(new Consumer<KidooApiResult<LoginResult>>() {
+//            @Override
+//            public void accept(KidooApiResult<LoginResult> loginResultKidooApiResult) throws Exception {
+//                LogUtils.i("login success");
+//                callback.onSuccess(loginResultKidooApiResult.getData());
+//            }
+//        }, new Consumer<Throwable>() {
+//            @Override
+//            public void accept(Throwable throwable) throws Exception {
+//                LogUtils.e(throwable.getMessage());
+//                callback.onFailure(throwable.getMessage());
+//            }
+//        });
+
+        .subscribe(new ProgressSubscriber<KidooApiResult<LoginResult>>(context, new IProgressDialog() {
             @Override
-            public void accept(KidooApiResult<LoginResult> loginResultKidooApiResult) throws Exception {
-                LogUtils.i("login success");
-                callback.onSuccess(loginResultKidooApiResult.getData());
+            public Dialog getDialog() {
+                return DialogHelper.getLoadingDialog(context);
             }
-        }, new Consumer<Throwable>() {
+        }) {
             @Override
-            public void accept(Throwable throwable) throws Exception {
-                LogUtils.e(throwable.getMessage());
-                callback.onFailure(throwable.getMessage());
+            public void onNext(KidooApiResult<LoginResult> loginResultKidooApiResult) {
+                LogUtils.i("login success");
+                if(loginResultKidooApiResult.isSuccess()) {
+                    callback.onSuccess(loginResultKidooApiResult.getData());
+                } else {
+                    callback.onFailure(loginResultKidooApiResult.getErrorMsg());
+                    dismissProgress();
+                }
+            }
+
+            @Override
+            public void onError(ApiException e) {
+                super.onError(e);
+                callback.onFailure(e.getMessage());
             }
         });
     }

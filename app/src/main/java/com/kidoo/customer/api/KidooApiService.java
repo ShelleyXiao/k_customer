@@ -2,6 +2,7 @@ package com.kidoo.customer.api;
 
 import com.kidoo.customer.bean.KeypairResult;
 import com.kidoo.customer.bean.LoginResult;
+import com.kidoo.customer.bean.RegisterResultBean;
 import com.kidoo.customer.bean.SMSCodeBean;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
 
@@ -39,6 +40,7 @@ public interface KidooApiService {
     @FormUrlEncoded
     Observable<KidooApiResult<SMSCodeBean>> getSMS(@FieldMap Map<String, String> map);
 
-//    @POST("customer/common/register")
-
+    @POST("customer/common/register")
+    @FormUrlEncoded
+    Observable<KidooApiResult<RegisterResultBean>> register(@FieldMap Map<String, String> map);
 }

@@ -40,7 +40,7 @@ public class MyEnterLayout extends LinearLayout {
         item_layout = ((RelativeLayout) view.findViewById(R.id.item_layout));
         //设置左右padding16像素
 //        setPadding(DensityUtil.getDensity(context, 16), DensityUtil.getDensity(context, 0));
-        setPadding((int)TDevice.dipToPx(context.getResources(), 16f), (int)TDevice.dipToPx(context.getResources(),16f));
+        setPadding((int)TDevice.dipToPx(context.getResources(), 8f), (int)TDevice.dipToPx(context.getResources(),8f));
         setItemTitle = ((TextView) item_layout.findViewById(R.id.itemTitle));
         devider_line = ((ImageView) view.findViewById(R.id.devider_line));
         ivIcon = (ImageView) view.findViewById(R.id.itemIcon);

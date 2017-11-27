@@ -1,5 +1,7 @@
 package com.kidoo.customer.mvp.contract;
 
+import android.content.Context;
+
 import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.mvp.view.BaseView;
@@ -23,13 +25,13 @@ public interface LoginContract {
 
     interface Presenter extends BasePresenter<View> {
 
-        void loginAction(String account, String pwd);
+        void loginAction(Context context, String account, String pwd);
 
     }
 
     interface Interactor {
 
-        void doLogin(String account, String pwd, LoginCallback callback);
+        void doLogin(Context context, String account, String pwd, LoginCallback callback);
 
         interface LoginCallback {
             void onSuccess(LoginResult result);

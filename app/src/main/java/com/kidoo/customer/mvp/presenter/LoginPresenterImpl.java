@@ -67,7 +67,7 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginContract.View> im
 //    }
 
     @Override
-    public void loginAction(String account, String pwd) {
+    public void loginAction(Context context, String account, String pwd) {
         LogUtils.w(account + " " + pwd);
 
         if(TextUtils.isEmpty(account)) {
@@ -75,7 +75,7 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginContract.View> im
             return;
         }
 
-        mInteractor.doLogin(account, pwd, new LoginContract.Interactor.LoginCallback() {
+        mInteractor.doLogin(context, account, pwd, new LoginContract.Interactor.LoginCallback() {
             @Override
             public void onSuccess(LoginResult result) {
 

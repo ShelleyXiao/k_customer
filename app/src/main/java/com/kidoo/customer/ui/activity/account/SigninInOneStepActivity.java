@@ -1,14 +1,20 @@
 package com.kidoo.customer.ui.activity.account;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.LinkMovementMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.text.style.ClickableSpan;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -59,6 +65,9 @@ public class SigninInOneStepActivity extends AccountBaseActivity<SigninPresenter
     ImageView mShowPwdImg;
     @BindView(R.id.bt_signin)
     Button mSigninBtn;
+
+    @BindView(R.id.disclaimer_text)
+    TextView tvDisclaimer;
 
     private Toolbar mToolBar;
 
@@ -159,6 +168,27 @@ public class SigninInOneStepActivity extends AccountBaseActivity<SigninPresenter
                 }
             }
         });
+
+        String tilte = getString(R.string.disclaimer_title);
+        String url = getString(R.string.disclaimer_about);
+        String disclaimer = tilte + url;
+        SpannableString str = new SpannableString(disclaimer);
+        str.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                //todo
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(Color.argb(255, 255, 0, 0));
+                ds.setUnderlineText(false);
+            }
+
+        }, tilte.length(), str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvDisclaimer.setMovementMethod(LinkMovementMethod.getInstance());
+        tvDisclaimer.setHighlightColor(getResources().getColor(android.R.color.transparent));
+        tvDisclaimer.setText(str);
     }
 
     @Override
@@ -240,7 +270,7 @@ public class SigninInOneStepActivity extends AccountBaseActivity<SigninPresenter
         }
 
         if (mTvRegisterSmsCall.getTag() == null) {
-
+            mTvRegisterSmsCall.setTag(true);
             mTimer = new CountDownTimer(60 * 1000, 1000) {
 
                 @SuppressLint("DefaultLocale")
@@ -285,7 +315,7 @@ public class SigninInOneStepActivity extends AccountBaseActivity<SigninPresenter
         String phoneNumber = mEtRegisterUsername.getText().toString().trim();
         String pwd = mAccountPwdInput.getText().toString().trim();
         if(RichTextParser.machPassword(pwd)) {
-            mPresenter.signin(phoneNumber, pwd, smsCode);
+            mPresenter.signin(this, phoneNumber, pwd, smsCode);
         } else {
             showToastForKeyBord(R.string.sign_in_pwd_simple_hint);
             mAccountPwdInput.requestFocus();

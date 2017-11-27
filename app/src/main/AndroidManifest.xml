@@ -31,7 +31,7 @@
     <!-- 该权限用于访问GPS定位，比如基于百度lbs雷达功能附近的程序员模块-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!--<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>-->
 
     <!--环信-->
     <uses-permission android:name="android.permission.VIBRATE"/>
@@ -77,7 +77,7 @@
 
         <activity
             android:name=".ui.activity.MainActivity"
-            android:theme="@style/Account_Base.App.Theme.NoTitle"
+            android:theme="@style/App.Theme.Main"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -113,8 +113,8 @@
             android:label="Login"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/App.Theme.Main"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             >
 
         </activity>

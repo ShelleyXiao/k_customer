@@ -1,17 +1,24 @@
 package com.kidoo.customer.ui.activity.account;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.LinkMovementMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kidoo.customer.AccountHelper;
@@ -57,6 +64,9 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
 
     @BindView(R.id.bt_login)
     Button mLoginBtn;
+
+    @BindView(R.id.disclaimer_text)
+    TextView tvDisclaimer;
 
     private boolean showPwd = false;
 
@@ -123,6 +133,26 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
 
         );
 
+        String tilte = getString(R.string.disclaimer_title);
+        String url = getString(R.string.disclaimer_about);
+        String disclaimer = tilte + url;
+        SpannableString str = new SpannableString(disclaimer);
+        str.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                //todo
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(Color.argb(255, 255, 0, 0));
+                ds.setUnderlineText(false);
+            }
+
+        }, tilte.length(), str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvDisclaimer.setMovementMethod(LinkMovementMethod.getInstance());
+        tvDisclaimer.setHighlightColor(getResources().getColor(android.R.color.transparent));
+        tvDisclaimer.setText(str);
     }
 
     @Override
@@ -256,7 +286,7 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
         if (!TextUtils.isEmpty(pwd) && !TextUtils.isEmpty(accoutId)) {
 
             if (TDevice.hasInternet()) {
-                mPresenter.loginAction(accoutId, pwd);
+                mPresenter.loginAction(this, accoutId, pwd);
             } else {
                 showToastForKeyBord(R.string.footer_type_net_error);
             }

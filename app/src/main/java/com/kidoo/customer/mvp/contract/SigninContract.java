@@ -1,5 +1,7 @@
 package com.kidoo.customer.mvp.contract;
 
+import android.content.Context;
+
 import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.mvp.view.BaseView;
 
@@ -20,7 +22,7 @@ public interface SigninContract {
 
         void getSMS(String phoneNumber);
 
-        void signin(String phoneNumber, String pwd, String captcha);
+        void signin(Context context, String phoneNumber, String pwd, String captcha);
 
 
     }

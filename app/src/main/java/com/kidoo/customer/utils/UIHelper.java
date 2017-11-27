@@ -1,7 +1,9 @@
 package com.kidoo.customer.utils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
@@ -12,6 +14,8 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ZoomButtonsController;
@@ -147,6 +151,77 @@ public class UIHelper {
 //        });
     }
 
+    private final static String TAG = "UiUtil";
+    private final static String STATUS_BAR_DEF_PACKAGE = "android";
+    private final static String STATUS_BAR_DEF_TYPE = "dimen";
+    private final static String STATUS_BAR_NAME = "status_bar_height";
+    private final static String STATUS_CLASS_NAME = "com.android.internal.R$dimen";
+    private final static String STATUS_CLASS_FIELD = "status_bar_height";
+    private static int STATUS_BAR_HEIGHT = 0;
+
+
+    public static synchronized int getStatusBarHeight(final Context context) {
+        if (STATUS_BAR_HEIGHT > 0)
+            return STATUS_BAR_HEIGHT;
+
+        Resources resources = context.getResources();
+        int resourceId = context.getResources().
+                getIdentifier(STATUS_BAR_NAME, STATUS_BAR_DEF_TYPE, STATUS_BAR_DEF_PACKAGE);
+        if (resourceId > 0) {
+            STATUS_BAR_HEIGHT = context.getResources().getDimensionPixelSize(resourceId);
+            LogUtils.d( String.format("Get status bar height %s", STATUS_BAR_HEIGHT));
+        } else {
+            try {
+                Class<?> clazz = Class.forName(STATUS_CLASS_NAME);
+                Object object = clazz.newInstance();
+                int height = Integer.parseInt(clazz.getField(STATUS_CLASS_FIELD)
+                        .get(object).toString());
+                STATUS_BAR_HEIGHT = resources.getDimensionPixelSize(height);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return (int) TDevice.dp2px(25);
+            }
+        }
+        return STATUS_BAR_HEIGHT;
+    }
+
+
+    public static boolean changeViewHeight(final View view, final int aimHeight) {
+        if (view.isInEditMode()) {
+            return false;
+        }
+
+        if (view.getHeight() == aimHeight) {
+            return false;
+        }
+
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        if (layoutParams == null) {
+            layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    aimHeight);
+            view.setLayoutParams(layoutParams);
+        } else {
+            layoutParams.height = aimHeight;
+            view.requestLayout();
+        }
+
+        return true;
+    }
+
+    public static boolean isFullScreen(final Activity activity) {
+        return (activity.getWindow().getAttributes().flags &
+                WindowManager.LayoutParams.FLAG_FULLSCREEN) != 0;
+    }
+
+    public static boolean isTranslucentStatus(final Activity activity) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
+                (activity.getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS) != 0;
+    }
+
+    static boolean isFitsSystemWindows(final Activity activity) {
+        return ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0).
+                getFitsSystemWindows();
+    }
 
 
 

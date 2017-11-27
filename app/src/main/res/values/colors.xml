@@ -22,11 +22,13 @@
     <color name="kidoo_9fa0a4">#9fa0a4</color>
     <color name="kidoo_0EC68D">#0EC68D</color>
     <color name="kidoo_0EC28c">#0EC28c</color>
+    <color name="kidoo_bebebe">#bebebe</color>
 
     <color name="kidoo_gray">#696969</color>
     <color name="kidoo_white_gray">#b6b6b6</color>
     <color name="kidoo_gren">#0ec68d</color>
     <color name="kidoo_gren_alpha">#550ec68d</color>
+    <color name="kidoo_black_alpha_16">#10000000</color>
     <color name="kidoo_black_alpha_80">#50000000</color>
     <color name="kidoo_black_alpha_112">#70000000</color>
     <color name="kidoo_black_alpha_03">#07000000</color>

@@ -1,5 +1,7 @@
 package com.kidoo.customer.mvp.presenter;
 
+import android.content.Context;
+
 import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.mvp.contract.LoginContract;
 import com.kidoo.customer.mvp.contract.SigninContract;
@@ -46,23 +48,23 @@ public class SigninPresenterImpl extends BasePresenterImpl<SigninContract.View> 
     }
 
     @Override
-    public void signin(final String phoneNumber, final String pwd, final String captcha) {
-        mInteractor.signInAction(phoneNumber, pwd, captcha, new SigninContract.Interactor.SignInCallbck() {
+    public void signin(final Context context, final String phoneNumber, final String pwd, final String captcha) {
+        mInteractor.signInAction(context, phoneNumber, pwd, captcha, new SigninContract.Interactor.SignInCallbck() {
             @Override
             public void onSuccess() {
-                loginAction(phoneNumber, pwd);
+                loginAction(context, phoneNumber, pwd);
             }
 
             @Override
             public void onFailure(String msg) {
-
+                mPresenterView.showToast(msg);
             }
         });
     }
 
 
-    private void loginAction(String account, String pwd) {
-        mLoginInractor.doLogin(account, pwd, new LoginContract.Interactor.LoginCallback() {
+    private void loginAction(Context context, String account, String pwd) {
+        mLoginInractor.doLogin(context, account, pwd, new LoginContract.Interactor.LoginCallback() {
             @Override
             public void onSuccess(LoginResult result) {
 

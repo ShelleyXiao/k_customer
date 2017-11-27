@@ -40,6 +40,14 @@
 
     </style>
 
+    <style name="BaseTheme" parent="Base.App.Theme.Light">
+        <item name="colorPrimary">@color/kidoo_gren</item>
+        <item name="colorPrimaryDark">@color/kidoo_gren</item>
+        <item name="colorAccent">@color/kidoo_gren</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
     <style name="AppTheme" parent="Base.App.Theme.Light"></style>
 
     <style name="Base.App.Theme.NoTitle" parent="Base.App.Theme.Light">

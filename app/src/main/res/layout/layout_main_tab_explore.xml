@@ -1,65 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/kidoo_black_alpha_03"
+              android:orientation="vertical">
 
-    <include
-        android:id="@+id/id_toolbar"
-        layout="@layout/toolbar" />
-
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/kidoo_black_alpha_03"
-        >
+        android:layout_height="@dimen/lay_16"/>
 
-        <View android:layout_width="match_parent"
-            android:layout_height="@dimen/lay_8"/>
+    <com.kidoo.customer.widget.MyEnterLayout
+        android:id="@+id/item_challengerec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_normal_selector"
+        android:clickable="true"
+        app:itemIcon="@drawable/icon_challengerec"
+        app:itemTitle="@string/explore_item_challengerec"
+        />
 
-        <com.kidoo.customer.widget.MyEnterLayout
-            android:id="@+id/item_challengerec"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/list_item_normal_selector"
-            app:itemIcon="@drawable/icon_activity"
-            />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lay_20"/>
 
-        <View android:layout_width="match_parent"
-            android:layout_height="@dimen/lay_8"/>
+    <com.kidoo.customer.widget.MyEnterLayout
+        android:id="@+id/item_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_normal_selector"
+        android:clickable="true"
+        app:itemIcon="@drawable/icon_activity"
+        app:itemTitle="@string/explore_item_activity"
+        />
 
-        <com.kidoo.customer.widget.MyEnterLayout
-            android:id="@+id/item_activity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/list_item_normal_selector"
-            app:itemIcon="@drawable/icon_activity"
-            />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lay_16"/>
 
-        <View android:layout_width="match_parent"
-            android:layout_height="@dimen/lay_8"/>
+    <com.kidoo.customer.widget.MyEnterLayout
+        android:id="@+id/item_team_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_normal_selector"
+        android:clickable="true"
+        app:itemIcon="@drawable/icon_aboutgamerule"
+        app:itemTitle="@string/explore_item_about"
+        />
 
-        <com.kidoo.customer.widget.MyEnterLayout
-            android:id="@+id/item_team_about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/list_item_normal_selector"
-            app:itemIcon="@drawable/icon_activity"
-            />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lay_16"/>
 
-        <View android:layout_width="match_parent"
-            android:layout_height="@dimen/lay_8"/>
+    <com.kidoo.customer.widget.MyEnterLayout
+        android:id="@+id/book_team_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_normal_selector"
+        android:clickable="true"
+        app:itemIcon="@drawable/icon_findteam"
+        app:itemTitle="@string/explore_item_findteam"
+        />
 
-        <com.kidoo.customer.widget.MyEnterLayout
-            android:id="@+id/book_team_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/list_item_normal_selector"
-            app:itemIcon="@drawable/icon_activity"
-            />
-
-    </LinearLayout>
 
 </LinearLayout>

@@ -133,5 +133,10 @@
         <item name="android:textColor">@color/kidoo_black_alpha_112</item>
     </style>
 
+    <declare-styleable name="TitleBar">
+        <attr name="aTitle" format="string" />
+        <attr name="aIcon" format="reference" />
+    </declare-styleable>
+
 
 </resources>
