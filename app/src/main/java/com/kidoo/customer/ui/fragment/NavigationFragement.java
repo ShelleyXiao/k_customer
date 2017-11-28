@@ -68,7 +68,7 @@ public class NavigationFragement extends BaseFragment implements View.OnClickLis
         root.setBackgroundDrawable(layerDrawable);
 
         mBroadcast.init(R.drawable.tab_icon_gb,
-                R.string.main_tab_name_broadcast,
+                R.string.main_tab_name_map,
                 BroadcastTabFragment.class);
 
         mMessage.init(R.drawable.tab_icon_message,

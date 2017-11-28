@@ -157,13 +157,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Dialog.NoTitle.Translucent"/>
 
-        <service android:name=".widget.boardcastFloatBtn.contorl.FloatBoradcastWMService"></service>
+        <!--<service android:name=".widget.boardcastFloatBtn.contorl.FloatBoradcastWMService"></service>-->
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote">
-        </service>
+            android:process=":remote" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

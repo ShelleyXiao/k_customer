@@ -90,7 +90,7 @@ public class TokenManager {
     }
 
     public void updateRSAKey(String key , RSAKey model) {
-        clearAuth(key);
+        clearRSAKey(key);
         setRSAKey(key, model);
     }
 

@@ -1,19 +1,21 @@
 package com.kidoo.customer.ui.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
+import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.R;
+import com.kidoo.customer.mvp.contract.CheckAllTokenContract;
+import com.kidoo.customer.mvp.presenter.CheckAllTokenPresenterImpl;
 import com.kidoo.customer.ui.activity.account.LoginActivity;
+import com.kidoo.customer.ui.base.activities.BaseMvpActivity;
 import com.kidoo.customer.utils.SharePrefUtil;
+
+import javax.inject.Inject;
 
 /**
  * User: ShaudXiao
@@ -25,7 +27,10 @@ import com.kidoo.customer.utils.SharePrefUtil;
  */
 
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseMvpActivity<CheckAllTokenPresenterImpl> implements CheckAllTokenContract.View{
+
+    @Inject
+    public CheckAllTokenPresenterImpl mPresenter;
 
     private Handler handler = new Handler() {
 
@@ -37,10 +42,13 @@ public class SplashActivity extends AppCompatActivity {
 
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        View v = LayoutInflater.from(this).inflate(R.layout.start_activity, null);
-        setContentView(v);
+    protected int getContentView() {
+        return R.layout.start_activity;
+    }
+
+    @Override
+    public void initWidget() {
+        super.initWidget();
 
         AlphaAnimation am = new AlphaAnimation(0.5f, 1.5f);
         am.setDuration(800);
@@ -64,13 +72,36 @@ public class SplashActivity extends AppCompatActivity {
                 handler.sendEmptyMessage(-1);
             }
         });
+        View v = findViewById(R.id.rootView);
         v.startAnimation(am);
     }
 
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected CheckAllTokenPresenterImpl initInjector() {
+        mActivityComponent.inject(this);
+        return mPresenter;
+    }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
+
+    @Override
+    public void goMain() {
+        Intent intent = new Intent();
+        intent.setClass(this, MainActivity.class);
+        this.startActivity(intent);
+        this.finish();
+    }
+
+    @Override
+    public void goLogin() {
+        Intent intent = new Intent();
+        intent.setClass(this, LoginActivity.class);
+        this.startActivity(intent);
+        this.finish();
     }
 
     private void redirectTo() {
@@ -82,15 +113,15 @@ public class SplashActivity extends AppCompatActivity {
         } else {
 
         }
-//        if(AccountHelper.isLogin()) {
-//            intent.setClass(this, MainActivity.class);
-//        } else {
-//            intent.setClass(this, LoginActivity.class);
-//        }
+        if(AccountHelper.isLogin()) {
+            mPresenter.checkAllTokenAction();
 
-        intent.setClass(this, LoginActivity.class);
-        this.startActivity(intent);
-        this.finish();
+        } else {
+            intent.setClass(this, LoginActivity.class);
+            this.startActivity(intent);
+            this.finish();
+        }
+
     }
 
 }

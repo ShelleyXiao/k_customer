@@ -51,15 +51,14 @@ public class SignInInteractor {
                     RSAKey key = new RSAKey();
                     key.setPrivateKey(keypairResultKidooApiResult.getData().getPrivateKey());
                     key.setPublickKey(keypairResultKidooApiResult.getData().getPublicKey());
-                    TokenManager.getInstance().setRSAKey(TokenManager.KEY_RSA, key);
+                    TokenManager.getInstance().updateRSAKey(TokenManager.KEY_RSA, key);
                     LogUtils.d(TokenManager.getInstance().getRSAKey(TokenManager.KEY_RSA));
                     LogUtils.d(phone);
                     byte[] encryptPhoneByte = RSAUtil.encryptByPublicKey(phone, keypairResultKidooApiResult.getData().getPublicKey());
 
                     String encryptPhone = Base64Utils.encode(encryptPhoneByte);
-//
-//  String encryptPhone = new String(encryptPhoneByte, "utf-8");
-                    LogUtils.d(encryptPhone);
+
+//                    LogUtils.d(encryptPhone);
                     return GetSMSApi.getSMS(phone, "1", encryptPhone);
                 } else {
                     return null;

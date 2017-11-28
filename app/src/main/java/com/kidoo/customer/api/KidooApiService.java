@@ -1,5 +1,7 @@
 package com.kidoo.customer.api;
 
+import com.kidoo.customer.bean.CheckAllTokenBean;
+import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.bean.KeypairResult;
 import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.bean.RegisterResultBean;
@@ -11,7 +13,9 @@ import java.util.Map;
 import io.reactivex.Observable;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.QueryMap;
 
 /**
  * User: ShaudXiao
@@ -43,4 +47,11 @@ public interface KidooApiService {
     @POST("customer/common/register")
     @FormUrlEncoded
     Observable<KidooApiResult<RegisterResultBean>> register(@FieldMap Map<String, String> map);
+
+    @POST("customer/common/checkAllToken")
+    @FormUrlEncoded
+    Observable<KidooApiResult<CheckAllTokenBean>> checkAllToken(@FieldMap Map<String , String> map);
+
+    @GET("customer/common/getInitData")
+    Observable<KidooApiResult<InitData>> getInitData( @QueryMap Map<String, String> maps);
 }

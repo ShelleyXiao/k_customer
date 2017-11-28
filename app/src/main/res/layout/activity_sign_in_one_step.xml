@@ -94,7 +94,7 @@
             android:layout_marginRight="@dimen/lay_8"
             android:layout_toRightOf="@+id/sign_in_identifying_tilte"
             android:background="@null"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLines="1"
             android:minLines="1"
             android:textColor="@color/kidoo_9fa0a4"
@@ -152,7 +152,7 @@
             android:textColor="@color/kidoo_9fa0a4"
             android:textSize="@dimen/font_20" />
 
-        <FrameLayout
+        <FrameLayout android:id="@+id/input_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/sgin_pwd"
@@ -187,7 +187,7 @@
             android:layout_height="1px"
             android:layout_below="@+id/sgin_pwd"
             android:layout_alignLeft="@+id/sgin_pwd"
-            android:layout_alignRight="@+id/sgin_pwd"
+            android:layout_alignRight="@+id/input_pwd"
             android:background="#696969" />
 
 

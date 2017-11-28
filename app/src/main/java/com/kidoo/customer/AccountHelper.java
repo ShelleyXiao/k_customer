@@ -7,6 +7,8 @@ import android.os.SystemClock;
 import android.support.v4.content.SharedPreferencesCompat;
 import android.text.TextUtils;
 
+import com.kidoo.customer.api.token.AuthModel;
+import com.kidoo.customer.api.token.TokenManager;
 import com.kidoo.customer.bean.Customer;
 import com.kidoo.customer.utils.LogUtils;
 
@@ -50,12 +52,18 @@ public class AccountHelper {
     }
 
     public static boolean isLogin() {
-        return getUserId() > 0 ;
+        AuthModel authModel = TokenManager.getInstance().getAuthModel(TokenManager.KEY_AUTH);
+        if(null != authModel && !TextUtils.isEmpty(authModel.getDifTime() + "")) {
+            LogUtils.w(authModel);
+            return getUserId() > 0;
+        } else {
+            return false;
+        }
+
     }
 
     public static long getUserId() {
-//        return getUser().getId();
-        return 7;
+        return getUser().getId();
     }
 
     public synchronized static Customer getUser() {
@@ -78,7 +86,7 @@ public class AccountHelper {
         return SharedPreferencesHelper.save(sInstance.application, customer);
     }
 
-    private static void clearUserCache() {
+    public static void clearUserCache() {
         sInstance.mCustomer = null;
         SharedPreferencesHelper.remove(sInstance.application, Customer.class);
     }

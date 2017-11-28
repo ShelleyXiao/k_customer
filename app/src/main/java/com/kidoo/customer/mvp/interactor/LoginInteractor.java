@@ -3,8 +3,12 @@ package com.kidoo.customer.mvp.interactor;
 import android.app.Dialog;
 import android.content.Context;
 
+import com.kidoo.customer.api.CheckAllTokenApi;
 import com.kidoo.customer.api.GetTempRSAKeyPairApi;
 import com.kidoo.customer.api.LoginApi;
+import com.kidoo.customer.api.token.RSAKey;
+import com.kidoo.customer.api.token.TokenManager;
+import com.kidoo.customer.bean.CheckAllTokenBean;
 import com.kidoo.customer.bean.KeypairResult;
 import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.cipher.rsa.Base64Utils;
@@ -22,6 +26,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
 /**
@@ -43,7 +48,7 @@ public class LoginInteractor implements LoginContract.Interactor {
 
     @Override
     public void doLogin(final Context context, final String account, final String pwd, final LoginCallback callback) {
-        LogUtils.i("interactor login");
+        LogUtils.i("interactor login " + account + " " + pwd);
         Observable<KidooApiResult<KeypairResult>> keyObservable = GetTempRSAKeyPairApi.getTempRSAKeyPair(account);
         keyObservable.flatMap(new Function<KidooApiResult<KeypairResult>, ObservableSource<KidooApiResult<LoginResult>>>() {
             @Override
@@ -52,11 +57,16 @@ public class LoginInteractor implements LoginContract.Interactor {
                     String publicKey = keypairResultKidooApiResult.getData().getPublicKey();
                     String privateKey = keypairResultKidooApiResult.getData().getPrivateKey();
 
+                    RSAKey key = new RSAKey();
+                    key.setPrivateKey(publicKey);
+                    key.setPublickKey(privateKey);
+                    TokenManager.getInstance().updateRSAKey(TokenManager.KEY_RSA, key);
+
                     String sha1Pwd = EncryptUtils.encryptSHA1ToString(pwd).toLowerCase();
                     byte[] b_rsapwd = RSAUtil.encryptByPublicKey(sha1Pwd, publicKey);
                     String finalPwd = Base64Utils.encode(b_rsapwd);
 
-                    return LoginApi.login(finalPwd, pwd, "1");
+                    return LoginApi.login(account, finalPwd, "1");
                 } else {
                     return  null;
                 }
@@ -84,8 +94,9 @@ public class LoginInteractor implements LoginContract.Interactor {
         }) {
             @Override
             public void onNext(KidooApiResult<LoginResult> loginResultKidooApiResult) {
-                LogUtils.i("login success");
+
                 if(loginResultKidooApiResult.isSuccess()) {
+                    LogUtils.i("login success");
                     callback.onSuccess(loginResultKidooApiResult.getData());
                 } else {
                     callback.onFailure(loginResultKidooApiResult.getErrorMsg());
@@ -99,5 +110,46 @@ public class LoginInteractor implements LoginContract.Interactor {
                 callback.onFailure(e.getMessage());
             }
         });
+    }
+
+
+
+    public void doLoginNoNewKeypair(final Context context, final String account, final String pwd, final LoginCallback callback) {
+        RSAKey rsaKey = TokenManager.getInstance().getRSAKey(TokenManager.KEY_RSA);
+        LogUtils.d(rsaKey);
+        try {
+            String publicKey = rsaKey.getPublickKey();
+            String sha1Pwd = EncryptUtils.encryptSHA1ToString(pwd).toLowerCase();
+            byte[] b_rsapwd = RSAUtil.encryptByPublicKey(sha1Pwd, publicKey);
+            String finalPwd = Base64Utils.encode(b_rsapwd);
+
+            Observable<KidooApiResult<LoginResult>> observable = LoginApi.login(account, finalPwd, "1");
+            observable.subscribe(new ProgressSubscriber<KidooApiResult<LoginResult>>(context, new IProgressDialog() {
+                @Override
+                public Dialog getDialog() {
+                    return DialogHelper.getLoadingDialog(context);
+                }
+            }) {
+                @Override
+                public void onNext(KidooApiResult<LoginResult> loginResultKidooApiResult) {
+                    LogUtils.i("login success");
+                    if(loginResultKidooApiResult.isSuccess()) {
+                        callback.onSuccess(loginResultKidooApiResult.getData());
+                    } else {
+                        callback.onFailure(loginResultKidooApiResult.getErrorMsg());
+                        dismissProgress();
+                    }
+                }
+
+                @Override
+                public void onError(ApiException e) {
+                    super.onError(e);
+                    callback.onFailure(e.getMessage());
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

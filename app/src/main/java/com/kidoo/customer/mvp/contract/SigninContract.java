@@ -13,7 +13,7 @@ public interface SigninContract {
 
     interface View extends BaseView {
 
-//        void goLogin();
+        void goMain();
 
         void stopSMSCounter(boolean smsSucess);
     }

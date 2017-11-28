@@ -6,6 +6,7 @@ import android.content.Context;
 import com.kidoo.customer.di.module.ActivityModule;
 import com.kidoo.customer.di.scope.ContextLife;
 import com.kidoo.customer.di.scope.PerActivity;
+import com.kidoo.customer.ui.activity.SplashActivity;
 import com.kidoo.customer.ui.activity.account.LoginActivity;
 import com.kidoo.customer.ui.activity.account.SigninInOneStepActivity;
 
@@ -36,12 +37,7 @@ public interface ActivityComponent {
 
     void inject(SigninInOneStepActivity activity);
 
-//    void inject(CategorySubscribeActivity activity);
-//    void inject(CategoryNecessaryActivity activity);
-//    void inject(CategoryNewActivity activity);
-//    void inject(CategorySubjectActivity activity);
-//    void inject(AppMoreRecommendActivity activity);
-//    void inject(AppDetailActivity activity);
-//    void inject(CategoryToolActivity activity);
+    void inject(SplashActivity activity);
+
 
 }

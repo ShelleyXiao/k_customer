@@ -2,11 +2,17 @@ package com.kidoo.customer.mvp.presenter;
 
 import android.content.Context;
 
+import com.kidoo.customer.AccountHelper;
+import com.kidoo.customer.R;
+import com.kidoo.customer.api.token.AuthModel;
+import com.kidoo.customer.api.token.TokenManager;
 import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.mvp.contract.LoginContract;
 import com.kidoo.customer.mvp.contract.SigninContract;
 import com.kidoo.customer.mvp.interactor.LoginInteractor;
 import com.kidoo.customer.mvp.interactor.SignInInteractor;
+
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -43,6 +49,7 @@ public class SigninPresenterImpl extends BasePresenterImpl<SigninContract.View> 
             @Override
             public void onFailure(String msg) {
                 mPresenterView.stopSMSCounter(false);
+                mPresenterView.showToast(msg);
             }
         });
     }
@@ -52,7 +59,9 @@ public class SigninPresenterImpl extends BasePresenterImpl<SigninContract.View> 
         mInteractor.signInAction(context, phoneNumber, pwd, captcha, new SigninContract.Interactor.SignInCallbck() {
             @Override
             public void onSuccess() {
+                mPresenterView.showToast(context.getResources().getString(R.string.register_success_hint));
                 loginAction(context, phoneNumber, pwd);
+
             }
 
             @Override
@@ -63,16 +72,25 @@ public class SigninPresenterImpl extends BasePresenterImpl<SigninContract.View> 
     }
 
 
-    private void loginAction(Context context, String account, String pwd) {
-        mLoginInractor.doLogin(context, account, pwd, new LoginContract.Interactor.LoginCallback() {
+    private void loginAction(final Context context, String account, String pwd) {
+        mLoginInractor.doLoginNoNewKeypair(context, account, pwd, new LoginContract.Interactor.LoginCallback() {
             @Override
             public void onSuccess(LoginResult result) {
-
+                AuthModel authModel = new AuthModel();
+                long nowTime = new Date().getTime();
+                authModel.setGetTokenTime(nowTime);
+                authModel.setDifTime(nowTime - result.getServerTime());
+                authModel.setServerTime(result.getServerTime());
+                authModel.setTokenId(result.getTokenId());
+                authModel.setImPasswd(result.getCustomer().getImPassword());
+                TokenManager.getInstance().updateAuthModel(TokenManager.KEY_AUTH, authModel);
+                AccountHelper.login(result.getCustomer());
+                mPresenterView.goMain();
             }
 
             @Override
             public void onFailure(String msg) {
-
+                mPresenterView.showToast(context.getResources().getString(R.string.login_faild) + ":" + msg);
             }
         });
     }

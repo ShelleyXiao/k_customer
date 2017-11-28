@@ -32,7 +32,7 @@ public class LocationUtils  {
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode. Hight_Accuracy); // 可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
         option.setCoorType( "bd09ll"); // 可选，默认gcj02，设置返回的定位结果坐标系
-        option.setScanSpan(5000); // 可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
+        option.setScanSpan(0); // 可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
         option.setIsNeedAddress( true); // 可选，设置是否需要地址信息，默认不需要
         option.setOpenGps( true); // 可选，默认false,设置是否使用 gps
         option.setLocationNotify( true); // 可选，默认false，设置是否当 gps有效时按照1S1次频率输出GPS结果
@@ -47,16 +47,16 @@ public class LocationUtils  {
         mLocationClient.registerLocationListener(new BDAbstractLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                LogUtils.d( "Location return : ************ " + bdLocation.getLocType());
+                LogUtils.w( "Location return : ************ " + bdLocation.getLocType());
                 //注意这里，一定要判断BdLocation的返回值，只有在getLocType（）==61或者161的情况下才表示定位成功，具体返回的错误码可参考http://lbsyun.baidu.com/index.php?title=android-locsdk/guide/ermsg
                 if (bdLocation.getLocType() == BDLocation.TypeGpsLocation
                         || bdLocation.getLocType() == BDLocation.TypeNetWorkLocation && bdLocation.getLatitude() != 0.0) {
 
                     //将定位结果回调给locationFace的locationResult（）方法
                     if(null != locationFace) {
-
+                        LogUtils.w(bdLocation.getAddress().address);
                         locationFace.locationResult(bdLocation);
-                        mLocationClient.stop();
+//                        mLocationClient.stop();
                     }
 
                 }

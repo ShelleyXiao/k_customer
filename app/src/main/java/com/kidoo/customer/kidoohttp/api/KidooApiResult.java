@@ -16,7 +16,7 @@ import java.io.Serializable;
 
 public class KidooApiResult<T> implements Serializable {
     boolean success;
-    private int errorCode;
+    private String errorCode;
     private String errorMsg;
     private int showType;
     private T data;
@@ -31,11 +31,11 @@ public class KidooApiResult<T> implements Serializable {
         this.success = success;
     }
 
-    public int getErrorCode() {
+    public String getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(int errorCode) {
+    public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
     }
 

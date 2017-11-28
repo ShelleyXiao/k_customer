@@ -11,13 +11,18 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapPoi;
+import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.kidoo.customer.R;
 import com.kidoo.customer.interf.LocationFace;
+import com.kidoo.customer.utils.LogUtils;
 
 import java.util.HashMap;
 
@@ -33,10 +38,15 @@ import java.util.HashMap;
 
 public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickListener {
 
+    private static final int accuracyCircleFillColor = 0xAAFFFF88;
+    private static final int accuracyCircleStrokeColor = 0xAA00FF00;
+
     private Context mContext;
 
     private MapView mMapView;
     private BaiduMap mBaidumap;
+
+    private BitmapDescriptor mCurrentMarker;
 
     private HashMap<String, Marker> mMarkerHashMap = new HashMap<>();
 
@@ -49,12 +59,16 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
     public BaidumapView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
+
         initBaiduMap();
     }
 
     public BaidumapView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        initBaiduMap();
     }
+
 
     public BaidumapView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
@@ -95,6 +109,20 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
         });
     }
 
+//    public void onResume() {
+//        mMapView.onResume();
+//    }
+//
+//    public void onPause() {
+//        mMapView.onPause();
+//    }
+
+    public void onDestroy() {
+        mBaidumap.setMyLocationEnabled(false);
+        mMapView.onDestroy();
+        mMapView = null;
+    }
+
     public void setOverlyLatLng(String title, LatLng ll) {
         if(mMarkerHashMap != null) {
             Marker marker = mMarkerHashMap.get(title);
@@ -110,6 +138,12 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
         mMapView.showZoomControls(false);//缩放按钮
 
         mBaidumap = mMapView.getMap();
+        mBaidumap.setMyLocationEnabled(true);
+
+        mBaidumap.setMyLocationConfiguration(new MyLocationConfiguration(
+                MyLocationConfiguration.LocationMode.NORMAL, true, mCurrentMarker,
+                accuracyCircleFillColor, accuracyCircleStrokeColor));
+
         //地图点击事件处理
         mBaidumap.setOnMapClickListener(this);
 
@@ -124,12 +158,13 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
 //            }
 //        });
 
-        //定位
+//        //定位
         LocationUtils.getLocation(mContext);
         LocationUtils.setLocationFace(new LocationFace() {
             @Override
             public void locationResult(BDLocation location) {
-                setCenter(new LatLng(location.getLongitude(), location.getLatitude()));
+                LogUtils.w(location.toString());
+                setCenter(new LatLng(location.getLatitude(), location.getLongitude()));
             }
         });
 
@@ -137,8 +172,23 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
     }
 
     private void setCenter(LatLng latLng) {
-        MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
-        mBaidumap.animateMapStatus(u);
+//        MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
+//
+//        mBaidumap.animateMapStatus(u);
+//
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.gb_choice_icon);
+        //创建一个图层选项
+        OverlayOptions options = new MarkerOptions().position(latLng).icon(bitmapDescriptor);
+        mBaidumap.addOverlay(options);
+        MapStatus mMapStatus = new MapStatus.Builder()
+                .target(latLng)
+                .zoom(14)
+                .build();
+
+        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+        mBaidumap.setMapStatus(mMapStatusUpdate);
+
+
     }
 
 

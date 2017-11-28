@@ -14,27 +14,33 @@ import java.io.Serializable;
 
 public class AuthModel implements Serializable {
 
-
-    private String difTime;// nowtiem - serverTime = difTime
-    private String serverTime;
+    private long getTokenTime;
+    private long difTime;// nowtiem - serverTime = difTime
+    private long serverTime;
     private String tokenId; //login 成功返回tokenId
+    private String imPasswd;
 
+    public long getGetTokenTime() {
+        return getTokenTime;
+    }
 
+    public void setGetTokenTime(long getTokenTime) {
+        this.getTokenTime = getTokenTime;
+    }
 
-
-    public String getDifTime() {
+    public long getDifTime() {
         return difTime;
     }
 
-    public void setDifTime(String difTime) {
+    public void setDifTime(long difTime) {
         this.difTime = difTime;
     }
 
-    public String getServerTime() {
+    public long getServerTime() {
         return serverTime;
     }
 
-    public void setServerTime(String serverTime) {
+    public void setServerTime(long serverTime) {
         this.serverTime = serverTime;
     }
 
@@ -47,6 +53,13 @@ public class AuthModel implements Serializable {
         this.tokenId = tokenId;
     }
 
+    public String getImPasswd() {
+        return imPasswd;
+    }
+
+    public void setImPasswd(String imPasswd) {
+        this.imPasswd = imPasswd;
+    }
 
     @Override
     public String toString() {

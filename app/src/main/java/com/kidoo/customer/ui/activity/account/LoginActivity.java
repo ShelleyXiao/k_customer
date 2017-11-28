@@ -164,7 +164,6 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.dropView();
     }
 
     @OnClick({R.id.show_pwd, R.id.clean_id, R.id.sigin_in, R.id.forget_pwd, R.id.bt_login})
@@ -284,7 +283,6 @@ public class LoginActivity extends AccountBaseActivity<LoginPresenterImpl> imple
         String pwd = mAccountPwdInput.getText().toString().trim();
 
         if (!TextUtils.isEmpty(pwd) && !TextUtils.isEmpty(accoutId)) {
-
             if (TDevice.hasInternet()) {
                 mPresenter.loginAction(this, accoutId, pwd);
             } else {

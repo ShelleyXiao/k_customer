@@ -3,13 +3,18 @@ package com.kidoo.customer.mvp.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.R;
+import com.kidoo.customer.api.token.AuthModel;
+import com.kidoo.customer.api.token.TokenManager;
 import com.kidoo.customer.bean.KeypairResult;
 import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.mvp.contract.LoginContract;
 import com.kidoo.customer.mvp.interactor.LoginInteractor;
 import com.kidoo.customer.utils.LogUtils;
 import com.zhouyou.http.subsciber.IProgressDialog;
+
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -66,6 +71,7 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginContract.View> im
 //                });
 //    }
 
+
     @Override
     public void loginAction(Context context, String account, String pwd) {
         LogUtils.w(account + " " + pwd);
@@ -79,11 +85,24 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginContract.View> im
             @Override
             public void onSuccess(LoginResult result) {
 
+                AuthModel authModel = new AuthModel();
+                long nowTime = new Date().getTime();
+                LogUtils.w(nowTime + " " + "serverTime: " + result.getServerTime());
+                authModel.setGetTokenTime(nowTime);
+                authModel.setDifTime(nowTime - result.getServerTime());
+                authModel.setServerTime(result.getServerTime());
+                authModel.setTokenId(result.getTokenId());
+                authModel.setImPasswd(result.getCustomer().getImPassword());
+
+                TokenManager.getInstance().updateAuthModel(TokenManager.KEY_AUTH, authModel);
+                AccountHelper.login(result.getCustomer());
+
+                mPresenterView.goMainPage();
             }
 
             @Override
             public void onFailure(String msg) {
-
+                mPresenterView.showToast(msg);
             }
         });
 

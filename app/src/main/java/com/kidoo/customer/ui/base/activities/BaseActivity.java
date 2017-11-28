@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.GlideRequests;
@@ -31,6 +32,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private Fragment mFragment;
     private Unbinder mUnbinder;
 
+    protected View rootView;
+
 //    protected Toast mToast;
 
     @Override
@@ -38,6 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onCreate(savedInstanceState);
 
         if(initBundle(getIntent().getExtras())) {
+
             setContentView(getContentView());
             initWindow();
 

@@ -1,8 +1,6 @@
 package com.kidoo.customer.mvp.contract;
 
-import android.content.Context;
-
-import com.kidoo.customer.bean.LoginResult;
+import com.kidoo.customer.bean.CheckAllTokenBean;
 import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.mvp.view.BaseView;
 
@@ -16,30 +14,30 @@ import com.kidoo.customer.mvp.view.BaseView;
  */
 
 
-public interface LoginContract {
+public interface CheckAllTokenContract {
 
     interface View extends BaseView {
 
-        void goMainPage();
+        void goMain();
+
+        void goLogin();
     }
 
     interface Presenter extends BasePresenter<View> {
 
-
-        void loginAction(Context context, String account, String pwd);
+        void checkAllTokenAction();
 
     }
 
     interface Interactor {
 
-        void doLogin(Context context, String account, String pwd, LoginCallback callback);
 
+        void doCheckAllToken(String customId, String tokenId, String token, CheckAllTokenContract.Interactor.CheckAllTokenCallback callback);
 
-        interface LoginCallback {
-            void onSuccess(LoginResult result);
+        interface CheckAllTokenCallback {
+            void onSuccess(CheckAllTokenBean result);
             void onFailure(String msg);
         }
-
 
 
     }

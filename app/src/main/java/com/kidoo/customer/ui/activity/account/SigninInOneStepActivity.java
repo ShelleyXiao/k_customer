@@ -1,6 +1,7 @@
 package com.kidoo.customer.ui.activity.account;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
@@ -27,6 +28,7 @@ import com.kidoo.customer.AppContext;
 import com.kidoo.customer.R;
 import com.kidoo.customer.mvp.contract.SigninContract;
 import com.kidoo.customer.mvp.presenter.SigninPresenterImpl;
+import com.kidoo.customer.ui.activity.MainActivity;
 import com.kidoo.customer.utils.TDevice;
 import com.kidoo.customer.utils.parser.RichTextParser;
 
@@ -326,14 +328,24 @@ public class SigninInOneStepActivity extends AccountBaseActivity<SigninPresenter
     @Override
     public void stopSMSCounter(boolean smsSucess) {
         if(smsSucess) {
-            if(null != mTimer) {
-                mTimer.onFinish();
-                mTimer.cancel();
-            }
+
             showToastForKeyBord(getString(R.string.get_sms_call_success_hint));
         } else {
-            showToastForKeyBord(getString(R.string.get_sms_call_faild_hint));
+//            showToastForKeyBord(getString(R.string.get_sms_call_faild_hint));
         }
+
+        if(null != mTimer) {
+            mTimer.onFinish();
+            mTimer.cancel();
+        }
+    }
+
+    @Override
+    public void goMain() {
+        Intent intent = new Intent(SigninInOneStepActivity.this, MainActivity.class);
+        startActivity(intent);
+
+        finish();
     }
 
 }
