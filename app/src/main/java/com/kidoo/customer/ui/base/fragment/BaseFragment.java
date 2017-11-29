@@ -13,12 +13,16 @@ import android.widget.TextView;
 
 import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.GlideRequests;
+import com.kidoo.customer.component.ActivityLifeCycleEvent;
 import com.kidoo.customer.utils.ImageLoader;
 
 import java.io.Serializable;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
 
 /** 
  * description: Fragmetn基础类
@@ -38,6 +42,8 @@ public abstract class BaseFragment extends Fragment {
 
   //  private RequestManager mImgLoader;
     private GlideRequests mGlideRequests;
+
+    public final PublishSubject<ActivityLifeCycleEvent> lifecycleSubject = PublishSubject.create();
 
 
     @Override
@@ -77,6 +83,8 @@ public abstract class BaseFragment extends Fragment {
             initWidget(mRoot);
 
             initData();
+
+            initEventAndData();
         }
 
         return mRoot;
@@ -116,6 +124,8 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroy();
         mUnbinder.unbind();
         mBundle = null;
+
+        lifecycleSubject.onNext(ActivityLifeCycleEvent.DESTROY);
     }
 
     @Override
@@ -136,6 +146,26 @@ public abstract class BaseFragment extends Fragment {
     protected void initData() {
 
     }
+
+    protected  void initEventAndData(){
+
+    }
+
+    protected CompositeDisposable mCompositeDisposable;
+
+    protected void dispose() {
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.dispose();
+        }
+    }
+
+    protected void addDisposable(Disposable disposable) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        mCompositeDisposable.add(disposable);
+    }
+
 
     protected <T extends View> T findView(int viewId) {
         return (T) mRoot.findViewById(viewId);

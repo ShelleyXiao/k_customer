@@ -20,10 +20,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
-import com.zhouyou.http.exception.ApiException;
-import com.zhouyou.http.subsciber.BaseSubscriber;
-import com.zhouyou.http.subsciber.IProgressDialog;
-import com.zhouyou.http.subsciber.ProgressCancelListener;
+import com.kidoo.customer.kidoohttp.http.exception.ApiException;
 
 
 /**

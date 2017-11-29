@@ -3,6 +3,7 @@ package com.kidoo.customer.api;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
 import com.kidoo.customer.kidoohttp.http.KidooApiManager;
+import com.kidoo.customer.kidoohttp.http.func.HandleFuc;
 import com.kidoo.customer.kidoohttp.http.request.CustomerRequset;
 
 import io.reactivex.Observable;
@@ -27,7 +28,7 @@ public class GetInitDataApi {
         KidooApiService kidooApiService = requset.create(KidooApiService.class);
         Observable<KidooApiResult<InitData>> observable = requset.call(kidooApiService.getInitData(requset.getParams().urlParamsMap));
 
-        return observable;
+        return observable.map(new HandleFuc<InitData>());
     }
 
 }

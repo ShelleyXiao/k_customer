@@ -5,15 +5,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.GlideRequests;
+import com.kidoo.customer.component.ActivityLifeCycleEvent;
 import com.kidoo.customer.mvp.view.BaseView;
 import com.kidoo.customer.utils.LogUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * User: ShaudXiao
@@ -32,7 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private Fragment mFragment;
     private Unbinder mUnbinder;
 
-    protected View rootView;
+    public final PublishSubject<ActivityLifeCycleEvent> lifecycleSubject = PublishSubject.create();
 
 //    protected Toast mToast;
 
@@ -49,6 +52,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
             initWidget();
             initData();
+
+            initEventAndData();
 
         } else {
             LogUtils.w("INIT BUNDLE FALSE , FINISH THIS");
@@ -70,6 +75,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mIsDestroy = true;
         super.onDestroy();
         mUnbinder.unbind();
+        dispose();
+
+        lifecycleSubject.onNext(ActivityLifeCycleEvent.DESTROY);
     }
 
     protected void addFragment(int frameLayoutId, Fragment fragment) {
@@ -118,6 +126,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     protected void initData() {
+    }
+
+    protected  void initEventAndData(){
+
     }
 
     public synchronized GlideRequests getImageLoader() {
@@ -191,5 +203,20 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 //        showToast(message);
 //    }
 
+
+    protected CompositeDisposable mCompositeDisposable;
+
+    protected void dispose() {
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.dispose();
+        }
+    }
+
+    protected void addDisposable(Disposable disposable) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        mCompositeDisposable.add(disposable);
+    }
 
 }

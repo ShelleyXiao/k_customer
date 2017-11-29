@@ -3,6 +3,8 @@ package com.kidoo.customer.mvp.presenter;
 
 import com.kidoo.customer.mvp.view.BaseView;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * User: ShaudXiao
  * Date: 2017-10-10
@@ -19,7 +21,7 @@ public interface BasePresenter<T extends BaseView>{
 
     void dropView();
 
-    void subscribe();
+    void addDisposable(Disposable disposable);
 
     void unsubscribe();
 }

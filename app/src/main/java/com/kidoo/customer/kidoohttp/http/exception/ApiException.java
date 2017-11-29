@@ -59,6 +59,11 @@ public class ApiException extends Exception {
             ex = new ApiException(exception, exception.code());
             ex.message = exception.getMessage();
             return ex;
+        } else if (e instanceof ServerException) {
+            ServerException resultException = (ServerException) e;
+            ex = new ApiException(resultException, ERROR.REQUEST_EXCEPTION);
+            ex.message = resultException.getMessage();
+            return ex;
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
                 || e instanceof JsonSyntaxException
@@ -155,6 +160,11 @@ public class ApiException extends Exception {
          * 空指针错误
          */
         public static final int NULLPOINTER_EXCEPTION = UNKNOWNHOST_ERROR + 1;
+
+        /**
+         * 请求结果错误
+         * */
+        public static final int REQUEST_EXCEPTION = NULLPOINTER_EXCEPTION + 1;
     }
 
 }

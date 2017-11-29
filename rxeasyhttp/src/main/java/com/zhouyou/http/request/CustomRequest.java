@@ -75,7 +75,8 @@ public class CustomRequest extends BaseRequest<CustomRequest> {
      */
     public <T> Observable<T> call(Observable<T> observable) {
         checkvalidate();
-        return observable.compose(RxUtil.io_main())
+        return observable
+                .compose(RxUtil.io_main())
                 .compose(new HandleErrTransformer())
                 .retryWhen(new RetryExceptionFunc(retryCount, retryDelay, retryIncreaseDelay));
     }

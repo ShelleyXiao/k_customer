@@ -1,5 +1,6 @@
 package com.kidoo.customer.api;
 
+import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.bean.CheckAllTokenBean;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.bean.KeypairResult;
@@ -54,4 +55,8 @@ public interface KidooApiService {
 
     @GET("customer/common/getInitData")
     Observable<KidooApiResult<InitData>> getInitData( @QueryMap Map<String, String> maps);
+
+    @GET("customer/channel/queryAllChannels")
+    Observable<KidooApiResult<AllChannelResultBean>> queryAllChannels();
+
 }
