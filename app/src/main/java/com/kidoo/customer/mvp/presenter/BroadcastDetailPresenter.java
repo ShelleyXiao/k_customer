@@ -124,7 +124,7 @@ public class BroadcastDetailPresenter implements BroadcastDetailContract.Present
     }
 
     @Override
-    public void subscribe() {
+    public void addDisposable(Disposable disposable) {
 
     }
 

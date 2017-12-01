@@ -3,30 +3,27 @@ package com.kidoo.customer.mvp.interactor;
 import android.app.Dialog;
 import android.content.Context;
 
-import com.kidoo.customer.api.CheckAllTokenApi;
 import com.kidoo.customer.api.GetTempRSAKeyPairApi;
 import com.kidoo.customer.api.LoginApi;
 import com.kidoo.customer.api.token.RSAKey;
 import com.kidoo.customer.api.token.TokenManager;
-import com.kidoo.customer.bean.CheckAllTokenBean;
 import com.kidoo.customer.bean.KeypairResult;
 import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.cipher.rsa.Base64Utils;
 import com.kidoo.customer.cipher.rsa.RSAUtil;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
+import com.kidoo.customer.kidoohttp.http.exception.ApiException;
+import com.kidoo.customer.kidoohttp.http.subsciber.IProgressDialog;
 import com.kidoo.customer.kidoohttp.http.subsciber.ProgressSubscriber;
 import com.kidoo.customer.mvp.contract.LoginContract;
 import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.EncryptUtils;
 import com.kidoo.customer.utils.LogUtils;
-import com.zhouyou.http.exception.ApiException;
-import com.zhouyou.http.subsciber.IProgressDialog;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
 /**

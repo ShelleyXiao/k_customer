@@ -121,7 +121,7 @@ public class MyCampaignPresenter implements MyCampaignContract.Presenter {
 
 
     @Override
-    public void subscribe() {
+    public void addDisposable(Disposable disposable) {
 
     }
 

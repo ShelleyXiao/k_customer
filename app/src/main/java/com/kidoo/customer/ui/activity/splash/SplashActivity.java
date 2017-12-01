@@ -1,4 +1,4 @@
-package com.kidoo.customer.ui.activity;
+package com.kidoo.customer.ui.activity.splash;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -11,6 +11,7 @@ import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.R;
 import com.kidoo.customer.mvp.contract.CheckAllTokenContract;
 import com.kidoo.customer.mvp.presenter.CheckAllTokenPresenterImpl;
+import com.kidoo.customer.ui.activity.MainActivity;
 import com.kidoo.customer.ui.activity.account.LoginActivity;
 import com.kidoo.customer.ui.base.activities.BaseMvpActivity;
 import com.kidoo.customer.utils.SharePrefUtil;
@@ -28,6 +29,8 @@ import javax.inject.Inject;
 
 
 public class SplashActivity extends BaseMvpActivity<CheckAllTokenPresenterImpl> implements CheckAllTokenContract.View{
+
+    public static final String PREF_IS_USER_GUIDE_SHOWED = "is_user_guide_showed";
 
     @Inject
     public CheckAllTokenPresenterImpl mPresenter;
@@ -105,22 +108,23 @@ public class SplashActivity extends BaseMvpActivity<CheckAllTokenPresenterImpl> 
     }
 
     private void redirectTo() {
-        boolean firstEnter = SharePrefUtil.getBoolean(this, "first_enter", false);
+        boolean firstEnter = SharePrefUtil.getBoolean(this, PREF_IS_USER_GUIDE_SHOWED, false);
         Intent intent = new Intent();
         if(!firstEnter) {
-            SharePrefUtil.saveBoolean(this, "first_enter", true);
-//            intent.setClass(this, GuideActivity.class);
+            intent.setClass(this, GuideActivity.class);
+            startActivity(intent);
+            finish();
         } else {
+            if(AccountHelper.isLogin()) {
+                mPresenter.checkAllTokenAction();
 
+            } else {
+                intent.setClass(this, LoginActivity.class);
+                this.startActivity(intent);
+                this.finish();
+            }
         }
-        if(AccountHelper.isLogin()) {
-            mPresenter.checkAllTokenAction();
 
-        } else {
-            intent.setClass(this, LoginActivity.class);
-            this.startActivity(intent);
-            this.finish();
-        }
 
     }
 

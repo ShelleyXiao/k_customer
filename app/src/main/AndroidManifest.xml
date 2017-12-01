@@ -87,12 +87,17 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.SplashActivity"
+            android:name=".ui.activity.splash.SplashActivity"
             android:theme="@style/App.Theme.Launch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.activity.splash.GuideActivity"
+            android:label="guide">
+
         </activity>
 
 

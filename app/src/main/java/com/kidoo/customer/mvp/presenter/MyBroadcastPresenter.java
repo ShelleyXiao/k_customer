@@ -12,6 +12,8 @@ import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * User: ShaudXiao
  * Date: 2017-10-16
@@ -64,7 +66,7 @@ public class MyBroadcastPresenter implements MyBroadcastContract.Presenter {
     }
 
     @Override
-    public void subscribe() {
+    public void addDisposable(Disposable disposable) {
 
     }
 

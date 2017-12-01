@@ -6,7 +6,7 @@ import android.content.Context;
 import com.kidoo.customer.di.module.ActivityModule;
 import com.kidoo.customer.di.scope.ContextLife;
 import com.kidoo.customer.di.scope.PerActivity;
-import com.kidoo.customer.ui.activity.SplashActivity;
+import com.kidoo.customer.ui.activity.splash.SplashActivity;
 import com.kidoo.customer.ui.activity.account.LoginActivity;
 import com.kidoo.customer.ui.activity.account.SigninInOneStepActivity;
 

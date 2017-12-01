@@ -1,15 +1,18 @@
 <resources>
-    <string name="app_name">Kidoo</string>
+    <string name="app_name">星动</string>
 
     <string name="tip_double_click_exit">再次点击退出应用</string>
 
     <string name="copy_success">复制成功</string>
+
 
     <string name="main_tab_name_broadcast">广播</string>
     <string name="main_tab_name_map">地图</string>
     <string name="main_tab_name_message">信息</string>
     <string name="main_tab_name_explore">发现</string>
     <string name="main_tab_name_me">个人</string>
+
+
 
     <string name="need_lbs_permission_hint">需要定位权限</string>
     <string name="clear_bodies_failed_hint">清除位置信息失败</string>
@@ -28,6 +31,7 @@
 
     <string name="actionbar_title_setting">设置</string>
 
+    <string name="guide_start_button_text">立即体验</string>
 
 
     <string name="sign_in_tilte">注册</string>
