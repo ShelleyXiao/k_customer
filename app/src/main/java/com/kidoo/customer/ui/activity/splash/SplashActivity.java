@@ -102,7 +102,7 @@ public class SplashActivity extends BaseMvpActivity<CheckAllTokenPresenterImpl> 
     @Override
     public void goLogin() {
         Intent intent = new Intent();
-        intent.setClass(this, LoginActivity.class);
+        intent.setClass(this, MainActivity.class);
         this.startActivity(intent);
         this.finish();
     }

@@ -1,7 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/kidoo_black_alpha_03"
+    android:orientation="vertical">
+
+    <FrameLayout android:id="@+id/userinfo_header"
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+
+        <ImageView
+            android:id="@+id/userinfo_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@color/blue_grey_400" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/lay_8">
+
+            <ImageView
+                android:id="@+id/portrait"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/lay_20"
+                android:layout_marginLeft="@dimen/lay_16"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/def_user" />
+
+            <ImageView
+                android:id="@+id/garden"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignTop="@+id/portrait"
+                android:layout_marginLeft="@dimen/lay_8"
+                android:layout_toRightOf="@+id/portrait"
+                android:contentDescription="@null"
+                android:src="@drawable/w_info_gender_m_p" />
+
+            <TextView
+                android:id="@+id/slogn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/garden"
+                android:layout_below="@+id/garden"
+                android:layout_marginTop="@dimen/lay_8"
+                android:layout_toRightOf="@+id/portrait"
+                android:text="@string/userinfo_tab_slogn_default"
+                android:textColor="@color/kidoo_black_alpha_112"
+                android:textSize="@dimen/font_16" />
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/lay_16">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/lay_4">
+            android:layout_marginRight="@dimen/lay_4">
+
+            <View
+                android:layout_width="@dimen/lay_4"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/decoration_title"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/decoration_title"
+                android:background="@color/kidoo_gren" />
+
+            <TextView
+                android:id="@+id/decoration_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lay_12"
+                android:layout_marginTop="@dimen/lay_4"
+                android:text="@string/userinfo_tab_decoration_item"
+                android:textColor="@color/kidoo_gray"
+                android:textSize="@dimen/font_18"
+
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lay_16" />
+
+    <com.kidoo.customer.widget.MyEnterLayout
+        android:id="@+id/userinfo_item_campain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_normal_selector"
+        android:clickable="true"
+        app:itemIcon="@drawable/icon_beevaluated"
+        app:itemTitle="@string/userinfo_tab_campain_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lay_20" />
+
+    <com.kidoo.customer.widget.MyEnterLayout
+        android:id="@+id/userinfo_item_challengerec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_normal_selector"
+        android:clickable="true"
+        app:itemIcon="@drawable/icon_challengerec"
+        app:itemTitle="@string/userinfo_tab_challengerec_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lay_16" />
+
+    <com.kidoo.customer.widget.MyEnterLayout
+        android:id="@+id/userinfo_item_team"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_normal_selector"
+        android:clickable="true"
+        app:itemIcon="@drawable/icon_myteam"
+        app:itemTitle="@string/userinfo_tab_team_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lay_16" />
+
+    <com.kidoo.customer.widget.MyEnterLayout
+        android:id="@+id/userinfo_item_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_normal_selector"
+        android:clickable="true"
+        app:itemIcon="@drawable/icon_install"
+        app:itemTitle="@string/userinfo_tab_setting_item" />
+
 
 </LinearLayout>

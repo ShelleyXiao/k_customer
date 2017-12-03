@@ -7,6 +7,7 @@ import com.kidoo.customer.bean.KeypairResult;
 import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.bean.RegisterResultBean;
 import com.kidoo.customer.bean.SMSCodeBean;
+import com.kidoo.customer.bean.UserDetailBean;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
 
 import java.util.Map;
@@ -58,5 +59,11 @@ public interface KidooApiService {
 
     @GET("customer/channel/queryAllChannels")
     Observable<KidooApiResult<AllChannelResultBean>> queryAllChannels();
+
+    @POST("customer/customer/queryDetail")
+    @FormUrlEncoded
+    Observable<KidooApiResult<UserDetailBean>> queryDetail(@QueryMap Map<String, String> maps);
+
+
 
 }

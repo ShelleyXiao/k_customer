@@ -3,10 +3,13 @@ package com.kidoo.customer.ui.fragment;
 import com.kidoo.customer.R;
 import com.kidoo.customer.ui.base.fragment.BaseTitleFragment;
 
-/**
- * Created by Shelley on 2017/9/17.
- */
-
+/** 
+ * description:
+ * autour: ShaudXiao
+ * date: 2017/12/2  
+ * update: 2017/12/2
+ * version: 
+*/
 public class ExporeTabFragment extends BaseTitleFragment {
 
     @Override

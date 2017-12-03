@@ -21,18 +21,20 @@
         <ImageView android:id="@+id/itemIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/lay_4"/>
+            android:layout_marginLeft="@dimen/lay_12"
+            android:layout_centerVertical="true"
+            />
 
         <TextView
             android:id="@+id/itemTitle"
-            style="@style/item_title_true_15sp"
+            style="@style/item_title_true_16sp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/arrowlayout"
             android:layout_toRightOf="@id/itemIcon"
-            android:layout_marginLeft="@dimen/lay_2"
+            android:layout_marginLeft="@dimen/lay_12"
             android:layout_centerVertical="true"
-            android:text="" />
+            />
 
     </RelativeLayout>
 

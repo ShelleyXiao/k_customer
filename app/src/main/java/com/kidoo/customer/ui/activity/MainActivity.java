@@ -15,6 +15,7 @@ import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.AppConfig;
 import com.kidoo.customer.R;
 import com.kidoo.customer.interf.OnTabReselectListener;
+import com.kidoo.customer.service.GloablCheckService;
 import com.kidoo.customer.ui.base.activities.BaseActivity;
 import com.kidoo.customer.ui.fragment.NavigationFragement;
 import com.kidoo.customer.utils.AppSystemUtils;
@@ -58,6 +59,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void initData() {
         super.initData();
+
+        GloablCheckService.init(this);
+
         checkUpdate();
         checkLocation();
 

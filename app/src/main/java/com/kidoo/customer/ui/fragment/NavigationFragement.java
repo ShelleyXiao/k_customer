@@ -81,7 +81,7 @@ public class NavigationFragement extends BaseFragment implements View.OnClickLis
 
         mNavMe.init(R.drawable.tab_icon_me,
                 R.string.main_tab_name_me,
-                MeeageTabFragment.class);
+                UserInfoTabFragment.class);
 
 
     }

@@ -6,6 +6,7 @@ import android.content.Context;
 import com.kidoo.customer.di.module.FragmentModule;
 import com.kidoo.customer.di.scope.ContextLife;
 import com.kidoo.customer.di.scope.PerFragment;
+import com.kidoo.customer.ui.fragment.UserInfoTabFragment;
 
 import dagger.Component;
 
@@ -24,5 +25,8 @@ public interface FragmentComponent {
     Context getApplicationContext();
 
     Activity getActivity();
+
+
+    void inject(UserInfoTabFragment fragment);
 
 }

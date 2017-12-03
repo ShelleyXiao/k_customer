@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.kidoo.customer.api.KidooApiService;
+import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.di.Component.AppComponent;
 import com.kidoo.customer.di.Component.DaggerAppComponent;
 import com.kidoo.customer.di.module.AppModule;
@@ -39,6 +40,8 @@ public class AppContext extends Application{
     private static AppContext instance;
 
     public AppComponent mAppComponent;
+
+    private InitData mInitData;
 
     @Override
     public void onCreate() {
@@ -168,5 +171,11 @@ public class AppContext extends Application{
         return mAppComponent;
     }
 
+    public InitData getInitData() {
+        return mInitData;
+    }
 
+    public void setInitData(InitData mInitData) {
+        this.mInitData = mInitData;
+    }
 }

@@ -29,10 +29,10 @@ public class MyEnterLayout extends LinearLayout {
 
     public MyEnterLayout(Context paramContext, AttributeSet paramAttributeSet) {
         super(paramContext, paramAttributeSet);
-        a(paramContext, paramAttributeSet);
+        init(paramContext, paramAttributeSet);
     }
 
-    private void a(Context context, AttributeSet attrs) {
+    private void init(Context context, AttributeSet attrs) {
 
 
         setOrientation(LinearLayout.VERTICAL);

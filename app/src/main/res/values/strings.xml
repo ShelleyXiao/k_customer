@@ -192,6 +192,13 @@
 
     <string name="rationale_location_contacts">Kidoo 需要知道你在那</string>
 
+    <string name="userinfo_tab_slogn_default">这家伙懒什么都没留下</string>
+    <string name="userinfo_tab_decoration_item">我的奖章</string>
+    <string name="userinfo_tab_campain_item">我的比赛</string>
+    <string name="userinfo_tab_challengerec_item">挑战信息</string>
+    <string name="userinfo_tab_team_item">我的战队</string>
+    <string name="userinfo_tab_setting_item">设置</string>
+
 
 
 </resources>

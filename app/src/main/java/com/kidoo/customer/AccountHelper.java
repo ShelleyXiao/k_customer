@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import com.kidoo.customer.api.token.AuthModel;
 import com.kidoo.customer.api.token.TokenManager;
 import com.kidoo.customer.bean.Customer;
+import com.kidoo.customer.service.GloablCheckService;
 import com.kidoo.customer.utils.LogUtils;
 
 import net.oschina.common.helper.SharedPreferencesHelper;
@@ -102,6 +103,7 @@ public class AccountHelper {
 
         if(saveOk) {
             // 登陆成功后的动作
+            GloablCheckService.init(sInstance.application);
         }
 
         return saveOk;
