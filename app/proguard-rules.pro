@@ -195,3 +195,8 @@
     **[] $VALUES;
     public *;
 }
+
+#七牛混淆规则
+-keep class com.qiniu.**{*;}
+-keep class com.qiniu.**{public <init>();}
+-ignorewarnings
