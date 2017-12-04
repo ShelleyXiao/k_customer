@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/kidoo_black_alpha_03"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/kidoo_bg_gray"
+              android:orientation="vertical">
 
-    <FrameLayout android:id="@+id/userinfo_header"
+    <FrameLayout
+        android:id="@+id/userinfo_header"
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="170dp">
 
         <ImageView
             android:id="@+id/userinfo_bg"
@@ -16,12 +17,23 @@
             android:layout_height="match_parent"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
-            android:src="@color/blue_grey_400" />
+            android:src="@color/blue_grey_400"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/lay_8">
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/lay_4"
+                android:text="name"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_24"
+                />
 
             <ImageView
                 android:id="@+id/portrait"
@@ -32,7 +44,7 @@
                 android:layout_marginLeft="@dimen/lay_16"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
-                android:src="@drawable/def_user" />
+                android:src="@drawable/def_user"/>
 
             <ImageView
                 android:id="@+id/garden"
@@ -42,7 +54,7 @@
                 android:layout_marginLeft="@dimen/lay_8"
                 android:layout_toRightOf="@+id/portrait"
                 android:contentDescription="@null"
-                android:src="@drawable/w_info_gender_m_p" />
+                android:src="@drawable/w_info_gender_m_p"/>
 
             <TextView
                 android:id="@+id/slogn"
@@ -54,7 +66,7 @@
                 android:layout_toRightOf="@+id/portrait"
                 android:text="@string/userinfo_tab_slogn_default"
                 android:textColor="@color/kidoo_black_alpha_112"
-                android:textSize="@dimen/font_16" />
+                android:textSize="@dimen/font_16"/>
         </RelativeLayout>
 
 
@@ -79,7 +91,7 @@
                 android:layout_alignBottom="@+id/decoration_title"
                 android:layout_alignParentStart="true"
                 android:layout_alignTop="@+id/decoration_title"
-                android:background="@color/kidoo_gren" />
+                android:background="@color/kidoo_gren"/>
 
             <TextView
                 android:id="@+id/decoration_title"
@@ -97,7 +109,25 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/medal_empty_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/lay_8"
+                android:text="@string/userinfo_medal_empty_hint"
+                android:textColor="@color/black_alpha_32"
+                android:textSize="@dimen/font_18"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/medal_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/lay_2"
+                android:scrollbars="vertical"/>
 
 
         </RelativeLayout>
@@ -107,7 +137,21 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/lay_16" />
+        android:layout_height="@dimen/lay_12"/>
+
+    <com.kidoo.customer.widget.MyEnterLayout
+        android:id="@+id/userinfo_item_campain_manager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_normal_selector"
+        android:clickable="true"
+        app:itemIcon="@drawable/icon_beevaluated"
+        app:itemTitle="@string/userinfo_tab_campain_manager_item"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lay_12"/>
 
     <com.kidoo.customer.widget.MyEnterLayout
         android:id="@+id/userinfo_item_campain"
@@ -116,11 +160,11 @@
         android:background="@drawable/list_item_normal_selector"
         android:clickable="true"
         app:itemIcon="@drawable/icon_beevaluated"
-        app:itemTitle="@string/userinfo_tab_campain_item" />
+        app:itemTitle="@string/userinfo_tab_campain_item"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/lay_20" />
+        android:layout_height="@dimen/lay_12"/>
 
     <com.kidoo.customer.widget.MyEnterLayout
         android:id="@+id/userinfo_item_challengerec"
@@ -129,11 +173,11 @@
         android:background="@drawable/list_item_normal_selector"
         android:clickable="true"
         app:itemIcon="@drawable/icon_challengerec"
-        app:itemTitle="@string/userinfo_tab_challengerec_item" />
+        app:itemTitle="@string/userinfo_tab_challengerec_item"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/lay_16" />
+        android:layout_height="@dimen/lay_12"/>
 
     <com.kidoo.customer.widget.MyEnterLayout
         android:id="@+id/userinfo_item_team"
@@ -142,11 +186,11 @@
         android:background="@drawable/list_item_normal_selector"
         android:clickable="true"
         app:itemIcon="@drawable/icon_myteam"
-        app:itemTitle="@string/userinfo_tab_team_item" />
+        app:itemTitle="@string/userinfo_tab_team_item"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/lay_16" />
+        android:layout_height="@dimen/lay_12"/>
 
     <com.kidoo.customer.widget.MyEnterLayout
         android:id="@+id/userinfo_item_setting"
@@ -155,7 +199,7 @@
         android:background="@drawable/list_item_normal_selector"
         android:clickable="true"
         app:itemIcon="@drawable/icon_install"
-        app:itemTitle="@string/userinfo_tab_setting_item" />
+        app:itemTitle="@string/userinfo_tab_setting_item"/>
 
 
 </LinearLayout>

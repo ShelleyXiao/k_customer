@@ -1,46 +1,38 @@
 package com.kidoo.customer.mvp.interactor;
 
-import com.kidoo.customer.api.QueryUserDetailApi;
-import com.kidoo.customer.bean.UserDetailBean;
+import com.kidoo.customer.api.UpdateUserInfoApi;
+import com.kidoo.customer.bean.ReturnNullBean;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
-import com.kidoo.customer.mvp.contract.UseInfoContract;
+import com.kidoo.customer.mvp.contract.UseDetailContract;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 /**
- * Created by Shelley on 2017/12/2.
+ * User: ShaudXiao
+ * Date: 2017-12-04
+ * Time: 18:25
+ * Company: zx
+ * Description:
+ * FIXME
  */
 
-public class UserDetailInteractor implements UseInfoContract.Interactor {
 
+public class UserDetailInteractor implements UseDetailContract.Interactor {
 
     @Inject
-    public UserDetailInteractor() {};
+    public UserDetailInteractor() {
+
+    }
 
     @Override
-    public Disposable doQueryUserDetail( String phone, final Callback callback) {
+    public void updateUserInfoAction(String customerId, String realName, String nickName, String email, String portait, String sex, String brithday, String sign, UpdateInfoCallbck callbck) {
+        Observable<KidooApiResult<ReturnNullBean>> observable = UpdateUserInfoApi.updateUserInfoApi(
+                customerId, realName, nickName, email, portait, sex, brithday, sign
+        );
 
-        Observable<KidooApiResult<UserDetailBean>> observable = QueryUserDetailApi.queryDetailAction(phone);
-        Disposable disposable = observable.subscribe(new Consumer<KidooApiResult<UserDetailBean>>() {
-            @Override
-            public void accept(KidooApiResult<UserDetailBean> userDetailBeanKidooApiResult) throws Exception {
-                if(userDetailBeanKidooApiResult.isSuccess()) {
-                    callback.onSuccess(userDetailBeanKidooApiResult.getData());
-                } else {
-                    callback.onFailure(userDetailBeanKidooApiResult.getErrorMsg());
-                }
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                callback.onFailure(throwable.getMessage());
-            }
-        });
 
-        return disposable;
+
     }
 }

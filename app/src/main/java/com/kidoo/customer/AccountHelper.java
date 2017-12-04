@@ -55,7 +55,7 @@ public class AccountHelper {
     public static boolean isLogin() {
         AuthModel authModel = TokenManager.getInstance().getAuthModel(TokenManager.KEY_AUTH);
         if(null != authModel && !TextUtils.isEmpty(authModel.getDifTime() + "")) {
-            LogUtils.w(authModel);
+//            LogUtils.w(authModel);
             return getUserId() > 0;
         } else {
             return false;

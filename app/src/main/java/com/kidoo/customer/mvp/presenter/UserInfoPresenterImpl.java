@@ -2,7 +2,7 @@ package com.kidoo.customer.mvp.presenter;
 
 import com.kidoo.customer.bean.UserDetailBean;
 import com.kidoo.customer.mvp.contract.UseInfoContract;
-import com.kidoo.customer.mvp.interactor.UserDetailInteractor;
+import com.kidoo.customer.mvp.interactor.UserInfoInteractor;
 
 import javax.inject.Inject;
 
@@ -19,7 +19,7 @@ import io.reactivex.disposables.Disposable;
 public class UserInfoPresenterImpl extends BasePresenterImpl<UseInfoContract.View> implements UseInfoContract.Presenter {
 
     @Inject
-    UserDetailInteractor mInteractor;
+    UserInfoInteractor mInteractor;
 
     @Inject
     public UserInfoPresenterImpl() {

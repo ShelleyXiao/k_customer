@@ -130,13 +130,41 @@
 
     <style name="item_title_true_16sp">
         <item name="android:textSize">@dimen/font_16</item>
-        <item name="android:textColor">@color/kidoo_black_alpha_112</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <declare-styleable name="TitleBar">
         <attr name="aTitle" format="string" />
         <attr name="aIcon" format="reference" />
     </declare-styleable>
+
+    <style name="user_detail_text_name">
+        <item name="android:textSize">@dimen/font_14</item>
+        <item name="android:textColor">#333</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="user_detail_text_hint" >
+        <item name="android:textSize">@dimen/font_14</item>
+        <item name="android:textColor">#999</item>
+        <item name="android:textColorHint">#999</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="user_detail_text_met">
+        <item name="android:textSize">@dimen/font_14</item>
+        <item name="android:textColor">#999</item>
+        <item name="android:textColorHint">#999</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="MenuTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
 
 </resources>

@@ -6,6 +6,7 @@ import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.bean.KeypairResult;
 import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.bean.RegisterResultBean;
+import com.kidoo.customer.bean.ReturnNullBean;
 import com.kidoo.customer.bean.SMSCodeBean;
 import com.kidoo.customer.bean.UserDetailBean;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
@@ -62,8 +63,10 @@ public interface KidooApiService {
 
     @POST("customer/customer/queryDetail")
     @FormUrlEncoded
-    Observable<KidooApiResult<UserDetailBean>> queryDetail(@QueryMap Map<String, String> maps);
+    Observable<KidooApiResult<UserDetailBean>> queryDetail(@FieldMap Map<String, String> maps);
 
-
+    @POST("customer/account/update")
+    @FormUrlEncoded
+    Observable<KidooApiResult<ReturnNullBean>> updateUserInfo(@FieldMap Map<String,String> maps);
 
 }

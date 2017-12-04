@@ -95,7 +95,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.splash.GuideActivity"
+        <activity
+            android:name=".ui.activity.splash.GuideActivity"
             android:label="guide">
 
         </activity>
@@ -120,6 +121,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/App.Theme.Main"
             android:windowSoftInputMode="stateHidden|adjustResize"
+            >
+
+        </activity>
+
+        <activity
+            android:name=".ui.activity.UserDetailActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/user_detail_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             >
 
         </activity>
@@ -162,12 +173,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Dialog.NoTitle.Translucent"/>
 
+
         <!--<service android:name=".widget.boardcastFloatBtn.contorl.FloatBoradcastWMService"></service>-->
+
+        <service
+            android:name=".service.GloablCheckService"
+            android:exported="false"
+            />
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" />
+            android:process=":remote"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

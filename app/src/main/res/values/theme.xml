@@ -12,9 +12,11 @@
         <item name="actionBarStyle">@style/App.Widget.ActionBar</item>
         <item name="homeAsUpIndicator">@drawable/back_icon</item>
 
+
+
         <!--action popup-->
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
-
+        <item name="android:actionMenuTextAppearance">@style/MenuTextStyle</item>
         <!--action menu-->
         <item name="actionMenuTextColor">@color/white</item>
 

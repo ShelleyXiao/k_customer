@@ -111,6 +111,8 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     compile 'net.oschina.common:common:0.1.6'
+
+
     //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.2'
     //    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'
 
@@ -125,6 +127,8 @@ dependencies {
 
     compile 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
 
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+
     //指定注解处理器
     annotationProcessor 'com.google.dagger:dagger-compiler:2.0.2'
     //dagger公用api
@@ -136,5 +140,14 @@ dependencies {
     compile project(':rxeasyhttp')
     compile files('libs/pinyin4j-2.5.0.jar')
 
+    //七牛
+    compile 'com.qiniu:qiniu-android-sdk:7.3.+'
 
+
+    compile('cn.qqtheme.framework:WheelPicker:1.5.5') {
+        exclude group: 'com.android.support'
+    }
+
+    // 图片压缩
+    compile 'top.zibin:Luban:1.1.3'
 }

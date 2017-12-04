@@ -26,6 +26,8 @@
 
     <color name="kidoo_gray">#696969</color>
     <color name="kidoo_white_gray">#b6b6b6</color>
+    <color name="kidoo_bg_gray">#f4f4f4</color>
+    <color name="kidoo_hint_gray">#d2d2d2</color>
     <color name="kidoo_gren">#0ec68d</color>
     <color name="kidoo_green_01">#2CB08F</color>
     <color name="kidoo_gren_alpha">#550ec68d</color>
@@ -38,6 +40,7 @@
     <color name="kidoo_black_alpha_48">#30000000</color>
     <color name="kidoo_white_alpha_16">#10ffffff</color>
     <color name="kidoo_white_alpha_240">#f0ffffff</color>
+    <color name="kidoo_black_text">#333333</color>
 
 
 

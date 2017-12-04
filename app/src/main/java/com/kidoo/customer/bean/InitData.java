@@ -62,4 +62,15 @@ public class InitData implements Serializable {
     public void setQnTokenTime(String qnTokenTime) {
         this.qnTokenTime = qnTokenTime;
     }
+
+    @Override
+    public String toString() {
+        return "InitData{" +
+                "qnToken='" + qnToken + '\'' +
+                ", appNeedUpdate=" + appNeedUpdate +
+                ", webAppVersion='" + webAppVersion + '\'' +
+                ", qnDomain='" + qnDomain + '\'' +
+                ", qnTokenTime='" + qnTokenTime + '\'' +
+                '}';
+    }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.di.Component.DaggerFragmentComponent;
 import com.kidoo.customer.di.Component.FragmentComponent;
+import com.kidoo.customer.di.module.FragmentModule;
 import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.mvp.view.BaseView;
 
@@ -33,7 +34,8 @@ public abstract class BaseMvpFragment<T extends BasePresenter> extends BaseFragm
     }
 
     private void initFragmentComponent(){
-        mFragmentComponent = DaggerFragmentComponent.builder()
+
+        mFragmentComponent = DaggerFragmentComponent.builder().fragmentModule(new FragmentModule(this))
                 .appComponent(((AppContext) getActivity().getApplication()).getAppComponent())
                 .build();
     }

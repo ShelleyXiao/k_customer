@@ -194,10 +194,25 @@
 
     <string name="userinfo_tab_slogn_default">这家伙懒什么都没留下</string>
     <string name="userinfo_tab_decoration_item">我的奖章</string>
+    <string name="userinfo_tab_campain_manager_item">赛事信息</string>
     <string name="userinfo_tab_campain_item">我的比赛</string>
     <string name="userinfo_tab_challengerec_item">挑战信息</string>
     <string name="userinfo_tab_team_item">我的战队</string>
     <string name="userinfo_tab_setting_item">设置</string>
+
+    <string name="userinfo_medal_empty_hint">暂时没有奖章</string>
+
+    <string name="user_detail_title">我的详情</string>
+    <string name="user_detail_nickname_hint">请输入您的昵称</string>
+    <string name="user_detail_realname_hint">请输入您的真实姓名</string>
+    <string name="user_detail_realname">姓名</string>
+    <string name="user_detail_email_hint">请输入您的邮箱</string>
+    <string name="user_detail_email">邮箱</string>
+    <string name="user_detail_birthday">请选择您的生日</string>
+    <string name="user_detail_sign">个性签名</string>
+    <string name="user_detail_sign_hint">请输入您的个性签名(最多不超过30个字符)</string>
+    <string name="user_detail_menu_save">保存</string>
+
 
 
 
