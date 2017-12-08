@@ -1,5 +1,6 @@
 package com.kidoo.customer.api;
 
+import com.kidoo.customer.api.token.QNToken;
 import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.bean.CheckAllTokenBean;
 import com.kidoo.customer.bean.InitData;
@@ -68,5 +69,10 @@ public interface KidooApiService {
     @POST("customer/account/update")
     @FormUrlEncoded
     Observable<KidooApiResult<ReturnNullBean>> updateUserInfo(@FieldMap Map<String,String> maps);
+
+    @GET("customer/store/queryPicInfo")
+    Observable<KidooApiResult<QNToken>> queryPicInfo();
+
+
 
 }

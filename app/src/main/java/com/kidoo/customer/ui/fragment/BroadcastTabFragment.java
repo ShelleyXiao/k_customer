@@ -12,13 +12,18 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.kidoo.customer.R;
+import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.interf.OnTabReselectListener;
-import com.kidoo.customer.ui.base.fragment.BaseFragment;
+import com.kidoo.customer.mvp.contract.MapContract;
+import com.kidoo.customer.mvp.presenter.MapPresenterImpl;
+import com.kidoo.customer.ui.base.fragment.BaseMvpFragment;
 import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.mapView.BaidumapView;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -34,7 +39,8 @@ import pub.devrel.easypermissions.EasyPermissions;
  * FIXME
  */
 
-public class BroadcastTabFragment extends BaseFragment implements OnTabReselectListener, EasyPermissions.PermissionCallbacks{
+public class BroadcastTabFragment extends BaseMvpFragment<MapPresenterImpl> implements OnTabReselectListener, EasyPermissions.PermissionCallbacks
+        , MapContract.View {
 
     private static final int accuracyCircleFillColor = 0xAAFFFF88;
     private static final int accuracyCircleStrokeColor = 0xAA00FF00;
@@ -48,6 +54,8 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
     @BindView(R.id.bmapView)
     BaidumapView mMapView;
 
+    @Inject
+    public MapPresenterImpl mPresenter;
 
 
     @Override
@@ -65,6 +73,13 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
     public void onResume() {
 //        mMapView.onResume();
         super.onResume();
+    }
+
+    @Override
+    protected MapPresenterImpl initInjector() {
+        mFragmentComponent.inject(this);
+
+        return mPresenter;
     }
 
     @Override
@@ -170,5 +185,15 @@ public class BroadcastTabFragment extends BaseFragment implements OnTabReselectL
                 alertDialog.show();
             }
         }
+    }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
+
+    @Override
+    public void updateUserInfo(AllChannelResultBean channelResultBean) {
+
     }
 }

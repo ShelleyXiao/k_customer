@@ -42,9 +42,12 @@
     <color name="kidoo_white_alpha_240">#f0ffffff</color>
     <color name="kidoo_black_text">#333333</color>
 
+    <color name="kidoo_button_blue">#5ed7ec</color>
+
 
 
     <color name="list_divider_color">#c8c7cc</color>
+    <color name="child_item_diveder">#D6D6D5</color>
 
     <!-- 下拉刷新时，颜色值 -->
     <color name="swiperefresh_color1">#ff00ddff</color>
@@ -66,5 +69,15 @@
 
     <color name="bg_press">#ebebeb</color>\
     <color name="bg_press_material">#d4d4d4</color>
+
+    <color name="menu_bg">#F5F5F5</color>
+
+    <color name="menu_divider_line">#e0e0e0</color>
+
+    <color name="menu_popup_left_bg">#eee</color>
+    <color name="menu_popup_right_bg">#ddd</color>
+    <color name="menu_popup_right_bg_selected">#ccc</color>
+
+    <color name="menu_div_gray">#ccc</color>
 
 </resources>

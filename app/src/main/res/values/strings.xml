@@ -213,7 +213,8 @@
     <string name="user_detail_sign_hint">请输入您的个性签名(最多不超过30个字符)</string>
     <string name="user_detail_menu_save">保存</string>
 
-
+    <string name="user_detail_nickname_empty">请输入昵称～</string>
+    <string name="user_detail_update_success">已成功修改资料！</string>
 
 
 </resources>

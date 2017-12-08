@@ -1,6 +1,7 @@
 package com.kidoo.customer.ui.activity;
 
 import android.net.Uri;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,14 +14,17 @@ import com.bumptech.glide.request.target.ViewTarget;
 import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.R;
+import com.kidoo.customer.api.token.QNToken;
 import com.kidoo.customer.bean.Customer;
 import com.kidoo.customer.media.SelectImageActivity;
 import com.kidoo.customer.media.config.SelectOption;
 import com.kidoo.customer.mvp.contract.UseDetailContract;
 import com.kidoo.customer.mvp.presenter.UserDetailPresenterImpl;
 import com.kidoo.customer.ui.base.activities.BaseBackMvpActivity;
+import com.kidoo.customer.utils.DateTimeUtils;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.CircleImageView;
+import com.kidoo.customer.widget.LoadingDialogNormal;
 import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.Configuration;
@@ -31,6 +35,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.text.ParseException;
 
 import javax.inject.Inject;
 
@@ -56,6 +61,12 @@ public class UserDetailActivity extends BaseBackMvpActivity<UserDetailPresenterI
 
     @BindView(R.id.met_name)
     MaterialEditText metName;
+
+    @BindView(R.id.met_realname)
+    MaterialEditText metRealName;
+
+    @BindView(R.id.met_email)
+    MaterialEditText metEmail;
 
     @BindView(R.id.tv_select_sex)
     TextView tvSelectSex;
@@ -90,6 +101,12 @@ public class UserDetailActivity extends BaseBackMvpActivity<UserDetailPresenterI
 
     private boolean mIsUploadIcon;
 
+    private QNToken mQNToken;
+
+    private long mBirthdayTimestamp;
+
+    private LoadingDialogNormal mLoadingDialogNormal;
+    private String mCropHeadPath;
 
     @Override
     public void initWidget() {
@@ -103,19 +120,51 @@ public class UserDetailActivity extends BaseBackMvpActivity<UserDetailPresenterI
                 .putThreshhold(512 * 1024)  // 启用分片上传阀值。默认512K
                 .connectTimeout(10) // 链接超时。默认10秒
                 .responseTimeout(30) // 服务器响应超时。默认60秒
-                .zone(FixedZone.zone0) // 设置区域，指定不同区域的上传域名、备用域名、备用IP。默认 Zone.zone0
+                .zone(FixedZone.zone2) // 设置区域，指定不同区域的上传域名、备用域名、备用IP。默认 Zone.zone0
                 .build();
         // 重用uploadManager。一般地，只需要创建一个uploadManager对象
         mUploadManager = new UploadManager(config);
+
+        mLoadingDialogNormal = new LoadingDialogNormal(this);
 
     }
 
     @Override
     public void initData() {
         super.initData();
+
         mCustomer = AccountHelper.getUser();
         String url = AppContext.context().getInitData().getQnDomain() + mCustomer.getPortrait();
         loadImageViewTarget(url);
+        LogUtils.i(mCustomer.toString());
+
+        metName.setText(mCustomer.getNickName());
+        metEmail.setText(mCustomer.getEmail());
+        metSign.setText(mCustomer.getSign());
+        long birthday = mCustomer.getBirthday();
+        if (birthday != 0) {
+            String birthdayStr = DateTimeUtils.format(birthday, DateTimeUtils.FORMAT_SHORT);
+            tvSelectDate.setText(birthdayStr);
+        }
+
+        tvSelectSex.setText(getResources().getStringArray(R.array.sex)[mCustomer.getSex()]);
+
+
+        mPresenter.doQueryPicInfo();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mLoadingDialogNormal.close();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLoadingDialogNormal.close();
+        mLoadingDialogNormal = null;
     }
 
     @Override
@@ -145,8 +194,8 @@ public class UserDetailActivity extends BaseBackMvpActivity<UserDetailPresenterI
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_commit) {
             save();
-
         }
+
         return false;
     }
 
@@ -160,6 +209,7 @@ public class UserDetailActivity extends BaseBackMvpActivity<UserDetailPresenterI
                     @Override
                     public void doSelected(String[] images) {
                         String path = images[0];
+                        mCropHeadPath = path;
                         uploadNewPhoto(new File(path));
 
                     }
@@ -180,39 +230,74 @@ public class UserDetailActivity extends BaseBackMvpActivity<UserDetailPresenterI
     void save() {
         int sex = 0;
         if (tvSelectSex.getText().toString().equals("男")) {
-            sex = 1;
+            sex = 0;
         } else {
-            sex = 2;
+            sex = 1;
         }
 
-        if (metName == null) {
-            return;
-        }
-        if (metName.getText().toString().equals("")) {
-            showToast("请输入昵称～");
+        String nickName = metName.getText().toString();
+        if (TextUtils.isEmpty(nickName)) {
+            showToast(getString(R.string.user_detail_nickname_empty));
             return;
         }
 
-        String qnToken = AppContext.context().getInitData().getQnToken();
-        String qnTokenTime = AppContext.context().getInitData().getQnTokenTime();
-        if(mCacheFile != null) {
-            mUploadManager.put(mCacheFile, mCacheFile.getName(), qnToken,
+        String birthDay = tvSelectDate.getText().toString();
+        if (TextUtils.isEmpty(birthDay)) {
+            return;
+        }
+        try {
+            mBirthdayTimestamp = DateTimeUtils.parseMillis(birthDay, DateTimeUtils.FORMAT_SHORT);
+            LogUtils.i(birthDay + " time " + mBirthdayTimestamp);
+        } catch (ParseException e) {
+
+        }
+
+
+        if (mLoadingDialogNormal != null) {
+            mLoadingDialogNormal.show();
+        }
+
+        if (mCacheFile == null) {
+            mPresenter.doUpdateUserInfo(mCustomer.getMobile(), metRealName.getText().toString(),
+                    nickName, metEmail.getText().toString(), null, sex, mBirthdayTimestamp, metSign.getText().toString());
+            return;
+        }
+
+        String qnToken = mQNToken.getQnToken();
+        String qnTokenTime = mQNToken.getQnTokenTime();
+        if (mCacheFile != null) {
+            final int finalSex1 = sex;
+            final String finalNickName = nickName;
+            final String fileHashCode = String.valueOf(mCacheFile.hashCode());
+            mUploadManager.put(mCacheFile, fileHashCode, qnToken,
                     new UpCompletionHandler() {
                         @Override
                         public void complete(String key, ResponseInfo info, JSONObject res) {
                             //res包含hash、key等信息，具体字段取决于上传策略的设置
+                            LogUtils.i(key + info.toString());
                             if (info.isOK()) {
+                                String hash = null;
+                                try {
+                                    hash = res.getString("hash");
+                                } catch (Exception e) {
 
+                                }
+
+                                mPresenter.doUpdateUserInfo(mCustomer.getMobile(), metRealName.getText().toString(),
+                                        finalNickName, metEmail.getText().toString(), hash + "jpg", finalSex1,
+                                        mBirthdayTimestamp, metSign.getText().toString());
                             } else {
                                 LogUtils.i("qiniu", "Upload Fail");
                                 //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+
+                                mPresenter.doUpdateUserInfo(mCustomer.getMobile(), metRealName.getText().toString(),
+                                        finalNickName, metEmail.getText().toString(), null, finalSex1,
+                                        mBirthdayTimestamp, metSign.getText().toString());
                             }
                             LogUtils.i("qiniu", key + ",\r\n " + info + ",\r\n " + res);
                         }
                     }, null);
         }
-
-
 
     }
 
@@ -255,6 +340,13 @@ public class UserDetailActivity extends BaseBackMvpActivity<UserDetailPresenterI
             @Override
             public void onDatePicked(String year, String month, String day) {
                 tvSelectDate.setText(year + "-" + month + "-" + day);
+                String foramtDate = year + "-" + month + "-" + day;
+                try {
+                    mBirthdayTimestamp = DateTimeUtils.parseMillis(foramtDate, DateTimeUtils.FORMAT_SHORT);
+                    LogUtils.i(foramtDate + " time " + mBirthdayTimestamp);
+                } catch (ParseException e) {
+
+                }
             }
         });
         llSelectBirth.setOnClickListener(new View.OnClickListener() {
@@ -284,5 +376,41 @@ public class UserDetailActivity extends BaseBackMvpActivity<UserDetailPresenterI
     @Override
     public void updateSuccess(boolean sccuss) {
 
+        if (mLoadingDialogNormal != null)
+            mLoadingDialogNormal.close();
+
+        if (sccuss) {
+            showToast(getString(R.string.user_detail_update_success));
+            int sex = 0;
+            if (tvSelectSex.getText().toString().equals("男")) {
+                sex = 0;
+            } else {
+                sex = 1;
+            }
+            mCustomer.setSex(sex);
+
+            String nickName = metName.getText().toString();
+            mCustomer.setNickName(nickName);
+
+            String birthDay = tvSelectDate.getText().toString();
+
+            try {
+                mBirthdayTimestamp = DateTimeUtils.parseMillis(birthDay, DateTimeUtils.FORMAT_SHORT);
+                LogUtils.i(birthDay + " time " + mBirthdayTimestamp);
+                mCustomer.setBirthday(mBirthdayTimestamp);
+            } catch (ParseException e) {
+
+            }
+            mCustomer.setEmail(metEmail.getText().toString());
+            mCustomer.setSign(metSign.getText().toString());
+
+            AccountHelper.updateUserCache(mCustomer);
+        }
+    }
+
+    @Override
+    public void updateQNToken(QNToken token) {
+        mQNToken = token;
+        LogUtils.i(mQNToken.toString());
     }
 }

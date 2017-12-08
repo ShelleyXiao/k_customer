@@ -302,6 +302,7 @@
     <dimen name="lay_12">12dp</dimen>
     <dimen name="lay_14">14dp</dimen>
     <dimen name="lay_16">16dp</dimen>
+    <dimen name="lay_1">1dp</dimen>
     <dimen name="lay_2">2dp</dimen>
     <dimen name="lay_20">20dp</dimen>
     <dimen name="lay_24">24dp</dimen>
@@ -312,12 +313,16 @@
     <dimen name="lay_40">40dp</dimen>
     <dimen name="lay_44">44dp</dimen>
     <dimen name="lay_48">48dp</dimen>
+    <dimen name="lay_50">50dp</dimen>
     <dimen name="lay_52">52dp</dimen>
+    <dimen name="lay_54">54dp</dimen>
     <dimen name="lay_56">56dp</dimen>
     <dimen name="lay_60">60dp</dimen>
     <dimen name="lay_64">64dp</dimen>
+    <dimen name="lay_66">66dp</dimen>
     <dimen name="lay_68">68dp</dimen>
     <dimen name="lay_72">72dp</dimen>
+    <dimen name="lay_74">74dp</dimen>
     <dimen name="lay_76">76dp</dimen>
     <dimen name="lay_8">8dp</dimen>
     <dimen name="lay_80">80dp</dimen>

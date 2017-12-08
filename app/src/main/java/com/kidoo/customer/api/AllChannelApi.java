@@ -1,6 +1,5 @@
-package com.kidoo.customer.api.token;
+package com.kidoo.customer.api;
 
-import com.kidoo.customer.api.KidooApiService;
 import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
 import com.kidoo.customer.kidoohttp.http.KidooApiManager;

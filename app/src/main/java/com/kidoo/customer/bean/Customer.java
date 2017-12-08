@@ -22,7 +22,7 @@ public class Customer {
     private String nickName;
     private String portrait;
     private int sex;
-    private int email;
+    private String email;
     private long birthday;
     private String sign;
     private int status;
@@ -119,11 +119,11 @@ public class Customer {
         this.sex = sex;
     }
 
-    public int getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(int email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 

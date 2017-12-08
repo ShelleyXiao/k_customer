@@ -50,4 +50,10 @@
 
     </declare-styleable>
 
+
+    <declare-styleable name="LoadingView">
+        <attr name="loadingsrc" format="reference"></attr>
+    </declare-styleable>
+
+
 </resources>

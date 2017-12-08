@@ -160,7 +160,7 @@ public class UserInfoTabFragment extends BaseMvpFragment<UserInfoPresenterImpl> 
 
     @Override
     public void updateUserInfo(UserDetailBean detail) {
-        AccountHelper.updateUserCache(detail.getCustomer());
+//        AccountHelper.updateUserCache(detail.getCustomer());
 
         updateBaseInfo(detail.getCustomer());
         updateMedal(detail.getMedalList());
