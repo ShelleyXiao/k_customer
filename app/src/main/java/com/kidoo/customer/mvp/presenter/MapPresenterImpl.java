@@ -1,8 +1,12 @@
 package com.kidoo.customer.mvp.presenter;
 
 import com.kidoo.customer.bean.AllChannelResultBean;
+import com.kidoo.customer.bean.AreanaBean;
 import com.kidoo.customer.mvp.contract.MapContract;
 import com.kidoo.customer.mvp.interactor.MapInteractor;
+import com.kidoo.customer.utils.LogUtils;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -33,6 +37,7 @@ public class MapPresenterImpl extends BasePresenterImpl<MapContract.View> implem
         Disposable disposable = mInteractor.queryAllChannelsAction(new MapContract.Interactor.GetAllChannelsCallback() {
             @Override
             public void onSuccess(AllChannelResultBean result) {
+                LogUtils.i(result.getChannelAList().length);
                 mPresenterView.updateUserInfo(result);
             }
 
@@ -42,6 +47,22 @@ public class MapPresenterImpl extends BasePresenterImpl<MapContract.View> implem
             }
         });
 
+        addDisposable(disposable);
+    }
+
+    @Override
+    public void doQueryAreans(int channelCId) {
+        Disposable disposable = mInteractor.QueryAreansAction(channelCId, new MapContract.Interactor.GetAreansCallback() {
+            @Override
+            public void onSuccess(List<AreanaBean> result) {
+                mPresenterView.updateAreans(result);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+
+            }
+        });
         addDisposable(disposable);
     }
 }

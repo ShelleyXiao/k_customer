@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -130,12 +132,19 @@
         </LinearLayout>
     </LinearLayout>
 
+    <View android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:id="@+id/divder_line"
+        android:background="@color/menu_divder_line"
+        android:visibility="visible"
+        />
+
     <RelativeLayout
         android:id="@+id/rl_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ll_tab"
+        android:layout_below="@+id/ll_tab"
         android:background="#88000000">
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>
 

@@ -8,11 +8,7 @@ import com.kidoo.customer.R;
 
 import java.util.List;
 
-/**
- *
- * 综合排序
- * Created by vonchenchen on 2016/4/5 0005.
- */
+
 public class SortHolder extends BaseWidgetHolder<List<String>>{
 
     /** 综合排序 */

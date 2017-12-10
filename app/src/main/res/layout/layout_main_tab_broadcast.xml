@@ -12,6 +12,7 @@
 
     <com.kidoo.customer.widget.expandMenu.SelectMenuView
         android:layout_width="match_parent"
+        android:id="@+id/search_menu"
         android:layout_height="wrap_content"/>
 
 </FrameLayout>

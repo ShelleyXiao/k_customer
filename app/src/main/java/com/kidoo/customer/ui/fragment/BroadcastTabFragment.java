@@ -9,18 +9,23 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.widget.Toast;
 
+import com.baidu.mapapi.map.Marker;
 import com.kidoo.customer.R;
 import com.kidoo.customer.bean.AllChannelResultBean;
+import com.kidoo.customer.bean.AreanaBean;
+import com.kidoo.customer.bean.ChannelA;
+import com.kidoo.customer.bean.ChannelC;
 import com.kidoo.customer.interf.OnTabReselectListener;
 import com.kidoo.customer.mvp.contract.MapContract;
 import com.kidoo.customer.mvp.presenter.MapPresenterImpl;
 import com.kidoo.customer.ui.base.fragment.BaseMvpFragment;
 import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.LogUtils;
+import com.kidoo.customer.widget.expandMenu.SelectMenuView;
 import com.kidoo.customer.widget.mapView.BaidumapView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -40,7 +45,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  */
 
 public class BroadcastTabFragment extends BaseMvpFragment<MapPresenterImpl> implements OnTabReselectListener, EasyPermissions.PermissionCallbacks
-        , MapContract.View {
+        , MapContract.View, SelectMenuView.OnMenuSelectDataChangedListener, BaidumapView.OnMyMarkerClickListener {
 
     private static final int accuracyCircleFillColor = 0xAAFFFF88;
     private static final int accuracyCircleStrokeColor = 0xAA00FF00;
@@ -54,8 +59,18 @@ public class BroadcastTabFragment extends BaseMvpFragment<MapPresenterImpl> impl
     @BindView(R.id.bmapView)
     BaidumapView mMapView;
 
+    @BindView(R.id.search_menu)
+    SelectMenuView selectMenuView;
+
     @Inject
     public MapPresenterImpl mPresenter;
+
+    private List<ChannelA> mChannelList ;
+    private List<AreanaBean> mAreanBeans ;
+    private int mSelectChannelID = -1;
+    private int mSelectChannelAIndex = 0;
+    private int mSelectChannelBIndex = 0;
+    private int mSelectChannelCIndex = 0;
 
 
     @Override
@@ -73,6 +88,9 @@ public class BroadcastTabFragment extends BaseMvpFragment<MapPresenterImpl> impl
     public void onResume() {
 //        mMapView.onResume();
         super.onResume();
+
+        mPresenter.doQueryAllChannels();
+
     }
 
     @Override
@@ -92,17 +110,9 @@ public class BroadcastTabFragment extends BaseMvpFragment<MapPresenterImpl> impl
 
     @Override
     public void initWidget(View root) {
-//        mBaiduMap = mMapView.getMap();
-//        MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(14.0f);
-//        mBaiduMap.setMapStatus(msu);
-//        // 开启定位图层
-//        mBaiduMap.setMyLocationEnabled(true);
-//        mBaiduMap.setOnMarkerClickListener(this);
-//
-//        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
-//                MyLocationConfiguration.LocationMode.NORMAL, true, mCurrentMarker,
-//                accuracyCircleFillColor, accuracyCircleStrokeColor));
 
+        mMapView.setMyMarkerClickListener(this);
+        selectMenuView.setOnMenuSelectDataChangedListener(this);
     }
 
     @Override
@@ -123,6 +133,7 @@ public class BroadcastTabFragment extends BaseMvpFragment<MapPresenterImpl> impl
         LogUtils.w("tab relect");
 
         requsetLocation();
+        mPresenter.doQueryAreans(mSelectChannelID);
     }
 
 
@@ -131,7 +142,8 @@ public class BroadcastTabFragment extends BaseMvpFragment<MapPresenterImpl> impl
         if (EasyPermissions.hasPermissions(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.READ_PHONE_STATE)) {
             // Have permission, do the thing!
-            Toast.makeText(getActivity(), "TODO: SMS things", Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), "TODO: SMS things", Toast.LENGTH_LONG).show();
+
         } else {
             // Request one permission
             EasyPermissions.requestPermissions(getActivity(), getString(R.string.need_lbs_permission_hint), LOCATION_PERMISSION,
@@ -194,6 +206,63 @@ public class BroadcastTabFragment extends BaseMvpFragment<MapPresenterImpl> impl
 
     @Override
     public void updateUserInfo(AllChannelResultBean channelResultBean) {
+        if(mChannelList == null) {
+            mChannelList = new ArrayList<>();
+        }
+        if (channelResultBean != null) {
+            LogUtils.i(channelResultBean.getChannelAList()[0].getDescription());
+            if (channelResultBean.getChannelAList() != null) {
+                mChannelList.clear();
+                List<ChannelA> dataList = new ArrayList<>();
+                dataList.add(channelResultBean.getChannelAList()[0]);
+                selectMenuView.setDataList(dataList);
+                mChannelList.addAll(dataList);
+            }
+        }
 
+    }
+
+    @Override
+    public void updateAreans(List<AreanaBean> datas) {
+        if(mAreanBeans == null) {
+            mAreanBeans = new ArrayList<>();
+        }
+        mAreanBeans.clear();
+        mAreanBeans.addAll(datas);
+    }
+
+    @Override
+    public void onSubjectABChanged(int indexChannalA, int indexChannalB) {
+        mSelectChannelAIndex = indexChannalA;
+        mSelectChannelBIndex = indexChannalB;
+    }
+
+    @Override
+    public void onSubjectCChanged(int indexChannalC) {
+        mSelectChannelCIndex = indexChannalC;
+        ChannelC selectChannelC = mChannelList.get(mSelectChannelAIndex)
+                .getChannelBList().get(mSelectChannelBIndex)
+                .getChannelCList().get(indexChannalC);
+        mSelectChannelID = selectChannelC.getId();
+
+        mPresenter.doQueryAreans(mSelectChannelID);
+    }
+
+    @Override
+    public void onViewClicked(View view) {
+
+    }
+
+    @Override
+    public void onSelectedDismissed(int indexChannalA, int indexChannalB) {
+
+    }
+
+    @Override
+    public void onMarkerClick(Marker marker) {
+        AreanaBean bean = (AreanaBean) marker.getExtraInfo ().get ("marker");
+        if(bean != null) {
+            //todo
+        }
     }
 }

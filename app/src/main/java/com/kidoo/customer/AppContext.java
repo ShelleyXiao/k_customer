@@ -50,7 +50,7 @@ public class AppContext extends Application{
 
         initApplicationComponent();
 
-        initBugly();
+//        initBugly();
 
         initHttp();
 

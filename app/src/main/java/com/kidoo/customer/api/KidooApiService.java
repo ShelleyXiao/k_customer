@@ -2,6 +2,7 @@ package com.kidoo.customer.api;
 
 import com.kidoo.customer.api.token.QNToken;
 import com.kidoo.customer.bean.AllChannelResultBean;
+import com.kidoo.customer.bean.ArenaListResult;
 import com.kidoo.customer.bean.CheckAllTokenBean;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.bean.KeypairResult;
@@ -61,6 +62,11 @@ public interface KidooApiService {
 
     @GET("customer/channel/queryAllChannels")
     Observable<KidooApiResult<AllChannelResultBean>> queryAllChannels();
+
+
+    @POST("customer/arena/queryArenaMap")
+    @FormUrlEncoded
+    Observable<KidooApiResult<ArenaListResult>> queryArenaMap(@FieldMap Map<String, String> maps);
 
     @POST("customer/customer/queryDetail")
     @FormUrlEncoded

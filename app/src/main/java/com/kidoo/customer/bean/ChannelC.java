@@ -17,38 +17,38 @@ public class ChannelC implements Serializable {
 
 
     /**
-     * id : 5
-     * channelAId : 3
-     * channelBId : 4
+     * id : 1
+     * channelAId : 1
+     * channelBId : 1
      * pic : FqaKnpiFTiTJgLHSqeUrWKnvqG1m.png
-     * nameCh : 篮球(3v3)
-     * nameEn : basketball 3v3
-     * status : 0
-     * minimum : 6
-     * maximum : 6
+     * name : 3V3
+     * state : 1
+     * minTeam : 3
+     * maxTeam : 6
+     * minPlayer : 2
+     * maxPlayer : 2
      * playerType : 1
-     * durationMin : 10
-     * durationMax : 10080
-     * description : 接头篮球
+     * description : 街头篮球
+     * weight : 2
      * createTime : null
-     * dimensionList : []
      */
 
     private int id;
     private int channelAId;
     private int channelBId;
     private String pic;
-    private String nameCh;
-    private String nameEn;
-    private int status;
-    private int minimum;
-    private int maximum;
+    private String name;
+    private int state;
+    private int minTeam;
+    private int maxTeam;
+    private int minPlayer;
+    private int maxPlayer;
     private int playerType;
-    private int durationMin;
-    private int durationMax;
     private String description;
-    private long createTime;
-    private List<Dimension> mDimensionList;
+    private int weight;
+    private String createTime;
+
+    private List<Dimension> dimensions;
 
     public int getId() {
         return id;
@@ -82,44 +82,52 @@ public class ChannelC implements Serializable {
         this.pic = pic;
     }
 
-    public String getNameCh() {
-        return nameCh;
+    public String getName() {
+        return name;
     }
 
-    public void setNameCh(String nameCh) {
-        this.nameCh = nameCh;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNameEn() {
-        return nameEn;
+    public int getState() {
+        return state;
     }
 
-    public void setNameEn(String nameEn) {
-        this.nameEn = nameEn;
+    public void setState(int state) {
+        this.state = state;
     }
 
-    public int getStatus() {
-        return status;
+    public int getMinTeam() {
+        return minTeam;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setMinTeam(int minTeam) {
+        this.minTeam = minTeam;
     }
 
-    public int getMinimum() {
-        return minimum;
+    public int getMaxTeam() {
+        return maxTeam;
     }
 
-    public void setMinimum(int minimum) {
-        this.minimum = minimum;
+    public void setMaxTeam(int maxTeam) {
+        this.maxTeam = maxTeam;
     }
 
-    public int getMaximum() {
-        return maximum;
+    public int getMinPlayer() {
+        return minPlayer;
     }
 
-    public void setMaximum(int maximum) {
-        this.maximum = maximum;
+    public void setMinPlayer(int minPlayer) {
+        this.minPlayer = minPlayer;
+    }
+
+    public int getMaxPlayer() {
+        return maxPlayer;
+    }
+
+    public void setMaxPlayer(int maxPlayer) {
+        this.maxPlayer = maxPlayer;
     }
 
     public int getPlayerType() {
@@ -130,22 +138,6 @@ public class ChannelC implements Serializable {
         this.playerType = playerType;
     }
 
-    public int getDurationMin() {
-        return durationMin;
-    }
-
-    public void setDurationMin(int durationMin) {
-        this.durationMin = durationMin;
-    }
-
-    public int getDurationMax() {
-        return durationMax;
-    }
-
-    public void setDurationMax(int durationMax) {
-        this.durationMax = durationMax;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -154,19 +146,27 @@ public class ChannelC implements Serializable {
         this.description = description;
     }
 
-    public long getCreateTime() {
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(long createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public List<Dimension> getDimensionList() {
-        return mDimensionList;
+    public List<Dimension> getDimensions() {
+        return dimensions;
     }
 
-    public void setDimensionList(List<Dimension> dimensionList) {
-        mDimensionList = dimensionList;
+    public void setDimensions(List<Dimension> dimensions) {
+        this.dimensions = dimensions;
     }
 }

@@ -28,7 +28,7 @@ public class Dimension implements Serializable {
     private String name;
     private int valType;
     private String description;
-    private Object createTime;
+    private String createTime;
 
     public int getId() {
         return id;
@@ -70,11 +70,23 @@ public class Dimension implements Serializable {
         this.description = description;
     }
 
-    public Object getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Object createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Dimension{" +
+                "id=" + id +
+                ", channelCId=" + channelCId +
+                ", name='" + name + '\'' +
+                ", valType=" + valType +
+                ", description='" + description + '\'' +
+                ", createTime='" + createTime + '\'' +
+                '}';
     }
 }

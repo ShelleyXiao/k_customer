@@ -14,21 +14,20 @@ import java.util.List;
 
 
 public class ChannelA implements Serializable {
-
     /**
      * id : 1
-     * nameCh : 线下娱乐
-     * nameEn : offline amuse
-     * description : 线下娱乐
-     * createTime : 1502953765000
-     * channelBList : [{"id":1,"channelAId":1,"nameCh":"桌游","nameEn":"table game","description":"桌游","createTime":1502953831000,"channelCList":[{"id":1,"channelAId":1,"channelBId":1,"pic":"Fuz-RKpyeKRPsv6OvG60wbDAmgpJ.png","nameCh":"狼人杀","nameEn":"were wolf","status":0,"minimum":12,"maximum":12,"playerType":0,"durationMin":20,"durationMax":10080,"description":"狼人杀","createTime":null,"dimensionList":[]}]}]
+     * name : 体育
+     * description : 所有体育的父类
+     * createTime : null
+     * weight : 0
      */
 
     private int id;
-    private String nameCh;
-    private String nameEn;
+    private String name;
     private String description;
-    private long createTime;
+    private String createTime;
+    private int weight;
+
     private List<ChannelB> channelBList;
 
     public int getId() {
@@ -39,20 +38,12 @@ public class ChannelA implements Serializable {
         this.id = id;
     }
 
-    public String getNameCh() {
-        return nameCh;
+    public String getName() {
+        return name;
     }
 
-    public void setNameCh(String nameCh) {
-        this.nameCh = nameCh;
-    }
-
-    public String getNameEn() {
-        return nameEn;
-    }
-
-    public void setNameEn(String nameEn) {
-        this.nameEn = nameEn;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -63,12 +54,20 @@ public class ChannelA implements Serializable {
         this.description = description;
     }
 
-    public long getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(long createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
     public List<ChannelB> getChannelBList() {
@@ -79,4 +78,14 @@ public class ChannelA implements Serializable {
         this.channelBList = channelBList;
     }
 
+    @Override
+    public String toString() {
+        return "ChannelA{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", createTime=" + createTime +
+                ", weight=" + weight +
+                '}';
+    }
 }

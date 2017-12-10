@@ -12,6 +12,7 @@ import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +22,11 @@ import android.webkit.WebView;
 import android.widget.ZoomButtonsController;
 
 import com.kidoo.customer.AppContext;
+import com.kidoo.customer.media.ImageGalleryActivity;
+import com.kidoo.customer.widget.AvatarView;
 
 
-
-
-/** 
+/**
  * description: 界面帮助类
  * autour: ShaudXiao
  * date: 2017/9/24  
@@ -101,13 +102,13 @@ public class UIHelper {
      * @param context
      * @param avatarUrl
      */
-//    public static void showUserAvatar(Context context, String avatarUrl) {
-//        if (TextUtils.isEmpty(avatarUrl)) {
-//            return;
-//        }
-//        String url = AvatarView.getLargeAvatar(avatarUrl);
-//        ImageGalleryActivity.show(context, url);
-//    }
+    public static void showUserAvatar(Context context, String avatarUrl) {
+        if (TextUtils.isEmpty(avatarUrl)) {
+            return;
+        }
+        String url = AvatarView.getLargeAvatar(avatarUrl);
+        ImageGalleryActivity.show(context, url);
+    }
 
     /**
      * 显示扫一扫界面

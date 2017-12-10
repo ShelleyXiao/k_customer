@@ -135,6 +135,15 @@
 
         </activity>
 
+        <activity
+            android:name=".ui.activity.ArenDetailActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/aren_info_title"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
 
         <activity
             android:name=".ui.activity.MyBroadcastActivity"

@@ -55,5 +55,9 @@
         <attr name="loadingsrc" format="reference"></attr>
     </declare-styleable>
 
+    <declare-styleable name="KidooSubtitleView">
+        <attr name="subtitle" format="string"/>
+    </declare-styleable>
+
 
 </resources>

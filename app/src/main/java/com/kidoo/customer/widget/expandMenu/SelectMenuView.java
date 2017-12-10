@@ -1,26 +1,35 @@
 package com.kidoo.customer.widget.expandMenu;
 
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kidoo.customer.R;
+import com.kidoo.customer.bean.ChannelA;
+import com.kidoo.customer.bean.ChannelC;
+import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.expandMenu.holder.SelectHolder;
 import com.kidoo.customer.widget.expandMenu.holder.SortHolder;
-import com.kidoo.customer.widget.expandMenu.holder.SubjectHolder;
+import com.kidoo.customer.widget.expandMenu.holder.SubjectChannelABHolder;
+import com.kidoo.customer.widget.expandMenu.holder.SubjectChannelCHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * 搜索菜单栏
- * Created by vonchenchen on 2016/4/5 0005.
+ * description: 搜索菜单栏
+ * autour: ShaudXiao
+ * date: 2017/12/9
+ * update: 2017/12/9
+ * version:
  */
 public class SelectMenuView extends LinearLayout {
 
@@ -35,37 +44,57 @@ public class SelectMenuView extends LinearLayout {
     private View mSelectView;
 
     private View mRootView;
-    
+
     private View mPopupWindowView;
 
     private RelativeLayout mMainContentLayout;
     private View mBackView;
 
-    /** 科目 */
-    private SubjectHolder mSubjectHolder;
-    /** 综合排序 */
+    private View mDivderView;
+
+    /**
+     * ChannelA & B
+     */
+    private SubjectChannelABHolder mSubjectHolder;
+
+    private SubjectChannelCHolder mSubjectChannelHolder;
+
+    /**
+     * 综合排序
+     */
     private SortHolder mSortHolder;
-    /** 筛选 */
+    /**
+     * 筛选
+     */
     private SelectHolder mSelectHolder;
 
     private OnMenuSelectDataChangedListener mOnMenuSelectDataChangedListener;
 
     private RelativeLayout mContentLayout;
 
-    private TextView mSubjectText;
+    private TextView mChannelBText;
     private ImageView mSubjectArrowImage;
-    private TextView mSortText;
+    private TextView mChannelCText;
     private ImageView mSortArrowImage;
     private TextView mSelectText;
     private ImageView mSelectArrowImage;
 
-    private List<String> mGroupList;
-    private List<String> mPrimaryList;
-    private List<String> mJuniorList;
-    private List<String> mHighList;
-    private List<List<String>> mSubjectDataList;
+
+    private List<ChannelA> mChannelDataList = new ArrayList<>();
+
+    private List<ChannelC> mChannelCList = new ArrayList<>();
+    ;
 
     private int mTabRecorder = -1;
+
+    private int mChannelASelectIndex = 0;
+    private int mChannelBSelectIndex = 0;
+    private int mChannelCSelectIndex = 0;
+
+    private Animation inAnimation;
+    private Animation outAnimation;
+
+    private LayoutTransition mTransitioner;
 
     public SelectMenuView(Context context) {
         super(context);
@@ -81,112 +110,85 @@ public class SelectMenuView extends LinearLayout {
         init();
     }
 
-    private void init(){
+    public void setDataList(List<ChannelA> aDataList) {
+        if (aDataList != null) {
+            mChannelDataList.addAll(aDataList);
+            mSubjectHolder.refreshData(mChannelDataList, 0, -1);
 
-        mGroupList = new ArrayList<String>();
-        mGroupList.add("A");
-        mGroupList.add("B");
-        mGroupList.add("C");
-        mPrimaryList = new ArrayList<String>();
-        mPrimaryList.add("A1");
-        mPrimaryList.add("A2");
-        mPrimaryList.add("A3");
-        mJuniorList = new ArrayList<String>();
-        mJuniorList.add("B1");
-        mJuniorList.add("B2");
-        mJuniorList.add("B3");
-        mJuniorList.add("B4");
-        mJuniorList.add("B5");
-        mJuniorList.add("B6");
-        mJuniorList.add("B7");
-        mJuniorList.add("B8");
-        mJuniorList.add("B9");
-        mHighList = new ArrayList<String>();
-        mHighList.add("C1");
-        mHighList.add("C2");
-        mHighList.add("C3");
-        mHighList.add("C4");
-        mHighList.add("C5");
-        mHighList.add("C6");
-        mHighList.add("C7");
-        mHighList.add("C8");
-        mHighList.add("C9");
+            mChannelBText.setText(mChannelDataList.get(mChannelASelectIndex)
+                    .getChannelBList()
+                    .get(mChannelBSelectIndex).getName());
 
-        mSubjectDataList = new ArrayList<List<String>>();
-        mSubjectDataList.add(mGroupList);
-        mSubjectDataList.add(mPrimaryList);
-        mSubjectDataList.add(mJuniorList);
-        mSubjectDataList.add(mHighList);
+            mChannelCList.addAll(aDataList.get(mChannelASelectIndex)
+                    .getChannelBList()
+                    .get(mChannelBSelectIndex)
+                    .getChannelCList());
+            mSubjectChannelHolder.refreshViewData(mChannelCList, mChannelCSelectIndex);
+            mChannelCText.setText(mChannelCList.get(mChannelCSelectIndex).getName());
+        }
+
+    }
+
+    private void init() {
 
 
-        //科目
-        mSubjectHolder = new SubjectHolder(mContext);
-        mSubjectHolder.refreshData(mSubjectDataList, 0, -1);
-        mSubjectHolder.setOnRightListViewItemSelectedListener(new SubjectHolder.OnRightListViewItemSelectedListener() {
+        mSubjectHolder = new SubjectChannelABHolder(mContext);
+//        mSubjectHolder.refreshData(mChannelDataList, 0, -1);
+        mSubjectHolder.setOnRightListViewItemSelectedListener(new SubjectChannelABHolder.OnRightListViewItemSelectedListener() {
             @Override
             public void OnRightListViewItemSelected(int leftIndex, int rightIndex, String text) {
 
-                if(mOnMenuSelectDataChangedListener != null){
-                    int grade = leftIndex+1;
-                    int subject = getSubjectId(rightIndex);
-                    mOnMenuSelectDataChangedListener.onSubjectChanged(grade+"", subject+"");
+                if (mOnMenuSelectDataChangedListener != null) {
+
+                    mChannelASelectIndex = leftIndex;
+                    mChannelBSelectIndex = rightIndex;
+
+                    mOnMenuSelectDataChangedListener.onSubjectABChanged(leftIndex, rightIndex);
+                    LogUtils.i("menu select " + text);
                 }
 
                 dismissPopupWindow();
                 //Toast.makeText(UIUtils.getContext(), text, Toast.LENGTH_SHORT).show();
-                mSubjectText.setText(text);
+                mChannelBText.setText(text);
             }
         });
 
-        //综合排序
-        mSortHolder = new SortHolder(mContext);
-        mSortHolder.setOnSortInfoSelectedListener(new SortHolder.OnSortInfoSelectedListener() {
+        mSubjectChannelHolder = new SubjectChannelCHolder(mContext);
+        mSubjectChannelHolder.setOnChannelCListViewItemSelectedListener(new SubjectChannelCHolder.OnChannelCListViewItemSelectedListener() {
             @Override
-            public void onSortInfoSelected(String info) {
+            public void OnListViewItemSelected(int index, String text) {
+                if (mOnMenuSelectDataChangedListener != null) {
 
-                if(mOnMenuSelectDataChangedListener != null){
-                    mOnMenuSelectDataChangedListener.onSortChanged(info);
+                    mOnMenuSelectDataChangedListener.onSubjectCChanged(index);
+                    LogUtils.i("menu select " + text);
                 }
+                mChannelCSelectIndex = index;
 
                 dismissPopupWindow();
-                mSortText.setText(getSortString(info));
-                //Toast.makeText(UIUtils.getContext(), info, Toast.LENGTH_SHORT).show();
+                mChannelCText.setText(mChannelCList.get(index).getName());
             }
         });
 
-        //筛选
-        mSelectHolder = new SelectHolder(mContext);
-        mSelectHolder.setOnSelectedInfoListener(new SelectHolder.OnSelectedInfoListener() {
-            @Override
-            public void OnselectedInfo(String gender, String type) {
-
-                if(mOnMenuSelectDataChangedListener != null){
-                    mOnMenuSelectDataChangedListener.onSelectedChanged(gender, type);
-                }
-
-                dismissPopupWindow();
-                //Toast.makeText(UIUtils.getContext(), gender+" "+type, Toast.LENGTH_SHORT).show();
-            }
-        });
+        inAnimation = AnimationUtils.loadAnimation(mContext, R.anim.fade_in_anim);
+        outAnimation = AnimationUtils.loadAnimation(mContext, R.anim.fade_out_anim);
     }
 
-    private int getSubjectId(int index){
-        return index;
-    }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         View.inflate(mContext, R.layout.layout_search_menu, this);
 
-        mSubjectText = (TextView) findViewById(R.id.subject);
+        mChannelBText = (TextView) findViewById(R.id.subject);
         mSubjectArrowImage = (ImageView) findViewById(R.id.img_sub);
 
-        mSortText = (TextView) findViewById(R.id.comprehensive_sorting);
+        mChannelCText = (TextView) findViewById(R.id.comprehensive_sorting);
         mSortArrowImage = (ImageView) findViewById(R.id.img_cs);
 
         mSelectText = (TextView) findViewById(R.id.tv_select);
         mSelectArrowImage = (ImageView) findViewById(R.id.img_sc);
+
+        mDivderView = findViewById(R.id.divder_line);
 
         mContentLayout = (RelativeLayout) findViewById(R.id.rl_content);
 
@@ -202,7 +204,7 @@ public class SelectMenuView extends LinearLayout {
         mSubjectView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mOnMenuSelectDataChangedListener != null){
+                if (mOnMenuSelectDataChangedListener != null) {
                     mOnMenuSelectDataChangedListener.onViewClicked(mSubjectView);
                 }
                 handleClickSubjectView();
@@ -212,7 +214,7 @@ public class SelectMenuView extends LinearLayout {
         mSortView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mOnMenuSelectDataChangedListener != null){
+                if (mOnMenuSelectDataChangedListener != null) {
                     mOnMenuSelectDataChangedListener.onViewClicked(mSortView);
                 }
                 handleClickSortView();
@@ -222,7 +224,7 @@ public class SelectMenuView extends LinearLayout {
         mSelectView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mOnMenuSelectDataChangedListener != null){
+                if (mOnMenuSelectDataChangedListener != null) {
                     mOnMenuSelectDataChangedListener.onViewClicked(mSelectView);
                 }
                 handleClickSelectView();
@@ -235,9 +237,14 @@ public class SelectMenuView extends LinearLayout {
                 dismissPopupWindow();
             }
         });
+
+//        mTransitioner = new LayoutTransition();
+//        mContentLayout.setLayoutTransition(mTransitioner);
+
+//        setTransition();
     }
 
-    private void handleClickSubjectView(){
+    private void handleClickSubjectView() {
 
         mMainContentLayout.removeAllViews();
         mMainContentLayout.addView(mSubjectHolder.getRootView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -245,15 +252,15 @@ public class SelectMenuView extends LinearLayout {
         popUpWindow(TAB_SUBJECT);
     }
 
-    private void handleClickSortView(){
+    private void handleClickSortView() {
 
         mMainContentLayout.removeAllViews();
-        mMainContentLayout.addView(mSortHolder.getRootView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mMainContentLayout.addView(mSubjectChannelHolder.getRootView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         popUpWindow(TAB_SORT);
     }
 
-    private void handleClickSelectView(){
+    private void handleClickSelectView() {
 
         mMainContentLayout.removeAllViews();
         mMainContentLayout.addView(mSelectHolder.getRootView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -261,104 +268,108 @@ public class SelectMenuView extends LinearLayout {
         popUpWindow(TAB_SELECT);
     }
 
-    private void popUpWindow(int tab){
-        if(mTabRecorder != -1) {
+    private void popUpWindow(int tab) {
+        if (mTabRecorder != -1) {
             resetTabExtend(mTabRecorder);
         }
+
+        mDivderView.setVisibility(View.VISIBLE);
+
         extendsContent();
         setTabExtend(tab);
         mTabRecorder = tab;
+
+        mMainContentLayout.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_in_anim));
     }
 
-    private void extendsContent(){
+    private void extendsContent() {
+        mDivderView.setVisibility(View.GONE);
+
         mContentLayout.removeAllViews();
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         mContentLayout.addView(mPopupWindowView, params);
     }
 
-    private void dismissPopupWindow(){
+    private void dismissPopupWindow() {
+        if (!isShowing()) {
+            return;
+        }
+
         mContentLayout.removeAllViews();
         setTabClose();
+
+        mMainContentLayout.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.fade_out_anim));
+
     }
 
-    public void setOnMenuSelectDataChangedListener(OnMenuSelectDataChangedListener onMenuSelectDataChangedListener){
+    public boolean isShowing() {
+        View view = mContentLayout.findViewById(R.id.ll_background);
+        return view != null;
+    }
+
+    public void setOnMenuSelectDataChangedListener(OnMenuSelectDataChangedListener onMenuSelectDataChangedListener) {
         this.mOnMenuSelectDataChangedListener = onMenuSelectDataChangedListener;
     }
 
-    public interface OnMenuSelectDataChangedListener{
+    public interface OnMenuSelectDataChangedListener {
 
-        void onSubjectChanged(String grade, String subjects);
-        void onSortChanged(String sortType);
+        void onSubjectABChanged(int indexChannalA, int indexChannalB);
 
-        void onSelectedChanged(String gender, String classType);
+        void onSubjectCChanged(int indexChannalC);
 
         void onViewClicked(View view);
 
         //筛选菜单，当点击其他处菜单收回后，需要更新当前选中项
-        void onSelectedDismissed(String gender, String classType);
+        void onSelectedDismissed(int indexChannalA, int indexChannalB);
     }
 
-    private void setTabExtend(int tab){
-        if(tab == TAB_SUBJECT){
-            mSubjectText.setTextColor(getResources().getColor(R.color.blue_50));
+    private void setTabExtend(int tab) {
+        if (tab == TAB_SUBJECT) {
+            mChannelBText.setTextColor(getResources().getColor(R.color.blue_50));
             mSubjectArrowImage.setImageResource(R.drawable.channel_open_icon);
-        }else if(tab == TAB_SORT){
-            mSortText.setTextColor(getResources().getColor(R.color.blue_50));
+        } else if (tab == TAB_SORT) {
+            mChannelCText.setTextColor(getResources().getColor(R.color.blue_50));
             mSortArrowImage.setImageResource(R.drawable.channel_open_icon);
-        }else if(tab == TAB_SELECT){
+        } else if (tab == TAB_SELECT) {
             mSelectText.setTextColor(getResources().getColor(R.color.blue_50));
             mSelectArrowImage.setImageResource(R.drawable.channel_open_icon);
         }
     }
 
-    private void resetTabExtend(int tab){
-        if(tab == TAB_SUBJECT){
-            mSubjectText.setTextColor(getResources().getColor(R.color.blue_grey_600));
+    private void resetTabExtend(int tab) {
+        if (tab == TAB_SUBJECT) {
+            mChannelBText.setTextColor(getResources().getColor(R.color.blue_grey_600));
             mSubjectArrowImage.setImageResource(R.drawable.channel_close_icon);
-        }else if(tab == TAB_SORT){
-            mSortText.setTextColor(getResources().getColor(R.color.blue_grey_600));
+        } else if (tab == TAB_SORT) {
+            mChannelCText.setTextColor(getResources().getColor(R.color.blue_grey_600));
             mSortArrowImage.setImageResource(R.drawable.channel_close_icon);
-        }else if(tab == TAB_SELECT){
+        } else if (tab == TAB_SELECT) {
             mSelectText.setTextColor(getResources().getColor(R.color.blue_grey_600));
             mSelectArrowImage.setImageResource(R.drawable.channel_close_icon);
         }
     }
 
-    private void setTabClose(){
+    private void setTabClose() {
 
-        mSubjectText.setTextColor(getResources().getColor(R.color.blue_grey_300));
+        mChannelBText.setTextColor(getResources().getColor(R.color.blue_grey_300));
         mSubjectArrowImage.setImageResource(R.drawable.channel_close_icon);
 
-        mSortText.setTextColor(getResources().getColor(R.color.blue_grey_300));
+        mChannelCText.setTextColor(getResources().getColor(R.color.blue_grey_300));
         mSortArrowImage.setImageResource(R.drawable.channel_close_icon);
 
         mSelectText.setTextColor(getResources().getColor(R.color.blue_grey_300));
         mSelectArrowImage.setImageResource(R.drawable.channel_close_icon);
     }
 
-    private String getSortString(String info){
-        if(SortHolder.SORT_BY_NORULE.equals(info)){
-            return "sort1";
-        }else if(SortHolder.SORT_BY_EVALUATION.equals(info)){
-            return "sort2";
-        }else if(SortHolder.SORT_BY_PRICELOW.equals(info)){
-            return "sort3";
-        }else if(SortHolder.SORT_BY_PRICEHIGH.equals(info)){
-            return "sort4";
-        }else if(SortHolder.SORT_BY_DISTANCE.equals(info)){
-            return "sort5";
-        }
-        return "sort1";
-    }
 
-    public void clearAllInfo(){
+    public void clearAllInfo() {
         //清除控件内部选项
-        mSubjectHolder.refreshData(mSubjectDataList, 0, -1);
-        mSortHolder.refreshView(null);
-        mSelectHolder.refreshView(null);
+        mSubjectHolder.refreshData(mChannelDataList, 0, -1);
+        mSubjectChannelHolder.refreshView(null);
+//        mSelectHolder.refreshView(null);
 
         //清除菜单栏显示
-        mSubjectText.setText("type1");
-        mSortText.setText("type2");
+        mChannelBText.setText("type1");
+        mChannelCText.setText("type2");
     }
 }

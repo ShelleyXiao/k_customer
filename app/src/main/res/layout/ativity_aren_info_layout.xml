@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/lay_16"
+            android:layout_marginTop="@dimen/lay_8"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/channel_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/lay_8"
+                android:layout_marginTop="@dimen/lay_8"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/channel_a"
+                    style="@style/main_title_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="test" />
+
+                <TextView
+                    android:id="@+id/channel_b"
+                    style="@style/main_title_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="test" />
+
+                <TextView
+                    android:id="@+id/channel_c"
+                    style="@style/main_title_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="test" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo2" />
+
+            <com.kidoo.customer.widget.KidooSubtitleView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/lay_12"
+                android:layout_marginTop="@dimen/lay_12"
+                app:subtitle="@string/aren_info_name_title" />
+
+            <TextView
+                android:id="@+id/aren_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lay_12"
+                android:text="text"
+                android:textColor="@color/kidoo_gray"
+                android:textSize="@dimen/font_16" />
+
+
+            <com.kidoo.customer.widget.KidooSubtitleView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/lay_12"
+                android:layout_marginTop="@dimen/lay_12"
+                app:subtitle="@string/aren_info_contact_title" />
+
+            <TextView
+                android:id="@+id/aren_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lay_12"
+                android:text="text"
+                android:textColor="@color/kidoo_gray"
+                android:textSize="@dimen/font_16" />
+
+            <com.kidoo.customer.widget.KidooSubtitleView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/lay_12"
+                android:layout_marginTop="@dimen/lay_12"
+                app:subtitle="@string/aren_info_address_title" />
+
+            <TextView
+                android:id="@+id/aren_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lay_12"
+                android:text="text"
+                android:textColor="@color/kidoo_gray"
+                android:textSize="@dimen/font_16" />
+
+            <com.kidoo.customer.widget.KidooSubtitleView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/lay_12"
+                android:layout_marginTop="@dimen/lay_12"
+                app:subtitle="@string/aren_info_detail_title" />
+
+            <TextView
+                android:id="@+id/aren_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/lay_12"
+                android:text="text"
+                android:textColor="@color/kidoo_gray"
+                android:textSize="@dimen/font_16" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</FrameLayout>

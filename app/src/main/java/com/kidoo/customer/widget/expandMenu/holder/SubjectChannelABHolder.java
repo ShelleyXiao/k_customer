@@ -10,16 +10,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kidoo.customer.R;
+import com.kidoo.customer.bean.ChannelA;
+import com.kidoo.customer.bean.ChannelB;
 
 import java.util.List;
 
-/**
- * 科目
- * Created by vonchenchen on 2016/4/5 0005.
- */
-public class SubjectHolder extends BaseWidgetHolder<List<List<String>>> {
 
-    private List<List<String>> mDataList;
+public class SubjectChannelABHolder extends BaseWidgetHolder<List<ChannelA>> {
+
+    private List<ChannelA> mDataList;
 
     private ListView mLeftListView;
     private ListView mRightListView;
@@ -43,7 +42,7 @@ public class SubjectHolder extends BaseWidgetHolder<List<List<String>>> {
 
     private OnRightListViewItemSelectedListener mOnRightListViewItemSelectedListener;
 
-    public SubjectHolder(Context context) {
+    public SubjectChannelABHolder(Context context) {
         super(context);
     }
 
@@ -64,7 +63,7 @@ public class SubjectHolder extends BaseWidgetHolder<List<List<String>>> {
                 view.setBackgroundResource(R.color.white);
                 mLeftRecordView = view;
 
-                mRightAdapter.setDataList(mDataList.get(position + 1), mRightSelectedIndex);
+                mRightAdapter.setDataList(mDataList.get(position + 1).getChannelBList(), mRightSelectedIndex);
                 mRightAdapter.notifyDataSetChanged();
             }
         });
@@ -86,8 +85,8 @@ public class SubjectHolder extends BaseWidgetHolder<List<List<String>>> {
 
                 if(mOnRightListViewItemSelectedListener != null){
 
-                    List<String> dataList = mDataList.get(mLeftSelectedIndex+1);
-                    String text = dataList.get(mRightSelectedIndex);
+                    List<ChannelB> dataList = mDataList.get(mLeftSelectedIndex).getChannelBList();
+                    String text = dataList.get(mRightSelectedIndex).getName();
 
                     mOnRightListViewItemSelectedListener.OnRightListViewItemSelected(mLeftSelectedIndex, mRightSelectedIndex, text);
                 }
@@ -98,11 +97,11 @@ public class SubjectHolder extends BaseWidgetHolder<List<List<String>>> {
     }
 
     @Override
-    public void refreshView(List<List<String>> data) {
+    public void refreshView(List<ChannelA> data) {
 
     }
 
-    public void refreshData(List<List<String>> data, int leftSelectedIndex, int rightSelectedIndex){
+    public void refreshData(List<ChannelA> data, int leftSelectedIndex, int rightSelectedIndex){
 
         this.mDataList = data;
 
@@ -112,8 +111,8 @@ public class SubjectHolder extends BaseWidgetHolder<List<List<String>>> {
         mLeftSelectedIndexRecord = mLeftSelectedIndex;
         mRightSelectedIndexRecord = mRightSelectedIndex;
 
-        mLeftAdapter = new LeftAdapter(data.get(0), mLeftSelectedIndex);
-        mRightAdapter = new RightAdapter(data.get(1), mRightSelectedIndex);
+        mLeftAdapter = new LeftAdapter(mDataList, mLeftSelectedIndex);
+        mRightAdapter = new RightAdapter(mDataList.get(mLeftSelectedIndex).getChannelBList(), mRightSelectedIndex);
 
         mLeftListView.setAdapter(mLeftAdapter);
         mRightListView.setAdapter(mRightAdapter);
@@ -121,9 +120,9 @@ public class SubjectHolder extends BaseWidgetHolder<List<List<String>>> {
 
     private class LeftAdapter extends BaseAdapter {
 
-        private List<String> mLeftDataList;
+        private List<ChannelA> mLeftDataList;
 
-        public LeftAdapter(List<String> list, int leftIndex){
+        public LeftAdapter(List<ChannelA> list, int leftIndex){
             this.mLeftDataList = list;
             mLeftSelectedIndex = leftIndex;
         }
@@ -157,7 +156,7 @@ public class SubjectHolder extends BaseWidgetHolder<List<List<String>>> {
                 holder = (LeftViewHolder) convertView.getTag();
             }
 
-            holder.leftText.setText(mLeftDataList.get(position));
+            holder.leftText.setText(mLeftDataList.get(position).getName());
             if(mLeftSelectedIndex == position){
                 holder.backgroundView.setBackgroundResource(R.color.white);  //选中项背景
                 if(position == 0 && mIsFirstMeasureLeft){
@@ -178,14 +177,14 @@ public class SubjectHolder extends BaseWidgetHolder<List<List<String>>> {
 
     private class RightAdapter extends BaseAdapter {
 
-        private List<String> mRightDataList;
+        private List<ChannelB> mRightDataList;
 
-        public RightAdapter(List<String> list, int rightSelectedIndex){
+        public RightAdapter(List<ChannelB> list, int rightSelectedIndex){
             this.mRightDataList = list;
             mRightSelectedIndex = rightSelectedIndex;
         }
 
-        public void setDataList(List<String> list, int rightSelectedIndex){
+        public void setDataList(List<ChannelB> list, int rightSelectedIndex){
             this.mRightDataList = list;
             mRightSelectedIndex = rightSelectedIndex;
         }
@@ -219,7 +218,7 @@ public class SubjectHolder extends BaseWidgetHolder<List<List<String>>> {
                 holder = (RightViewHolder) convertView.getTag();
             }
 
-            holder.rightText.setText(mRightDataList.get(position));
+            holder.rightText.setText(mRightDataList.get(position).getName());
             if(mRightSelectedIndex == position && mLeftSelectedIndex == mLeftSelectedIndexRecord){
                 holder.selectedImage.setVisibility(View.VISIBLE);
                 mRightRecordImageView = holder.selectedImage;

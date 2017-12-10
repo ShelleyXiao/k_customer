@@ -1,6 +1,7 @@
 package com.kidoo.customer.widget.mapView;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.kidoo.customer.R;
+import com.kidoo.customer.bean.AreanaBean;
 import com.kidoo.customer.interf.LocationFace;
 import com.kidoo.customer.utils.LogUtils;
 
@@ -88,7 +90,11 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
         MyMarkerClickListener = myMarkerClickListener;
     }
 
-    public void addOverlyLatLng(View view, LatLng latLng, String title) {
+    public void addOverlyLatLng(View view, LatLng latLng, AreanaBean areanaBean) {
+        if(view == null || areanaBean == null) {
+            return ;
+        }
+        String title = areanaBean.getName();
         BitmapDescriptor bdC = BitmapDescriptorFactory.fromView(view);
         MarkerOptions ooC = new MarkerOptions().title(title)
                 .position(latLng)
@@ -96,7 +102,11 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
                 .perspective(false)
                 .anchor(0.5f, 1f);
         ooC.animateType(MarkerOptions.MarkerAnimateType.grow);
-        mMarkerHashMap.put(title, (Marker)(mBaidumap.addOverlay(ooC)));
+        Marker marker = (Marker) mBaidumap.addOverlay(ooC);
+        Bundle bundle = new Bundle ();
+        bundle.putSerializable ("marker", areanaBean);
+        marker.setExtraInfo(bundle);
+        mMarkerHashMap.put(title, marker);
 
         mBaidumap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override

@@ -17,21 +17,21 @@ public class ChannelB implements Serializable {
 
 
     /**
-     * id : 4
-     * channelAId : 3
-     * nameCh : 篮球
-     * nameEn : basketball
-     * description : 篮球
-     * createTime : 1502955328000
-     * channelCList : [{"id":4,"channelAId":3,"channelBId":4,"pic":"FqaKnpiFTiTJgLHSqeUrWKnvqG1m.png","nameCh":"篮球(5v5)","nameEn":"basketball 5v5","status":0,"minimum":10,"maximum":20,"playerType":1,"durationMin":10,"durationMax":10080,"description":"篮球正式赛","createTime":null,"dimensionList":[{"id":3,"channelCId":4,"name":"得分","valType":0,"description":"篮球的得分","createTime":null},{"id":4,"channelCId":4,"name":"助攻","valType":0,"description":"篮球的助攻","createTime":null}]},{"id":5,"channelAId":3,"channelBId":4,"pic":"FqaKnpiFTiTJgLHSqeUrWKnvqG1m.png","nameCh":"篮球(3v3)","nameEn":"basketball 3v3","status":0,"minimum":6,"maximum":6,"playerType":1,"durationMin":10,"durationMax":10080,"description":"接头篮球","createTime":null,"dimensionList":[]}]
+     * id : 1
+     * channelAId : 1
+     * name : 篮球
+     * description : 所有篮球的父类
+     * weight : 0
+     * createTime : null
      */
 
     private int id;
     private int channelAId;
-    private String nameCh;
-    private String nameEn;
+    private String name;
     private String description;
-    private long createTime;
+    private int weight;
+    private String createTime;
+
     private List<ChannelC> channelCList;
 
     public int getId() {
@@ -50,20 +50,12 @@ public class ChannelB implements Serializable {
         this.channelAId = channelAId;
     }
 
-    public String getNameCh() {
-        return nameCh;
+    public String getName() {
+        return name;
     }
 
-    public void setNameCh(String nameCh) {
-        this.nameCh = nameCh;
-    }
-
-    public String getNameEn() {
-        return nameEn;
-    }
-
-    public void setNameEn(String nameEn) {
-        this.nameEn = nameEn;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -74,11 +66,19 @@ public class ChannelB implements Serializable {
         this.description = description;
     }
 
-    public long getCreateTime() {
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(long createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -90,4 +90,15 @@ public class ChannelB implements Serializable {
         this.channelCList = channelCList;
     }
 
+    @Override
+    public String toString() {
+        return "ChannelB{" +
+                "id=" + id +
+                ", channelAId=" + channelAId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", weight=" + weight +
+                ", createTime='" + createTime + '\'' +
+                '}';
+    }
 }

@@ -14,22 +14,22 @@ import java.io.Serializable;
 
 public class AllChannelResultBean implements Serializable{
 
-    private ChannelCMap channelCmap;
-    private ChannelA channelAList;
+//    private ChannelCMap channelCmap;
+    private ChannelA[] channelAList;
 
-    public ChannelCMap getChannelCmap() {
-        return channelCmap;
-    }
+//    public ChannelCMap getChannelCmap() {
+//        return channelCmap;
+//    }
+//
+//    public void setChannelCmap(ChannelCMap channelCmap) {
+//        this.channelCmap = channelCmap;
+//    }
 
-    public void setChannelCmap(ChannelCMap channelCmap) {
-        this.channelCmap = channelCmap;
-    }
-
-    public ChannelA getChannelAList() {
+    public ChannelA[] getChannelAList() {
         return channelAList;
     }
 
-    public void setChannelAList(ChannelA channelAList) {
+    public void setChannelAList(ChannelA[] channelAList) {
         this.channelAList = channelAList;
     }
 }
