@@ -2,7 +2,6 @@ package com.kidoo.customer.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,19 +9,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestOptions;
 import com.kidoo.customer.R;
 import com.kidoo.customer.bean.BannerBean;
 import com.kidoo.customer.bean.NewsBean;
 import com.kidoo.customer.utils.DateTimeUtils;
-import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.KidooSubtitleView;
-import com.sunfusheng.glideimageview.GlideImageLoader;
 import com.sunfusheng.glideimageview.GlideImageView;
 import com.sunfusheng.glideimageview.progress.CircleProgressView;
-import com.sunfusheng.glideimageview.progress.OnGlideImageViewListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,6 +102,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     ((GlideImageView) itemView).loadImage(baseUrl + mImageList.get(position), R.color.placeholder);
                 }
             });
+            adsViewHolder.vpTop.setAutoPlayAble(true);
 
             adsViewHolder.vpTop.setDelegate(new BGABanner.Delegate<ImageView, String>() {
                 @Override
@@ -175,27 +169,27 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             contentViewHolder.tvTime.setText(DateTimeUtils.formatDateTime(DateTimeUtils.format(bean.getUpdateTime(),
                     "yyyy-MM-dd HH:mm")));
 
-            GlideImageLoader imageLoader = contentViewHolder.ivInfoPic.getImageLoader();
-            imageLoader.setOnGlideImageViewListener(baseUrl + bean.getTitlePic(),
-                    new OnGlideImageViewListener() {
-                        @Override
-                        public void onProgress(int percent, boolean isDone, GlideException exception) {
-                            if (exception != null && !TextUtils.isEmpty(exception.getMessage())) {
-                                LogUtils.e(exception.getMessage());
-                            }
-                            contentViewHolder.pvInfoProgress.setProgress(percent);
-                            contentViewHolder.pvInfoProgress.setVisibility(isDone ? View.GONE : View.VISIBLE);
-                        }
-                    }
-            );
+//            GlideImageLoader imageLoader = contentViewHolder.ivInfoPic.getImageLoader();
+//            imageLoader.setOnGlideImageViewListener(baseUrl + bean.getTitlePic(),
+//                    new OnGlideImageViewListener() {
+//                        @Override
+//                        public void onProgress(int percent, boolean isDone, GlideException exception) {
+//                            if (exception != null && !TextUtils.isEmpty(exception.getMessage())) {
+//                                LogUtils.e(exception.getMessage());
+//                            }
+//                            contentViewHolder.pvInfoProgress.setProgress(percent);
+//                            contentViewHolder.pvInfoProgress.setVisibility(isDone ? View.GONE : View.VISIBLE);
+//                        }
+//                    }
+//            );
+//
+//            RequestOptions requestOptions = contentViewHolder.ivInfoPic.requestOptions(R.color.placeholder)
+//                    .centerCrop();
+//            imageLoader.requestBuilder(baseUrl + bean.getTitlePic(), requestOptions)
+//                    .transition(DrawableTransitionOptions.withCrossFade())
+//                    .into(contentViewHolder.ivInfoPic);
 
-            RequestOptions requestOptions = contentViewHolder.ivInfoPic.requestOptions(R.color.placeholder)
-                    .centerCrop();
-            imageLoader.requestBuilder(baseUrl + bean.getTitlePic(), requestOptions)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(contentViewHolder.ivInfoPic);
-
-
+            contentViewHolder.ivInfoPic.loadImage(baseUrl + bean.getTitlePic(), R.color.placeholder);
             contentViewHolder.content.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -228,6 +222,49 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         return 0;
     }
+
+    public void addBannerData(List<BannerBean> bannerList) {
+        if (bannerList == null) {
+            return;
+        }
+        mBannerList.addAll(bannerList);
+        notifyDataSetChanged();
+    }
+
+    public void addData(List<NewsBean> newsBeans) {
+
+        if (newsBeans == null) {
+            return;
+        }
+        mNewsBeans.addAll(newsBeans);
+        notifyDataSetChanged();
+    }
+
+    public void addData(NewsBean dataBean) {
+        if (mNewsBeans != null) {
+            mNewsBeans.add(dataBean);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void clearAllNews() {
+        if (mNewsBeans != null) {
+            mNewsBeans.clear();
+        }
+    }
+
+    /**
+     * @param position
+     */
+    public void deleteItem(int position) {
+        if (mNewsBeans == null) {
+            return;
+        }
+        mNewsBeans.remove(position);
+        notifyDataSetChanged();
+    }
+
+
 
     class BannerAdsViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.vp_top)
@@ -283,42 +320,6 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-    }
-
-    public void addBannerData(List<BannerBean> bannerList) {
-        if (bannerList == null) {
-            return;
-        }
-        mBannerList.addAll(bannerList);
-        notifyDataSetChanged();
-    }
-
-    public void addData(List<NewsBean> newsBeans) {
-
-        if (newsBeans == null) {
-            return;
-        }
-        mNewsBeans.addAll(newsBeans);
-        notifyDataSetChanged();
-    }
-
-    public void addData(NewsBean dataBean) {
-        if (mNewsBeans != null) {
-            mNewsBeans.add(dataBean);
-        }
-        notifyDataSetChanged();
-    }
-
-
-    /**
-     * @param position
-     */
-    public void deleteItem(int position) {
-        if (mNewsBeans == null) {
-            return;
-        }
-        mNewsBeans.remove(position);
-        notifyDataSetChanged();
     }
 
 

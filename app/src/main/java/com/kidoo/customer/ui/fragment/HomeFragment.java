@@ -132,7 +132,19 @@ public class HomeFragment extends BaseMvpFragment<HomePresenterImpl> implements 
 
             @Override
             public void onStarRankingListClick(View view) {
-
+                LogUtils.d(view.getId());
+                switch (view.getId()) {
+                    case R.id.campaign_info:
+                        break;
+                    case R.id.find_team:
+                        break;
+                    case R.id.aren_map:
+                        break;
+                    case R.id.review:
+                        break;
+                    default:
+                        break;
+                }
             }
 
             @Override
@@ -184,16 +196,18 @@ public class HomeFragment extends BaseMvpFragment<HomePresenterImpl> implements 
                 loadingLayout.setStatus(LoadingLayout.Success);//加载成功
             }
         }
-        LogUtils.i(datas.get(0).toString());
-
+        //        LogUtils.i(datas.get(0).toString());
+        mNewHomeListAdapter.clearAllNews();
         mNewHomeListAdapter.addData(datas);
-        if(info == null) {
+        if (info == null) {
             mPageCurrentNo = 1;
             mPageSizeTotal = 1;
         } else {
             mPageSizeTotal = info.getTotalPage();
             mPageCurrentNo = info.getPageNo();
         }
+
+        mPageCurrentNo++;
 
     }
 
@@ -214,7 +228,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenterImpl> implements 
             swipeToLoadLayout.setLoadingMore(false);
         }
 
-        if(info == null) {
+        if (info == null) {
             mPageCurrentNo = 1;
             mPageSizeTotal = 1;
         } else {
@@ -222,6 +236,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenterImpl> implements 
             mPageCurrentNo = info.getPageNo();
         }
 
+        LogUtils.i("mPageCurrentNo = " + mPageCurrentNo + "mPageSizeTotal = " + mPageSizeTotal);
 
         mPageCurrentNo++;
 
@@ -254,6 +269,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenterImpl> implements 
 
     @Override
     public void onLoadMore() {
+        LogUtils.i("mPageCurrentNo = " + mPageCurrentNo + "mPageSizeTotal = " + mPageSizeTotal);
         if (mPageCurrentNo <= mPageSizeTotal) {
             mPresenter.doQueryNews(1, Constants.PAGE_SIZE, mPageCurrentNo);
             return;
