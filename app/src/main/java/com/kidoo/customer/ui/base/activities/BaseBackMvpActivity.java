@@ -37,8 +37,8 @@ public abstract class BaseBackMvpActivity<T extends BasePresenter> extends BaseM
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    public void onBackPressedSupport() {
+        super.onBackPressedSupport();
         finish();
     }
 

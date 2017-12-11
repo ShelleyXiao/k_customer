@@ -1,7 +1,7 @@
 package com.kidoo.customer.mvp.interactor;
 
 import com.kidoo.customer.api.AllChannelApi;
-import com.kidoo.customer.api.token.QueryArenaMapApi;
+import com.kidoo.customer.api.QueryArenaMapApi;
 import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.bean.ArenaListResult;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;

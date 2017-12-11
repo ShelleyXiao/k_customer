@@ -82,4 +82,6 @@
 
     <color name="menu_div_gray">#ccc</color>
 
+    <color name="placeholder">#33000000</color>
+
 </resources>

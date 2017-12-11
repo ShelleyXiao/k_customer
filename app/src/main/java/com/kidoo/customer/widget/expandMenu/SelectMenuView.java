@@ -144,7 +144,8 @@ public class SelectMenuView extends LinearLayout {
                     mChannelBSelectIndex = rightIndex;
 
                     mOnMenuSelectDataChangedListener.onSubjectABChanged(leftIndex, rightIndex);
-                    LogUtils.i("menu select " + text);
+                    LogUtils.i("menu select " + text +
+                    "leftIndex = " + leftIndex + "rightIndex =  " + rightIndex);
                 }
 
                 dismissPopupWindow();

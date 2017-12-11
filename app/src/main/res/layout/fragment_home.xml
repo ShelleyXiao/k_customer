@@ -1,28 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+    <com.kidoo.customer.widget.TitleBar
+        android:id="@+id/nav_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingTop="25dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:paddingRight="@dimen/lay_20"
-            android:text="@string/main_tab_name_home"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font_18" />
-
-    </android.support.v7.widget.Toolbar>
+        android:layout_gravity="top"
+        app:aTitle="@string/main_tab_name_home" />
 
 
     <com.weavey.loading.lib.LoadingLayout
@@ -37,18 +26,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.mperfit.perfit.widget.RefreshHeaderView
+            <com.kidoo.customer.widget.recylerview.RefreshHeaderView
                 android:id="@id/swipe_refresh_header"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:gravity="center" />
+                android:gravity="center"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/swipe_target"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
-                android:scrollbars="none" />
+                android:scrollbars="none"/>
+
+
+            <com.kidoo.customer.widget.recylerview.LoadMoreFooterView
+                android:id="@+id/swipe_load_more_footer"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"/>
 
 
         </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>

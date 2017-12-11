@@ -1,4 +1,4 @@
-package com.kidoo.customer.widget.refreshview;
+package com.kidoo.customer.widget.recylerview;
 
 import android.content.Context;
 import android.util.AttributeSet;

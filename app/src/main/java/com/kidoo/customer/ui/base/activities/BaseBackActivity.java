@@ -36,8 +36,8 @@ public abstract class BaseBackActivity extends BaseActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    public void onBackPressedSupport() {
+        super.onBackPressedSupport();
         finish();
     }
 

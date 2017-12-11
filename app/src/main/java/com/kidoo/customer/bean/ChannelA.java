@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 
-public class ChannelA implements Serializable {
+public class ChannelA  extends Channel implements Serializable {
     /**
      * id : 1
      * name : 体育

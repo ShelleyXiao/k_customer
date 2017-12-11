@@ -1,6 +1,8 @@
 package com.kidoo.customer.widget.mapView;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -71,7 +73,7 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
         initBaiduMap();
     }
 
-
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public BaidumapView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -86,14 +88,21 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
         return false;
     }
 
-    public  void setMyMarkerClickListener(OnMyMarkerClickListener myMarkerClickListener) {
+    public void setMyMarkerClickListener(OnMyMarkerClickListener myMarkerClickListener) {
         MyMarkerClickListener = myMarkerClickListener;
     }
 
-    public void addOverlyLatLng(View view, LatLng latLng, AreanaBean areanaBean) {
-        if(view == null || areanaBean == null) {
-            return ;
+    public void clearAllOverlys() {
+        if (mBaidumap != null) {
+            mBaidumap.clear();
         }
+    }
+
+    public void addOverlyLatLng(View view, AreanaBean areanaBean) {
+        if (view == null || areanaBean == null) {
+            return;
+        }
+        LatLng latLng = new LatLng(areanaBean.getLatitude(), areanaBean.getLongitude());
         String title = areanaBean.getName();
         BitmapDescriptor bdC = BitmapDescriptorFactory.fromView(view);
         MarkerOptions ooC = new MarkerOptions().title(title)
@@ -101,22 +110,16 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
                 .icon(bdC)
                 .perspective(false)
                 .anchor(0.5f, 1f);
+
+
         ooC.animateType(MarkerOptions.MarkerAnimateType.grow);
         Marker marker = (Marker) mBaidumap.addOverlay(ooC);
-        Bundle bundle = new Bundle ();
-        bundle.putSerializable ("marker", areanaBean);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("marker", areanaBean);
         marker.setExtraInfo(bundle);
         mMarkerHashMap.put(title, marker);
 
-        mBaidumap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                if(null != MyMarkerClickListener) {
-                    MyMarkerClickListener.onMarkerClick(marker);
-                }
-                return true;
-            }
-        });
+
     }
 
 //    public void onResume() {
@@ -134,9 +137,9 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
     }
 
     public void setOverlyLatLng(String title, LatLng ll) {
-        if(mMarkerHashMap != null) {
+        if (mMarkerHashMap != null) {
             Marker marker = mMarkerHashMap.get(title);
-            if(null != marker) {
+            if (null != marker) {
                 marker.setPosition(ll);
             }
         }
@@ -154,8 +157,18 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
                 MyLocationConfiguration.LocationMode.NORMAL, true, mCurrentMarker,
                 accuracyCircleFillColor, accuracyCircleStrokeColor));
 
-        //地图点击事件处理
-        mBaidumap.setOnMapClickListener(this);
+//        //地图点击事件处理
+//        mBaidumap.setOnMapClickListener(this);
+
+        mBaidumap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if (null != MyMarkerClickListener) {
+                    MyMarkerClickListener.onMarkerClick(marker);
+                }
+                return true;
+            }
+        });
 
 //        mBaidumap.setOnMapLoadedCallback(new OnMapLoadedCallback() {
 //
@@ -200,7 +213,6 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
 
 
     }
-
 
 
     public interface OnMyMarkerClickListener {

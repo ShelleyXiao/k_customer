@@ -3,7 +3,6 @@ package com.kidoo.customer.ui.base.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +22,7 @@ import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
+import me.yokeyword.fragmentation.SupportFragment;
 
 /** 
  * description: Fragmetn基础类
@@ -32,7 +32,7 @@ import io.reactivex.subjects.PublishSubject;
  * version: 
 */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends SupportFragment {
 
     protected Context mContext;
     protected View mRoot;
@@ -44,6 +44,23 @@ public abstract class BaseFragment extends Fragment {
     private GlideRequests mGlideRequests;
 
     public final PublishSubject<ActivityLifeCycleEvent> lifecycleSubject = PublishSubject.create();
+
+    private boolean isFirst = true;
+
+    //Fragment的View加载完毕的标记
+    private boolean isViewCreated;
+
+    //Fragment对用户可见的标记
+    private boolean isUIVisible;
+
+    //setUserVisibleHint(boolean isVisibleToUser)方法会多次回调,而且可能会在onCreateView()方法执行完毕之前回调
+    // 如果isVisibleToUser==true,然后进行数据加载和控件数据填充,但是onCreateView()方法并未执行完毕,
+    // 此时就会出现NullPointerException空指针异常. 所以给onCreateView 添加标记位
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        this.isUIVisible = isVisibleToUser;
+        super.setUserVisibleHint(isVisibleToUser);
+    }
 
 
     @Override
@@ -79,6 +96,9 @@ public abstract class BaseFragment extends Fragment {
             if(savedInstanceState != null) {
                 onRestartInstance(savedInstanceState);
             }
+
+            isViewCreated =true;
+
             // 初始化子部件
             initWidget(mRoot);
 
@@ -103,6 +123,13 @@ public abstract class BaseFragment extends Fragment {
 //    public void onResume() {
 //        super.onResume();
 //    }
+
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        initEventAndData();
+        isFirst = false;
+    }
 
     @Override
     public void onPause() {

@@ -11,7 +11,6 @@ import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.R;
 import com.kidoo.customer.mvp.contract.CheckAllTokenContract;
 import com.kidoo.customer.mvp.presenter.CheckAllTokenPresenterImpl;
-import com.kidoo.customer.ui.activity.ArenDetailActivity;
 import com.kidoo.customer.ui.activity.MainActivity;
 import com.kidoo.customer.ui.activity.account.LoginActivity;
 import com.kidoo.customer.ui.base.activities.BaseMvpActivity;
@@ -103,7 +102,7 @@ public class SplashActivity extends BaseMvpActivity<CheckAllTokenPresenterImpl> 
     @Override
     public void goLogin() {
         Intent intent = new Intent();
-        intent.setClass(this, ArenDetailActivity.class);
+        intent.setClass(this, LoginActivity.class);
         this.startActivity(intent);
         this.finish();
     }

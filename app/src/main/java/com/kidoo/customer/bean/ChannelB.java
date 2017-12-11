@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 
-public class ChannelB implements Serializable {
+public class ChannelB  extends Channel  implements Serializable {
 
 
     /**

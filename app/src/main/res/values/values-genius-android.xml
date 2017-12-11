@@ -285,6 +285,32 @@
     <color name="yellow_a200">#ffff00</color>
     <color name="yellow_a400">#ffea00</color>
     <color name="yellow_a700">#ffd600</color>
+
+
+    <color name="transparent05">#0B000000</color>
+    <color name="transparent10">#1A000000</color>
+    <color name="transparent20">#33000000</color>
+    <color name="transparent30">#4D000000</color>
+    <color name="transparent40">#66000000</color>
+    <color name="transparent50">#80000000</color>
+    <color name="transparent60">#9A000000</color>
+    <color name="transparent70">#B3000000</color>
+    <color name="transparent80">#CC000000</color>
+    <color name="transparent90">#E5000000</color>
+    <color name="transparent100">#FF000000</color>
+
+    <color name="transparent_white">#00ffffff</color>
+    <color name="transparent10_white">#1Affffff</color>
+    <color name="transparent20_white">#33ffffff</color>
+    <color name="transparent30_white">#4Dffffff</color>
+    <color name="transparent40_white">#66ffffff</color>
+    <color name="transparent50_white">#80ffffff</color>
+    <color name="transparent60_white">#9Affffff</color>
+    <color name="transparent70_white">#B3ffffff</color>
+    <color name="transparent80_white">#CCffffff</color>
+    <color name="transparent90_white">#E5ffffff</color>
+    <color name="transparent100_white">#FFffffff</color>
+
     <dimen name="font_10">10sp</dimen>
     <dimen name="font_112">112sp</dimen>
     <dimen name="font_12">12sp</dimen>
@@ -299,6 +325,8 @@
     <dimen name="font_56">56sp</dimen>
     <dimen name="font_6">6sp</dimen>
     <dimen name="font_8">8sp</dimen>
+    <dimen name="lay_8">8dp</dimen>
+    <dimen name="lay_10">10dp</dimen>
     <dimen name="lay_12">12dp</dimen>
     <dimen name="lay_14">14dp</dimen>
     <dimen name="lay_16">16dp</dimen>
@@ -324,7 +352,6 @@
     <dimen name="lay_72">72dp</dimen>
     <dimen name="lay_74">74dp</dimen>
     <dimen name="lay_76">76dp</dimen>
-    <dimen name="lay_8">8dp</dimen>
     <dimen name="lay_80">80dp</dimen>
     <dimen name="lay_84">84dp</dimen>
     <dimen name="lay_88">88dp</dimen>

@@ -7,6 +7,8 @@ import com.kidoo.customer.bean.CheckAllTokenBean;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.bean.KeypairResult;
 import com.kidoo.customer.bean.LoginResult;
+import com.kidoo.customer.bean.NewBananersResult;
+import com.kidoo.customer.bean.NewsListResult;
 import com.kidoo.customer.bean.RegisterResultBean;
 import com.kidoo.customer.bean.ReturnNullBean;
 import com.kidoo.customer.bean.SMSCodeBean;
@@ -78,6 +80,13 @@ public interface KidooApiService {
 
     @GET("customer/store/queryPicInfo")
     Observable<KidooApiResult<QNToken>> queryPicInfo();
+
+    @GET("customer/banner/queryBannerList")
+    Observable<KidooApiResult<NewBananersResult>> queryBannerList();
+
+    @GET("customer/news/queryNewsList")
+    Observable<KidooApiResult<NewsListResult>> queryNewsList(@QueryMap Map<String, String> maps);
+
 
 
 

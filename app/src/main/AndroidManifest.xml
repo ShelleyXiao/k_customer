@@ -129,6 +129,15 @@
             android:name=".ui.activity.UserDetailActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/user_detail_title"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity
+            android:name=".ui.activity.AreanMapActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/aren_map_title"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             >

@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.kidoo.customer.api.KidooApiService;
+import com.kidoo.customer.bean.ChannelA;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.di.Component.AppComponent;
 import com.kidoo.customer.di.Component.DaggerAppComponent;
@@ -21,6 +22,9 @@ import com.kidoo.customer.utils.TDevice;
 import com.kidoo.customer.widget.SimplexToast;
 import com.tencent.bugly.crashreport.CrashReport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -32,16 +36,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * FIXME
  */
 
-public class AppContext extends Application{
+public class AppContext extends Application {
 
     private static Context _context;
 
-//    private RefWatcher mRefWatcher;
+    //    private RefWatcher mRefWatcher;
     private static AppContext instance;
 
     public AppComponent mAppComponent;
 
     private InitData mInitData;
+
 
     @Override
     public void onCreate() {
@@ -65,6 +70,8 @@ public class AppContext extends Application{
 
 
     }
+
+    private List<ChannelA> gChannelAList = new ArrayList<>();
 
     private void initBugly() {
         Context context = getApplicationContext();
@@ -165,9 +172,10 @@ public class AppContext extends Application{
 
     /**
      * 对外提供AppComponent
+     *
      * @return
      */
-    public AppComponent getAppComponent(){
+    public AppComponent getAppComponent() {
         return mAppComponent;
     }
 
@@ -177,5 +185,15 @@ public class AppContext extends Application{
 
     public void setInitData(InitData mInitData) {
         this.mInitData = mInitData;
+    }
+
+
+    public List<ChannelA> getgChannelAList() {
+        return gChannelAList;
+    }
+
+    public void setgChannelAList(List<ChannelA> dataList) {
+        this.gChannelAList.clear();
+        this.gChannelAList.addAll(dataList);
     }
 }

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <RelativeLayout
+            android:id="@+id/campaign_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/item_ranking_bg">
+
+            <ImageView
+                android:id="@+id/icon_campaign_info"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/lay_8"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_beevaluated"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon_campaign_info"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/lay_8"
+                android:layout_marginTop="@dimen/font_12"
+                android:text="@string/campaign_info_title"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/find_team"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/item_ranking_bg"
+            >
+
+            <ImageView
+                android:id="@+id/icon_find_team"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/lay_8"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_findteam"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon_find_team"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/lay_8"
+                android:layout_marginTop="@dimen/font_12"
+                android:text="@string/explore_item_findteam"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/aren_map"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/item_ranking_bg">
+
+            <ImageView
+                android:id="@+id/icon_aren_map"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/lay_8"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_beevaluated"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon_aren_map"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/lay_8"
+                android:layout_marginTop="@dimen/font_12"
+                android:text="@string/aren_map_title"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/review"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/item_ranking_bg">
+
+            <ImageView
+                android:id="@+id/icon_review"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/lay_8"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_activity"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon_review"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/lay_8"
+                android:layout_marginTop="@dimen/font_12"
+                android:text="@string/main_home_ranking_review"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lay_20"
+        />
+
+</LinearLayout>

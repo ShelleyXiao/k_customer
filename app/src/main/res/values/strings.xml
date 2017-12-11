@@ -9,11 +9,16 @@
 
     <string name="main_tab_name_broadcast">广播</string>
     <string name="main_tab_name_map">地图</string>
-    <string name="main_tab_name_message">信息</string>
+    <string name="main_tab_name_message">消息</string>
     <string name="main_tab_name_explore">发现</string>
     <string name="main_tab_name_me">个人</string>
 
+    <string name="main_home_ranking_review">精彩回放</string>
+    <string name="read_actic_title">阅读全文</string>
 
+    <string name="info_type_wonderful_event">精彩赛事</string>
+
+    <string name="transitional_image">the image of transition</string>
 
     <string name="need_lbs_permission_hint">需要定位权限</string>
     <string name="clear_bodies_failed_hint">清除位置信息失败</string>
@@ -222,6 +227,8 @@
     <string name="aren_info_contact_title">联系方式</string>
     <string name="aren_info_address_title">地址</string>
     <string name="aren_info_detail_title">信息</string>
+
+    <string name="aren_map_title">场地信息</string>
 
 
 </resources>

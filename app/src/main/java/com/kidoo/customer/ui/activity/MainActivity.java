@@ -69,7 +69,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressedSupport() {
+        super.onBackPressedSupport();
         long curTime = SystemClock.uptimeMillis();
         if ((curTime - mBackPressedTime) < (3 * 1000)) {
             finish();

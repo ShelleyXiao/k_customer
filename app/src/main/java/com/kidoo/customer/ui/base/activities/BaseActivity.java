@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 
 import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.GlideRequests;
@@ -17,6 +16,7 @@ import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
+import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * User: ShaudXiao
@@ -28,7 +28,7 @@ import io.reactivex.subjects.PublishSubject;
  */
 
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity extends SupportActivity implements BaseView {
 
     protected GlideRequests mGlideRequests;
     private boolean mIsDestroy;

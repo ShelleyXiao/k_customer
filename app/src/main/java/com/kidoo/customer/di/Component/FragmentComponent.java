@@ -6,7 +6,7 @@ import android.content.Context;
 import com.kidoo.customer.di.module.FragmentModule;
 import com.kidoo.customer.di.scope.ContextLife;
 import com.kidoo.customer.di.scope.PerFragment;
-import com.kidoo.customer.ui.fragment.BroadcastTabFragment;
+import com.kidoo.customer.ui.fragment.HomeFragment;
 import com.kidoo.customer.ui.fragment.UserInfoTabFragment;
 
 import dagger.Component;
@@ -30,6 +30,7 @@ public interface FragmentComponent {
 
     void inject(UserInfoTabFragment fragment);
 
-    void inject(BroadcastTabFragment fragment);
+//    void inject(BroadcastTabFragment fragment);
+    void inject(HomeFragment fragment);
 
 }

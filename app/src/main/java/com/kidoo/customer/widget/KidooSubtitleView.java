@@ -52,4 +52,8 @@ public class KidooSubtitleView extends FrameLayout {
 
         ta.recycle();
     }
+
+    public void setTitle(String title) {
+        tvSubtitle.setText(title);
+    }
 }
