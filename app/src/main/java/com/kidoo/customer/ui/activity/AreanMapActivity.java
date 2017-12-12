@@ -10,22 +10,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.kidoo.customer.AppContext;
+import com.kidoo.customer.Constants;
 import com.kidoo.customer.R;
 import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.bean.AreanaBean;
 import com.kidoo.customer.bean.ChannelA;
 import com.kidoo.customer.bean.ChannelC;
 import com.kidoo.customer.bean.InitData;
-import com.kidoo.customer.interf.OnTabReselectListener;
 import com.kidoo.customer.mvp.contract.MapContract;
 import com.kidoo.customer.mvp.presenter.MapPresenterImpl;
-import com.kidoo.customer.ui.base.activities.BaseMvpActivity;
+import com.kidoo.customer.ui.base.activities.BaseBackMvpActivity;
 import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.expandMenu.SelectMenuView;
+import com.kidoo.customer.widget.glideimageview.GlideImageView;
 import com.kidoo.customer.widget.mapView.BaidumapView;
-import com.sunfusheng.glideimageview.GlideImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  * FIXME
  */
 
-public class AreanMapActivity extends BaseMvpActivity<MapPresenterImpl> implements OnTabReselectListener, EasyPermissions.PermissionCallbacks
+public class AreanMapActivity extends BaseBackMvpActivity<MapPresenterImpl> implements EasyPermissions.PermissionCallbacks
         , MapContract.View, SelectMenuView.OnMenuSelectDataChangedListener, BaidumapView.OnMyMarkerClickListener {
 
     private static final int RC_LOC_PERM = 122;
@@ -70,6 +72,8 @@ public class AreanMapActivity extends BaseMvpActivity<MapPresenterImpl> implemen
     private int mSelectChannelBIndex = 0;
     private int mSelectChannelCIndex = 0;
 
+    private String baseUrl;
+
     @Override
     public void onPause() {
 //        mMapView.onPause();
@@ -80,6 +84,9 @@ public class AreanMapActivity extends BaseMvpActivity<MapPresenterImpl> implemen
     public void onResume() {
 //        mMapView.onResume();
         super.onResume();
+
+        InitData initData = AppContext.context().getInitData();
+        baseUrl = initData.getQnDomain();
 
         mPresenter.doQueryAllChannels();
 
@@ -102,6 +109,8 @@ public class AreanMapActivity extends BaseMvpActivity<MapPresenterImpl> implemen
 
     @Override
     public void initWidget() {
+        super.initWidget();
+
         mMapView.setMyMarkerClickListener(this);
         selectMenuView.setOnMenuSelectDataChangedListener(this);
     }
@@ -110,6 +119,11 @@ public class AreanMapActivity extends BaseMvpActivity<MapPresenterImpl> implemen
     public void initData() {
         super.initData();
 
+        List<ChannelA> channelAList = AppContext.context().getgChannelAList();
+        if (channelAList != null && channelAList.size() > 0) {
+            selectMenuView.setDataList(channelAList);
+        }
+
         requsetLocation();
     }
 
@@ -117,15 +131,6 @@ public class AreanMapActivity extends BaseMvpActivity<MapPresenterImpl> implemen
     @Override
     protected int getContentView() {
         return R.layout.layout_main_tab_broadcast;
-    }
-
-
-    @Override
-    public void onTabReselect() {
-        LogUtils.w("tab relect");
-
-
-        mPresenter.doQueryAreans(mSelectChannelID);
     }
 
 
@@ -212,8 +217,16 @@ public class AreanMapActivity extends BaseMvpActivity<MapPresenterImpl> implemen
                 mChannelList.addAll(dataList);
 
                 AppContext.context().setgChannelAList(dataList);
+
+                mSelectChannelID = dataList.get(mSelectChannelAIndex).getChannelBList()
+                        .get(mSelectChannelBIndex)
+                        .getChannelCList().get(mSelectChannelCIndex)
+                        .getId();
+
+                mPresenter.doQueryAreans(mSelectChannelID);
             }
         }
+
 
     }
 
@@ -230,6 +243,13 @@ public class AreanMapActivity extends BaseMvpActivity<MapPresenterImpl> implemen
         for (AreanaBean bean : mAreanBeans) {
             addMapOverlyItem(bean);
         }
+
+        LatLng latLng = null;
+        if (!findCloseArean(mAreanBeans, latLng)) {
+            LogUtils.i("setCenter");
+            mMapView.setCenter(latLng);
+        }
+
     }
 
     @Override
@@ -273,14 +293,39 @@ public class AreanMapActivity extends BaseMvpActivity<MapPresenterImpl> implemen
     }
 
     private void addMapOverlyItem(AreanaBean bean) {
-        InitData initData = AppContext.context().getInitData();
-        String baseUrl = initData.getQnDomain();
         View view = LayoutInflater.from(this).inflate(R.layout.layout_map_view_marker, null, false);
         GlideImageView glideImageView = (GlideImageView) view.findViewById(R.id.img_pic);
 
-        glideImageView.loadImage(baseUrl + bean.getPicMini(), R.color.blue_grey_400);
+//        RequestOptions requestOptions = glideImageView.requestOptions(R.color.placeholder).centerCrop()
+//                .diskCacheStrategy(DiskCacheStrategy.DATA)
+//                .dontAnimate();
+//
+//        glideImageView.load(baseUrl + bean.getPicMini(), requestOptions);
+
+        glideImageView.loadImage(baseUrl + bean.getPicMini(), R.color.placeholder);
+
+//        ImageView glideImageView = (ImageView) view.findViewById(R.id.img_pic);
+//        getImageLoader().load(baseUrl + bean.getPicMini()).into(glideImageView);
 
         mMapView.addOverlyLatLng(view, bean);
+    }
+
+    private boolean findCloseArean(List<AreanaBean> areanaBeans, LatLng cloesAreanLatLng) {
+        LatLng myLatLng = mMapView.getMyLatLng();
+        double minDistance = 0;
+        for (AreanaBean bean : areanaBeans) {
+            double distance = DistanceUtil.getDistance(myLatLng, new LatLng(bean.getLatitude(), bean.getLongitude()));
+            if (distance < Constants.DEFAAULT_AREN_CLOSE) {
+                LogUtils.i(cloesAreanLatLng);
+                return true;
+            }
+            if (minDistance < distance) {
+                minDistance = distance;
+                cloesAreanLatLng = new LatLng(bean.getLatitude(), bean.getLongitude());
+            }
+        }
+
+        return false;
     }
 
 }

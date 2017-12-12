@@ -34,8 +34,8 @@
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="dialog_common" parent="@style/Theme.AppCompat.Dialog">
-        <item name="android:windowBackground">@drawable/dialog_background</item>
+    <style name="dialog_common" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@drawable/background_sentgift</item>
     </style>
 
     <style name="dialog_divider">
@@ -131,6 +131,11 @@
 
     <style name="item_title_true_16sp">
         <item name="android:textSize">@dimen/font_16</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="item_title_true_14sp">
+        <item name="android:textSize">@dimen/font_14</item>
         <item name="android:textColor">@color/black</item>
     </style>
 

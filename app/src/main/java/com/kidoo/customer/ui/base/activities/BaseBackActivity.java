@@ -53,4 +53,9 @@ public abstract class BaseBackActivity extends BaseActivity {
         if (mWaitDialog == null) return;
         mWaitDialog.dismiss();
     }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
 }

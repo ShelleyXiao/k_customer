@@ -36,7 +36,8 @@ import retrofit2.http.QueryMap;
 
 public interface KidooApiService {
 
-    public static final String BASE_API_URL = "http://www.kidoo.site";
+//    public static final String BASE_API_URL = "http://www.kidoo.site";
+    public static final String BASE_API_URL = "http://120.79.34.62:8061";
 
     @POST("customer/common/getKeyPair")
     @FormUrlEncoded

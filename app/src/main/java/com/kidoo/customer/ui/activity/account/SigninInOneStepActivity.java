@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.CountDownTimer;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -91,7 +90,7 @@ public class SigninInOneStepActivity extends AccountBaseActivity<SigninPresenter
     @Override
     public void initWindow() {
         super.initWindow();
-        initToolbar();
+//        initToolbar();
     }
 
     @Override
@@ -206,20 +205,20 @@ public class SigninInOneStepActivity extends AccountBaseActivity<SigninPresenter
         mPresenter.dropView();
     }
 
-    private void initToolbar() {
-        mToolBar = (Toolbar) findViewById(R.id.id_toolbar);
-        if (mToolBar != null) {
-            setSupportActionBar(mToolBar);
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-                actionBar.setHomeButtonEnabled(false);
-            }
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-            TextView title = (TextView) mToolBar.findViewById(R.id.toolbar_title);
-            title.setText(getString(R.string.sign_in_tilte));
-        }
-    }
+//    private void initToolbar() {
+//        mToolBar = (Toolbar) findViewById(R.id.id_toolbar);
+//        if (mToolBar != null) {
+//            setSupportActionBar(mToolBar);
+//            ActionBar actionBar = getSupportActionBar();
+//            if (actionBar != null) {
+//                actionBar.setDisplayHomeAsUpEnabled(true);
+//                actionBar.setHomeButtonEnabled(false);
+//            }
+//            getSupportActionBar().setDisplayShowTitleEnabled(false);
+//            TextView title = (TextView) mToolBar.findViewById(R.id.toolbar_title);
+//            title.setText(getString(R.string.sign_in_tilte));
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

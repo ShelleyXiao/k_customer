@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
+        android:paddingTop="@dimen/lay_8"
+        android:paddingBottom="@dimen/lay_4"
         android:weightSum="4">
 
         <RelativeLayout
@@ -22,10 +24,10 @@
 
             <ImageView
                 android:id="@+id/icon_campaign_info"
-                android:layout_width="67dp"
-                android:layout_height="67dp"
-                android:layout_centerInParent="true"
-                android:layout_margin="@dimen/lay_8"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="@dimen/lay_16"
+                android:layout_centerHorizontal="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/icon_beevaluated"/>
 
@@ -52,10 +54,10 @@
 
             <ImageView
                 android:id="@+id/icon_find_team"
-                android:layout_width="67dp"
-                android:layout_height="67dp"
-                android:layout_centerInParent="true"
-                android:layout_margin="@dimen/lay_8"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="@dimen/lay_16"
+                android:layout_centerHorizontal="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/icon_findteam"/>
 
@@ -67,7 +69,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/lay_8"
-                android:layout_marginTop="@dimen/font_12"
+                android:layout_marginTop="@dimen/lay_12"
                 android:text="@string/explore_item_findteam"/>
 
         </RelativeLayout>
@@ -81,12 +83,12 @@
 
             <ImageView
                 android:id="@+id/icon_aren_map"
-                android:layout_width="67dp"
-                android:layout_height="67dp"
-                android:layout_centerInParent="true"
-                android:layout_margin="@dimen/lay_8"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="@dimen/lay_16"
+                android:layout_centerHorizontal="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/icon_beevaluated"/>
+                android:src="@drawable/gb_icon_p"/>
 
 
             <TextView
@@ -110,10 +112,10 @@
 
             <ImageView
                 android:id="@+id/icon_review"
-                android:layout_width="67dp"
-                android:layout_height="67dp"
-                android:layout_centerInParent="true"
-                android:layout_margin="@dimen/lay_8"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="@dimen/lay_16"
+                android:layout_centerHorizontal="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/icon_activity"/>
 

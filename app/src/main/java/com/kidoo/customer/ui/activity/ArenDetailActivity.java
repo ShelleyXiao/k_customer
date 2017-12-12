@@ -22,10 +22,10 @@ import com.kidoo.customer.bean.ChannelC;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.ui.base.activities.BaseBackActivity;
 import com.kidoo.customer.utils.LogUtils;
-import com.sunfusheng.glideimageview.GlideImageLoader;
-import com.sunfusheng.glideimageview.GlideImageView;
-import com.sunfusheng.glideimageview.progress.CircleProgressView;
-import com.sunfusheng.glideimageview.progress.OnGlideImageViewListener;
+import com.kidoo.customer.widget.glideimageview.GlideImageLoader;
+import com.kidoo.customer.widget.glideimageview.GlideImageView;
+import com.kidoo.customer.widget.glideimageview.progress.CircleProgressView;
+import com.kidoo.customer.widget.glideimageview.progress.OnGlideImageViewListener;
 
 import java.util.List;
 

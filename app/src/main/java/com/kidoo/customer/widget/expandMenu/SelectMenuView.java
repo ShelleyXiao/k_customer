@@ -112,6 +112,7 @@ public class SelectMenuView extends LinearLayout {
 
     public void setDataList(List<ChannelA> aDataList) {
         if (aDataList != null) {
+            mChannelDataList.clear();
             mChannelDataList.addAll(aDataList);
             mSubjectHolder.refreshData(mChannelDataList, 0, -1);
 
@@ -352,13 +353,13 @@ public class SelectMenuView extends LinearLayout {
 
     private void setTabClose() {
 
-        mChannelBText.setTextColor(getResources().getColor(R.color.blue_grey_300));
+        mChannelBText.setTextColor(getResources().getColor(R.color.text_dark));
         mSubjectArrowImage.setImageResource(R.drawable.channel_close_icon);
 
-        mChannelCText.setTextColor(getResources().getColor(R.color.blue_grey_300));
+        mChannelCText.setTextColor(getResources().getColor(R.color.text_dark));
         mSortArrowImage.setImageResource(R.drawable.channel_close_icon);
 
-        mSelectText.setTextColor(getResources().getColor(R.color.blue_grey_300));
+        mSelectText.setTextColor(getResources().getColor(R.color.text_dark));
         mSelectArrowImage.setImageResource(R.drawable.channel_close_icon);
     }
 

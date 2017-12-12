@@ -6,7 +6,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializer;
 import com.google.gson.JsonSyntaxException;
 
-import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.conn
+        .ConnectTimeoutException;
 import org.json.JSONException;
 
 import java.io.NotSerializableException;

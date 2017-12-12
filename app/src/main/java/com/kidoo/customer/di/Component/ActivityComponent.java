@@ -8,6 +8,7 @@ import com.kidoo.customer.di.scope.ContextLife;
 import com.kidoo.customer.di.scope.PerActivity;
 import com.kidoo.customer.ui.activity.AreanMapActivity;
 import com.kidoo.customer.ui.activity.UserDetailActivity;
+import com.kidoo.customer.ui.activity.WondefulEventNewsActivity;
 import com.kidoo.customer.ui.activity.account.LoginActivity;
 import com.kidoo.customer.ui.activity.account.SigninInOneStepActivity;
 import com.kidoo.customer.ui.activity.splash.SplashActivity;
@@ -44,6 +45,9 @@ public interface ActivityComponent {
     void inject(UserDetailActivity activity);
 
     void inject(AreanMapActivity activity);
+
+    void inject(WondefulEventNewsActivity activity);
+
 
 
 

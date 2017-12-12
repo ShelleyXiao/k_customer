@@ -25,6 +25,7 @@ import com.kidoo.customer.ui.base.fragment.BaseMvpFragment;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.TDevice;
 import com.kidoo.customer.widget.MyEnterLayout;
+import com.kidoo.customer.widget.glideimageview.GlideImageView;
 
 import java.util.List;
 
@@ -56,10 +57,10 @@ public class UserInfoTabFragment extends BaseMvpFragment<UserInfoPresenterImpl> 
     TextView tvUserName;
 
     @BindView(R.id.portrait)
-    ImageView ivPortrait;
+    GlideImageView ivPortrait;
 
     @BindView(R.id.garden)
-    ImageView ivGerden;
+    GlideImageView ivGerden;
 
     @BindView(R.id.slogn)
     TextView tvSlogn;
@@ -194,6 +195,9 @@ public class UserInfoTabFragment extends BaseMvpFragment<UserInfoPresenterImpl> 
 
     private void updatePortrait(String url) {
         LogUtils.i(url);
+
+        ivPortrait.loadImage(url, R.drawable.def_user);
+
         getImgLoader().load(url)
                 .centerCrop()
                 .placeholder(R.drawable.def_user)

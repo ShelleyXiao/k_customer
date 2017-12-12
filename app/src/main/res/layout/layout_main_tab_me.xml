@@ -3,7 +3,7 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/kidoo_bg_gray"
+              android:background="@color/kidoo_black_alpha_03"
               android:orientation="vertical">
 
     <FrameLayout
@@ -35,7 +35,7 @@
                 android:textSize="@dimen/font_24"
                 />
 
-            <ImageView
+            <com.kidoo.customer.widget.glideimageview.GlideImageView
                 android:id="@+id/portrait"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -46,7 +46,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/def_user"/>
 
-            <ImageView
+            <com.kidoo.customer.widget.glideimageview.GlideImageView
                 android:id="@+id/garden"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
@@ -139,19 +139,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/lay_12"/>
 
-    <com.kidoo.customer.widget.MyEnterLayout
-        android:id="@+id/userinfo_item_campain_manager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/list_item_normal_selector"
-        android:clickable="true"
-        app:itemIcon="@drawable/icon_beevaluated"
-        app:itemTitle="@string/userinfo_tab_campain_manager_item"/>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/lay_12"/>
 
     <com.kidoo.customer.widget.MyEnterLayout
         android:id="@+id/userinfo_item_campain"
@@ -167,13 +154,15 @@
         android:layout_height="@dimen/lay_12"/>
 
     <com.kidoo.customer.widget.MyEnterLayout
-        android:id="@+id/userinfo_item_challengerec"
+        android:id="@+id/userinfo_item_campain_manager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/list_item_normal_selector"
         android:clickable="true"
-        app:itemIcon="@drawable/icon_challengerec"
-        app:itemTitle="@string/userinfo_tab_challengerec_item"/>
+        app:itemIcon="@drawable/icon_beevaluated"
+        app:itemTitle="@string/userinfo_tab_campain_manager_item"/>
+
+
 
     <View
         android:layout_width="match_parent"
@@ -187,6 +176,20 @@
         android:clickable="true"
         app:itemIcon="@drawable/icon_myteam"
         app:itemTitle="@string/userinfo_tab_team_item"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lay_12"/>
+
+    <com.kidoo.customer.widget.MyEnterLayout
+        android:id="@+id/userinfo_item_challengerec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_item_normal_selector"
+        android:clickable="true"
+        app:itemIcon="@drawable/icon_challengerec"
+        app:itemTitle="@string/userinfo_tab_challengerec_item"/>
+
 
     <View
         android:layout_width="match_parent"

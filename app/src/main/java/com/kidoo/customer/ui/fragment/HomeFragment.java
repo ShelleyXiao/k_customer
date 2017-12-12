@@ -1,5 +1,6 @@
 package com.kidoo.customer.ui.fragment;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,8 @@ import com.kidoo.customer.bean.NewsBean;
 import com.kidoo.customer.bean.PageInfo;
 import com.kidoo.customer.mvp.contract.HomeContract;
 import com.kidoo.customer.mvp.presenter.HomePresenterImpl;
+import com.kidoo.customer.ui.activity.AreanMapActivity;
+import com.kidoo.customer.ui.activity.WondefulEventNewsActivity;
 import com.kidoo.customer.ui.base.fragment.BaseMvpFragment;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.NetWorkUtil;
@@ -139,8 +142,14 @@ public class HomeFragment extends BaseMvpFragment<HomePresenterImpl> implements 
                     case R.id.find_team:
                         break;
                     case R.id.aren_map:
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), AreanMapActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.review:
+                        Intent intent3 = new Intent();
+                        intent3.setClass(getActivity(), WondefulEventNewsActivity.class);
+                        startActivity(intent3);
                         break;
                     default:
                         break;

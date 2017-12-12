@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/profile_bg">
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_content"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="8dp"
+            android:textSize="13sp"
+            android:gravity="top"
+            app:met_hideUnderline="true"
+            android:hint="@string/suggestion_edit_hint"
+            android:layout_height="200dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_send"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/btn_normal_bg"
+        android:layout_marginRight="8dp"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp" />
+
+
+</LinearLayout>

@@ -11,56 +11,77 @@
         android:layout_height="@dimen/lay_16"/>
 
     <com.kidoo.customer.widget.MyEnterLayout
-        android:id="@+id/item_challengerec"
+        android:id="@+id/item_ranking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/list_item_normal_selector"
         android:clickable="true"
-        app:itemIcon="@drawable/icon_challengerec"
-        app:itemTitle="@string/explore_item_challengerec"
+        app:itemIcon="@drawable/icon_topcharts"
+        app:itemTitle="@string/explore_item_ranking"
         />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/lay_20"/>
-
-    <com.kidoo.customer.widget.MyEnterLayout
-        android:id="@+id/item_activity"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/list_item_normal_selector"
-        android:clickable="true"
-        app:itemIcon="@drawable/icon_activity"
-        app:itemTitle="@string/explore_item_activity"
-        />
+        android:visibility="gone">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/lay_16"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/lay_16"/>
 
-    <com.kidoo.customer.widget.MyEnterLayout
-        android:id="@+id/item_team_about"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/list_item_normal_selector"
-        android:clickable="true"
-        app:itemIcon="@drawable/icon_aboutgamerule"
-        app:itemTitle="@string/explore_item_about"
-        />
+        <com.kidoo.customer.widget.MyEnterLayout
+            android:id="@+id/item_challengerec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_item_normal_selector"
+            android:clickable="true"
+            app:itemIcon="@drawable/icon_challengerec"
+            app:itemTitle="@string/explore_item_challengerec"
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/lay_16"/>
+            />
 
-    <com.kidoo.customer.widget.MyEnterLayout
-        android:id="@+id/book_team_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/list_item_normal_selector"
-        android:clickable="true"
-        app:itemIcon="@drawable/icon_findteam"
-        app:itemTitle="@string/explore_item_findteam"
-        />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/lay_20"/>
 
+        <com.kidoo.customer.widget.MyEnterLayout
+            android:id="@+id/item_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_item_normal_selector"
+            android:clickable="true"
+            app:itemIcon="@drawable/icon_activity"
+            app:itemTitle="@string/explore_item_activity"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/lay_16"/>
+
+        <com.kidoo.customer.widget.MyEnterLayout
+            android:id="@+id/item_team_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_item_normal_selector"
+            android:clickable="true"
+            app:itemIcon="@drawable/icon_aboutgamerule"
+            app:itemTitle="@string/explore_item_about"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/lay_16"/>
+
+        <com.kidoo.customer.widget.MyEnterLayout
+            android:id="@+id/book_team_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_item_normal_selector"
+            android:clickable="true"
+            app:itemIcon="@drawable/icon_findteam"
+            app:itemTitle="@string/explore_item_findteam"
+            />
+
+    </FrameLayout>
 
 </LinearLayout>

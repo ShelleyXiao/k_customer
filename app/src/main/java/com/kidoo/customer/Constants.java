@@ -52,43 +52,12 @@ public class Constants {
 
     public static final int JOYINACTIVITY = 3;
 
-    //================= ENROLL ====================
-    public static final String ENROLL_TYPE = "ENROlL_TYPE";
-    public static final int ENROLL_TYPE_MATCH = 0x302;
-    public static final int ENROLL_TYPE_ACTIVITY = 0x303;
 
-    public static final String ENROLL_TITLE = "0";
+    public static final String INIT_DATA_CACHE_KEY = "init_data";
 
-    public static final String ENROLL_DATE = "1";
-
-    public static final String ENROLL_PRICE = "2";
-
-    public static final String ENROLL_COUNT = "3";
-
-    public static final String ENROLL_TOTALCOUNT = "4";
-
-    public static final String ENROLL_PLACE = "5";
-
-    public static final String ENROLL_ACTIVITYID = "6";
-    public static final String SP_SHORTCUT = "short_cut";
-    public static final String EXTRA_FROM = "extra_icon";
-    public static final  boolean EXTRA_FROM_SHORTCUT_ICON = true ;
-    public static final String REDIRECT_URL = "http://sns.whalecloud.com/sina2/callback";
-    public static final String SCOPE = "";
-    public static final String PREVIEWIMAG_SELECT = "photo_preview_select";
-    public static final String INTENT_ISLIKE = "islike";
-    public static final String INTENT_ISLIKE_POSITION ="islike_position" ;
-    public static final String INTENT_ISLIKE_POST_TYPE = "islike_type";
-    public static final int TYPE_POSTDEFORMPOST = 0x107;
-    public static final int TYPE_POSTDEFORMLIKE = 0x108;
-    public static final int QATYPE_STAR = 0x118;
-    public static final int QATYPE_SCORE= 0x119;
-    public static final int QATYPE_GAME= 0x120;
-    public static final String TYPE = "type";
-    public static final String POST_ID = "postId";
-    public static final String INTENT_GAMECATEGORY = "GAME_CATEGORY_ID";
-    public static final String INTENT_GAME_NAME = "game_name";
-
+    public static final String CHANNEL_DATA_CACHE_KEY = "channel_data";
 
     public static final int PAGE_SIZE = 5;
+
+    public static final double DEFAAULT_AREN_CLOSE = 5 * 1000;
 }

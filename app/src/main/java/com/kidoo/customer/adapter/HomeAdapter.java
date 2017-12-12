@@ -2,6 +2,7 @@ package com.kidoo.customer.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,19 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestOptions;
+import com.kidoo.customer.AppContext;
 import com.kidoo.customer.R;
 import com.kidoo.customer.bean.BannerBean;
 import com.kidoo.customer.bean.NewsBean;
 import com.kidoo.customer.utils.DateTimeUtils;
+import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.KidooSubtitleView;
-import com.sunfusheng.glideimageview.GlideImageView;
-import com.sunfusheng.glideimageview.progress.CircleProgressView;
+import com.kidoo.customer.widget.glideimageview.GlideImageView;
+import com.kidoo.customer.widget.glideimageview.progress.CircleProgressView;
+import com.kidoo.customer.widget.glideimageview.progress.OnGlideImageViewListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +60,8 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.mBannerList = bannerBeans;
         this.mNewsBeans = newsBeans;
 
-//        this.baseUrl = AppContext.context().getInitData().getQnDomain();
-        this.baseUrl = "http://ouhstqlop.bkt.clouddn.com/";
+        this.baseUrl = AppContext.context().getInitData().getQnDomain();
+//        this.baseUrl = "http://ouhstqlop.bkt.clouddn.com/";
 
     }
 
@@ -87,31 +94,33 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof BannerAdsViewHolder) {
             //广告条
-            final List<String> mImageList = new ArrayList<>();
-            List<String> mTypeList = new ArrayList<>();
-            for (BannerBean item : mBannerList) {
-                mImageList.add(item.getPic());
-                mTypeList.add(String.valueOf(item.getType()));
-            }
-            BannerAdsViewHolder adsViewHolder = (BannerAdsViewHolder) holder;
-
-            adsViewHolder.vpTop.setData(getPageView(mBannerList));
-            adsViewHolder.vpTop.setAdapter(new BGABanner.Adapter<ImageView, String>() {
-                @Override
-                public void fillBannerItem(BGABanner banner, ImageView itemView, String type, int position) {
-                    ((GlideImageView) itemView).loadImage(baseUrl + mImageList.get(position), R.color.placeholder);
+            if (mBannerList.size() != 0) {
+                final List<String> mImageList = new ArrayList<>();
+                List<String> mTypeList = new ArrayList<>();
+                for (BannerBean item : mBannerList) {
+                    mImageList.add(item.getPic());
+                    mTypeList.add(String.valueOf(item.getType()));
                 }
-            });
-            adsViewHolder.vpTop.setAutoPlayAble(true);
+                BannerAdsViewHolder adsViewHolder = (BannerAdsViewHolder) holder;
 
-            adsViewHolder.vpTop.setDelegate(new BGABanner.Delegate<ImageView, String>() {
-                @Override
-                public void onBannerItemClick(BGABanner banner, ImageView itemView, String type, int position) {
-                    if (onClickListener != null) {
-                        onClickListener.onBannerItemClick(position, itemView);
+                adsViewHolder.vpTop.setData(getPageView(mBannerList));
+                adsViewHolder.vpTop.setAdapter(new BGABanner.Adapter<ImageView, String>() {
+                    @Override
+                    public void fillBannerItem(BGABanner banner, ImageView itemView, String type, int position) {
+                        ((GlideImageView) itemView).loadImage(baseUrl + mImageList.get(position), R.color.placeholder);
                     }
-                }
-            });
+                });
+                adsViewHolder.vpTop.setAutoPlayAble(true);
+
+                adsViewHolder.vpTop.setDelegate(new BGABanner.Delegate<ImageView, String>() {
+                    @Override
+                    public void onBannerItemClick(BGABanner banner, ImageView itemView, String type, int position) {
+                        if (onClickListener != null) {
+                            onClickListener.onBannerItemClick(position, itemView);
+                        }
+                    }
+                });
+            }
 
         } else if (holder instanceof TagsViewHolder) {
 
@@ -169,27 +178,24 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             contentViewHolder.tvTime.setText(DateTimeUtils.formatDateTime(DateTimeUtils.format(bean.getUpdateTime(),
                     "yyyy-MM-dd HH:mm")));
 
-//            GlideImageLoader imageLoader = contentViewHolder.ivInfoPic.getImageLoader();
-//            imageLoader.setOnGlideImageViewListener(baseUrl + bean.getTitlePic(),
-//                    new OnGlideImageViewListener() {
-//                        @Override
-//                        public void onProgress(int percent, boolean isDone, GlideException exception) {
-//                            if (exception != null && !TextUtils.isEmpty(exception.getMessage())) {
-//                                LogUtils.e(exception.getMessage());
-//                            }
-//                            contentViewHolder.pvInfoProgress.setProgress(percent);
-//                            contentViewHolder.pvInfoProgress.setVisibility(isDone ? View.GONE : View.VISIBLE);
-//                        }
-//                    }
-//            );
-//
-//            RequestOptions requestOptions = contentViewHolder.ivInfoPic.requestOptions(R.color.placeholder)
-//                    .centerCrop();
-//            imageLoader.requestBuilder(baseUrl + bean.getTitlePic(), requestOptions)
-//                    .transition(DrawableTransitionOptions.withCrossFade())
-//                    .into(contentViewHolder.ivInfoPic);
 
-            contentViewHolder.ivInfoPic.loadImage(baseUrl + bean.getTitlePic(), R.color.placeholder);
+            RequestOptions requestOptions = contentViewHolder.ivInfoPic.requestOptions(R.color.placeholder).centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true);
+
+            contentViewHolder.ivInfoPic.load(baseUrl + bean.getTitlePic(), requestOptions).listener(new OnGlideImageViewListener() {
+                @Override
+                public void onProgress(int percent, boolean isDone, GlideException exception) {
+                    if (exception != null && !TextUtils.isEmpty(exception.getMessage())) {
+                        LogUtils.e(exception.getMessage());
+                    }
+                    contentViewHolder.pvInfoProgress.setProgress(percent);
+                    contentViewHolder.pvInfoProgress.setVisibility(isDone ? View.GONE : View.VISIBLE);
+                }
+            });
+
+
+//            contentViewHolder.ivInfoPic.loadImage(baseUrl + bean.getTitlePic(), R.color.placeholder);
+
             contentViewHolder.content.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -263,7 +269,6 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mNewsBeans.remove(position);
         notifyDataSetChanged();
     }
-
 
 
     class BannerAdsViewHolder extends RecyclerView.ViewHolder {

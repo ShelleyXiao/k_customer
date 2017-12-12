@@ -192,6 +192,7 @@
     <string name="broadcast_detail_toolbar_menu_title">群聊</string>
     
     <string name="explore_item_challengerec">挑战信息</string>
+    <string name="explore_item_ranking">排行榜</string>
     <string name="explore_item_findteam">查找战队</string>
     <string name="explore_item_activity">活动列表</string>
     <string name="explore_item_about">关于竞技场/战队</string>
@@ -200,9 +201,9 @@
 
     <string name="userinfo_tab_slogn_default">这家伙懒什么都没留下</string>
     <string name="userinfo_tab_decoration_item">我的奖章</string>
-    <string name="userinfo_tab_campain_manager_item">赛事信息</string>
+    <string name="userinfo_tab_campain_manager_item">赛事管理</string>
     <string name="userinfo_tab_campain_item">我的比赛</string>
-    <string name="userinfo_tab_challengerec_item">挑战信息</string>
+    <string name="userinfo_tab_challengerec_item">挑战记录</string>
     <string name="userinfo_tab_team_item">我的战队</string>
     <string name="userinfo_tab_setting_item">设置</string>
 
@@ -229,6 +230,16 @@
     <string name="aren_info_detail_title">信息</string>
 
     <string name="aren_map_title">场地信息</string>
+    <string name="setting_title">设置</string>
+    <string name="exit_login">退出当前账号</string>
+    <string name="setting_about">关于我们</string>
+    <string name="setting_modify_pwd">修改密码</string>
+    <string name="setting_feedback">意见与建议</string>
+
+    <string name="exit_dialog_msg">您确定要退出么?</string>
+
+
+    <string name="suggestion_edit_hint">请把您的宝贵意见和建议写与此处</string>
 
 
 </resources>

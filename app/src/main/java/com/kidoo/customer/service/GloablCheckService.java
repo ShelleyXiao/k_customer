@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.mvp.contract.InitDataContract;
@@ -29,9 +28,9 @@ public class GloablCheckService extends Service {
     private static final String FLAG_ACTION_EXIT = "_EXIT";
 
     public static void init(Context context) {
-        if(!AccountHelper.isLogin()) {
-            return;
-        }
+//        if(!AccountHelper.isLogin()) {
+//            return;
+//        }
 
         startAction(context);
     }

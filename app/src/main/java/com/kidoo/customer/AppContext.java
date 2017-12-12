@@ -10,12 +10,14 @@ import com.baidu.mapapi.SDKInitializer;
 import com.kidoo.customer.api.KidooApiService;
 import com.kidoo.customer.bean.ChannelA;
 import com.kidoo.customer.bean.InitData;
+import com.kidoo.customer.cache.ACache;
 import com.kidoo.customer.di.Component.AppComponent;
 import com.kidoo.customer.di.Component.DaggerAppComponent;
 import com.kidoo.customer.di.module.AppModule;
 import com.kidoo.customer.kidoohttp.http.KidooApiManager;
 import com.kidoo.customer.kidoohttp.http.model.HttpHeaders;
 import com.kidoo.customer.kidoohttp.http.model.HttpParams;
+import com.kidoo.customer.service.GloablCheckService;
 import com.kidoo.customer.utils.AppSystemUtils;
 import com.kidoo.customer.utils.CommonUtils;
 import com.kidoo.customer.utils.TDevice;
@@ -67,6 +69,8 @@ public class AppContext extends Application {
 
 //        mRefWatcher = BuildConfig.DEBUG ? LeakCanary.install(this) : RefWatcher.DISABLED;
         AccountHelper.init(this);
+
+        GloablCheckService.init(_context);
 
 
     }
@@ -180,19 +184,31 @@ public class AppContext extends Application {
     }
 
     public InitData getInitData() {
+        if(mInitData == null) {
+            mInitData = (InitData)ACache.get(this).getAsObject(Constants.INIT_DATA_CACHE_KEY);
+        }
         return mInitData;
     }
 
     public void setInitData(InitData mInitData) {
+
         this.mInitData = mInitData;
+        ACache.get(this).put(Constants.INIT_DATA_CACHE_KEY, mInitData);
     }
 
 
     public List<ChannelA> getgChannelAList() {
+        if(gChannelAList == null) {
+            gChannelAList = (ArrayList<ChannelA>)ACache.get(this).getAsObject(Constants.CHANNEL_DATA_CACHE_KEY);
+        }
+
         return gChannelAList;
     }
 
     public void setgChannelAList(List<ChannelA> dataList) {
+
+        ACache.get(this).put(Constants.CHANNEL_DATA_CACHE_KEY, (ArrayList<ChannelA>)dataList);
+
         this.gChannelAList.clear();
         this.gChannelAList.addAll(dataList);
     }

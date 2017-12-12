@@ -56,6 +56,8 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
 
     private OnMyMarkerClickListener MyMarkerClickListener;
 
+    private LatLng mMyLatLng = null;
+
     public BaidumapView(Context context) {
         super(context);
     }
@@ -182,19 +184,20 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
 //        });
 
 //        //定位
-        LocationUtils.getLocation(mContext);
+        LocationUtils.getLocation(mContext.getApplicationContext());
         LocationUtils.setLocationFace(new LocationFace() {
             @Override
             public void locationResult(BDLocation location) {
                 LogUtils.w(location.toString());
-                setCenter(new LatLng(location.getLatitude(), location.getLongitude()));
+                mMyLatLng = new  LatLng(location.getLatitude(), location.getLongitude());
+                setCenter(mMyLatLng);
             }
         });
 
         addView(mMapView);
     }
 
-    private void setCenter(LatLng latLng) {
+    public void setCenter(LatLng latLng) {
 //        MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
 //
 //        mBaidumap.animateMapStatus(u);
@@ -214,6 +217,10 @@ public class BaidumapView extends LinearLayout implements BaiduMap.OnMapClickLis
 
     }
 
+    public LatLng getMyLatLng() {
+
+        return mMyLatLng;
+    }
 
     public interface OnMyMarkerClickListener {
         void onMarkerClick(Marker arg0);
