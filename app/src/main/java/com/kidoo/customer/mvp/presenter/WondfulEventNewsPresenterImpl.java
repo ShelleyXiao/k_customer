@@ -50,7 +50,7 @@ public class WondfulEventNewsPresenterImpl extends BasePresenterImpl<WondefulEve
             @Override
             public void onSuccess(KidooApiResult<NewsListResult> result) {
                 NewsListResult newsListResult = (NewsListResult) result.getData();
-                mPresenterView.loadMoreContent(newsListResult.getNewsList(), result.getPageInfo());
+                mPresenterView.updateNews(newsListResult.getNewsList(), result.getPageInfo());
             }
 
             @Override

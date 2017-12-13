@@ -208,11 +208,13 @@ public class AreanMapActivity extends BaseBackMvpActivity<MapPresenterImpl> impl
             mChannelList = new ArrayList<>();
         }
         if (channelResultBean != null) {
-            LogUtils.i(channelResultBean.getChannelAList()[0].getDescription());
+            LogUtils.i(channelResultBean.getChannelAList().get(0).getDescription()
+                    + channelResultBean.getChannelAList().size()
+            );
             if (channelResultBean.getChannelAList() != null) {
                 mChannelList.clear();
                 List<ChannelA> dataList = new ArrayList<>();
-                dataList.add(channelResultBean.getChannelAList()[0]);
+                dataList.addAll(channelResultBean.getChannelAList());
                 selectMenuView.setDataList(dataList);
                 mChannelList.addAll(dataList);
 

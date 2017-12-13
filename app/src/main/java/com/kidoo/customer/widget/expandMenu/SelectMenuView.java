@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.kidoo.customer.R;
 import com.kidoo.customer.bean.ChannelA;
+import com.kidoo.customer.bean.ChannelB;
 import com.kidoo.customer.bean.ChannelC;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.expandMenu.holder.SelectHolder;
@@ -55,11 +56,12 @@ public class SelectMenuView extends LinearLayout {
     /**
      * ChannelA & B
      */
-    private SubjectChannelABHolder mSubjectHolder;
+    private SubjectChannelABHolder mSubjectABHolder;
 
-    private SubjectChannelCHolder mSubjectChannelHolder;
+    private SubjectChannelCHolder mSubjectCHolder;
 
     /**
+     *
      * 综合排序
      */
     private SortHolder mSortHolder;
@@ -83,7 +85,6 @@ public class SelectMenuView extends LinearLayout {
     private List<ChannelA> mChannelDataList = new ArrayList<>();
 
     private List<ChannelC> mChannelCList = new ArrayList<>();
-    ;
 
     private int mTabRecorder = -1;
 
@@ -114,7 +115,7 @@ public class SelectMenuView extends LinearLayout {
         if (aDataList != null) {
             mChannelDataList.clear();
             mChannelDataList.addAll(aDataList);
-            mSubjectHolder.refreshData(mChannelDataList, 0, -1);
+            mSubjectABHolder.refreshData(mChannelDataList, 0, -1);
 
             mChannelBText.setText(mChannelDataList.get(mChannelASelectIndex)
                     .getChannelBList()
@@ -124,7 +125,8 @@ public class SelectMenuView extends LinearLayout {
                     .getChannelBList()
                     .get(mChannelBSelectIndex)
                     .getChannelCList());
-            mSubjectChannelHolder.refreshViewData(mChannelCList, mChannelCSelectIndex);
+
+            mSubjectCHolder.refreshViewData(mChannelCList, mChannelCSelectIndex);
             mChannelCText.setText(mChannelCList.get(mChannelCSelectIndex).getName());
         }
 
@@ -133,9 +135,9 @@ public class SelectMenuView extends LinearLayout {
     private void init() {
 
 
-        mSubjectHolder = new SubjectChannelABHolder(mContext);
-//        mSubjectHolder.refreshData(mChannelDataList, 0, -1);
-        mSubjectHolder.setOnRightListViewItemSelectedListener(new SubjectChannelABHolder.OnRightListViewItemSelectedListener() {
+        mSubjectABHolder = new SubjectChannelABHolder(mContext);
+//        mSubjectABHolder.refreshData(mChannelDataList, 0, -1);
+        mSubjectABHolder.setOnRightListViewItemSelectedListener(new SubjectChannelABHolder.OnRightListViewItemSelectedListener() {
             @Override
             public void OnRightListViewItemSelected(int leftIndex, int rightIndex, String text) {
 
@@ -152,11 +154,18 @@ public class SelectMenuView extends LinearLayout {
                 dismissPopupWindow();
                 //Toast.makeText(UIUtils.getContext(), text, Toast.LENGTH_SHORT).show();
                 mChannelBText.setText(text);
+                List<ChannelB> channelBs = mChannelDataList.get(leftIndex).getChannelBList();
+                List<ChannelC> channelCS = channelBs.get(rightIndex).getChannelCList();
+
+                mChannelCList.clear();
+                mChannelCList.addAll(channelCS);
+                mSubjectCHolder.refreshViewData(mChannelCList, mChannelCSelectIndex);
+                mChannelCText.setText(mChannelCList.get(mChannelCSelectIndex).getName());
             }
         });
 
-        mSubjectChannelHolder = new SubjectChannelCHolder(mContext);
-        mSubjectChannelHolder.setOnChannelCListViewItemSelectedListener(new SubjectChannelCHolder.OnChannelCListViewItemSelectedListener() {
+        mSubjectCHolder = new SubjectChannelCHolder(mContext);
+        mSubjectCHolder.setOnChannelCListViewItemSelectedListener(new SubjectChannelCHolder.OnChannelCListViewItemSelectedListener() {
             @Override
             public void OnListViewItemSelected(int index, String text) {
                 if (mOnMenuSelectDataChangedListener != null) {
@@ -249,7 +258,7 @@ public class SelectMenuView extends LinearLayout {
     private void handleClickSubjectView() {
 
         mMainContentLayout.removeAllViews();
-        mMainContentLayout.addView(mSubjectHolder.getRootView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mMainContentLayout.addView(mSubjectABHolder.getRootView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         popUpWindow(TAB_SUBJECT);
     }
@@ -257,7 +266,7 @@ public class SelectMenuView extends LinearLayout {
     private void handleClickSortView() {
 
         mMainContentLayout.removeAllViews();
-        mMainContentLayout.addView(mSubjectChannelHolder.getRootView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mMainContentLayout.addView(mSubjectCHolder.getRootView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         popUpWindow(TAB_SORT);
     }
@@ -366,8 +375,8 @@ public class SelectMenuView extends LinearLayout {
 
     public void clearAllInfo() {
         //清除控件内部选项
-        mSubjectHolder.refreshData(mChannelDataList, 0, -1);
-        mSubjectChannelHolder.refreshView(null);
+        mSubjectABHolder.refreshData(mChannelDataList, 0, -1);
+        mSubjectCHolder.refreshView(null);
 //        mSelectHolder.refreshView(null);
 
         //清除菜单栏显示

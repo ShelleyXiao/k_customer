@@ -28,6 +28,7 @@ public class SubjectChannelABHolder extends BaseWidgetHolder<List<ChannelA>> {
 
     private int mLeftSelectedIndex = 0;
     private int mRightSelectedIndex = 0;
+
     private int mLeftSelectedIndexRecord = mLeftSelectedIndex;
     private int mRightSelectedIndexRecord = mRightSelectedIndex;
 
@@ -63,7 +64,7 @@ public class SubjectChannelABHolder extends BaseWidgetHolder<List<ChannelA>> {
                 view.setBackgroundResource(R.color.white);
                 mLeftRecordView = view;
 
-                mRightAdapter.setDataList(mDataList.get(position + 1).getChannelBList(), mRightSelectedIndex);
+                mRightAdapter.setDataList(mDataList.get(position).getChannelBList(), mRightSelectedIndex);
                 mRightAdapter.notifyDataSetChanged();
             }
         });

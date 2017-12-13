@@ -37,7 +37,7 @@ public class MapPresenterImpl extends BasePresenterImpl<MapContract.View> implem
         Disposable disposable = mInteractor.queryAllChannelsAction(new MapContract.Interactor.GetAllChannelsCallback() {
             @Override
             public void onSuccess(AllChannelResultBean result) {
-                LogUtils.i(result.getChannelAList().length);
+                LogUtils.i(result.getChannelAList().size());
                 mPresenterView.updateUserInfo(result);
             }
 

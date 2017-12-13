@@ -238,8 +238,10 @@
 
     <string name="exit_dialog_msg">您确定要退出么?</string>
 
-
     <string name="suggestion_edit_hint">请把您的宝贵意见和建议写与此处</string>
+
+    <string name="channel_campaign_list_title">赛事列表</string>
+    <string name="channel_hava_no_campaign_data">没有这个频道的比赛</string>
 
 
 </resources>

@@ -2,6 +2,10 @@ package com.kidoo.customer.api.token;
 
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.cache.ACache;
+import com.kidoo.customer.cipher.rsa.Base64Utils;
+import com.kidoo.customer.cipher.rsa.RSAUtil;
+
+import java.util.Date;
 
 /**
  * User: ShaudXiao
@@ -52,7 +56,7 @@ public class TokenManager {
         this.timestamep = timestamep;
     }
 
-    public AuthModel getAuthModel(String key) {
+    public synchronized AuthModel getAuthModel(String key) {
         Object object = mACache.getAsObject(key);
         AuthModel authModel = new AuthModel();
         if (object != null) {
@@ -62,7 +66,7 @@ public class TokenManager {
         return authModel;
     }
 
-    public RSAKey getRSAKey(String key) {
+    public synchronized RSAKey getRSAKey(String key) {
         Object object = mACache.getAsObject(key);
         RSAKey rsaKey = new RSAKey();
         if (object != null) {
@@ -74,22 +78,24 @@ public class TokenManager {
 
     public void setAuthModel(String key, AuthModel model) {
         if (null != model) {
+            mAuthModel = model;
             mACache.put(key, model);
         }
     }
 
-    public void updateAuthModel(String key , AuthModel model) {
+    public void updateAuthModel(String key, AuthModel model) {
         clearAuth(key);
         setAuthModel(key, model);
     }
 
     public void setRSAKey(String key, RSAKey model) {
         if (null != model) {
+            this.mRSAKey = model;
             mACache.put(key, model);
         }
     }
 
-    public void updateRSAKey(String key , RSAKey model) {
+    public void updateRSAKey(String key, RSAKey model) {
         clearRSAKey(key);
         setRSAKey(key, model);
     }
@@ -106,6 +112,32 @@ public class TokenManager {
         this.mRSAKey = rsaKey;
         mACache.put(key, this.mRSAKey);
         mACache.remove(key);
+    }
+
+    public String getToken() {
+        if (mAuthModel == null) {
+            mAuthModel = getAuthModel(TokenManager.KEY_AUTH);
+        }
+
+        if (mRSAKey == null) {
+            mRSAKey = getRSAKey(TokenManager.KEY_RSA);
+        }
+
+        long getTokenTime = mAuthModel.getGetTokenTime();
+        long difTime = mAuthModel.getDifTime();
+        long nowTime = new Date().getTime();
+        String serverTime = String.valueOf(nowTime - difTime);
+        try {
+            byte[] bytesToken = RSAUtil.encryptByPublicKey(serverTime, mRSAKey.getPublickKey());
+            String token = Base64Utils.encode(bytesToken);
+
+            return token;
+        } catch (Exception e) {
+
+        }
+
+
+        return null;
     }
 
 }

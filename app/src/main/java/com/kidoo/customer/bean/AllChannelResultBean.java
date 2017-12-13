@@ -1,6 +1,7 @@
 package com.kidoo.customer.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * User: ShaudXiao
@@ -15,7 +16,7 @@ import java.io.Serializable;
 public class AllChannelResultBean implements Serializable{
 
 //    private ChannelCMap channelCmap;
-    private ChannelA[] channelAList;
+    private List<ChannelA> channelAList;
 
 //    public ChannelCMap getChannelCmap() {
 //        return channelCmap;
@@ -25,11 +26,20 @@ public class AllChannelResultBean implements Serializable{
 //        this.channelCmap = channelCmap;
 //    }
 
-    public ChannelA[] getChannelAList() {
+//    public ChannelA[] getChannelAList() {
+//        return channelAList;
+//    }
+//
+//    public void setChannelAList(ChannelA[] channelAList) {
+//        this.channelAList = channelAList;
+//    }
+
+
+    public List<ChannelA> getChannelAList() {
         return channelAList;
     }
 
-    public void setChannelAList(ChannelA[] channelAList) {
+    public void setChannelAList(List<ChannelA> channelAList) {
         this.channelAList = channelAList;
     }
 }

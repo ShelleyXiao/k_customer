@@ -10,6 +10,8 @@ import android.text.TextUtils;
 import com.kidoo.customer.api.token.AuthModel;
 import com.kidoo.customer.api.token.TokenManager;
 import com.kidoo.customer.bean.Customer;
+import com.kidoo.customer.kidoohttp.http.KidooApiManager;
+import com.kidoo.customer.kidoohttp.http.model.HttpParams;
 import com.kidoo.customer.service.GloablCheckService;
 import com.kidoo.customer.utils.LogUtils;
 
@@ -93,7 +95,7 @@ public class AccountHelper {
     }
 
     public static boolean login(final Customer customer) {
-        LogUtils.w("login:" + customer);
+        LogUtils.i("login:" + customer);
         int count = 10;
         boolean saveOk;
         // 保存缓存
@@ -103,7 +105,13 @@ public class AccountHelper {
 
         if(saveOk) {
             // 登陆成功后的动作
-            GloablCheckService.init(sInstance.application);
+//            GloablCheckService.init(sInstance.application);
+            LogUtils.i("start refresh token");
+            GloablCheckService.startRefreshTokenID(sInstance.application);
+
+            HttpParams params = new HttpParams();
+            params.put("mobile", customer.getMobile());
+            KidooApiManager.getInstance().addCommonParams(params);
         }
 
         return saveOk;
