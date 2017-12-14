@@ -127,7 +127,7 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.UserDetailActivity"
+            android:name=".ui.activity.user.UserDetailActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/user_detail_title"
             android:screenOrientation="portrait"
@@ -166,6 +166,16 @@
         </activity>
 
         <activity
+            android:name=".ui.activity.channelCampaign.CampaignDetailActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/campaign_detail_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity
             android:name=".ui.activity.ArenDetailActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/aren_info_title"
@@ -175,21 +185,21 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.SettingActivity"
+            android:name=".ui.activity.setting.SettingActivity"
             android:label="@string/setting_title"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             />
 
         <activity
-            android:name=".ui.activity.AboutAsAcitivty"
+            android:name=".ui.activity.setting.AboutAsAcitivty"
             android:label="@string/setting_about"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             />
 
         <activity
-            android:name=".ui.activity.SuggestionActivity"
+            android:name=".ui.activity.setting.SuggestionActivity"
             android:label="@string/setting_feedback"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

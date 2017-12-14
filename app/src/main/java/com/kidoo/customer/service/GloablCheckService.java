@@ -19,7 +19,7 @@ import com.kidoo.customer.bean.CheckTokenIdBean;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
 import com.kidoo.customer.mvp.contract.InitDataContract;
-import com.kidoo.customer.mvp.interactor.InitDataInteractor;
+import com.kidoo.customer.mvp.interactor.account.InitDataInteractor;
 import com.kidoo.customer.utils.AppSystemUtils;
 import com.kidoo.customer.utils.LogUtils;
 

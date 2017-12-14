@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.kidoo.customer.R;
 import com.kidoo.customer.widget.tablayout.CommonTabLayout;
@@ -27,7 +28,7 @@ import butterknife.BindView;
  */
 
 
-public abstract class BaseViewPagerActivity extends BackActivity {
+public abstract class BaseViewPagerActivity extends BaseBackActivity {
 
     @BindView(R.id.tab_nav)
     protected CommonTabLayout mTabNav;
@@ -164,6 +165,12 @@ public abstract class BaseViewPagerActivity extends BackActivity {
         public int getItemPosition(Object object) {
             return PagerAdapter.POSITION_NONE;
         }
+    }
+
+
+    @Override
+    public void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
 }

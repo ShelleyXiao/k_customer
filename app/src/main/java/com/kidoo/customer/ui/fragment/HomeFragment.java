@@ -19,10 +19,12 @@ import com.kidoo.customer.adapter.HomeAdapter;
 import com.kidoo.customer.bean.BannerBean;
 import com.kidoo.customer.bean.NewsBean;
 import com.kidoo.customer.bean.PageInfo;
-import com.kidoo.customer.mvp.contract.HomeContract;
-import com.kidoo.customer.mvp.presenter.HomePresenterImpl;
+import com.kidoo.customer.mvp.contract.news.HomeContract;
+import com.kidoo.customer.mvp.presenter.news.HomePresenterImpl;
 import com.kidoo.customer.ui.activity.AreanMapActivity;
 import com.kidoo.customer.ui.activity.WondefulEventNewsActivity;
+import com.kidoo.customer.ui.activity.channelCampaign.CampaignDetailActivity;
+import com.kidoo.customer.ui.activity.channelCampaign.ChannelCampaignListActivtiy;
 import com.kidoo.customer.ui.base.fragment.BaseMvpFragment;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.NetWorkUtil;
@@ -138,8 +140,14 @@ public class HomeFragment extends BaseMvpFragment<HomePresenterImpl> implements 
                 LogUtils.d(view.getId());
                 switch (view.getId()) {
                     case R.id.campaign_info:
+                        Intent intentC = new Intent();
+                        intentC.setClass(getActivity(), ChannelCampaignListActivtiy.class);
+                        startActivity(intentC);
                         break;
                     case R.id.find_team:
+                        Intent intentf = new Intent();
+                        intentf.setClass(getActivity(), CampaignDetailActivity.class);
+                        startActivity(intentf);
                         break;
                     case R.id.aren_map:
                         Intent intent = new Intent();

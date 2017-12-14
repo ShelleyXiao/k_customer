@@ -10,7 +10,7 @@ import android.view.animation.Animation;
 import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.R;
 import com.kidoo.customer.mvp.contract.CheckAllTokenContract;
-import com.kidoo.customer.mvp.presenter.CheckAllTokenPresenterImpl;
+import com.kidoo.customer.mvp.presenter.account.CheckAllTokenPresenterImpl;
 import com.kidoo.customer.ui.activity.MainActivity;
 import com.kidoo.customer.ui.activity.account.LoginActivity;
 import com.kidoo.customer.ui.base.activities.BaseMvpActivity;

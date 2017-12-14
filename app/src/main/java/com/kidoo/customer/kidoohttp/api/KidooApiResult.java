@@ -70,4 +70,16 @@ public class KidooApiResult<T> implements Serializable {
     public void setPageInfo(PageInfo pageInfo) {
         this.pageInfo = pageInfo;
     }
+
+    @Override
+    public String toString() {
+        return "KidooApiResult{" +
+                "success=" + success +
+                ", errorCode='" + errorCode + '\'' +
+                ", errorMsg='" + errorMsg + '\'' +
+                ", showType=" + showType +
+                ", data=" + data +
+                ", pageInfo=" + pageInfo +
+                '}';
+    }
 }

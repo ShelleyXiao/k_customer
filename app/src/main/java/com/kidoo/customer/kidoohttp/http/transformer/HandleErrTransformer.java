@@ -2,7 +2,6 @@ package com.kidoo.customer.kidoohttp.http.transformer;
 
 
 import com.kidoo.customer.kidoohttp.http.function.HttpResponseFunc;
-import com.kidoo.customer.utils.LogUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -22,7 +21,7 @@ public class HandleErrTransformer<T> implements ObservableTransformer<T, T> {
 
     @Override
     public ObservableSource<T> apply(Observable<T> upstream) {
-        LogUtils.i("HandleErrTransformer");
+
         return upstream.onErrorResumeNext(new HttpResponseFunc<T>());
     }
 }

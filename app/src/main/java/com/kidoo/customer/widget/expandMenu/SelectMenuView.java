@@ -115,7 +115,7 @@ public class SelectMenuView extends LinearLayout {
         if (aDataList != null) {
             mChannelDataList.clear();
             mChannelDataList.addAll(aDataList);
-            mSubjectABHolder.refreshData(mChannelDataList, 0, -1);
+            mSubjectABHolder.refreshData(mChannelDataList, 0, 0);
 
             mChannelBText.setText(mChannelDataList.get(mChannelASelectIndex)
                     .getChannelBList()

@@ -190,7 +190,7 @@
     <string name="broadcast_detial_toolbar_title">广播详情</string>
 
     <string name="broadcast_detail_toolbar_menu_title">群聊</string>
-    
+
     <string name="explore_item_challengerec">挑战信息</string>
     <string name="explore_item_ranking">排行榜</string>
     <string name="explore_item_findteam">查找战队</string>
@@ -242,6 +242,19 @@
 
     <string name="channel_campaign_list_title">赛事列表</string>
     <string name="channel_hava_no_campaign_data">没有这个频道的比赛</string>
+
+    <string name="campaign_detail_title">比赛详情</string>
+    <string name="campaign_detail_schedule">赛程</string>
+    <string name="campaign_detail_award">奖章</string>
+    <string name="campaign_detail_ablum">相册</string>
+    <string name="campaign_detail_node">战况</string>
+
+    <string name="campaign_errol_btn">报名情况</string>
+
+    <string name="campaign_status">状态</string>
+    <string name="campaign_level">级别</string>
+    <string name="campaign_format">赛制</string>
+    <string name="campaign_info">赛事信息</string>
 
 
 </resources>

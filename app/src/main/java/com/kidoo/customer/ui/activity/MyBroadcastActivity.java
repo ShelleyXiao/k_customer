@@ -38,10 +38,7 @@ public class MyBroadcastActivity extends BaseViewPagerActivity {
         return customTabEntities;
     }
 
-    @Override
-    public String getToolbarTitle() {
-        return getString(R.string.my_broadcast_detail_toolbar_title);
-    }
+
 
     @Override
     public void showToast(String msg) {

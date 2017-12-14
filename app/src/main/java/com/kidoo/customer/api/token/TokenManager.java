@@ -4,6 +4,7 @@ import com.kidoo.customer.AppContext;
 import com.kidoo.customer.cache.ACache;
 import com.kidoo.customer.cipher.rsa.Base64Utils;
 import com.kidoo.customer.cipher.rsa.RSAUtil;
+import com.kidoo.customer.utils.LogUtils;
 
 import java.util.Date;
 
@@ -128,12 +129,13 @@ public class TokenManager {
         long nowTime = new Date().getTime();
         String serverTime = String.valueOf(nowTime - difTime);
         try {
+            LogUtils.i(mRSAKey.getPublickKey());
             byte[] bytesToken = RSAUtil.encryptByPublicKey(serverTime, mRSAKey.getPublickKey());
             String token = Base64Utils.encode(bytesToken);
 
             return token;
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
 

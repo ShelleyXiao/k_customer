@@ -26,7 +26,7 @@ import android.widget.Toast;
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.R;
 import com.kidoo.customer.mvp.contract.SigninContract;
-import com.kidoo.customer.mvp.presenter.SigninPresenterImpl;
+import com.kidoo.customer.mvp.presenter.account.SigninPresenterImpl;
 import com.kidoo.customer.ui.activity.MainActivity;
 import com.kidoo.customer.utils.TDevice;
 import com.kidoo.customer.utils.parser.RichTextParser;

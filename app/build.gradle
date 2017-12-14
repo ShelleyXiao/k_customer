@@ -150,10 +150,12 @@ dependencies {
 
     compile 'cn.bingoogolapple:bga-banner:2.1.4'
 
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 
     compile('cn.qqtheme.framework:WheelPicker:1.5.5') {
         exclude group: 'com.android.support'
     }
+
 
     // 图片压缩
     compile 'top.zibin:Luban:1.1.3'

@@ -18,9 +18,10 @@ import com.kidoo.customer.bean.MedalBean;
 import com.kidoo.customer.bean.UserDetailBean;
 import com.kidoo.customer.interf.OnTabReselectListener;
 import com.kidoo.customer.media.ImageGalleryActivity;
-import com.kidoo.customer.mvp.contract.UseInfoContract;
-import com.kidoo.customer.mvp.presenter.UserInfoPresenterImpl;
-import com.kidoo.customer.ui.activity.UserDetailActivity;
+import com.kidoo.customer.mvp.contract.user.UseInfoContract;
+import com.kidoo.customer.mvp.presenter.user.UserInfoPresenterImpl;
+import com.kidoo.customer.ui.activity.setting.SettingActivity;
+import com.kidoo.customer.ui.activity.user.UserDetailActivity;
 import com.kidoo.customer.ui.base.fragment.BaseMvpFragment;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.TDevice;
@@ -149,6 +150,10 @@ public class UserInfoTabFragment extends BaseMvpFragment<UserInfoPresenterImpl> 
                 if (!TextUtils.isEmpty(poratait)) {
                     ImageGalleryActivity.show(getActivity(), poratait);
                 }
+                break;
+            case R.id.userinfo_item_setting:
+                Intent intent1 = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

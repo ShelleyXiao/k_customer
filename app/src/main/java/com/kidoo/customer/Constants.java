@@ -60,4 +60,6 @@ public class Constants {
     public static final int PAGE_SIZE = 5;
 
     public static final double DEFAAULT_AREN_CLOSE = 5 * 1000;
+
+    public static final String MATCH_BEAN_DATA_KEY = "matchbean";
 }

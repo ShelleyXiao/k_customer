@@ -7,10 +7,11 @@ import com.kidoo.customer.di.module.ActivityModule;
 import com.kidoo.customer.di.scope.ContextLife;
 import com.kidoo.customer.di.scope.PerActivity;
 import com.kidoo.customer.ui.activity.AreanMapActivity;
-import com.kidoo.customer.ui.activity.UserDetailActivity;
+import com.kidoo.customer.ui.activity.user.UserDetailActivity;
 import com.kidoo.customer.ui.activity.WondefulEventNewsActivity;
 import com.kidoo.customer.ui.activity.account.LoginActivity;
 import com.kidoo.customer.ui.activity.account.SigninInOneStepActivity;
+import com.kidoo.customer.ui.activity.channelCampaign.ChannelCampaignListActivtiy;
 import com.kidoo.customer.ui.activity.splash.SplashActivity;
 
 import dagger.Component;
@@ -47,6 +48,8 @@ public interface ActivityComponent {
     void inject(AreanMapActivity activity);
 
     void inject(WondefulEventNewsActivity activity);
+
+    void inject(ChannelCampaignListActivtiy activity);
 
 
 

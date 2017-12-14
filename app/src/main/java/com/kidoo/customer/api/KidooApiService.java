@@ -8,6 +8,7 @@ import com.kidoo.customer.bean.CheckTokenIdBean;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.bean.KeypairResult;
 import com.kidoo.customer.bean.LoginResult;
+import com.kidoo.customer.bean.MatchListResult;
 import com.kidoo.customer.bean.NewBananersResult;
 import com.kidoo.customer.bean.NewsListResult;
 import com.kidoo.customer.bean.RegisterResultBean;
@@ -37,7 +38,7 @@ import retrofit2.http.QueryMap;
 
 public interface KidooApiService {
 
-//    public static final String BASE_API_URL = "http://www.kidoo.site";
+    //    public static final String BASE_API_URL = "http://www.kidoo.site";
     public static final String BASE_API_URL = "http://120.79.34.62:8061";
 
     @POST("customer/common/getKeyPair")
@@ -59,14 +60,14 @@ public interface KidooApiService {
 
     @POST("customer/common/checkAllToken")
     @FormUrlEncoded
-    Observable<KidooApiResult<CheckAllTokenBean>> checkAllToken(@FieldMap Map<String , String> map);
+    Observable<KidooApiResult<CheckAllTokenBean>> checkAllToken(@FieldMap Map<String, String> map);
 
     @POST("/customer/common/checkTokenId")
     @FormUrlEncoded
-    Observable<KidooApiResult<CheckTokenIdBean>> checkTokenId(@FieldMap Map<String , String> map);
+    Observable<KidooApiResult<CheckTokenIdBean>> checkTokenId(@FieldMap Map<String, String> map);
 
     @GET("customer/common/getInitData")
-    Observable<KidooApiResult<InitData>> getInitData( @QueryMap Map<String, String> maps);
+    Observable<KidooApiResult<InitData>> getInitData(@QueryMap Map<String, String> maps);
 
     @GET("customer/channel/queryAllChannels")
     Observable<KidooApiResult<AllChannelResultBean>> queryAllChannels();
@@ -81,7 +82,7 @@ public interface KidooApiService {
 
     @POST("customer/account/update")
     @FormUrlEncoded
-    Observable<KidooApiResult<ReturnNullBean>> updateUserInfo(@FieldMap Map<String,String> maps);
+    Observable<KidooApiResult<ReturnNullBean>> updateUserInfo(@FieldMap Map<String, String> maps);
 
     @GET("customer/store/queryPicInfo")
     Observable<KidooApiResult<QNToken>> queryPicInfo();
@@ -92,8 +93,9 @@ public interface KidooApiService {
     @GET("customer/news/queryNewsList")
     Observable<KidooApiResult<NewsListResult>> queryNewsList(@QueryMap Map<String, String> maps);
 
-
-
+    @POST("customer/match/queryMatchList")
+    @FormUrlEncoded
+    Observable<KidooApiResult<MatchListResult>> queryMatchList(@FieldMap Map<String, String> maps);
 
 
 }
