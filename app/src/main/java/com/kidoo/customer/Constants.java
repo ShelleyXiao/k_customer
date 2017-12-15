@@ -62,4 +62,8 @@ public class Constants {
     public static final double DEFAAULT_AREN_CLOSE = 5 * 1000;
 
     public static final String MATCH_BEAN_DATA_KEY = "matchbean";
+
+    public static final String SELECT_A_INDEX = "channela_index";
+    public static final String SELECT_B_INDEX = "channelb_index";
+    public static final String SELECT_C_INDEX = "channelc_index";
 }

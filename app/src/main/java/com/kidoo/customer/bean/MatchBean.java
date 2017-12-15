@@ -148,4 +148,23 @@ public class MatchBean implements Serializable {
     public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        return "MatchBean{" +
+                "id=" + id +
+                ", channelCId=" + channelCId +
+                ", name='" + name + '\'' +
+                ", level=" + level +
+                ", format=" + format +
+                ", charge=" + charge +
+                ", msg='" + msg + '\'' +
+                ", picMini='" + picMini + '\'' +
+                ", pic='" + pic + '\'' +
+                ", committerId=" + committerId +
+                ", committerType=" + committerType +
+                ", state=" + state +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

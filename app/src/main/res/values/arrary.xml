@@ -14,7 +14,6 @@
 
     <string-array name="campaign_level">
         <item>业余</item>
-        <item>初级</item>
         <item>半职业</item>
         <item>职业</item>
     </string-array>
@@ -25,8 +24,9 @@
     </string-array>
 
     <string-array name="campaign_format">
-        <item>淘汰赛</item>
         <item>积分赛</item>
+        <item>淘汰赛</item>
+        <item>积分淘汰赛</item>
     </string-array>
 
     <string-array name="eposide_status">

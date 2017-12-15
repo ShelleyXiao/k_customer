@@ -8,223 +8,157 @@ import java.io.Serializable;
 
 public class MedalBean implements Serializable {
 
-    private int id ;
-    private int awardId ;
-    private int channelCId ;
-    private int campaignId ;
-    private int level ;
-    private int roundId ;
-    private int roundNo ;
+    /**
+     * id : 44
+     * channelCId : 4
+     * matchId : 17
+     * customerId : null
+     * teamId : null
+     * level : 1
+     * name : 个人奖
+     * picMini : Fh2R6W2mNL8cg_v15NP_ntZJqTrj.png
+     * pic : Fh2R6W2mNL8cg_v15NP_ntZJqTrj.png
+     * msgMini : null
+     * msg : null
+     * playerType : 0
+     * state : 0
+     * createTime : null
+     * updateTime : null
+     */
 
+    private int id;
+    private int channelCId;
+    private int matchId;
+    private Object customerId;
+    private Object teamId;
+    private int level;
     private String name;
-
-    private double bonus;
     private String picMini;
     private String pic;
-    private String descriptionMini;
-    private String description;
-
-    private int type;
-    private int rankNo;
-    private int medalType;
-    private int electType;
-    private int customerId;
-    private int teamId;
-    private long createTime;
-    private long updateTime;
-
-    public int getId() {
-        return id;
-    }
+    private Object msgMini;
+    private Object msg;
+    private int playerType;
+    private int state;
+    private Object createTime;
+    private Object updateTime;
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getAwardId() {
-        return awardId;
-    }
-
-    public void setAwardId(int awardId) {
-        this.awardId = awardId;
-    }
-
-    public int getChannelCId() {
-        return channelCId;
     }
 
     public void setChannelCId(int channelCId) {
         this.channelCId = channelCId;
     }
 
-    public int getCampaignId() {
-        return campaignId;
+    public void setMatchId(int matchId) {
+        this.matchId = matchId;
     }
 
-    public void setCampaignId(int campaignId) {
-        this.campaignId = campaignId;
+    public void setCustomerId(Object customerId) {
+        this.customerId = customerId;
     }
 
-    public int getLevel() {
-        return level;
+    public void setTeamId(Object teamId) {
+        this.teamId = teamId;
     }
 
     public void setLevel(int level) {
         this.level = level;
     }
 
-    public int getRoundId() {
-        return roundId;
-    }
-
-    public void setRoundId(int roundId) {
-        this.roundId = roundId;
-    }
-
-    public int getRoundNo() {
-        return roundNo;
-    }
-
-    public void setRoundNo(int roundNo) {
-        this.roundNo = roundNo;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public double getBonus() {
-        return bonus;
-    }
-
-    public void setBonus(double bonus) {
-        this.bonus = bonus;
-    }
-
-    public String getPicMini() {
-        return picMini;
     }
 
     public void setPicMini(String picMini) {
         this.picMini = picMini;
     }
 
-    public String getPic() {
-        return pic;
-    }
-
     public void setPic(String pic) {
         this.pic = pic;
     }
 
-    public String getDescriptionMini() {
-        return descriptionMini;
+    public void setMsgMini(Object msgMini) {
+        this.msgMini = msgMini;
     }
 
-    public void setDescriptionMini(String descriptionMini) {
-        this.descriptionMini = descriptionMini;
+    public void setMsg(Object msg) {
+        this.msg = msg;
     }
 
-    public String getDescription() {
-        return description;
+    public void setPlayerType(int playerType) {
+        this.playerType = playerType;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setState(int state) {
+        this.state = state;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public int getRankNo() {
-        return rankNo;
-    }
-
-    public void setRankNo(int rankNo) {
-        this.rankNo = rankNo;
-    }
-
-    public int getMedalType() {
-        return medalType;
-    }
-
-    public void setMedalType(int medalType) {
-        this.medalType = medalType;
-    }
-
-    public int getElectType() {
-        return electType;
-    }
-
-    public void setElectType(int electType) {
-        this.electType = electType;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public int getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
-    }
-
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(long createTime) {
+    public void setCreateTime(Object createTime) {
         this.createTime = createTime;
     }
 
-    public long getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(long updateTime) {
+    public void setUpdateTime(Object updateTime) {
         this.updateTime = updateTime;
     }
 
-    @Override
-    public String toString() {
-        return "MedalBean{" +
-                "id=" + id +
-                ", awardId=" + awardId +
-                ", channelCId=" + channelCId +
-                ", campaignId=" + campaignId +
-                ", level=" + level +
-                ", roundId=" + roundId +
-                ", roundNo=" + roundNo +
-                ", name='" + name + '\'' +
-                ", bonus=" + bonus +
-                ", picMini='" + picMini + '\'' +
-                ", pic='" + pic + '\'' +
-                ", descriptionMini='" + descriptionMini + '\'' +
-                ", description='" + description + '\'' +
-                ", type=" + type +
-                ", rankNo=" + rankNo +
-                ", medalType=" + medalType +
-                ", electType=" + electType +
-                ", customerId=" + customerId +
-                ", teamId=" + teamId +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
+    public int getId() {
+        return id;
+    }
+
+    public int getChannelCId() {
+        return channelCId;
+    }
+
+    public int getMatchId() {
+        return matchId;
+    }
+
+    public Object getCustomerId() {
+        return customerId;
+    }
+
+    public Object getTeamId() {
+        return teamId;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPicMini() {
+        return picMini;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public Object getMsgMini() {
+        return msgMini;
+    }
+
+    public Object getMsg() {
+        return msg;
+    }
+
+    public int getPlayerType() {
+        return playerType;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public Object getCreateTime() {
+        return createTime;
+    }
+
+    public Object getUpdateTime() {
+        return updateTime;
     }
 }

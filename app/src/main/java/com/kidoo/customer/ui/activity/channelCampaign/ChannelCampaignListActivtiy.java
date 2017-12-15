@@ -172,6 +172,9 @@ public class ChannelCampaignListActivtiy extends BaseBackMvpActivity<ChannelCamp
                 if (null != bean) {
                     Intent intent = new Intent(ChannelCampaignListActivtiy.this, CampaignDetailActivity.class);
                     Bundle bundle = new Bundle();
+                    bundle.putInt(Constants.SELECT_A_INDEX, mSelectChannelAIndex);
+                    bundle.putInt(Constants.SELECT_B_INDEX, mSelectChannelBIndex);
+                    bundle.putInt(Constants.SELECT_C_INDEX, mSelectChannelCIndex);
                     bundle.putSerializable(Constants.MATCH_BEAN_DATA_KEY, bean);
                     intent.putExtras(bundle);
                     startActivity(intent);

@@ -24,11 +24,12 @@ public class DateTimeUtils {
     /**
      * 英文全称 如：2010-12-01 23:15:06
      */
-    private static final String FORMAT_LONG = "yyyy-MM-dd HH:mm:ss";
+//    private static final String FORMAT_LONG = "yyyy-MM-dd HH:mm:ss";
+    public static final String FORMAT_LONG = "yyyy-MM-dd HH:mm";
     /**
      * 精确到毫秒的完整时间 如：yyyy-MM-dd HH:mm:ss.SSS
      */
-    private static final String FORMAT_FULL = "yyyy-MM-dd HH:mm:ss.SSS";
+    public static final String FORMAT_FULL = "yyyy-MM-dd HH:mm:ss.SSS";
     /**
      * 英文简写（默认）如：2010-12-01
      */

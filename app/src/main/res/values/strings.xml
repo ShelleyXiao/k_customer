@@ -256,5 +256,9 @@
     <string name="campaign_format">赛制</string>
     <string name="campaign_info">赛事信息</string>
 
+    <string name="competion_name">本场比赛名</string>
+    <string name="competion_time_title">时间</string>
+    <string name="competion_time">%1$s至%2$s</string>
+
 
 </resources>

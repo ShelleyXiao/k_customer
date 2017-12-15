@@ -61,14 +61,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp">
 
-                <com.sunfusheng.glideimageview.GlideImageView
+                <com.kidoo.customer.widget.glideimageview.GlideImageView
                     android:id="@+id/iv_match_pic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
                     android:focusable="true"/>
 
-                <com.sunfusheng.glideimageview.progress.CircleProgressView
+                <com.kidoo.customer.widget.glideimageview.progress.CircleProgressView
                     android:id="@+id/pv_match_pic_progress"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -109,7 +109,7 @@
                 app:subtitle="@string/campaign_level"/>
 
             <TextView
-                android:id="@+id/aren_contact"
+                android:id="@+id/tv_match_level"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/lay_12"

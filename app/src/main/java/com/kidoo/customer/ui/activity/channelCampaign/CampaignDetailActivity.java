@@ -2,15 +2,26 @@ package com.kidoo.customer.ui.activity.channelCampaign;
 
 import android.os.Bundle;
 
+import com.kidoo.customer.AppContext;
 import com.kidoo.customer.Constants;
 import com.kidoo.customer.R;
+import com.kidoo.customer.bean.CompetionDetailResult;
 import com.kidoo.customer.bean.MatchBean;
+import com.kidoo.customer.component.RxBus;
+import com.kidoo.customer.di.Component.ActivityComponent;
+import com.kidoo.customer.di.Component.DaggerActivityComponent;
+import com.kidoo.customer.di.module.ActivityModule;
+import com.kidoo.customer.mvp.contract.channelCampaign.CompetionDetailContract;
+import com.kidoo.customer.mvp.presenter.channelCampaign.CompetionDetailPresenterImpl;
 import com.kidoo.customer.ui.base.activities.BaseViewPagerActivity;
 import com.kidoo.customer.ui.fragment.channelCampaign.CampaignBaseInfoFragment;
+import com.kidoo.customer.ui.fragment.channelCampaign.CompetitionScheduleFragment;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.tablayout.CustomTabEntity;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 /**
  * User: ShaudXiao
@@ -22,12 +33,17 @@ import java.util.ArrayList;
  */
 
 
-public class CampaignDetailActivity extends BaseViewPagerActivity {
+public class CampaignDetailActivity extends BaseViewPagerActivity implements CompetionDetailContract.View{
 
+    protected ActivityComponent mActivityComponent;
+
+    @Inject
+    protected CompetionDetailPresenterImpl mPresenter;
 
     private MatchBean mMatchBean;
 
     private Bundle mBundle;
+
 
     @Override
     public boolean initBundle(Bundle bundle) {
@@ -41,10 +57,37 @@ public class CampaignDetailActivity extends BaseViewPagerActivity {
     }
 
     @Override
+    public void initWidget() {
+        super.initWidget();
+
+        mActivityComponent = DaggerActivityComponent.builder()
+                .activityModule(new ActivityModule(this))
+                .appComponent(((AppContext) getApplication()).getAppComponent())
+                .build();
+
+        mActivityComponent.inject(this);
+
+        mPresenter.attachView(this);
+
+
+
+    }
+
+    @Override
+    protected void initEventAndData() {
+        super.initEventAndData();
+
+        if(mMatchBean != null) {
+            int matchId = mMatchBean.getId();
+            mPresenter.doQueryCompetionDetail(matchId);
+        }
+    }
+
+    @Override
     protected PagerInfo[] getPagers() {
         return new PagerInfo[]{
                 new PagerInfo(getString(R.string.campaign_detail_title), CampaignBaseInfoFragment.class, mBundle),
-                new PagerInfo(getString(R.string.campaign_detail_schedule), CampaignBaseInfoFragment.class, mBundle),
+                new PagerInfo(getString(R.string.campaign_detail_schedule), CompetitionScheduleFragment.class, mBundle),
                 new PagerInfo(getString(R.string.campaign_detail_award), CampaignBaseInfoFragment.class, mBundle),
                 new PagerInfo(getString(R.string.campaign_detail_ablum), CampaignBaseInfoFragment.class, mBundle),
                 new PagerInfo(getString(R.string.campaign_detail_node), CampaignBaseInfoFragment.class, mBundle),
@@ -61,5 +104,18 @@ public class CampaignDetailActivity extends BaseViewPagerActivity {
         customTabEntities.add(new TabEntity(getString(R.string.campaign_detail_ablum), R.drawable.tab_icon_me, R.drawable.tab_icon_me));
         customTabEntities.add(new TabEntity(getString(R.string.campaign_detail_node), R.drawable.tab_icon_me, R.drawable.tab_icon_me));
         return customTabEntities;
+    }
+
+    @Override
+    public void updateCompetionDetail(CompetionDetailResult result) {
+        LogUtils.i(result.getMatch().toString());
+        if(result != null) {
+            RxBus.getDefault().postSticky(result);
+        }
+    }
+
+    @Override
+    public void showError(String msg) {
+
     }
 }
