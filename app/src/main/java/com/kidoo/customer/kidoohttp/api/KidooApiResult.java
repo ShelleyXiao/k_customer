@@ -18,8 +18,10 @@ public class KidooApiResult<T> implements Serializable {
     boolean success;
     private String errorCode;
     private String errorMsg;
-    private int showType;
+    private String errorMsgDev;
     private T data;
+
+
 
     private PageInfo pageInfo;
 
@@ -47,12 +49,12 @@ public class KidooApiResult<T> implements Serializable {
         this.errorMsg = errorMsg;
     }
 
-    public int getShowType() {
-        return showType;
+    public String getErrorMsgDev() {
+        return errorMsgDev;
     }
 
-    public void setShowType(int showType) {
-        this.showType = showType;
+    public void setErrorMsgDev(String errorMsgDev) {
+        this.errorMsgDev = errorMsgDev;
     }
 
     public T getData() {
@@ -77,7 +79,7 @@ public class KidooApiResult<T> implements Serializable {
                 "success=" + success +
                 ", errorCode='" + errorCode + '\'' +
                 ", errorMsg='" + errorMsg + '\'' +
-                ", showType=" + showType +
+                ", errorMsgDev='" + errorMsgDev + '\'' +
                 ", data=" + data +
                 ", pageInfo=" + pageInfo +
                 '}';

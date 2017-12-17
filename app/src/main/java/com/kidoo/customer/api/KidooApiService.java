@@ -12,6 +12,7 @@ import com.kidoo.customer.bean.LoginResult;
 import com.kidoo.customer.bean.MatchListResult;
 import com.kidoo.customer.bean.NewBananersResult;
 import com.kidoo.customer.bean.NewsListResult;
+import com.kidoo.customer.bean.QueryTeamResult;
 import com.kidoo.customer.bean.RegisterResultBean;
 import com.kidoo.customer.bean.ReturnNullBean;
 import com.kidoo.customer.bean.SMSCodeBean;
@@ -101,5 +102,10 @@ public interface KidooApiService {
     @POST("customer/match/queryMatchDetail")
     @FormUrlEncoded
     Observable<KidooApiResult<CompetionDetailResult>> queryMatchDetail(@FieldMap Map<String, String> maps);
+
+    @POST("customer/org/queryTeamList")
+    @FormUrlEncoded
+    Observable<KidooApiResult<QueryTeamResult>> queryTeamList(@FieldMap Map<String, String> maps);
+
 
 }

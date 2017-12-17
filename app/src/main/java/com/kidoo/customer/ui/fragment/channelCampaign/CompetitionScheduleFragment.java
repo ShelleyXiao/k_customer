@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.kidoo.customer.R;
-import com.kidoo.customer.adapter.CompetionDetailScheduleAdapter;
+import com.kidoo.customer.adapter.competion.CompetionDetailScheduleAdapter;
 import com.kidoo.customer.bean.CompetionDetailResult;
 import com.kidoo.customer.bean.CompetionEpisodeBean;
 import com.kidoo.customer.component.RxBus;

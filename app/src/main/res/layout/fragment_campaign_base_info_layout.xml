@@ -66,7 +66,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="true"
-                    android:focusable="true"/>
+                    android:focusable="true"
+                    app:riv_pressed_border_color="@color/kidoo_gren_alpha"
+                    app:riv_pressed_border_width="2dp"
+                    app:riv_pressed_mask_color="@color/placeholder"
+                    />
 
                 <com.kidoo.customer.widget.glideimageview.progress.CircleProgressView
                     android:id="@+id/pv_match_pic_progress"

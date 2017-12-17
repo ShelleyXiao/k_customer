@@ -33,6 +33,7 @@ import com.kidoo.customer.AppOperator;
 import com.kidoo.customer.GlideRequest;
 import com.kidoo.customer.R;
 import com.kidoo.customer.ui.base.activities.BaseActivity;
+import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.rom.BitmapUtil;
 import com.kidoo.customer.widget.loading.Loading;
 
@@ -73,7 +74,7 @@ public class ImageGalleryActivity extends BaseActivity implements ViewPager.OnPa
     private int mCurPosition;
     private boolean mNeedSaveLocal;
     private boolean[] mImageDownloadStatus;
-    private boolean mNeedCookie;
+    private boolean mNeedCookie = false;
 
     public static void show(Context context, String images) {
         show(context, images, true);
@@ -121,7 +122,6 @@ public class ImageGalleryActivity extends BaseActivity implements ViewPager.OnPa
         mCurPosition = bundle.getInt(KEY_POSITION, 0);
         mNeedSaveLocal = bundle.getBoolean(KEY_NEED_SAVE, true);
         mNeedCookie = bundle.getBoolean(KEY_COOKIE, false);
-
         if (mImageSource != null) {
             // 初始化下载状态
             mImageDownloadStatus = new boolean[mImageSource.length];
@@ -184,7 +184,6 @@ public class ImageGalleryActivity extends BaseActivity implements ViewPager.OnPa
 
     }
 
-    @SuppressWarnings("unused")
     @AfterPermissionGranted(PERMISSION_ID)
     @OnClick(R.id.iv_save)
     public void saveToFileByPermission() {
@@ -383,6 +382,7 @@ public class ImageGalleryActivity extends BaseActivity implements ViewPager.OnPa
                                    final ImageView previewView,
                                    final ImageView defaultView,
                                    final Loading loading) {
+            LogUtils.i(urlOrPath);
             loadImageDoDownAndGetOverrideSize(urlOrPath, new DoOverrideSizeCallback() {
 
                 @Override
@@ -395,6 +395,7 @@ public class ImageGalleryActivity extends BaseActivity implements ViewPager.OnPa
                                     loading.setVisibility(View.GONE);
                                     defaultView.setVisibility(View.VISIBLE);
                                     updateDownloadStatus(pos, false);
+                                    LogUtils.i("onLoadFiald pos = " + pos);
                                     return false;
                                 }
 
@@ -403,6 +404,7 @@ public class ImageGalleryActivity extends BaseActivity implements ViewPager.OnPa
                                     loading.stop();
                                     loading.setVisibility(View.GONE);
                                     updateDownloadStatus(pos, true);
+                                    LogUtils.i("success pos = " + pos);
                                     return false;
                                 }
                             }).diskCacheStrategy(DiskCacheStrategy.DATA);
@@ -428,32 +430,38 @@ public class ImageGalleryActivity extends BaseActivity implements ViewPager.OnPa
                         File sourceFile = futureTarget.get();
                         BitmapFactory.Options options = BitmapUtil.createOptions();
                         options.inJustDecodeBounds = true;
+                        LogUtils.i(sourceFile.getAbsoluteFile());
                         BitmapFactory.decodeFile(sourceFile.getAbsolutePath(), options);
 
                         int width = options.outWidth;
                         int height = options.outHeight;
+                        LogUtils.i("width = " + width + " height = " + height);
                         BitmapUtil.resetOptions(options);
                         if (width > 0 && height > 0) {
-                            final Point screenPoint = getDisplayDimens();
-                            final int maxLen = Math.min(Math.min(screenPoint.y, screenPoint.x) * 5, 1366 * 3);
+                            // Get Screen
+                            final Point point = getDisplayDimens();
 
+                            // This max size
+                            final int maxLen = Math.min(Math.min(point.y, point.x) * 5, 1366 * 3);
+
+                            // Init override size
                             final int overrideW, overrideH;
-                            if ((width / (float) height) > (screenPoint.x / (float) screenPoint.y)) {
-                                overrideH = Math.min(height, screenPoint.y);
+                            if ((width / (float) height) > (point.x / (float) point.y)) {
+                                overrideH = Math.min(height, point.y);
                                 overrideW = Math.min(width, maxLen);
                             } else {
-                                overrideW = Math.min(width, screenPoint.x);
+                                overrideW = Math.min(width, point.x);
                                 overrideH = Math.min(height, maxLen);
-
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        callback.onDone(overrideW, overrideH, true);
-                                    }
-                                });
-
                             }
-                        } else {
+
+                            // Call back on main thread
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    callback.onDone(overrideW, overrideH, true);
+                                }
+                            });
+                        }  else {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {

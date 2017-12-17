@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/lay_4"
+    android:paddingLeft="@dimen/lay_8"
+    android:paddingTop="@dimen/lay_4">
+
+    <com.kidoo.customer.widget.glideimageview.GlideImageView
+        android:id="@+id/iv_team_pic"
+        android:layout_width="@dimen/lay_72"
+        android:layout_height="@dimen/lay_72"
+        android:layout_margin="@dimen/lay_2"
+        android:clickable="false"
+        android:focusable="false"
+        android:src="@drawable/def_user"
+        app:riv_border_color="@color/kidoo_gren_alpha"
+        app:riv_border_width="@dimen/lay_2"
+        app:riv_corner_radius="@dimen/lay_10"
+        app:riv_is_circle="false"
+        app:riv_pressed_border_color="@color/kidoo_gren_alpha"
+        app:riv_pressed_border_width="2dp"
+        app:riv_pressed_mask_color="@color/placeholder"/>
+
+    <TextView
+        android:id="@+id/tv_team_name"
+        style="@style/item_title_true_16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/lay_12"
+        android:layout_marginTop="@dimen/lay_4"
+        android:layout_toRightOf="@+id/iv_team_pic"
+        android:text="test"
+
+        />
+
+
+</RelativeLayout>

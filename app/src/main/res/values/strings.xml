@@ -260,5 +260,11 @@
     <string name="competion_time_title">时间</string>
     <string name="competion_time">%1$s至%2$s</string>
 
+    <string name="query_team_title">查找战队</string>
+    <string name="query_team_edit_hint">请输入战队名，支持模糊搜索</string>
+    <string name="query_button_search">搜索</string>
+
+    <string name="query_team_empty">没有找到相依的战队</string>
+
 
 </resources>

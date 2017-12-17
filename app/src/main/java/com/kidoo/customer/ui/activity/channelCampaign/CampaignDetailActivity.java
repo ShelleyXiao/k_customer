@@ -15,6 +15,9 @@ import com.kidoo.customer.mvp.contract.channelCampaign.CompetionDetailContract;
 import com.kidoo.customer.mvp.presenter.channelCampaign.CompetionDetailPresenterImpl;
 import com.kidoo.customer.ui.base.activities.BaseViewPagerActivity;
 import com.kidoo.customer.ui.fragment.channelCampaign.CampaignBaseInfoFragment;
+import com.kidoo.customer.ui.fragment.channelCampaign.CompetionAlbumFragment;
+import com.kidoo.customer.ui.fragment.channelCampaign.CompetionMedalListFragment;
+import com.kidoo.customer.ui.fragment.channelCampaign.CompetionNodeListFragment;
 import com.kidoo.customer.ui.fragment.channelCampaign.CompetitionScheduleFragment;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.tablayout.CustomTabEntity;
@@ -88,9 +91,9 @@ public class CampaignDetailActivity extends BaseViewPagerActivity implements Com
         return new PagerInfo[]{
                 new PagerInfo(getString(R.string.campaign_detail_title), CampaignBaseInfoFragment.class, mBundle),
                 new PagerInfo(getString(R.string.campaign_detail_schedule), CompetitionScheduleFragment.class, mBundle),
-                new PagerInfo(getString(R.string.campaign_detail_award), CampaignBaseInfoFragment.class, mBundle),
-                new PagerInfo(getString(R.string.campaign_detail_ablum), CampaignBaseInfoFragment.class, mBundle),
-                new PagerInfo(getString(R.string.campaign_detail_node), CampaignBaseInfoFragment.class, mBundle),
+                new PagerInfo(getString(R.string.campaign_detail_award), CompetionMedalListFragment.class, mBundle),
+                new PagerInfo(getString(R.string.campaign_detail_ablum), CompetionAlbumFragment.class, mBundle),
+                new PagerInfo(getString(R.string.campaign_detail_node), CompetionNodeListFragment.class, mBundle),
 
         };
     }

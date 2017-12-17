@@ -1,7 +1,9 @@
 package com.kidoo.customer.ui.base.activities;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.support.v7.app.ActionBar;
+import android.widget.Toast;
 
 import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.utils.DialogHelper;
@@ -18,7 +20,7 @@ import com.kidoo.customer.utils.DialogHelper;
 
 public abstract class BaseBackMvpActivity<T extends BasePresenter> extends BaseMvpActivity<T> {
 
-    private ProgressDialog mWaitDialog;
+    private Dialog mWaitDialog;
 
     @Override
     protected void initWindow() {
@@ -44,14 +46,19 @@ public abstract class BaseBackMvpActivity<T extends BasePresenter> extends BaseM
 
     protected void showLoadingDialog(String message) {
         if (mWaitDialog == null) {
-            mWaitDialog = DialogHelper.getProgressDialog(this, true);
+            mWaitDialog = DialogHelper.getLoadingDialog(this);
         }
-        mWaitDialog.setMessage(message);
+
         mWaitDialog.show();
     }
 
     protected void dismissLoadingDialog() {
         if (mWaitDialog == null) return;
         mWaitDialog.dismiss();
+    }
+
+    @Override
+    public void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

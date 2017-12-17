@@ -25,6 +25,7 @@ import com.kidoo.customer.ui.activity.AreanMapActivity;
 import com.kidoo.customer.ui.activity.WondefulEventNewsActivity;
 import com.kidoo.customer.ui.activity.channelCampaign.CampaignDetailActivity;
 import com.kidoo.customer.ui.activity.channelCampaign.ChannelCampaignListActivtiy;
+import com.kidoo.customer.ui.activity.team.QueryTeamActivity;
 import com.kidoo.customer.ui.base.fragment.BaseMvpFragment;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.NetWorkUtil;
@@ -146,7 +147,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenterImpl> implements 
                         break;
                     case R.id.find_team:
                         Intent intentf = new Intent();
-                        intentf.setClass(getActivity(), CampaignDetailActivity.class);
+                        intentf.setClass(getActivity(), QueryTeamActivity.class);
                         startActivity(intentf);
                         break;
                     case R.id.aren_map:

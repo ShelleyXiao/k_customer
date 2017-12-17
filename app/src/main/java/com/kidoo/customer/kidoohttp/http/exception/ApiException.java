@@ -80,7 +80,7 @@ public class ApiException extends Exception {
         } else if (e instanceof ConnectException) {
             ex = new ApiException(e, ERROR.NETWORD_ERROR);
             ex.message = "连接失败";
-            return ex;
+              return ex;
         } else if (e instanceof javax.net.ssl.SSLHandshakeException) {
             ex = new ApiException(e, ERROR.SSL_ERROR);
             ex.message = "证书验证失败";

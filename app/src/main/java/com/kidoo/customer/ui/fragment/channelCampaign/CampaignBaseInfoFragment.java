@@ -20,6 +20,7 @@ import com.kidoo.customer.bean.ChannelB;
 import com.kidoo.customer.bean.ChannelC;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.bean.MatchBean;
+import com.kidoo.customer.media.ImageGalleryActivity;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.glideimageview.GlideImageLoader;
@@ -30,6 +31,7 @@ import com.kidoo.customer.widget.glideimageview.progress.OnGlideImageViewListene
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * User: ShaudXiao
@@ -123,10 +125,18 @@ public class CampaignBaseInfoFragment extends BaseFragment {
         if (mMatchBean != null) {
             loadMatchPic();
 
-            tvMatchFormat.setText(getResources().getStringArray(R.array.campaign_format)[mMatchBean.getFormat()]);
-            tvMatchLevel.setText(getResources().getStringArray(R.array.campaign_level)[mMatchBean.getLevel()]);
+            tvMatchFormat.setText(getResources().getStringArray(R.array.campaign_format)[mMatchBean.getFormat() - 1]);
+            tvMatchLevel.setText(getResources().getStringArray(R.array.campaign_level)[mMatchBean.getLevel() - 1]);
             tvMatchStatus.setText(getResources().getStringArray(R.array.match_status)[mMatchBean.getState()]);
             tvMatchInfo.setText(mMatchBean.getMsg());
+        }
+    }
+
+    @OnClick(R.id.iv_match_pic)
+    public void matchPicClick() {
+        String picUrl = AppContext.context().getInitData().getQnDomain() + mMatchBean.getPic();
+        if (!TextUtils.isEmpty(picUrl)) {
+            ImageGalleryActivity.show(getActivity(), picUrl);
         }
     }
 

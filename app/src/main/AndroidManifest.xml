@@ -176,6 +176,16 @@
         </activity>
 
         <activity
+            android:name=".ui.activity.team.QueryTeamActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/query_team_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity
             android:name=".ui.activity.ArenDetailActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/aren_info_title"

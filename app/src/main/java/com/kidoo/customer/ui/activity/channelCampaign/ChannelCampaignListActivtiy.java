@@ -17,7 +17,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.Constants;
 import com.kidoo.customer.R;
-import com.kidoo.customer.adapter.ChannelCampaignAdapter;
+import com.kidoo.customer.adapter.competion.ChannelCampaignAdapter;
 import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.bean.ChannelA;
 import com.kidoo.customer.bean.ChannelC;
