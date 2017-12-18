@@ -1,6 +1,7 @@
 package com.kidoo.customer.mvp.contract.team;
 
 import com.kidoo.customer.bean.TeamBean;
+import com.kidoo.customer.bean.TeamDetailResult;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
 import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.mvp.view.BaseView;
@@ -22,7 +23,7 @@ public interface TeamDetailContract {
     interface View extends BaseView {
 
 
-        void updateTeamDetail(TeamBean teamBean);
+        void updateTeamDetail(TeamDetailResult teamBean);
 
         void showError(String msg);
 
@@ -42,7 +43,7 @@ public interface TeamDetailContract {
 
 
         interface GetTeamDetailCallback {
-            void onSuccess(KidooApiResult<TeamBean> teamBean);
+            void onSuccess(TeamDetailResult iteamBean);
 
             void onFailure(String msg);
         }

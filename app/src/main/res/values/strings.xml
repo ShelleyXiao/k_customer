@@ -274,6 +274,8 @@
     <string name="team_join_btn">加入他们</string>
     <string name="team_join_dailog_msg">确认申请加入该战队吗?</string>
     <string name="team_quit_dailog_msg">确认退出战队吗?</string>
+    <string name="team_modify_info">修改战队信息</string>
+    <string name="team_member_quit">退出战队</string>
 
 
 </resources>

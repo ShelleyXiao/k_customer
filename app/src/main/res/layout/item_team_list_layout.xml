@@ -10,8 +10,8 @@
 
     <com.kidoo.customer.widget.glideimageview.GlideImageView
         android:id="@+id/iv_team_pic"
-        android:layout_width="@dimen/lay_72"
-        android:layout_height="@dimen/lay_72"
+        android:layout_width="@dimen/lay_56"
+        android:layout_height="@dimen/lay_56"
         android:layout_margin="@dimen/lay_2"
         android:clickable="false"
         android:focusable="false"
