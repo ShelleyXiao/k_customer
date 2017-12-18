@@ -34,8 +34,8 @@ public class QueryTeamAdapter extends BaseQuickAdapter<TeamBean, BaseViewHolder>
     protected void convert(BaseViewHolder helper, TeamBean item) {
 
         helper.setText(R.id.tv_team_name, item.getName());
-        GlideImageView ivMathPic = (GlideImageView) helper.getView(R.id.iv_match_pic);
-        ivMathPic.loadImage(baseUrl + item.getIcon(), R.color.placeholder);
+        GlideImageView ivTeamPic = (GlideImageView) helper.getView(R.id.iv_team_pic);
+        ivTeamPic.loadImage(baseUrl + item.getIcon(), R.color.placeholder);
 
 
     }

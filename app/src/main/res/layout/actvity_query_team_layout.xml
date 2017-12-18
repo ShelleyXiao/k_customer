@@ -33,17 +33,19 @@
             android:textColor="#999"
             android:textColorHint="#999"
             android:textSize="@dimen/font_14"
-            app:met_hideUnderline="true"
+            app:met_hideUnderline="false"
             app:met_textColor="@color/kidoo_hint_gray" />
 
         <Button
             android:id="@+id/bt_search"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/size_36"
             android:layout_marginLeft="@dimen/lay_12"
             android:layout_marginRight="@dimen/lay_8"
+            android:layout_marginTop="@dimen/lay_4"
+            android:layout_marginBottom="@dimen/lay_4"
             android:layout_weight="1"
-            android:background="@drawable/bg_login_register"
+            android:background="@drawable/bg_rect"
             android:elevation="0dp"
             android:outlineProvider="none"
             android:text="@string/query_button_search"
@@ -58,7 +60,8 @@
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:isFirstVisible="false">
+        app:isFirstVisible="false"
+        android:layout_marginTop="@dimen/lay_8">
 
 
         <android.support.v7.widget.RecyclerView

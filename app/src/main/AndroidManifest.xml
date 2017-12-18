@@ -186,6 +186,15 @@
         </activity>
 
         <activity
+            android:name=".ui.activity.team.TeamDetailActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/team_detail_title"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity
             android:name=".ui.activity.ArenDetailActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/aren_info_title"

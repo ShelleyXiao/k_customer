@@ -32,7 +32,7 @@ public class TeamBean implements Serializable {
     private int state;
     private long createTime;
     private long updateTime;
-    private List<?> memberList;
+    private List<TeamMemberBen> memberList;
 
     public int getId() {
         return id;
@@ -106,11 +106,11 @@ public class TeamBean implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public List<?> getMemberList() {
+    public List<TeamMemberBen> getMemberList() {
         return memberList;
     }
 
-    public void setMemberList(List<?> memberList) {
+    public void setMemberList(List<TeamMemberBen> memberList) {
         this.memberList = memberList;
     }
 

@@ -265,6 +265,15 @@
     <string name="query_button_search">搜索</string>
 
     <string name="query_team_empty">没有找到相依的战队</string>
+    <string name="query_team_name_intput_emtpy">战队名不能为空哦！</string>
+    <string name="team_detail_title">战队详情</string>
+    <string name="team_medal_title">战队奖章</string>
+    <string name="team_member_title">战队成员</string>
+    <string name="team_medal_empty">战队暂无获得奖章</string>
+    <string name="team_dismiss_msg">抱歉,这只战队貌似解散了</string>
+    <string name="team_join_btn">加入他们</string>
+    <string name="team_join_dailog_msg">确认申请加入该战队吗?</string>
+    <string name="team_quit_dailog_msg">确认退出战队吗?</string>
 
 
 </resources>

@@ -14,6 +14,7 @@ import com.kidoo.customer.ui.activity.channelCampaign.CampaignDetailActivity;
 import com.kidoo.customer.ui.activity.channelCampaign.ChannelCampaignListActivtiy;
 import com.kidoo.customer.ui.activity.splash.SplashActivity;
 import com.kidoo.customer.ui.activity.team.QueryTeamActivity;
+import com.kidoo.customer.ui.activity.team.TeamDetailActivity;
 import com.kidoo.customer.ui.activity.user.UserDetailActivity;
 
 import dagger.Component;
@@ -56,5 +57,7 @@ public interface ActivityComponent {
     void inject(CampaignDetailActivity activity);
 
     void inject(QueryTeamActivity activity);
+
+    void inject(TeamDetailActivity activity);
 
 }

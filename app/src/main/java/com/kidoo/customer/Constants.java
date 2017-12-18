@@ -57,7 +57,7 @@ public class Constants {
 
     public static final String CHANNEL_DATA_CACHE_KEY = "channel_data";
 
-    public static final int PAGE_SIZE = 5;
+    public static final int PAGE_SIZE = 16;
 
     public static final double DEFAAULT_AREN_CLOSE = 5 * 1000;
 
@@ -66,4 +66,6 @@ public class Constants {
     public static final String SELECT_A_INDEX = "channela_index";
     public static final String SELECT_B_INDEX = "channelb_index";
     public static final String SELECT_C_INDEX = "channelc_index";
+    public static final String TEAM_ID_KEY = "team_id";
+
 }

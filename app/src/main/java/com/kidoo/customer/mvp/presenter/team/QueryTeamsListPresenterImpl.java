@@ -3,11 +3,9 @@ package com.kidoo.customer.mvp.presenter.team;
 import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.bean.QueryTeamResult;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
-import com.kidoo.customer.mvp.contract.channelCampaign.ChannelCampaignContract;
 import com.kidoo.customer.mvp.contract.team.QueryTeamContract;
 import com.kidoo.customer.mvp.interactor.team.QueryTeamInteractor;
 import com.kidoo.customer.mvp.presenter.BasePresenterImpl;
-import com.kidoo.customer.utils.LogUtils;
 
 import javax.inject.Inject;
 
@@ -32,7 +30,7 @@ public class QueryTeamsListPresenterImpl extends BasePresenterImpl<QueryTeamCont
         Disposable disposable = mInteractor.queryAllChannelsAction(new QueryTeamContract.Interactor.GetAllChannelsCallback() {
             @Override
             public void onSuccess(AllChannelResultBean result) {
-                LogUtils.i(result.getChannelAList().size());
+//                LogUtils.i(result.getChannelAList().size());
                 mPresenterView.updateChannelInfo(result);
             }
 

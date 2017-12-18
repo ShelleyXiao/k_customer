@@ -4,7 +4,6 @@ import com.kidoo.customer.api.AllChannelApi;
 import com.kidoo.customer.api.QueryTeamListApi;
 import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.bean.QueryTeamResult;
-import com.kidoo.customer.bean.TeamBean;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
 import com.kidoo.customer.mvp.contract.team.QueryTeamContract;
 import com.kidoo.customer.utils.LogUtils;
@@ -46,11 +45,16 @@ public class QueryTeamInteractor implements QueryTeamContract.Interactor{
             @Override
             public void accept(Throwable throwable) throws Exception {
                 LogUtils.e(throwable.getMessage());
+                callback.onFailure(throwable.getMessage());
             }
         });
 
+
+
         return disposable;
     }
+
+
 
     @Override
     public Disposable queryAllChannelsAction(final GetAllChannelsCallback callback) {
