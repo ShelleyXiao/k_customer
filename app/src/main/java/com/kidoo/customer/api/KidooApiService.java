@@ -16,9 +16,9 @@ import com.kidoo.customer.bean.QueryTeamResult;
 import com.kidoo.customer.bean.RegisterResultBean;
 import com.kidoo.customer.bean.ReturnNullBean;
 import com.kidoo.customer.bean.SMSCodeBean;
-import com.kidoo.customer.bean.TeamBean;
 import com.kidoo.customer.bean.TeamDetailResult;
 import com.kidoo.customer.bean.UserDetailBean;
+import com.kidoo.customer.bean.UsersBaseResult;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
 
 import java.util.Map;
@@ -84,6 +84,10 @@ public interface KidooApiService {
     @FormUrlEncoded
     Observable<KidooApiResult<UserDetailBean>> queryDetail(@FieldMap Map<String, String> maps);
 
+    @POST("customer/customer/queryBaseInfo")
+    @FormUrlEncoded
+    Observable<KidooApiResult<UsersBaseResult>> queryUserBaseInfo(@FieldMap Map<String, String> maps);
+
     @POST("customer/account/update")
     @FormUrlEncoded
     Observable<KidooApiResult<ReturnNullBean>> updateUserInfo(@FieldMap Map<String, String> maps);
@@ -113,4 +117,15 @@ public interface KidooApiService {
     @FormUrlEncoded
     Observable<KidooApiResult<TeamDetailResult>> queryTeamDetail(@FieldMap Map<String, String> maps);
 
+    @POST("customer/org/joinTeam")
+    @FormUrlEncoded
+    Observable<KidooApiResult<ReturnNullBean>> joinTeam(@FieldMap Map<String, String> maps);
+
+    @POST("customer/org/quitTeam")
+    @FormUrlEncoded
+    Observable<KidooApiResult<ReturnNullBean>> quitTeam(@FieldMap Map<String, String> maps);
+
+    @POST("customer/org/modifyTeam")
+    @FormUrlEncoded
+    Observable<KidooApiResult<ReturnNullBean>> modifyTeam(@FieldMap Map<String, String> maps);
 }

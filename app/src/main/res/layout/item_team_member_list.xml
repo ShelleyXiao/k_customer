@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/lay_4"
+    android:paddingLeft="@dimen/lay_8"
+    android:paddingTop="@dimen/lay_4">
+
+    <com.kidoo.customer.widget.glideimageview.GlideImageView
+        android:id="@+id/iv_member_pic"
+        android:layout_width="@dimen/lay_56"
+        android:layout_height="@dimen/lay_56"
+        android:layout_margin="@dimen/lay_2"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/def_user"
+        app:riv_border_color="@color/kidoo_gren_alpha"
+        app:riv_border_width="@dimen/lay_2"
+        app:riv_corner_radius="@dimen/lay_10"
+        app:riv_is_circle="false"
+        app:riv_pressed_border_color="@color/kidoo_gren_alpha"
+        app:riv_pressed_border_width="2dp"
+        app:riv_pressed_mask_color="@color/placeholder"
+        android:nextFocusRight="@drawable/def_user"/>
+
+    <FrameLayout
+        android:id="@+id/tv_member_captain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/iv_member_pic"
+        android:layout_alignTop="@+id/iv_member_pic"
+        android:layout_toRightOf="@+id/iv_member_pic">
+
+        <TextView
+            android:id="@+id/tv_member_captain_name"
+            style="@style/item_title_true_16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/lay_12"
+            android:layout_marginTop="@dimen/lay_4"
+            android:text="test"
+            />
+
+        <ImageView
+            android:id="@+id/tv_match_status"
+            android:layout_width="64dp"
+            android:layout_height="24dp"
+            android:layout_below="@+id/tv_match_name"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/lay_4"
+            android:layout_marginLeft="@dimen/lay_12"
+            android:gravity="bottom"
+            android:src="@drawable/icon_iamcaptain"
+            />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_member_name"
+        style="@style/item_title_true_16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/lay_12"
+        android:layout_marginTop="@dimen/lay_4"
+        android:layout_toRightOf="@+id/iv_member_pic"
+        android:text="test"
+        />
+
+
+</RelativeLayout>

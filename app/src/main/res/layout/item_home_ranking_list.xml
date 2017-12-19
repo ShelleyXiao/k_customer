@@ -88,7 +88,7 @@
                 android:layout_marginTop="@dimen/lay_16"
                 android:layout_centerHorizontal="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/gb_icon_p"/>
+                android:src="@drawable/icon_map"/>
 
 
             <TextView

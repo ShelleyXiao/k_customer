@@ -1,8 +1,6 @@
 package com.kidoo.customer.ui.activity.team;
 
-import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -190,21 +188,19 @@ public class QueryTeamActivity extends BaseBackMvpActivity<QueryTeamsListPresent
                     }
                 }));
 
-        mTeamAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-            }
-        });
 
         mTeamAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(QueryTeamActivity.this, TeamDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt(Constants.TEAM_ID_KEY, mTeamDatas.get(position).getId());
-                intent.putExtras(bundle);
-                startActivity(intent);
+//                Intent intent = new Intent(QueryTeamActivity.this, TeamDetailActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putInt(Constants.TEAM_ID_KEY, mTeamDatas.get(position).getId());
+//                intent.putExtras(bundle);
+//                startActivity(intent);
+
+                TeamDetailActivity.showTeamDetail(QueryTeamActivity.this,
+                        mSelectChannelAIndex, mSelectChannelBIndex, mSelectChannelCIndex,
+                        mTeamDatas.get(position));
             }
         });
 

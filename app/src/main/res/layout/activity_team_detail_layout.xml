@@ -1,118 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/loadlayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+    >
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/loadlayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
+    <com.kidoo.customer.widget.PersonalScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
-
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lv_btn"
+        android:layout_marginBottom="@dimen/lay_10"
         >
 
-        <com.kidoo.customer.widget.expandMenu.SelectMenuView
-            android:id="@+id/search_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.kidoo.customer.widget.glideimageview.GlideImageView
-            android:id="@+id/iv_team_logo"
-            android:layout_width="@dimen/size_72"
-            android:layout_height="@dimen/size_72"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/lay_20"
-            android:scaleType="fitCenter"
-            app:riv_border_color="@color/kidoo_gren_alpha"
-            app:riv_border_width="1dp"
-            app:riv_is_circle="true"
-            tools:src="@drawable/def_user" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_team_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/lay_8"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_20"
-            tools:text="test" />
-
-        <com.kidoo.customer.widget.KidooSubtitleView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/lay_8"
-            app:subtitle="@string/team_medal_title" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/lay_56"
-            android:layout_marginLeft="@dimen/lay_12">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_team_medal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                android:scrollbars="none" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_team_medal_empty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/lay_8"
-                android:text="@string/team_medal_empty"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_20"
-                android:visibility="gone"
-                tools:text="test" />
-
-        </FrameLayout>
-
-        <com.kidoo.customer.widget.KidooSubtitleView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/lay_8"
-            app:subtitle="@string/team_member_title" />
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/lay_12"
-            android:layout_marginTop="@dimen/lay_4"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_team_member"
+            <LinearLayout
+                android:id="@+id/channel_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                android:scrollbars="none"
-                android:visibility="gone"
-                />
+                android:layout_marginBottom="@dimen/lay_8"
+                android:layout_marginTop="@dimen/lay_8"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/bt_send"
+                <TextView
+                    android:id="@+id/channel_a"
+                    style="@style/main_title_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="test"/>
+
+                <TextView
+                    android:id="@+id/channel_b"
+                    style="@style/main_title_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="test"/>
+
+                <TextView
+                    android:id="@+id/channel_c"
+                    style="@style/main_title_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="test"/>
+
+            </LinearLayout>
+
+            <com.kidoo.customer.widget.glideimageview.GlideImageView
+                android:id="@+id/iv_team_logo"
+                android:layout_width="@dimen/size_72"
+                android:layout_height="@dimen/size_72"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/lay_20"
+                android:scaleType="fitCenter"
+                app:riv_border_color="@color/kidoo_gren_alpha"
+                app:riv_border_width="1dp"
+                app:riv_is_circle="true"
+                tools:src="@drawable/def_user"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_team_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/lay_8"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_20"
+                tools:text="test"/>
+
+            <com.kidoo.customer.widget.KidooSubtitleView
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_below="@+id/rv_team_member"
-                android:layout_gravity="bottom"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="@dimen/lay_10"
-                android:background="@drawable/btn_normal_bg"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                tools:text="test" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/lay_8"
+                app:subtitle="@string/team_medal_title"/>
 
-        </RelativeLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lay_56"
+                android:layout_marginStart="@dimen/lay_12">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_team_medal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    android:visibility="gone"
+                    />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_team_medal_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/lay_8"
+                    android:text="@string/team_medal_empty"
+                    android:textColor="@color/kidoo_gray"
+                    android:textSize="@dimen/font_18"
+                    android:visibility="visible"
+                    tools:text="test"/>
+
+            </FrameLayout>
+
+            <com.kidoo.customer.widget.KidooSubtitleView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/lay_8"
+                app:subtitle="@string/team_member_title"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginStart="@dimen/lay_12"
+                android:layout_marginTop="@dimen/lay_8"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_team_member"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/lv_apply_member"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.kidoo.customer.widget.KidooSubtitleView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/lay_8"
+                    app:subtitle="@string/team_apply"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_team_apply_member"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_marginTop="@dimen/lay_8"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.kidoo.customer.widget.PersonalScrollView>
+
+    <LinearLayout
+        android:id="@+id/lv_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/lay_10"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:id="@+id/bt_join_apply"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/lay_10"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/btn_normal_bg"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:text="test"/>
+
+        <Button
+            android:id="@+id/bt_modify_team"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/btn_normal_bg"
+            android:text="@string/team_modify_info"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="gone"
+            tools:text="test1"/>
 
     </LinearLayout>
 
-</FrameLayout>
+
+</RelativeLayout>

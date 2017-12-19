@@ -15,6 +15,7 @@ import com.kidoo.customer.ui.activity.channelCampaign.ChannelCampaignListActivti
 import com.kidoo.customer.ui.activity.splash.SplashActivity;
 import com.kidoo.customer.ui.activity.team.QueryTeamActivity;
 import com.kidoo.customer.ui.activity.team.TeamDetailActivity;
+import com.kidoo.customer.ui.activity.team.TeamDetailModifyActivity;
 import com.kidoo.customer.ui.activity.user.UserDetailActivity;
 
 import dagger.Component;
@@ -29,7 +30,7 @@ import dagger.Component;
  */
 
 @PerActivity
-@Component(modules = ActivityModule.class , dependencies = AppComponent.class)
+@Component(modules = ActivityModule.class, dependencies = AppComponent.class)
 public interface ActivityComponent {
 
     @ContextLife("Application")
@@ -59,5 +60,7 @@ public interface ActivityComponent {
     void inject(QueryTeamActivity activity);
 
     void inject(TeamDetailActivity activity);
+
+    void inject(TeamDetailModifyActivity activity);
 
 }

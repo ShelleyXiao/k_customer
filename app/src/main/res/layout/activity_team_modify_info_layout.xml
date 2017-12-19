@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/kidoo_bg_gray"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="14dp"
+            android:background="@color/kidoo_bg_gray">
+
+
+            <com.kidoo.customer.widget.glideimageview.GlideImageView
+                android:id="@+id/iv_team_logo"
+                android:layout_width="@dimen/lay_56"
+                android:layout_height="@dimen/lay_56"
+                android:clickable="true"
+                android:focusable="true"
+                android:nextFocusRight="@drawable/def_user"
+                android:src="@drawable/def_user"
+                app:riv_border_color="@color/kidoo_gren_alpha"
+                app:riv_border_width="@dimen/lay_2"
+                app:riv_corner_radius="@dimen/lay_10"
+                app:riv_is_circle="false"
+                app:riv_pressed_border_color="@color/kidoo_gren_alpha"
+                app:riv_pressed_border_width="2dp"
+                app:riv_pressed_mask_color="@color/placeholder"/>
+
+            <LinearLayout
+                android:id="@+id/ll_head"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="60dp"
+                android:background="@drawable/profile_bg"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/user_detail_text_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/team_modify_logo_hint"/>
+
+            </LinearLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/profile_bg">
+
+            <TextView
+                style="@style/user_detail_text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/team_modify_name"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/met_name"
+                style="@style/user_detail_text_met"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:hint="@string/team_modify_nickname_hint"
+                android:maxLines="1"
+                android:textColorHint="@color/kidoo_hint_gray"
+                app:met_hideUnderline="true"
+                app:met_textColor="@color/kidoo_hint_gray"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/profile_bg"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="8dp"
+                    android:paddingTop="8dp"
+                    android:text="@string/team_modify_msg"
+                    android:textColor="@color/kidoo_black_text"
+                    android:textSize="13sp"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/met_team_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="start"
+                    android:hint="@string/team_modify_msg_hint"
+                    android:textSize="13sp"
+                    app:met_hideUnderline="true"
+                    app:met_textColor="@color/kidoo_hint_gray"
+                    app:met_textColorHint="@color/kidoo_hint_gray"/>
+            </LinearLayout>
+
+            <TextView android:id="@+id/str_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:gravity="bottom|right"
+                android:paddingTop="8dp"
+                android:text=""
+                android:textColor="@color/kidoo_black_text"
+                android:textSize="13sp"
+                tools:text="0/50"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_modify_team"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/lay_8"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/btn_normal_bg"
+        android:text="@string/team_modify_ok"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:text="test1"/>
+
+</FrameLayout>

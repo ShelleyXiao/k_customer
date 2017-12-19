@@ -272,10 +272,28 @@
     <string name="team_medal_empty">战队暂无获得奖章</string>
     <string name="team_dismiss_msg">抱歉,这只战队貌似解散了</string>
     <string name="team_join_btn">加入他们</string>
+    <string name="team_apply">申请成员</string>
     <string name="team_join_dailog_msg">确认申请加入该战队吗?</string>
     <string name="team_quit_dailog_msg">确认退出战队吗?</string>
+    <string name="team_join_success_msg">加入战队成功，等待审批</string>
+    <string name="team_join_fail_msg">加入战队失败</string>
+    <string name="team_quit_success_msg">退出战队成功</string>
+    <string name="team_quit_fail_msg">退出战队失败</string>
     <string name="team_modify_info">修改战队信息</string>
     <string name="team_member_quit">退出战队</string>
 
+    <string name="team_modify_title">修改战队</string>
+    <string name="team_modify_logo_hint">更改战队logo</string>
+    <string name="team_modify_name">战队名</string>
+    <string name="team_modify_msg">战队介绍</string>
+    <string name="team_modify_nickname_hint">请输入战队名</string>
+    <string name="team_modify_msg_hint">请输入您的战队介绍(最多不超过50个字符)</string>
+    <string name="team_modify_ok">确认修改</string>
+    <string name="pic_upload_faild">图片上传失败</string>
+    <string name="team_modify_success_msg">修改资料成功</string>
+
+    <string name="team_modify_fail_msg">修改资料失败</string>
+
+    <string name="team_modify_msg_limit">字数已超过限制</string>
 
 </resources>
