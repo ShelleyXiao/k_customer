@@ -68,4 +68,6 @@ public class Constants {
     public static final String SELECT_C_INDEX = "channelc_index";
     public static final String TEAM_ID_KEY = "team_id";
 
+    public static final String MATCH_ID_KEY = "match_id";
+
 }

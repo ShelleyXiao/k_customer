@@ -82,6 +82,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/lay_8"
+                app:subtitle="@string/team_msg_title"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_team_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/lay_12"
+                android:layout_marginTop="@dimen/lay_4"
+                android:text="@string/team_medal_empty"
+                android:textColor="@color/kidoo_gray"
+                android:textSize="@dimen/font_18"
+                android:visibility="visible"
+                tools:text="test"/>
+
+
+            <com.kidoo.customer.widget.KidooSubtitleView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/lay_8"
                 app:subtitle="@string/team_medal_title"/>
 
             <FrameLayout

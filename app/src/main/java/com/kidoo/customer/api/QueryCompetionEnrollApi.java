@@ -2,7 +2,7 @@ package com.kidoo.customer.api;
 
 import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.api.token.TokenManager;
-import com.kidoo.customer.bean.ReturnNullBean;
+import com.kidoo.customer.bean.EnrollSituationResult;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
 import com.kidoo.customer.kidoohttp.http.KidooApiManager;
 import com.kidoo.customer.kidoohttp.http.request.CustomerRequset;
@@ -11,30 +11,26 @@ import io.reactivex.Observable;
 
 /**
  * User: ShaudXiao
- * Date: 2017-12-19
- * Time: 16:45
+ * Date: 2017-12-20
+ * Time: 10:28
  * Company: zx
  * Description:
  * FIXME
  */
 
 
-public class ModifyTeamInfoApi {
+public class QueryCompetionEnrollApi {
 
-    public static Observable<KidooApiResult<ReturnNullBean>> modifyTeamInfo(String teamId, String teamName, String teamMsg, String icon) {
+    public static Observable<KidooApiResult<EnrollSituationResult>> queryCompetionEnroll(String matchId) {
         CustomerRequset requset = KidooApiManager.custom().build()
-                .params("id", teamId)
-                .params("name", teamName)
-                .params("icon", icon)
-                .params("msg", teamMsg)
+                .params("matchId", matchId)
                 .params("customerId", String.valueOf(AccountHelper.getUserId()))
                 .params("token", TokenManager.getInstance().getToken());
 
         KidooApiService kidooApiService = requset.create(KidooApiService.class);
-        Observable<KidooApiResult<ReturnNullBean>> observable = requset.call(kidooApiService.modifyTeam(requset.getParams().urlParamsMap));
+        Observable<KidooApiResult<EnrollSituationResult>> observable = requset.call(kidooApiService.queryMatchEnroll(requset.getParams().urlParamsMap));
 
         return observable;
-
     }
 
 }

@@ -158,17 +158,40 @@
 
     </com.kidoo.customer.widget.PersonalScrollView>
 
-    <Button
-        android:id="@+id/bt_send"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginBottom="@dimen/lay_12"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/btn_normal_bg"
-        android:text="@string/campaign_errol_btn"
-        android:textColor="@color/white"
-        android:textSize="16sp"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:id="@+id/bt_quit_enroll"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="@dimen/lay_4"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/btn_normal_bg"
+            android:text="@string/campaign_quit_errol_btn"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/bt_enroll"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="@dimen/lay_12"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="@dimen/lay_8"
+            android:background="@drawable/btn_normal_bg"
+            android:text="@string/campaign_errol_situaion_btn"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

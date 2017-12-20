@@ -200,16 +200,28 @@ public class TeamDetailModifyActivity extends BaseBackMvpActivity<TeamInfoModify
                 ActivityCompat.startActivity(this, intent, compat.toBundle());
                 break;
             case R.id.bt_modify_team:
-                LogUtils.i("onClick bt_modify_team pic");
-                Intent intent1 = new Intent(this, ImageGalleryActivity.class);
-                intent1.putExtra(KEY_IMAGE, new String[]{baseUrl + mCurrentTeam.getIcon()});
-                ActivityOptionsCompat compat1 = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(this, ivTeamLogo, getString(R.string.transitional_image));
-                ActivityCompat.startActivity(this, intent1, compat1.toBundle());
+                CommonDialog dialog = new CommonDialog(TeamDetailModifyActivity.this);
+                dialog.setTitle(null);
+                dialog.setMessage(getString(R.string.team_modify_confirm));
+                dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        save();
+                    }
+                });
+                dialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+
                 break;
         }
     }
-
 
 
     private void uploadNewPhoto(File file) {

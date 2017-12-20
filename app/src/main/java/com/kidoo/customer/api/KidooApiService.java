@@ -6,6 +6,8 @@ import com.kidoo.customer.bean.ArenaListResult;
 import com.kidoo.customer.bean.CheckAllTokenBean;
 import com.kidoo.customer.bean.CheckTokenIdBean;
 import com.kidoo.customer.bean.CompetionDetailResult;
+import com.kidoo.customer.bean.TeamsBaseInfoResult;
+import com.kidoo.customer.bean.EnrollSituationResult;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.bean.KeypairResult;
 import com.kidoo.customer.bean.LoginResult;
@@ -128,4 +130,21 @@ public interface KidooApiService {
     @POST("customer/org/modifyTeam")
     @FormUrlEncoded
     Observable<KidooApiResult<ReturnNullBean>> modifyTeam(@FieldMap Map<String, String> maps);
+
+    @POST("customer/match/queryMatchEnroll")
+    @FormUrlEncoded
+    Observable<KidooApiResult<EnrollSituationResult>> queryMatchEnroll(@FieldMap Map<String, String> maps);
+
+    @POST("/customer/match/enrollMatch")
+    @FormUrlEncoded
+    Observable<KidooApiResult<ReturnNullBean>> enrollMatch(@FieldMap Map<String, String> maps);
+
+    @POST("/customer/match/quitEnrollMatch")
+    @FormUrlEncoded
+    Observable<KidooApiResult<ReturnNullBean>> quitEnrollMatch(@FieldMap Map<String, String> maps);
+
+    @POST("customer/org/queryTeamBaseInfo")
+    @FormUrlEncoded
+    Observable<KidooApiResult<TeamsBaseInfoResult>> queryTeamBaseInfo(@FieldMap Map<String, String> maps);
+
 }

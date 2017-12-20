@@ -8,6 +8,7 @@ import com.kidoo.customer.di.scope.ContextLife;
 import com.kidoo.customer.di.scope.PerFragment;
 import com.kidoo.customer.ui.fragment.HomeFragment;
 import com.kidoo.customer.ui.fragment.UserInfoTabFragment;
+import com.kidoo.customer.ui.fragment.channelCampaign.CampaignBaseInfoFragment;
 
 import dagger.Component;
 
@@ -32,5 +33,7 @@ public interface FragmentComponent {
 
 //    void inject(BroadcastTabFragment fragment);
     void inject(HomeFragment fragment);
+
+    void inject(CampaignBaseInfoFragment fragment);
 
 }

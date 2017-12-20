@@ -11,30 +11,26 @@ import io.reactivex.Observable;
 
 /**
  * User: ShaudXiao
- * Date: 2017-12-19
- * Time: 16:45
+ * Date: 2017-12-20
+ * Time: 11:11
  * Company: zx
  * Description:
  * FIXME
  */
 
 
-public class ModifyTeamInfoApi {
+public class QuitMatchApi {
 
-    public static Observable<KidooApiResult<ReturnNullBean>> modifyTeamInfo(String teamId, String teamName, String teamMsg, String icon) {
+    public static Observable<KidooApiResult<ReturnNullBean>> quitMatch(String matchId) {
         CustomerRequset requset = KidooApiManager.custom().build()
-                .params("id", teamId)
-                .params("name", teamName)
-                .params("icon", icon)
-                .params("msg", teamMsg)
+                .params("matchId", matchId)
                 .params("customerId", String.valueOf(AccountHelper.getUserId()))
                 .params("token", TokenManager.getInstance().getToken());
 
         KidooApiService kidooApiService = requset.create(KidooApiService.class);
-        Observable<KidooApiResult<ReturnNullBean>> observable = requset.call(kidooApiService.modifyTeam(requset.getParams().urlParamsMap));
+        Observable<KidooApiResult<ReturnNullBean>> observable = requset.call(kidooApiService.quitEnrollMatch(requset.getParams().urlParamsMap));
 
         return observable;
 
     }
-
 }

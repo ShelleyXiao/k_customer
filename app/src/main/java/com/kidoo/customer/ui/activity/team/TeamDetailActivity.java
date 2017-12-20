@@ -73,6 +73,9 @@ public class TeamDetailActivity extends BaseBackMvpActivity<TeamDetailPresenterI
     @BindView(R.id.tv_team_name)
     TextView tvTeanName;
 
+    @BindView(R.id.tv_team_msg)
+    TextView tvTeamMsg;
+
     @BindView(R.id.rv_team_medal)
     RecyclerView rvMedalList;
 
@@ -180,6 +183,12 @@ public class TeamDetailActivity extends BaseBackMvpActivity<TeamDetailPresenterI
         tvTeanName.setText(mCurrentTeam.getName());
         ivTeamLogo.loadImage(baseUrl + mCurrentTeam.getIcon(), R.color.placeholder);
 
+        if (TextUtils.isEmpty(mCurrentTeam.getMsg())) {
+            tvTeamMsg.setText(getString(R.string.team_msg_empty_hint));
+        } else {
+            tvTeamMsg.setText(mCurrentTeam.getMsg());
+        }
+
         mTeamMemberAdapter = new TeamMemberAdapter(this, baseUrl, mCurrentTeam.getCaptainId(), mTeamMemberInfoList);
         mMedalAdapter = new MedalAdapter(this, baseUrl, mMedalList);
 
@@ -282,7 +291,7 @@ public class TeamDetailActivity extends BaseBackMvpActivity<TeamDetailPresenterI
     @Override
     public void joinTeamResult(boolean isSuccess, String errorMsg) {
         dismissLoadingDialog();
-        if(isSuccess) {
+        if (isSuccess) {
             CommonDialog dialog = new CommonDialog(this);
             dialog.setTitle(null);
             dialog.setMessage(getString(R.string.team_join_success_msg));
@@ -311,7 +320,7 @@ public class TeamDetailActivity extends BaseBackMvpActivity<TeamDetailPresenterI
     @Override
     public void quitTeamResult(boolean isSuccess, String errorMsg) {
         dismissLoadingDialog();
-        if(isSuccess) {
+        if (isSuccess) {
             CommonDialog dialog = new CommonDialog(this);
             dialog.setTitle(null);
             dialog.setMessage(getString(R.string.team_quit_success_msg));
@@ -340,7 +349,7 @@ public class TeamDetailActivity extends BaseBackMvpActivity<TeamDetailPresenterI
     public void viewClick(View view) {
         switch (view.getId()) {
             case R.id.bt_join_apply:
-                if(isInTeam) {
+                if (isInTeam) {
                     CommonDialog dialog = new CommonDialog(this);
                     dialog.setTitle(null);
                     dialog.setMessage(getString(R.string.team_quit_dailog_msg));
@@ -355,7 +364,7 @@ public class TeamDetailActivity extends BaseBackMvpActivity<TeamDetailPresenterI
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             showLoadingDialog("");
-                            mPresenter.doQuitTeam(mCurrentTeam.getId()+"");
+                            mPresenter.doQuitTeam(mCurrentTeam.getId() + "");
                             dialog.dismiss();
                         }
                     });
@@ -375,7 +384,7 @@ public class TeamDetailActivity extends BaseBackMvpActivity<TeamDetailPresenterI
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             showLoadingDialog("");
-                            mPresenter.doJoinTeam(mCurrentTeam.getId()+"");
+                            mPresenter.doJoinTeam(mCurrentTeam.getId() + "");
                             dialog.dismiss();
                         }
                     });

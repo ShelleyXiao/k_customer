@@ -5,6 +5,8 @@
 
     <string name="copy_success">复制成功</string>
 
+    <string name="no_network">好像没有网络信号！！</string>
+
     <string name="main_tab_name_home">首页</string>
 
     <string name="main_tab_name_broadcast">广播</string>
@@ -249,7 +251,10 @@
     <string name="campaign_detail_ablum">相册</string>
     <string name="campaign_detail_node">战况</string>
 
-    <string name="campaign_errol_btn">报名情况</string>
+    <string name="campaign_errol_situaion_btn">报名情况</string>
+    <string name="campaign_erroll_btn">报名</string>
+    <string name="campaign_quit_errol_btn">退出报名</string>
+    <string name="competion_enroll_emtpy">暂时没有队伍报名</string>
 
     <string name="campaign_status">状态</string>
     <string name="campaign_level">级别</string>
@@ -260,6 +265,13 @@
     <string name="competion_time_title">时间</string>
     <string name="competion_time">%1$s至%2$s</string>
 
+    <string name="competion_enroll_title">报名情况</string>
+    <string name="competion_enroll_msg">确认报名吗</string>
+    <string name="competion_quit_enroll_msg">确认退出报名吗</string>
+
+    <string name="competion_accpet">未通过验证</string>
+    <string name="competion_already">已通过验证</string>
+
     <string name="query_team_title">查找战队</string>
     <string name="query_team_edit_hint">请输入战队名，支持模糊搜索</string>
     <string name="query_button_search">搜索</string>
@@ -268,6 +280,8 @@
     <string name="query_team_name_intput_emtpy">战队名不能为空哦！</string>
     <string name="team_detail_title">战队详情</string>
     <string name="team_medal_title">战队奖章</string>
+    <string name="team_msg_title">战队信息</string>
+    <string name="team_msg_empty_hint">暂无</string>
     <string name="team_member_title">战队成员</string>
     <string name="team_medal_empty">战队暂无获得奖章</string>
     <string name="team_dismiss_msg">抱歉,这只战队貌似解散了</string>
@@ -295,5 +309,7 @@
     <string name="team_modify_fail_msg">修改资料失败</string>
 
     <string name="team_modify_msg_limit">字数已超过限制</string>
+
+    <string name="team_modify_confirm">确定要修改吗?</string>
 
 </resources>

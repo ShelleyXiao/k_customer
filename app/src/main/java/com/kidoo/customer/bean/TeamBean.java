@@ -28,6 +28,7 @@ public class TeamBean implements Serializable {
     private int channelCId;
     private String name;
     private String icon;
+    private String msg;
     private int captainId;
     private int state;
     private long createTime;
@@ -72,6 +73,14 @@ public class TeamBean implements Serializable {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public int getCaptainId() {

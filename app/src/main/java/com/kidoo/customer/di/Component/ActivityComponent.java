@@ -12,6 +12,7 @@ import com.kidoo.customer.ui.activity.account.LoginActivity;
 import com.kidoo.customer.ui.activity.account.SigninInOneStepActivity;
 import com.kidoo.customer.ui.activity.channelCampaign.CampaignDetailActivity;
 import com.kidoo.customer.ui.activity.channelCampaign.ChannelCampaignListActivtiy;
+import com.kidoo.customer.ui.activity.channelCampaign.CompetionEnrollSituationActivity;
 import com.kidoo.customer.ui.activity.splash.SplashActivity;
 import com.kidoo.customer.ui.activity.team.QueryTeamActivity;
 import com.kidoo.customer.ui.activity.team.TeamDetailActivity;
@@ -62,5 +63,8 @@ public interface ActivityComponent {
     void inject(TeamDetailActivity activity);
 
     void inject(TeamDetailModifyActivity activity);
+
+    void inject(CompetionEnrollSituationActivity activity);
+
 
 }

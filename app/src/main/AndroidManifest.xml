@@ -165,6 +165,17 @@
 
         </activity>
 
+
+        <activity
+            android:name=".ui.activity.channelCampaign.CompetionEnrollSituationActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/competion_enroll_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
         <activity
             android:name=".ui.activity.channelCampaign.CampaignDetailActivity"
             android:configChanges="keyboardHidden|orientation"
