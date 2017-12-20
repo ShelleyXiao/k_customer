@@ -28,4 +28,22 @@ public class AllChannelApi {
         return observable;
     }
 
+//    public static Observable<AllChannelResultBean> queryAllChannelsJson() {
+//        CustomerRequset requset = KidooApiManager.custom().build();
+//        KidooApiService kidooApiService = requset.create(KidooApiService.class);
+//        KidooApiManager  config = KidooApiManager.getInstance();
+//        return kidooApiService.queryAllChannelsJson()
+//                .compose(RxUtil.io_main())
+//                .retryWhen(new RetryExceptionFunc(KidooApiManager.getRetryCount(),
+//                        KidooApiManager.getRetryDelay(),
+//                        KidooApiManager.getRetryIncreaseDelay()))
+//                .map(new Function<Object, ResponseBody>() {
+//                    @Override
+//                    public ResponseBody apply(Object o) throws Exception {
+//                        return null;
+//                    }
+//                });
+//                ;
+//    }
+
 }

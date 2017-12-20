@@ -6,7 +6,6 @@ import com.kidoo.customer.bean.ArenaListResult;
 import com.kidoo.customer.bean.CheckAllTokenBean;
 import com.kidoo.customer.bean.CheckTokenIdBean;
 import com.kidoo.customer.bean.CompetionDetailResult;
-import com.kidoo.customer.bean.TeamsBaseInfoResult;
 import com.kidoo.customer.bean.EnrollSituationResult;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.bean.KeypairResult;
@@ -19,6 +18,7 @@ import com.kidoo.customer.bean.RegisterResultBean;
 import com.kidoo.customer.bean.ReturnNullBean;
 import com.kidoo.customer.bean.SMSCodeBean;
 import com.kidoo.customer.bean.TeamDetailResult;
+import com.kidoo.customer.bean.TeamsBaseInfoResult;
 import com.kidoo.customer.bean.UserDetailBean;
 import com.kidoo.customer.bean.UsersBaseResult;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
@@ -26,6 +26,7 @@ import com.kidoo.customer.kidoohttp.api.KidooApiResult;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -77,6 +78,9 @@ public interface KidooApiService {
 
     @GET("customer/channel/queryAllChannels")
     Observable<KidooApiResult<AllChannelResultBean>> queryAllChannels();
+
+    @GET("customer/channel/queryAllChannels")
+    Observable<ResponseBody> queryAllChannelsJson();
 
     @POST("customer/arena/queryArenaMap")
     @FormUrlEncoded
