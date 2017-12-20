@@ -5,6 +5,9 @@ import com.kidoo.customer.api.QueryMatchsApi;
 import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.bean.MatchListResult;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
+import com.kidoo.customer.kidoohttp.http.KidooApiManager;
+import com.kidoo.customer.kidoohttp.http.function.RetryExceptionFunc;
+import com.kidoo.customer.kidoohttp.http.utils.RxUtil;
 import com.kidoo.customer.mvp.contract.channelCampaign.ChannelCampaignContract;
 import com.kidoo.customer.utils.LogUtils;
 
@@ -13,6 +16,8 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import okhttp3.ResponseBody;
 
 /**
  * User: ShaudXiao
@@ -55,6 +60,28 @@ public class ChannelCampaignInteractor implements ChannelCampaignContract.Intera
                 callback.onFailure(throwable.getMessage());
             }
         });
+
+
+
+//        Observable observable = AllChannelApi.queryAllChannelsJson();
+//        Observable observable1 = observable.compose(RxUtil.io_main())
+//                .retryWhen(new RetryExceptionFunc(KidooApiManager.getRetryCount(),
+//                        KidooApiManager.getRetryDelay(),
+//                        KidooApiManager.getRetryIncreaseDelay()))
+//                .map(new Function() {
+//                    @Override
+//                    public Object apply(Object o) throws Exception {
+//
+//                        return o;
+//                    }
+//                });
+//        observable1.subscribe(new Consumer<Object>() {
+//            @Override
+//            public void accept(Object allChannelResultBean) throws Exception {
+//                LogUtils.i(((ResponseBody)allChannelResultBean).string());
+//            }
+//        });
+
 
         return disposable;
     }

@@ -14,17 +14,28 @@ import android.widget.Toast;
 import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.AppConfig;
 import com.kidoo.customer.R;
+import com.kidoo.customer.api.AllChannelApi;
+import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.interf.OnTabReselectListener;
+import com.kidoo.customer.kidoohttp.http.KidooApiManager;
+import com.kidoo.customer.kidoohttp.http.function.RetryExceptionFunc;
+import com.kidoo.customer.kidoohttp.http.utils.RxUtil;
 import com.kidoo.customer.service.GloablCheckService;
 import com.kidoo.customer.ui.base.activities.BaseActivity;
 import com.kidoo.customer.ui.fragment.NavigationFragement;
 import com.kidoo.customer.utils.AppSystemUtils;
 import com.kidoo.customer.utils.DialogHelper;
+import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.NavButtomButton;
 
 import java.util.List;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import okhttp3.ResponseBody;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -65,6 +76,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         checkUpdate();
         checkLocation();
 
+
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 
