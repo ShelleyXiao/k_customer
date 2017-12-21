@@ -22,7 +22,6 @@ public class KidooApiResult<T> implements Serializable {
     private T data;
 
 
-
     private PageInfo pageInfo;
 
     public boolean isSuccess() {

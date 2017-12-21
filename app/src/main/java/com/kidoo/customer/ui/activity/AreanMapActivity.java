@@ -219,6 +219,7 @@ public class AreanMapActivity extends BaseBackMvpActivity<MapPresenterImpl> impl
                 mChannelList.addAll(dataList);
 
                 AppContext.context().setgChannelAList(dataList);
+                AppContext.context().setgChannelCMaps(channelResultBean.getChannelCmaps());
 
                 mSelectChannelID = dataList.get(mSelectChannelAIndex).getChannelBList()
                         .get(mSelectChannelBIndex)

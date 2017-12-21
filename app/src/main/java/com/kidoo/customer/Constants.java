@@ -57,6 +57,8 @@ public class Constants {
 
     public static final String CHANNEL_DATA_CACHE_KEY = "channel_data";
 
+    public static final String CHANNELCMAP_DATA_CACHE_KEY = "channelCMap_data";
+
     public static final int PAGE_SIZE = 16;
 
     public static final double DEFAAULT_AREN_CLOSE = 5 * 1000;

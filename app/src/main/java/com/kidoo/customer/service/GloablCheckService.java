@@ -15,10 +15,12 @@ import com.kidoo.customer.AppContext;
 import com.kidoo.customer.api.CheckTokenIdApi;
 import com.kidoo.customer.api.token.AuthModel;
 import com.kidoo.customer.api.token.TokenManager;
+import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.bean.CheckTokenIdBean;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
 import com.kidoo.customer.mvp.contract.InitDataContract;
+import com.kidoo.customer.mvp.contract.channelCampaign.ChannelCampaignContract;
 import com.kidoo.customer.mvp.interactor.account.InitDataInteractor;
 import com.kidoo.customer.utils.AppSystemUtils;
 import com.kidoo.customer.utils.LogUtils;
@@ -158,6 +160,23 @@ public class GloablCheckService extends Service {
             @Override
             public void onFailure(String msg) {
                 LogUtils.e("request init data faild: " + msg);
+            }
+        });
+
+        initDataInteractor.queryAllChannelsAction(new ChannelCampaignContract.Interactor.GetAllChannelsCallback() {
+            @Override
+            public void onSuccess(AllChannelResultBean result) {
+                if (result != null) {
+                    if (result.getChannelAList() != null) {
+                        AppContext.context().setgChannelAList(result.getChannelAList());
+                        AppContext.context().setgChannelCMaps(result.getChannelCmaps());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+
             }
         });
     }

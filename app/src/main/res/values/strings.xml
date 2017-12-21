@@ -272,9 +272,15 @@
     <string name="competion_accpet">未通过验证</string>
     <string name="competion_already">已通过验证</string>
 
+    <string name="my_competion_list_title">赛事列表</string>
+
     <string name="query_team_title">查找战队</string>
     <string name="query_team_edit_hint">请输入战队名，支持模糊搜索</string>
     <string name="query_button_search">搜索</string>
+
+    <string name="competion_manager_title">赛事管理</string>
+    <string name="competion_manager_empty">没有记录?试着创建比赛吧~</string>
+    <string name="competion_manager_create_btn">创建赛事</string>
 
     <string name="query_team_empty">没有找到相依的战队</string>
     <string name="query_team_name_intput_emtpy">战队名不能为空哦！</string>

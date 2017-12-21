@@ -9,9 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.R;
+import com.kidoo.customer.adapter.MedalAdapter;
+import com.kidoo.customer.adapter.itemDecoration.SpaceItemDecoration;
 import com.kidoo.customer.bean.Customer;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.bean.MedalBean;
@@ -21,6 +24,7 @@ import com.kidoo.customer.media.ImageGalleryActivity;
 import com.kidoo.customer.mvp.contract.user.UseInfoContract;
 import com.kidoo.customer.mvp.presenter.user.UserInfoPresenterImpl;
 import com.kidoo.customer.ui.activity.setting.SettingActivity;
+import com.kidoo.customer.ui.activity.user.MyMatchsListActivity;
 import com.kidoo.customer.ui.activity.user.UserDetailActivity;
 import com.kidoo.customer.ui.base.fragment.BaseMvpFragment;
 import com.kidoo.customer.utils.LogUtils;
@@ -28,6 +32,7 @@ import com.kidoo.customer.utils.TDevice;
 import com.kidoo.customer.widget.MyEnterLayout;
 import com.kidoo.customer.widget.glideimageview.GlideImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -35,6 +40,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.BlurTransformation;
+
+import static android.support.v7.widget.LinearLayoutManager.HORIZONTAL;
 
 /**
  * description:
@@ -82,13 +89,16 @@ public class UserInfoTabFragment extends BaseMvpFragment<UserInfoPresenterImpl> 
     @BindView(R.id.medal_empty_hint)
     TextView tvMedalEmpty;
 
-    @BindView(R.id.medal_list)
+    @BindView(R.id.rv_medal_list)
     RecyclerView rvMedalList;
 
     @Inject
     UserInfoPresenterImpl mPresenter;
 
     private Customer customer;
+
+    private MedalAdapter mMedalAdapter;
+    private List<MedalBean> mMedalDatas = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -100,25 +110,43 @@ public class UserInfoTabFragment extends BaseMvpFragment<UserInfoPresenterImpl> 
     public void initWidget(View root) {
         super.initWidget(root);
 
-        LinearLayoutManager manager = new LinearLayoutManager(mContext);
-        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvMedalList.setLayoutManager(manager);
+        mMedalAdapter = new MedalAdapter(getActivity(), AppContext.context().getInitData().getQnDomain(),
+                mMedalDatas);
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(HORIZONTAL);
+        rvMedalList.setLayoutManager(linearLayoutManager);
+        rvMedalList.addItemDecoration(new SpaceItemDecoration(8));
+        rvMedalList.setAdapter(mMedalAdapter);
 
     }
 
     @Override
-    protected void initData() {
-        super.initData();
+    protected void initEventAndData() {
+        super.initEventAndData();
 
         if (AccountHelper.isLogin()) {
             customer = AccountHelper.getUser();
             updateBaseInfo(customer);
 
-
             sendRequestData();
         }
+
+        mMedalAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (mMedalDatas.size() != 0) {
+                    String[] picArray = new String[mMedalDatas.size()];
+                    String baseUrl = AppContext.context().getInitData().getQnDomain();
+                    for (int i = 0; i < mMedalDatas.size(); i++) {
+                        picArray[i] = baseUrl + mMedalDatas.get(i).getPic();
+                    }
+                    ImageGalleryActivity.show(getActivity(), picArray, position);
+                }
+            }
+        });
     }
+
 
     @Override
     public void onTabReselect() {
@@ -136,7 +164,8 @@ public class UserInfoTabFragment extends BaseMvpFragment<UserInfoPresenterImpl> 
         return mPresenter;
     }
 
-    @OnClick({R.id.userinfo_header, R.id.userinfo_item_campain, R.id.userinfo_item_team, R.id.userinfo_item_setting,
+    @OnClick({R.id.userinfo_header, R.id.userinfo_item_campain, R.id.userinfo_item_team,
+            R.id.userinfo_item_setting, R.id.userinfo_item_campain_manager,
             R.id.userinfo_item_challengerec, R.id.portrait})
     @Override
     public void onClick(View v) {
@@ -154,6 +183,14 @@ public class UserInfoTabFragment extends BaseMvpFragment<UserInfoPresenterImpl> 
             case R.id.userinfo_item_setting:
                 Intent intent1 = new Intent(getActivity(), SettingActivity.class);
                 startActivity(intent1);
+                break;
+            case R.id.userinfo_item_campain:
+                Intent intent2 = new Intent(getActivity(), MyMatchsListActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.userinfo_item_campain_manager:
+                Intent intent3 = new Intent(getActivity(), MyMatchsListActivity.class);
+                startActivity(intent3);
                 break;
         }
     }
@@ -224,6 +261,7 @@ public class UserInfoTabFragment extends BaseMvpFragment<UserInfoPresenterImpl> 
             tvMedalEmpty.setVisibility(View.GONE);
             rvMedalList.setVisibility(View.VISIBLE);
         }
-
+        mMedalDatas.addAll(beanList);
+        mMedalAdapter.notifyDataSetChanged();
     }
 }

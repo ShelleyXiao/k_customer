@@ -21,6 +21,7 @@ import com.kidoo.customer.bean.EnrollSituationResult;
 import com.kidoo.customer.bean.TeamBean;
 import com.kidoo.customer.mvp.contract.channelCampaign.CompetionEnrollContract;
 import com.kidoo.customer.mvp.presenter.channelCampaign.CompetionEnrollSituationPresenterImpl;
+import com.kidoo.customer.ui.activity.team.TeamDetailActivity;
 import com.kidoo.customer.ui.base.activities.BaseBackMvpActivity;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.NetWorkUtil;
@@ -136,6 +137,21 @@ public class CompetionEnrollSituationActivity extends BaseBackMvpActivity<Compet
 
         swipeToLoadLayout.setLoadMoreEnabled(false);
 
+    }
+
+    @Override
+    protected void initEventAndData() {
+        super.initEventAndData();
+
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                TeamBean bean = mAdapter.getItem(position);
+                if(bean != null) {
+                    TeamDetailActivity.showTeamDetail(CompetionEnrollSituationActivity.this, bean);
+                }
+            }
+        });
     }
 
     @Override

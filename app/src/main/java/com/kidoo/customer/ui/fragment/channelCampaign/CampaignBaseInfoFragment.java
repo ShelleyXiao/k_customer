@@ -22,6 +22,7 @@ import com.kidoo.customer.R;
 import com.kidoo.customer.bean.ChannelA;
 import com.kidoo.customer.bean.ChannelB;
 import com.kidoo.customer.bean.ChannelC;
+import com.kidoo.customer.bean.ChannelCMap;
 import com.kidoo.customer.bean.CompetionDetailResult;
 import com.kidoo.customer.bean.CompetionEnrollbean;
 import com.kidoo.customer.bean.InitData;
@@ -38,6 +39,7 @@ import com.kidoo.customer.widget.glideimageview.GlideImageView;
 import com.kidoo.customer.widget.glideimageview.progress.CircleProgressView;
 import com.kidoo.customer.widget.glideimageview.progress.OnGlideImageViewListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -120,15 +122,38 @@ public class CampaignBaseInfoFragment extends BaseMvpFragment<CompetionEnrollAct
         LogUtils.i(mMatchBean.toString());
 
         List<ChannelA> channelAList = AppContext.context().getgChannelAList();
-        if (channelAList != null) {
+//        if (channelAList != null) {
+//
+//            ChannelA channelA = channelAList.get(selectChannalAIndex);
+//            LogUtils.i(selectChannalAIndex + " " + channelA.getName());
+//            channelAName = channelA.getName();
+//            ChannelB channelB = channelA.getChannelBList().get(selectChannalBIndex);
+//            channelBName = channelB.getName();
+//            mChannelC = channelB.getChannelCList().get(selectChannalCIndex);
+//            channelCName = mChannelC.getName();
+//        }
 
-            ChannelA channelA = channelAList.get(selectChannalAIndex);
-            LogUtils.i(selectChannalAIndex + " " + channelA.getName());
-            channelAName = channelA.getName();
-            ChannelB channelB = channelA.getChannelBList().get(selectChannalBIndex);
-            channelBName = channelB.getName();
-            mChannelC = channelB.getChannelCList().get(selectChannalCIndex);
-            channelCName = mChannelC.getName();
+
+        List<ChannelCMap> channelCMaps = AppContext.context().getgChannelCMaps();
+        List<ChannelB> channelBList = new ArrayList<>();
+
+        if (channelAList != null && channelCMaps != null) {
+
+            ChannelCMap channelCMap = channelCMaps.get(mMatchBean.getChannelCId());
+            channelCName = channelCMap.getName();
+            for (ChannelA channelA : channelAList) {
+                if (channelA.getId() == channelCMap.getChannelAId()) {
+                    channelBList = channelA.getChannelBList();
+                    channelAName = channelA.getName();
+                    break;
+                }
+            }
+            for (ChannelB channelB : channelBList) {
+                if (channelB.getId() == channelCMap.getChannelBId()) {
+                    channelBName = channelB.getName();
+                    break;
+                }
+            }
         }
 
 
@@ -185,10 +210,6 @@ public class CampaignBaseInfoFragment extends BaseMvpFragment<CompetionEnrollAct
                 });
     }
 
-    @Override
-    public void showToast(String msg) {
-
-    }
 
     @Override
     protected CompetionEnrollActionPresenterImpl initInjector() {

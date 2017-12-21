@@ -9,6 +9,7 @@ import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.kidoo.customer.api.KidooApiService;
 import com.kidoo.customer.bean.ChannelA;
+import com.kidoo.customer.bean.ChannelCMap;
 import com.kidoo.customer.bean.InitData;
 import com.kidoo.customer.cache.ACache;
 import com.kidoo.customer.di.Component.AppComponent;
@@ -72,10 +73,13 @@ public class AppContext extends Application {
 
         GloablCheckService.init(_context);
 
+        SimplexToast.init(this);
 
     }
 
     private List<ChannelA> gChannelAList = new ArrayList<>();
+
+    private List<ChannelCMap> gChannelCMaps = new ArrayList<>();
 
     private void initBugly() {
         Context context = getApplicationContext();
@@ -211,5 +215,20 @@ public class AppContext extends Application {
 
         this.gChannelAList.clear();
         this.gChannelAList.addAll(dataList);
+    }
+
+    public List<ChannelCMap> getgChannelCMaps() {
+        if(gChannelCMaps == null) {
+            gChannelCMaps = (ArrayList<ChannelCMap>)ACache.get(this).getAsObject(Constants.CHANNELCMAP_DATA_CACHE_KEY);
+        }
+
+        return gChannelCMaps;
+    }
+
+    public void setgChannelCMaps(List<ChannelCMap> datas) {
+        ACache.get(this).put(Constants.CHANNELCMAP_DATA_CACHE_KEY, (ArrayList<ChannelCMap>)datas);
+
+        this.gChannelCMaps.clear();
+        this.gChannelCMaps.addAll(datas);
     }
 }

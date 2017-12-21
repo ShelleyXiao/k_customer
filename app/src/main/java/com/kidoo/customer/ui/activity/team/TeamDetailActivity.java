@@ -22,6 +22,7 @@ import com.kidoo.customer.adapter.team.TeamMemberAdapter;
 import com.kidoo.customer.bean.ChannelA;
 import com.kidoo.customer.bean.ChannelB;
 import com.kidoo.customer.bean.ChannelC;
+import com.kidoo.customer.bean.ChannelCMap;
 import com.kidoo.customer.bean.Customer;
 import com.kidoo.customer.bean.MedalBean;
 import com.kidoo.customer.bean.TeamBean;
@@ -121,14 +122,13 @@ public class TeamDetailActivity extends BaseBackMvpActivity<TeamDetailPresenterI
 
     private boolean isInTeam = false;
 
-    public static void showTeamDetail(Context context, int selectA, int selectB, int selectC
-            , TeamBean teamBean) {
+    public static void showTeamDetail(Context context,TeamBean teamBean) {
         Intent intent = new Intent(context, TeamDetailActivity.class);
         Bundle bundle = new Bundle();
 
-        bundle.putInt(Constants.SELECT_A_INDEX, selectA);
-        bundle.putInt(Constants.SELECT_B_INDEX, selectB);
-        bundle.putInt(Constants.SELECT_C_INDEX, selectC);
+//        bundle.putInt(Constants.SELECT_A_INDEX, selectA);
+//        bundle.putInt(Constants.SELECT_B_INDEX, selectB);
+//        bundle.putInt(Constants.SELECT_C_INDEX, selectC);
         bundle.putSerializable(Constants.TEAM_ID_KEY, teamBean);
         intent.putExtras(bundle);
         context.startActivity(intent);
@@ -143,9 +143,9 @@ public class TeamDetailActivity extends BaseBackMvpActivity<TeamDetailPresenterI
     protected boolean initBundle(Bundle bundle) {
         if (bundle != null) {
 
-            selectChannalAIndex = bundle.getInt(Constants.SELECT_A_INDEX);
-            selectChannalBIndex = bundle.getInt(Constants.SELECT_B_INDEX);
-            selectChannalCIndex = bundle.getInt(Constants.SELECT_C_INDEX);
+//            selectChannalAIndex = bundle.getInt(Constants.SELECT_A_INDEX);
+//            selectChannalBIndex = bundle.getInt(Constants.SELECT_B_INDEX);
+//            selectChannalCIndex = bundle.getInt(Constants.SELECT_C_INDEX);
 
             mCurrentTeam = (TeamBean) bundle.getSerializable(Constants.TEAM_ID_KEY);
         }
@@ -165,16 +165,39 @@ public class TeamDetailActivity extends BaseBackMvpActivity<TeamDetailPresenterI
 
 
         List<ChannelA> channelAList = AppContext.context().getgChannelAList();
-        if (channelAList != null) {
+//        if (channelAList != null) {
+//
+//            ChannelA channelA = channelAList.get(selectChannalAIndex);
+//            LogUtils.i(selectChannalAIndex + " " + channelA.getName());
+//            channelAName = channelA.getName();
+//            ChannelB channelB = channelA.getChannelBList().get(selectChannalBIndex);
+//            channelBName = channelB.getName();
+//            mChannelC = channelB.getChannelCList().get(selectChannalCIndex);
+//            channelCName = mChannelC.getName();
+//        }
 
-            ChannelA channelA = channelAList.get(selectChannalAIndex);
-            LogUtils.i(selectChannalAIndex + " " + channelA.getName());
-            channelAName = channelA.getName();
-            ChannelB channelB = channelA.getChannelBList().get(selectChannalBIndex);
-            channelBName = channelB.getName();
-            mChannelC = channelB.getChannelCList().get(selectChannalCIndex);
-            channelCName = mChannelC.getName();
+        List<ChannelCMap> channelCMaps = AppContext.context().getgChannelCMaps();
+        List<ChannelB> channelBList = new ArrayList<>();
+
+        if (channelAList != null && channelCMaps != null) {
+
+            ChannelCMap channelCMap = channelCMaps.get(mCurrentTeam.getChannelCId());
+            channelCName = channelCMap.getName();
+            for (ChannelA channelA : channelAList) {
+                if (channelA.getId() == channelCMap.getChannelAId()) {
+                    channelBList = channelA.getChannelBList();
+                    channelAName = channelA.getName();
+                    break;
+                }
+            }
+            for (ChannelB channelB : channelBList) {
+                if (channelB.getId() == channelCMap.getChannelBId()) {
+                    channelBName = channelB.getName();
+                    break;
+                }
+            }
         }
+
 
         tvChannelAName.setText(channelAName);
         tvChannelBName.setText(channelBName);

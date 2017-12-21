@@ -6,6 +6,7 @@ import com.kidoo.customer.di.Component.DaggerActivityComponent;
 import com.kidoo.customer.di.module.ActivityModule;
 import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.mvp.view.BaseView;
+import com.kidoo.customer.widget.SimplexToast;
 
 /**
  * description:
@@ -52,5 +53,10 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActiv
         if (mPresenter != null){
             mPresenter.dropView();
         }
+    }
+
+    @Override
+    public void showToast(String msg) {
+        SimplexToast.show(msg);
     }
 }

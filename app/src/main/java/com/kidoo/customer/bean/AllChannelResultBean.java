@@ -13,27 +13,20 @@ import java.util.List;
  */
 
 
-public class AllChannelResultBean implements Serializable{
+public class AllChannelResultBean implements Serializable {
 
-//    private ChannelCMap channelCmap;
     private List<ChannelA> channelAList;
 
-//    public ChannelCMap getChannelCmap() {
-//        return channelCmap;
-//    }
-//
-//    public void setChannelCmap(ChannelCMap channelCmap) {
-//        this.channelCmap = channelCmap;
-//    }
+    private List<ChannelCMap> channelCmaps;
 
-//    public ChannelA[] getChannelAList() {
-//        return channelAList;
-//    }
-//
-//    public void setChannelAList(ChannelA[] channelAList) {
-//        this.channelAList = channelAList;
-//    }
 
+    public List<ChannelCMap> getChannelCmaps() {
+        return channelCmaps;
+    }
+
+    public void setChannelCmaps(List<ChannelCMap> channelCmaps) {
+        this.channelCmaps = channelCmaps;
+    }
 
     public List<ChannelA> getChannelAList() {
         return channelAList;

@@ -199,7 +199,6 @@ public class QueryTeamActivity extends BaseBackMvpActivity<QueryTeamsListPresent
 //                startActivity(intent);
 
                 TeamDetailActivity.showTeamDetail(QueryTeamActivity.this,
-                        mSelectChannelAIndex, mSelectChannelBIndex, mSelectChannelCIndex,
                         mTeamDatas.get(position));
             }
         });
@@ -364,6 +363,7 @@ public class QueryTeamActivity extends BaseBackMvpActivity<QueryTeamsListPresent
                 mChannelList.addAll(dataList);
 
                 AppContext.context().setgChannelAList(dataList);
+                AppContext.context().setgChannelCMaps(channelResultBean.getChannelCmaps());
 
                 mSelectChannelID = dataList.get(mSelectChannelAIndex).getChannelBList()
                         .get(mSelectChannelBIndex)

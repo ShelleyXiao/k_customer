@@ -38,7 +38,7 @@ public class ChannelCampaignPresnterImpl extends BasePresenterImpl<ChannelCampai
         Disposable disposable = mInteractor.queryAllChannelsAction(new ChannelCampaignContract.Interactor.GetAllChannelsCallback() {
             @Override
             public void onSuccess(AllChannelResultBean result) {
-                LogUtils.i(result.getChannelAList().size());
+//                LogUtils.i(result.getChannelAList().size());
                 mPresenterView.updateChannelInfo(result);
             }
 
@@ -74,7 +74,7 @@ public class ChannelCampaignPresnterImpl extends BasePresenterImpl<ChannelCampai
         Disposable disposable = mInteractor.queryMacths(channelCID, new ChannelCampaignContract.Interactor.GetMatchsCallback() {
             @Override
             public void onSuccess(KidooApiResult<MatchListResult> result) {
-                LogUtils.i(result.toString());
+//                LogUtils.i(result.toString());
                 if (result.getData() != null) {
                     mPresenterView.updateMatch(result.getData().getMatchList(), result.getPageInfo());
                 } else {
