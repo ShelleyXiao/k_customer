@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import com.kidoo.customer.AppManager;
 import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.GlideRequests;
 import com.kidoo.customer.component.ActivityLifeCycleEvent;
@@ -43,7 +44,7 @@ public abstract class BaseActivity extends SupportActivity implements BaseView {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(initBundle(getIntent().getExtras())) {
+        if (initBundle(getIntent().getExtras())) {
 
             setContentView(getContentView());
             initWindow();
@@ -55,11 +56,14 @@ public abstract class BaseActivity extends SupportActivity implements BaseView {
 
             initEventAndData();
 
+            AppManager.getInstance().addStack(this);
+
         } else {
             LogUtils.w("INIT BUNDLE FALSE , FINISH THIS");
             finish();
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -73,24 +77,28 @@ public abstract class BaseActivity extends SupportActivity implements BaseView {
     @Override
     protected void onDestroy() {
         mIsDestroy = true;
-        super.onDestroy();
+
         mUnbinder.unbind();
         dispose();
 
         lifecycleSubject.onNext(ActivityLifeCycleEvent.DESTROY);
+
+        AppManager.getInstance().removeActivity(this);
+
+        super.onDestroy();
     }
 
     protected void addFragment(int frameLayoutId, Fragment fragment) {
         if (null != fragment) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            if(fragment.isAdded()) {
-                if(null != mFragment) {
+            if (fragment.isAdded()) {
+                if (null != mFragment) {
                     ft.hide(mFragment);
                 } else {
                     ft.show(fragment);
                 }
             } else {
-                if(null != mFragment) {
+                if (null != mFragment) {
                     ft.hide(mFragment).add(frameLayoutId, fragment);
                 } else {
                     ft.add(frameLayoutId, fragment);
@@ -128,7 +136,7 @@ public abstract class BaseActivity extends SupportActivity implements BaseView {
     protected void initData() {
     }
 
-    protected  void initEventAndData(){
+    protected void initEventAndData() {
 
     }
 

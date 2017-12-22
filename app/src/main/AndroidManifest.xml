@@ -136,10 +136,27 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.user.MyMatchsListActivity"
+            android:name=".ui.activity.user.UserMatchsListActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/my_competion_list_title"
-            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity
+            android:name=".ui.activity.user.UserMatchManagerActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/competion_manager_title"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity
+            android:name=".ui.activity.user.UserCreateCompetionActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/create_competion_title"
             android:screenOrientation="portrait"
             >
 

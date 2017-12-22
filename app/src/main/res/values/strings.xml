@@ -254,6 +254,9 @@
     <string name="campaign_errol_situaion_btn">报名情况</string>
     <string name="campaign_erroll_btn">报名</string>
     <string name="campaign_quit_errol_btn">退出报名</string>
+    <string name="campaign_modify_btn">修改比赛</string>
+    <string name="campaign_cancel_btn">取消比赛</string>
+    <string name="campaign_compelete_btn">完结比赛</string>
     <string name="competion_enroll_emtpy">暂时没有队伍报名</string>
 
     <string name="campaign_status">状态</string>
@@ -274,6 +277,8 @@
 
     <string name="my_competion_list_title">赛事列表</string>
 
+
+
     <string name="query_team_title">查找战队</string>
     <string name="query_team_edit_hint">请输入战队名，支持模糊搜索</string>
     <string name="query_button_search">搜索</string>
@@ -281,6 +286,28 @@
     <string name="competion_manager_title">赛事管理</string>
     <string name="competion_manager_empty">没有记录?试着创建比赛吧~</string>
     <string name="competion_manager_create_btn">创建赛事</string>
+
+    <string name="create_competion_title">创建比赛</string>
+    <string name="create_competion_name">比赛名</string>
+    <string name="create_competion_level">比赛级别</string>
+    <string name="create_competion_format">赛制</string>
+    <string name="create_competion_info">比赛信息</string>
+    <string name="create_competion_logo">比赛海报</string>
+    <string name="create_competion_logo_upload">上传照片</string>
+    <string name="create_competion_confirm_btn">确认创建</string>
+
+    <string name="create_competion_msg_hint">请输入您的赛事信息(最多不超过500个字符)</string>
+    <string name="create_competion_name_hint">请输入您的赛事名(最多不超过20个字符)</string>
+
+    <string name="campaign_level_1">业余</string>
+    <string name="campaign_level_2">半职业</string>
+    <string name="campaign_level_3">职业</string>
+
+    <string name="campaign_format_1">积分赛</string>
+    <string name="campaign_format_2">淘汰赛</string>
+    <string name="campaign_format_3">积分淘汰赛</string>
+
+
 
     <string name="query_team_empty">没有找到相依的战队</string>
     <string name="query_team_name_intput_emtpy">战队名不能为空哦！</string>

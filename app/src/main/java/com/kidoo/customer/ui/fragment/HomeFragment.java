@@ -23,7 +23,6 @@ import com.kidoo.customer.mvp.contract.news.HomeContract;
 import com.kidoo.customer.mvp.presenter.news.HomePresenterImpl;
 import com.kidoo.customer.ui.activity.AreanMapActivity;
 import com.kidoo.customer.ui.activity.WondefulEventNewsActivity;
-import com.kidoo.customer.ui.activity.channelCampaign.CampaignDetailActivity;
 import com.kidoo.customer.ui.activity.channelCampaign.ChannelCampaignListActivtiy;
 import com.kidoo.customer.ui.activity.team.QueryTeamActivity;
 import com.kidoo.customer.ui.base.fragment.BaseMvpFragment;

@@ -1,8 +1,6 @@
 package com.kidoo.customer.ui.activity.user;
 
-import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,9 +19,9 @@ import com.kidoo.customer.adapter.MyMatchsAdapter;
 import com.kidoo.customer.bean.MatchBean;
 import com.kidoo.customer.bean.PageInfo;
 import com.kidoo.customer.mvp.contract.user.UserMatchsContract;
-import com.kidoo.customer.mvp.interactor.user.UserMatchsPresenterImpl;
+import com.kidoo.customer.mvp.presenter.user.UserMatchsPresenterImpl;
 import com.kidoo.customer.ui.activity.channelCampaign.CampaignDetailActivity;
-import com.kidoo.customer.ui.base.activities.BaseMvpActivity;
+import com.kidoo.customer.ui.base.activities.BaseBackMvpActivity;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.NetWorkUtil;
 import com.kidoo.customer.widget.recylerview.LoadMoreFooterView;
@@ -48,7 +46,7 @@ import butterknife.BindView;
  */
 
 
-public class MyMatchsListActivity extends BaseMvpActivity<UserMatchsPresenterImpl> implements UserMatchsContract.View
+public class UserMatchsListActivity extends BaseBackMvpActivity<UserMatchsPresenterImpl> implements UserMatchsContract.View
         , OnRefreshListener, OnLoadMoreListener {
 
 
@@ -150,14 +148,17 @@ public class MyMatchsListActivity extends BaseMvpActivity<UserMatchsPresenterImp
                 LogUtils.d("onItemClick: ");
                 MatchBean bean = mMatchBeans.get(position);
                 if (null != bean) {
-                    Intent intent = new Intent(MyMatchsListActivity.this, CampaignDetailActivity.class);
-                    Bundle bundle = new Bundle();
-//                    bundle.putInt(Constants.SELECT_A_INDEX, mSelectChannelAIndex);
-//                    bundle.putInt(Constants.SELECT_B_INDEX, mSelectChannelBIndex);
-//                    bundle.putInt(Constants.SELECT_C_INDEX, mSelectChannelCIndex);
-                    bundle.putSerializable(Constants.MATCH_BEAN_DATA_KEY, bean);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+//                    Intent intent = new Intent(UserMatchsListActivity.this, CampaignDetailActivity.class);
+//                    Bundle bundle = new Bundle();
+////                    bundle.putInt(Constants.SELECT_A_INDEX, mSelectChannelAIndex);
+////                    bundle.putInt(Constants.SELECT_B_INDEX, mSelectChannelBIndex);
+////                    bundle.putInt(Constants.SELECT_C_INDEX, mSelectChannelCIndex);
+//                    bundle.putSerializable(Constants.MATCH_BEAN_DATA_KEY, bean);
+//                    bundle.putBoolean(Constants.FROM_MAMAGER_KEY, false);
+//                    intent.putExtras(bundle);
+//                    startActivity(intent);
+
+                    CampaignDetailActivity.showMatchDetail(UserMatchsListActivity.this, bean, false);
                 }
             }
         });
@@ -195,6 +196,9 @@ public class MyMatchsListActivity extends BaseMvpActivity<UserMatchsPresenterImp
         }
 
         mPageCurrentNo++;
+        if(mPageCurrentNo >= mPageSizeTotal) {
+            swipeToLoadLayout.setLoadMoreEnabled(false);
+        }
     }
 
     @Override
@@ -221,12 +225,12 @@ public class MyMatchsListActivity extends BaseMvpActivity<UserMatchsPresenterImp
             mPageCurrentNo = info.getPageNo();
         }
 
-        LogUtils.i("mPageCurrentNo = " + mPageCurrentNo + "mPageSizeTotal = " + mPageSizeTotal);
-
         mPageCurrentNo++;
 
-
         mAdapter.addData(datas);
+        if(mPageCurrentNo >= mPageSizeTotal) {
+            swipeToLoadLayout.setLoadMoreEnabled(false);
+        }
     }
 
     @Override

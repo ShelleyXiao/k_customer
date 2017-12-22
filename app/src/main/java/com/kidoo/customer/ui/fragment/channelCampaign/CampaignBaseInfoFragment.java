@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,6 +96,17 @@ public class CampaignBaseInfoFragment extends BaseMvpFragment<CompetionEnrollAct
     @BindView(R.id.bt_enroll)
     Button btEnrollSituation;
 
+    @BindView(R.id.ll_manager)
+    LinearLayout llManager;
+
+    @BindView(R.id.bt_modify)
+    Button btModify;
+
+    @BindView(R.id.bt_cancel)
+    Button btCacnel;
+
+    @BindView(R.id.bt_over)
+    Button btOver;
 
     @Inject
     public CompetionEnrollActionPresenterImpl mPresenter;
@@ -113,12 +125,15 @@ public class CampaignBaseInfoFragment extends BaseMvpFragment<CompetionEnrollAct
 
     private boolean isInMatch = false;
 
+    private boolean fromManager = false;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Bundle bundle = getArguments();
         mMatchBean = (MatchBean) bundle.getSerializable(Constants.MATCH_BEAN_DATA_KEY);
+        fromManager = bundle.getBoolean(Constants.FROM_MAMAGER_KEY, false);
         LogUtils.i(mMatchBean.toString());
 
         List<ChannelA> channelAList = AppContext.context().getgChannelAList();
@@ -180,6 +195,11 @@ public class CampaignBaseInfoFragment extends BaseMvpFragment<CompetionEnrollAct
             tvMatchStatus.setText(getResources().getStringArray(R.array.match_status)[mMatchBean.getState()]);
             tvMatchInfo.setText(mMatchBean.getMsg());
         }
+
+        if(fromManager) {
+            llManager.setVisibility(View.VISIBLE);
+            btQuitEnrrol.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -195,16 +215,19 @@ public class CampaignBaseInfoFragment extends BaseMvpFragment<CompetionEnrollAct
                         if (result != null) {
                             isInMatch = isInMatch(result.getEnrollList());
                             if (!isInMatch && result.getMatch().getState() == 1) {
-                                btQuitEnrrol.setVisibility(View.VISIBLE);
-                                btQuitEnrrol.setText(R.string.campaign_erroll_btn);
+                                findView(R.id.bt_quit_enroll).setVisibility(View.VISIBLE);
+                                ((Button)findView(R.id.bt_quit_enroll)).setText(R.string.campaign_erroll_btn);
                             } else if (isInMatch) {
-                                btQuitEnrrol.setVisibility(View.VISIBLE);
-                                btQuitEnrrol.setText(R.string.campaign_quit_errol_btn);
+                                findView(R.id.bt_quit_enroll).setVisibility(View.VISIBLE);
+                                ((Button)findView(R.id.bt_quit_enroll)).setText(R.string.campaign_quit_errol_btn);
                             } else {
-                                btQuitEnrrol.setVisibility(View.GONE);
+                                findView(R.id.bt_quit_enroll).setVisibility(View.GONE);
                             }
 
                             mMatchBean = result.getMatch();
+                            if(fromManager) {
+                                findView(R.id.bt_quit_enroll).setVisibility(View.GONE);
+                            }
                         }
                     }
                 });

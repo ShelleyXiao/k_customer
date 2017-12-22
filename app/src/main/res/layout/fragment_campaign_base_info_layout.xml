@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -9,8 +9,8 @@
 
     <com.kidoo.customer.widget.PersonalScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
 
         <LinearLayout
@@ -154,44 +154,94 @@
                 android:textSize="@dimen/font_16"/>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <Button
+                    android:id="@+id/bt_quit_enroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="@dimen/lay_4"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/btn_normal_bg"
+                    android:text="@string/campaign_quit_errol_btn"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+
+                <Button
+                    android:id="@+id/bt_enroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginBottom="@dimen/lay_12"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/lay_8"
+                    android:background="@drawable/btn_normal_bg"
+                    android:text="@string/campaign_errol_situaion_btn"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_manager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    >
+
+                    <Button
+                        android:id="@+id/bt_modify"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginBottom="@dimen/lay_12"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="@dimen/lay_8"
+                        android:background="@drawable/btn_myjoin_bg"
+                        android:text="@string/campaign_modify_btn"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"/>
+
+                    <Button
+                        android:id="@+id/bt_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginBottom="@dimen/lay_12"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="@dimen/lay_8"
+                        android:background="@drawable/btn_myjoin_bg"
+                        android:text="@string/campaign_cancel_btn"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"/>
+
+                    <Button
+                        android:id="@+id/bt_over"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginBottom="@dimen/lay_12"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="@dimen/lay_8"
+                        android:background="@drawable/btn_myjoin_bg"
+                        android:text="@string/campaign_compelete_btn"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </com.kidoo.customer.widget.PersonalScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
 
-        <Button
-            android:id="@+id/bt_quit_enroll"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginBottom="@dimen/lay_4"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/btn_normal_bg"
-            android:text="@string/campaign_quit_errol_btn"
-            android:textColor="@color/white"
-            android:textSize="16sp"/>
-
-        <Button
-            android:id="@+id/bt_enroll"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginBottom="@dimen/lay_12"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="@dimen/lay_8"
-            android:background="@drawable/btn_normal_bg"
-            android:text="@string/campaign_errol_situaion_btn"
-            android:textColor="@color/white"
-            android:textSize="16sp"/>
-
-
-    </LinearLayout>
-
-
-</LinearLayout>
+</FrameLayout>

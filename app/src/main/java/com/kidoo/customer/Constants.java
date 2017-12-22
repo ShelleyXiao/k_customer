@@ -63,6 +63,7 @@ public class Constants {
 
     public static final double DEFAAULT_AREN_CLOSE = 5 * 1000;
 
+    public static final String FROM_MAMAGER_KEY = "manager";
     public static final String MATCH_BEAN_DATA_KEY = "matchbean";
 
     public static final String SELECT_A_INDEX = "channela_index";

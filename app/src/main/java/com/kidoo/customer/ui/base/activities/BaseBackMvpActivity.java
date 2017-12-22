@@ -1,12 +1,12 @@
 package com.kidoo.customer.ui.base.activities;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.support.v7.app.ActionBar;
 import android.widget.Toast;
 
 import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.utils.DialogHelper;
+import com.kidoo.customer.utils.LogUtils;
 
 /**
  * User: ShaudXiao
@@ -41,6 +41,7 @@ public abstract class BaseBackMvpActivity<T extends BasePresenter> extends BaseM
     @Override
     public void onBackPressedSupport() {
         super.onBackPressedSupport();
+        LogUtils.i("");
         finish();
     }
 

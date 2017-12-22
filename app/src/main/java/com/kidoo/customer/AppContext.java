@@ -56,6 +56,8 @@ public class AppContext extends Application {
         super.onCreate();
         _context = getApplicationContext();
 
+
+
         initApplicationComponent();
 
 //        initBugly();
@@ -120,9 +122,13 @@ public class AppContext extends Application {
 
     }
 
+
+
     public static synchronized AppContext context() {
         return (AppContext) _context;
     }
+
+
 
     public static void showToast(int message) {
         showToast(message, Toast.LENGTH_LONG, 0);

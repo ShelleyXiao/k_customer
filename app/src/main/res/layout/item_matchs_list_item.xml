@@ -10,8 +10,8 @@
 
     <com.kidoo.customer.widget.glideimageview.GlideImageView
         android:id="@+id/iv_match_pic"
-        android:layout_width="@dimen/lay_72"
-        android:layout_height="@dimen/lay_72"
+        android:layout_width="@dimen/lay_56"
+        android:layout_height="@dimen/lay_56"
         android:layout_margin="@dimen/lay_2"
         android:clickable="true"
         android:focusable="true"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/iv_match_pic"
         android:layout_marginLeft="@dimen/lay_12"
-        android:layout_marginTop="@dimen/lay_4"
+        android:layout_marginTop="@dimen/lay_2"
         android:layout_toRightOf="@+id/iv_match_pic"
         android:text="test"
 
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/iv_match_pic"
         android:layout_below="@+id/tv_match_name"
-        android:layout_marginBottom="@dimen/lay_4"
+        android:layout_marginBottom="@dimen/lay_2"
         android:layout_marginLeft="@dimen/lay_12"
         android:layout_toRightOf="@+id/iv_match_pic"
         android:gravity="bottom"

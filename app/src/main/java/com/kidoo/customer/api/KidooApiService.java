@@ -120,9 +120,17 @@ public interface KidooApiService {
     @FormUrlEncoded
     Observable<KidooApiResult<MyMatchsResult>> queryMyMatchList(@FieldMap Map<String, String> maps);
 
+    @POST("customer/match/queryMyManageList")
+    @FormUrlEncoded
+    Observable<KidooApiResult<MyMatchsResult>> queryMyManageList(@FieldMap Map<String, String> maps);
+
     @POST("customer/org/queryTeamList")
     @FormUrlEncoded
     Observable<KidooApiResult<QueryTeamResult>> queryTeamList(@FieldMap Map<String, String> maps);
+
+    @POST("customer/match/createMatch")
+    @FormUrlEncoded
+    Observable<KidooApiResult<ReturnNullBean>> createMatch(@FieldMap Map<String, String> maps);
 
     @POST("customer/org/queryTeamDetail")
     @FormUrlEncoded

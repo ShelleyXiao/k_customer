@@ -1,5 +1,7 @@
 package com.kidoo.customer.ui.activity.channelCampaign;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.kidoo.customer.AppContext;
@@ -47,6 +49,15 @@ public class CampaignDetailActivity extends BaseViewPagerActivity implements Com
 
     private Bundle mBundle;
 
+
+    public static void showMatchDetail(Context context, MatchBean matchBean, boolean fromManager) {
+        Intent intent = new Intent(context, CampaignDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constants.MATCH_BEAN_DATA_KEY,matchBean);
+        bundle.putBoolean(Constants.FROM_MAMAGER_KEY, fromManager);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
 
     @Override
     public boolean initBundle(Bundle bundle) {

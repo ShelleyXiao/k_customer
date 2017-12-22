@@ -17,8 +17,9 @@ import com.kidoo.customer.ui.activity.splash.SplashActivity;
 import com.kidoo.customer.ui.activity.team.QueryTeamActivity;
 import com.kidoo.customer.ui.activity.team.TeamDetailActivity;
 import com.kidoo.customer.ui.activity.team.TeamDetailModifyActivity;
-import com.kidoo.customer.ui.activity.user.MyMatchsListActivity;
+import com.kidoo.customer.ui.activity.user.UserMatchsListActivity;
 import com.kidoo.customer.ui.activity.user.UserDetailActivity;
+import com.kidoo.customer.ui.activity.user.UserMatchManagerActivity;
 
 import dagger.Component;
 
@@ -67,7 +68,9 @@ public interface ActivityComponent {
 
     void inject(CompetionEnrollSituationActivity activity);
 
-    void inject(MyMatchsListActivity activity);
+    void inject(UserMatchsListActivity activity);
+
+    void inject(UserMatchManagerActivity activity);
 
 
 }

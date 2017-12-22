@@ -3,39 +3,30 @@ package com.kidoo.customer.ui.activity;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.AppConfig;
+import com.kidoo.customer.AppContext;
+import com.kidoo.customer.AppManager;
 import com.kidoo.customer.R;
-import com.kidoo.customer.api.AllChannelApi;
-import com.kidoo.customer.bean.AllChannelResultBean;
 import com.kidoo.customer.interf.OnTabReselectListener;
-import com.kidoo.customer.kidoohttp.http.KidooApiManager;
-import com.kidoo.customer.kidoohttp.http.function.RetryExceptionFunc;
-import com.kidoo.customer.kidoohttp.http.utils.RxUtil;
 import com.kidoo.customer.service.GloablCheckService;
 import com.kidoo.customer.ui.base.activities.BaseActivity;
 import com.kidoo.customer.ui.fragment.NavigationFragement;
 import com.kidoo.customer.utils.AppSystemUtils;
 import com.kidoo.customer.utils.DialogHelper;
-import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.widget.NavButtomButton;
 
 import java.util.List;
 
 import butterknife.BindView;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import okhttp3.ResponseBody;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -88,17 +79,37 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
 
     }
 
-    @Override
-    public void onBackPressedSupport() {
-        super.onBackPressedSupport();
-        long curTime = SystemClock.uptimeMillis();
-        if ((curTime - mBackPressedTime) < (3 * 1000)) {
-            finish();
-        } else {
-            mBackPressedTime = curTime;
-            Toast.makeText(this, R.string.tip_double_click_exit, Toast.LENGTH_LONG).show();
-        }
+//    @Override
+//    public void onBackPressedSupport() {
+//        super.onBackPressedSupport();
+//        long curTime = SystemClock.uptimeMillis();
+//        if ((curTime - mBackPressedTime) < (3 * 1000)) {
+//            finish();
+//        } else {
+//            mBackPressedTime = curTime;
+//            Toast.makeText(this, R.string.tip_double_click_exit, Toast.LENGTH_LONG).show();
+//        }
+//
+//    }
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        long period;
+        if (keyCode == event.KEYCODE_BACK)  //确定按下返回键
+        {
+            period = System.currentTimeMillis() - mBackPressedTime; //两次按下的时间间隔
+            if (period > 2000)    //2s之内两次按下退出有效
+            {
+                Toast.makeText(this, R.string.tip_double_click_exit, Toast.LENGTH_LONG).show();
+                mBackPressedTime = System.currentTimeMillis();
+            } else {
+                AppManager.getInstance().finishAllActivity();
+                AppManager.getInstance().AppExit(AppContext.context());
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

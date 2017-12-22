@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/lay_8"
+    >
+
+    <RadioGroup android:id="@+id/rg_competion_level"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+_        <RadioButton
+            android:id="@+id/btn_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/campaign_level_1"
+            android:textSize="@dimen/font_16"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/lay_12"
+            android:layout_marginEnd="@dimen/lay_12"
+            android:checked="true"
+            android:button="@null"
+            tools:text="test"
+            android:textColor="@drawable/radio_text_color_selector"
+            android:background="@drawable/radio_bg"
+            />
+        <RadioButton
+            android:id="@+id/btn_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/campaign_level_2"
+            android:textSize="@dimen/font_16"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:textColor="@drawable/radio_text_color_selector"
+            android:layout_marginStart="@dimen/lay_12"
+            android:layout_marginEnd="@dimen/lay_12"
+            android:background="@drawable/radio_bg"
+            tools:text="test"
+            />
+        <RadioButton
+            android:id="@+id/btn_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/campaign_level_3"
+            android:textSize="@dimen/font_16"
+            android:textColor="@drawable/radio_text_color_selector"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/lay_12"
+            android:layout_marginEnd="@dimen/lay_12"
+            android:button="@null"
+
+            android:background="@drawable/radio_bg"
+            tools:text="test"
+            />
+    </RadioGroup>
+
+</FrameLayout>
