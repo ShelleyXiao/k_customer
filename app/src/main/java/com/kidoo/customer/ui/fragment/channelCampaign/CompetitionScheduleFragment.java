@@ -10,6 +10,7 @@ import com.kidoo.customer.bean.CompetionDetailResult;
 import com.kidoo.customer.bean.CompetionEpisodeBean;
 import com.kidoo.customer.component.RxBus;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
+import com.kidoo.customer.widget.EmptyLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,9 @@ public class CompetitionScheduleFragment extends BaseFragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView rvEpisode;
+
+    @BindView(R.id.error_layout)
+    EmptyLayout elEmptylayout;
 
     @Override
     protected int getLayoutId() {
@@ -61,8 +65,12 @@ public class CompetitionScheduleFragment extends BaseFragment {
                     @Override
                     public void accept(CompetionDetailResult result) throws Exception {
 //                        LogUtils.i(result.toString());
-                        if (result != null) {
+                        if (result != null && (result.getEpisodeList() != null && result.getEpisodeList().size() > 0)) {
+
                             mScheduleAdapter.replaceData(result.getEpisodeList());
+                        } else {
+                            elEmptylayout.setVisibility(View.VISIBLE);
+                            elEmptylayout.setErrorType(EmptyLayout.NODATA);
                         }
                     }
                 });

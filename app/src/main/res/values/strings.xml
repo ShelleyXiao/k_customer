@@ -259,6 +259,8 @@
     <string name="campaign_compelete_btn">完结比赛</string>
     <string name="competion_enroll_emtpy">暂时没有队伍报名</string>
 
+    <string name="competion_ablum_add_pic">添加图片</string>
+
     <string name="campaign_status">状态</string>
     <string name="campaign_level">级别</string>
     <string name="campaign_format">赛制</string>
@@ -299,6 +301,9 @@
     <string name="create_competion_msg_hint">请输入您的赛事信息(最多不超过500个字符)</string>
     <string name="create_competion_name_hint">请输入您的赛事名(最多不超过20个字符)</string>
 
+    <string name="empty_name_input_prompt">赛事名不能为空</string>
+    <string name="empty_msg_input_prompt">赛事信息不能为空</string>
+
     <string name="campaign_level_1">业余</string>
     <string name="campaign_level_2">半职业</string>
     <string name="campaign_level_3">职业</string>
@@ -306,6 +311,11 @@
     <string name="campaign_format_1">积分赛</string>
     <string name="campaign_format_2">淘汰赛</string>
     <string name="campaign_format_3">积分淘汰赛</string>
+
+
+    <string name="create_competion_confirm">确定要创建吗?</string>
+    <string name="create_competion_success_msg">赛事创建成功</string>
+    <string name="create_competion_fiald_msg">赛事创建失败</string>
 
 
 
@@ -337,6 +347,7 @@
     <string name="team_modify_msg_hint">请输入您的战队介绍(最多不超过50个字符)</string>
     <string name="team_modify_ok">确认修改</string>
     <string name="pic_upload_faild">图片上传失败</string>
+    <string name="pic_upload_success">图片上传成功</string>
     <string name="team_modify_success_msg">修改资料成功</string>
 
     <string name="team_modify_fail_msg">修改资料失败</string>

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.kidoo.customer.AccountHelper;
 import com.kidoo.customer.AppContext;
@@ -167,6 +168,7 @@ public class GloablCheckService extends Service {
             @Override
             public void onSuccess(AllChannelResultBean result) {
                 if (result != null) {
+                    LogUtils.i("init channel data");
                     if (result.getChannelAList() != null) {
                         AppContext.context().setgChannelAList(result.getChannelAList());
                         AppContext.context().setgChannelCMaps(result.getChannelCmaps());
@@ -193,6 +195,10 @@ public class GloablCheckService extends Service {
 
         String customId = String.valueOf(AccountHelper.getUserId());
         final AuthModel model = TokenManager.getInstance().getAuthModel(TokenManager.KEY_AUTH);
+        if(TextUtils.isEmpty(customId) || TextUtils.isEmpty(model.getTokenId())) {
+            //todo login
+            return;
+        }
         CheckTokenIdApi.checkTokenId(customId, model.getTokenId())
                 .subscribe(new Consumer<KidooApiResult<CheckTokenIdBean>>() {
                     @Override

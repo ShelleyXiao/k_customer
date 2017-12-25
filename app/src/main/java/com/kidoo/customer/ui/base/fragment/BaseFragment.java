@@ -1,5 +1,6 @@
 package com.kidoo.customer.ui.base.fragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.kidoo.customer.GlideApp;
 import com.kidoo.customer.GlideRequests;
 import com.kidoo.customer.component.ActivityLifeCycleEvent;
+import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.ImageLoader;
 
 import java.io.Serializable;
@@ -52,6 +54,8 @@ public abstract class BaseFragment extends SupportFragment {
 
     //Fragment对用户可见的标记
     private boolean isUIVisible;
+
+    private Dialog mWaitDialog;
 
     //setUserVisibleHint(boolean isVisibleToUser)方法会多次回调,而且可能会在onCreateView()方法执行完毕之前回调
     // 如果isVisibleToUser==true,然后进行数据加载和控件数据填充,但是onCreateView()方法并未执行完毕,
@@ -149,7 +153,9 @@ public abstract class BaseFragment extends SupportFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mUnbinder.unbind();
+        if(mUnbinder != null) {
+            mUnbinder.unbind();
+        }
         mBundle = null;
 
         lifecycleSubject.onNext(ActivityLifeCycleEvent.DESTROY);
@@ -305,5 +311,18 @@ public abstract class BaseFragment extends SupportFragment {
      */
     protected void setImageFromNet(ImageView imageView, String imageUrl, int placeholder) {
         ImageLoader.loadImage(getImgLoader(), imageView, imageUrl, placeholder);
+    }
+
+    protected void showLoadingDialog(String message) {
+        if (mWaitDialog == null) {
+            mWaitDialog = DialogHelper.getLoadingDialog(getActivity());
+        }
+
+        mWaitDialog.show();
+    }
+
+    protected void dismissLoadingDialog() {
+        if (mWaitDialog == null) return;
+        mWaitDialog.dismiss();
     }
 }

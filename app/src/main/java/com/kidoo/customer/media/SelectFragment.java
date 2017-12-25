@@ -227,7 +227,7 @@ public class SelectFragment extends BaseFragment implements SelectImageContract.
     @Override
     public void onItemClick(int position, long itemId) {
 
-        LogUtils.w("******w***** 0");
+//        LogUtils.w("******w***** 0");
 
         if (mOption.isHasCam()) {
             if (position != 0) {
@@ -288,7 +288,7 @@ public class SelectFragment extends BaseFragment implements SelectImageContract.
     private void handleResult() {
 
         if(mSelectedImage.size() != 0) {
-            LogUtils.e("*********** 1" + mOption.isCrop());
+//            LogUtils.e("*********** 1" + mOption.isCrop());
             if(mOption.isCrop()) {
                 List<String> selectedImage = mOption.getSelectedImages();
                 selectedImage.clear();

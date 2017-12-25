@@ -1,5 +1,6 @@
 package com.kidoo.customer.mvp.contract.channelCampaign;
 
+import com.kidoo.customer.api.token.QNToken;
 import com.kidoo.customer.bean.CompetionDetailResult;
 import com.kidoo.customer.mvp.presenter.BasePresenter;
 import com.kidoo.customer.mvp.view.BaseView;
@@ -24,12 +25,16 @@ public interface CompetionDetailContract {
 
         void showError(String msg);
 
+        void updateQNToken(QNToken token);
+
     }
 
 
     interface Presenter extends BasePresenter<CompetionDetailContract.View> {
 
         void doQueryCompetionDetail(int matchID);
+
+        void doQueryPicInfo();
     }
 
     interface Interactor {
@@ -40,6 +45,15 @@ public interface CompetionDetailContract {
 
         interface GetCompetionDetailCallback {
             void onSuccess(CompetionDetailResult result);
+
+            void onFailure(String msg);
+        }
+
+        Disposable queryPicInfoAction(final CompetionDetailContract.Interactor.GetTokenCallback callback);
+
+
+        interface GetTokenCallback {
+            void onSuccess(QNToken token);
 
             void onFailure(String msg);
         }

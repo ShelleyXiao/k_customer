@@ -147,6 +147,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                 //当app第一次被安装时，不管是覆盖安装（不管是否有定位权限）还是全新安装都必须进行定位请求
                 AppConfig.updateLocationAppCode(getApplicationContext(), versionCode);
                 requestLocationPermission();
+                requestExternalStorage();
             }
             return;
         }
@@ -158,6 +159,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
             if (AppConfig.hasLocationPermission(getApplicationContext())) {
                 requestLocationPermission();
             }
+
         }
     }
 

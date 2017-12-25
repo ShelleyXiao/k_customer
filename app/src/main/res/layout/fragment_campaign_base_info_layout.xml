@@ -7,10 +7,15 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+
+
+
     <com.kidoo.customer.widget.PersonalScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:id="@+id/content"
+        >
 
 
         <LinearLayout
@@ -242,6 +247,12 @@
         </LinearLayout>
 
     </com.kidoo.customer.widget.PersonalScrollView>
+
+    <com.kidoo.customer.widget.EmptyLayout
+        android:id="@+id/error_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 
 </FrameLayout>

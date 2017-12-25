@@ -274,7 +274,7 @@ public class TeamDetailModifyActivity extends BaseBackMvpActivity<TeamInfoModify
                                 return;
                             }
                             LogUtils.i(path);
-                            final String fileHashCode = String.valueOf(file.hashCode());
+                            final String fileHashCode = FileUtils.getHash(path, "sha1") + "." + FileUtils.getFileFormat(path);
                             mUploadManager.put(mCacheFile, fileHashCode, qnToken,
                                     new UpCompletionHandler() {
                                         @Override
@@ -292,7 +292,7 @@ public class TeamDetailModifyActivity extends BaseBackMvpActivity<TeamInfoModify
                                                 String ext = FileUtils.getFileFormat(path);
                                                 mPresenter.doUpdateTeamInfo(mCurrentTeam.getId() + "",
                                                         nickName, teamMsg,
-                                                        hash + File.separator + ext);
+                                                        hash);
 
                                             } else {
                                                 LogUtils.i("qiniu", "Upload Fail");

@@ -1,5 +1,7 @@
 package com.kidoo.customer.api;
 
+import android.text.TextUtils;
+
 import com.kidoo.customer.bean.CheckTokenIdBean;
 import com.kidoo.customer.kidoohttp.api.KidooApiResult;
 import com.kidoo.customer.kidoohttp.http.KidooApiManager;
@@ -20,6 +22,7 @@ import io.reactivex.Observable;
 public class CheckTokenIdApi {
 
     public static Observable<KidooApiResult<CheckTokenIdBean>> checkTokenId(String customId, String tokenId) {
+
         CustomerRequset request = KidooApiManager.custom().build()
                 .removeParam("token") //移除参数 与普通请求却别开
                 .params("customerId", customId)

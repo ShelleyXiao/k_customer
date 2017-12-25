@@ -438,14 +438,29 @@ public final class DialogHelper {
         commonDialog.setNegativeButton(R.string.acton_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                commonDialog.dismiss();
             }
         });
 
         commonDialog.setPositiveButton(R.string.acton_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                commonDialog.dismiss();
+            }
+        });
 
+        return commonDialog;
+    }
+
+    public static Dialog  getWarningDailt(Context context, String msg) {
+        final CommonDialog commonDialog = new CommonDialog(context);
+//        commonDialog.setTitle(R.string.register_sms_wait_hint);
+        commonDialog.setMessage(msg);
+
+        commonDialog.setPositiveButton(R.string.acton_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                commonDialog.dismiss();
             }
         });
 

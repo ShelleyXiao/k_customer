@@ -1,5 +1,6 @@
 package com.kidoo.customer.mvp.presenter.channelCampaign;
 
+import com.kidoo.customer.api.token.QNToken;
 import com.kidoo.customer.bean.CompetionDetailResult;
 import com.kidoo.customer.mvp.contract.channelCampaign.CompetionDetailContract;
 import com.kidoo.customer.mvp.interactor.channelCampaign.CompetionDetailInteractor;
@@ -51,4 +52,23 @@ public class CompetionDetailPresenterImpl extends BasePresenterImpl<CompetionDet
 
         addDisposable(disposable);
     }
+
+    @Override
+    public void doQueryPicInfo() {
+        Disposable disposable = mInteractor.queryPicInfoAction(new CompetionDetailContract.Interactor.GetTokenCallback() {
+            @Override
+            public void onSuccess(QNToken token) {
+                mPresenterView.updateQNToken(token);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+
+            }
+        });
+
+        addDisposable(disposable);
+    }
+
+
 }

@@ -11,6 +11,7 @@ import com.kidoo.customer.bean.CompetionDetailResult;
 import com.kidoo.customer.bean.MedalBean;
 import com.kidoo.customer.component.RxBus;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
+import com.kidoo.customer.widget.EmptyLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,9 @@ public class CompetionMedalListFragment extends BaseFragment {
 
     @BindView(R.id.medal_list)
     RecyclerView rvMedalList;
+
+    @BindView(R.id.error_layout)
+    EmptyLayout elEmptylayout;
 
     private List<MedalBean> mMedalDatas = new ArrayList<>();
     private CompetionMedalListAdapter medalListAdapter;
@@ -60,9 +64,12 @@ public class CompetionMedalListFragment extends BaseFragment {
                 .subscribe(new Consumer<CompetionDetailResult>() {
                     @Override
                     public void accept(CompetionDetailResult result) throws Exception {
-//                        LogUtils.i(result.toString());
-                        if (result != null) {
+                        if (result != null && (result.getMedalList() != null && result.getMedalList().size() > 0)) {
+
                             medalListAdapter.replaceData(result.getMedalList());
+                        } else {
+                            elEmptylayout.setVisibility(View.VISIBLE);
+                            elEmptylayout.setErrorType(EmptyLayout.NODATA);
                         }
                     }
                 });

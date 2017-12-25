@@ -6,17 +6,14 @@ import android.view.View;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.R;
-import com.kidoo.customer.bean.CompetionAlbumBean;
 import com.kidoo.customer.bean.CompetionNodeBean;
 import com.kidoo.customer.utils.DateTimeUtils;
 import com.kidoo.customer.utils.LogUtils;
-import com.kidoo.customer.widget.glideimageview.GlideImageLoader;
 import com.kidoo.customer.widget.glideimageview.GlideImageView;
 import com.kidoo.customer.widget.glideimageview.progress.CircleProgressView;
 import com.kidoo.customer.widget.glideimageview.progress.OnGlideImageViewListener;
@@ -34,6 +31,7 @@ public class CompetionNodeListAdapter extends BaseQuickAdapter<CompetionNodeBean
 
     public CompetionNodeListAdapter(Context context, List<CompetionNodeBean> datas) {
         super(R.layout.item_competion_node_list_layout, datas);
+        mContex = context;
         this.baseUrl = AppContext.context().getInitData().getQnDomain();
     }
 
@@ -45,23 +43,27 @@ public class CompetionNodeListAdapter extends BaseQuickAdapter<CompetionNodeBean
                 "yyyy-MM-dd HH:mm")));
 
         helper.setText(R.id.tv_node_msg, item.getMsg());
-
         GlideImageView ivNodePic = (GlideImageView) helper.getView(R.id.iv_node_pic);
-        final CircleProgressView progressView = (CircleProgressView) helper.getView(R.id.pv_node_pic_progress);
+        if(!TextUtils.isEmpty(item.getPic())) {
 
-        RequestOptions requestOptions = ivNodePic.requestOptions(R.color.placeholder).centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true);
+            final CircleProgressView progressView = (CircleProgressView) helper.getView(R.id.pv_node_pic_progress);
 
-        ivNodePic.load(baseUrl + item.getPic(), requestOptions).listener(new OnGlideImageViewListener() {
-            @Override
-            public void onProgress(int percent, boolean isDone, GlideException exception) {
-                if (exception != null && !TextUtils.isEmpty(exception.getMessage())) {
-                    LogUtils.e(exception.getMessage());
+            RequestOptions requestOptions = ivNodePic.requestOptions(R.color.placeholder).centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true);
+
+            ivNodePic.load(baseUrl + item.getPic(), requestOptions).listener(new OnGlideImageViewListener() {
+                @Override
+                public void onProgress(int percent, boolean isDone, GlideException exception) {
+                    if (exception != null && !TextUtils.isEmpty(exception.getMessage())) {
+                        LogUtils.e(exception.getMessage());
+                    }
+                    progressView.setProgress(percent);
+                    progressView.setVisibility(isDone ? View.GONE : View.VISIBLE);
                 }
-                progressView.setProgress(percent);
-                progressView.setVisibility(isDone ? View.GONE : View.VISIBLE);
-            }
-        });
+            });
+        } else {
+            ivNodePic.setImageDrawable(mContex.getResources().getDrawable(R.color.placeholder));
+        }
 
     }
 }

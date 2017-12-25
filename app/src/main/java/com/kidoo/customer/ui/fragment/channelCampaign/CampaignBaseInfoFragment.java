@@ -34,6 +34,7 @@ import com.kidoo.customer.mvp.presenter.channelCampaign.CompetionEnrollActionPre
 import com.kidoo.customer.ui.activity.channelCampaign.CompetionEnrollSituationActivity;
 import com.kidoo.customer.ui.base.fragment.BaseMvpFragment;
 import com.kidoo.customer.utils.LogUtils;
+import com.kidoo.customer.widget.EmptyLayout;
 import com.kidoo.customer.widget.dialog.CommonDialog;
 import com.kidoo.customer.widget.glideimageview.GlideImageLoader;
 import com.kidoo.customer.widget.glideimageview.GlideImageView;
@@ -107,6 +108,9 @@ public class CampaignBaseInfoFragment extends BaseMvpFragment<CompetionEnrollAct
 
     @BindView(R.id.bt_over)
     Button btOver;
+
+    @BindView(R.id.error_layout)
+    EmptyLayout elEmptylayout;
 
     @Inject
     public CompetionEnrollActionPresenterImpl mPresenter;
@@ -228,6 +232,9 @@ public class CampaignBaseInfoFragment extends BaseMvpFragment<CompetionEnrollAct
                             if(fromManager) {
                                 findView(R.id.bt_quit_enroll).setVisibility(View.GONE);
                             }
+                        } else {
+                            elEmptylayout.setVisibility(View.VISIBLE);
+                            elEmptylayout.setErrorType(EmptyLayout.NODATA);
                         }
                     }
                 });

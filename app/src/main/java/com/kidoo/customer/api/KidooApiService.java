@@ -132,6 +132,10 @@ public interface KidooApiService {
     @FormUrlEncoded
     Observable<KidooApiResult<ReturnNullBean>> createMatch(@FieldMap Map<String, String> maps);
 
+    @POST("customer/match/addMatchPic")
+    @FormUrlEncoded
+    Observable<KidooApiResult<ReturnNullBean>> addMatchPic(@FieldMap Map<String, String> maps);
+
     @POST("customer/org/queryTeamDetail")
     @FormUrlEncoded
     Observable<KidooApiResult<TeamDetailResult>> queryTeamDetail(@FieldMap Map<String, String> maps);

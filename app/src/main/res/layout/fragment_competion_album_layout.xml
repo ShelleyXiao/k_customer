@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/lay_8"
-    android:background="@color/white"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/white"
+             android:padding="@dimen/lay_8"
     >
 
     <android.support.v7.widget.RecyclerView
@@ -14,5 +14,25 @@
         android:scrollbars="none">
 
     </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/bt_add_pic"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="@dimen/lay_8"
+        android:background="@drawable/btn_normal_bg"
+        android:text="@string/competion_ablum_add_pic"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:textSize="16sp"/>
+
+    <com.kidoo.customer.widget.EmptyLayout
+        android:id="@+id/error_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 </FrameLayout>

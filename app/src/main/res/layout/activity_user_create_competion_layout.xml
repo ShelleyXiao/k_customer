@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <com.kidoo.customer.widget.expandMenu.SelectMenuView
+        android:id="@+id/search_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -185,11 +186,13 @@
                     app:subtitle="@string/create_competion_logo"/>
 
                 <ImageView
-                    android:id="@+id/ivFeedCenter"
+                    android:id="@+id/iv_competion_log"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_156"
                     android:layout_gravity="center"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
+                    android:layout_marginStart="@dimen/lay_12"
+                    android:layout_marginEnd="@dimen/lay_12"
                     android:transitionName="@string/transitional_image"
                     android:visibility="gone"
                     />

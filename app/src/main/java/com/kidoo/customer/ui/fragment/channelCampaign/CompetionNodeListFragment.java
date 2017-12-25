@@ -10,6 +10,7 @@ import com.kidoo.customer.bean.CompetionDetailResult;
 import com.kidoo.customer.bean.CompetionNodeBean;
 import com.kidoo.customer.component.RxBus;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
+import com.kidoo.customer.widget.EmptyLayout;
 import com.kidoo.customer.widget.recylerview.SquareListDivider;
 
 import java.util.ArrayList;
@@ -26,6 +27,9 @@ public class CompetionNodeListFragment extends BaseFragment {
 
     @BindView(R.id.rv_node)
     RecyclerView rvNodeList;
+
+    @BindView(R.id.error_layout)
+    EmptyLayout elEmptylayout;
 
     private List<CompetionNodeBean> mNodeDatas = new ArrayList<>();
     private CompetionNodeListAdapter nodeListAdapter;
@@ -58,8 +62,13 @@ public class CompetionNodeListFragment extends BaseFragment {
                     @Override
                     public void accept(CompetionDetailResult result) throws Exception {
 //                        LogUtils.i(result.toString());
-                        if (result != null) {
+
+                        if (result != null && (result.getNodeList() != null && result.getNodeList().size() > 0)) {
+
                             nodeListAdapter.replaceData(result.getNodeList());
+                        } else {
+                            elEmptylayout.setVisibility(View.VISIBLE);
+                            elEmptylayout.setErrorType(EmptyLayout.NODATA);
                         }
                     }
                 });

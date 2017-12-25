@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         >
 _        <RadioButton
-            android:id="@+id/btn_0"
+            android:id="@+id/rb_competion_level_0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/campaign_level_1"
@@ -30,7 +30,7 @@ _        <RadioButton
             android:background="@drawable/radio_bg"
             />
         <RadioButton
-            android:id="@+id/btn_1"
+            android:id="@+id/rb_competion_level_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/campaign_level_2"
@@ -45,7 +45,7 @@ _        <RadioButton
             tools:text="test"
             />
         <RadioButton
-            android:id="@+id/btn_2"
+            android:id="@+id/rb_competion_level_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/campaign_level_3"
@@ -56,7 +56,6 @@ _        <RadioButton
             android:layout_marginStart="@dimen/lay_12"
             android:layout_marginEnd="@dimen/lay_12"
             android:button="@null"
-
             android:background="@drawable/radio_bg"
             tools:text="test"
             />

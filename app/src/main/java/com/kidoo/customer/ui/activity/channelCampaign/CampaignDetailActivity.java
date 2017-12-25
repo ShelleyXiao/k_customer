@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.Constants;
 import com.kidoo.customer.R;
+import com.kidoo.customer.api.token.QNToken;
 import com.kidoo.customer.bean.CompetionDetailResult;
 import com.kidoo.customer.bean.MatchBean;
 import com.kidoo.customer.component.RxBus;
@@ -38,7 +39,7 @@ import javax.inject.Inject;
  */
 
 
-public class CampaignDetailActivity extends BaseViewPagerActivity implements CompetionDetailContract.View{
+public class CampaignDetailActivity extends BaseViewPagerActivity implements CompetionDetailContract.View {
 
     protected ActivityComponent mActivityComponent;
 
@@ -49,11 +50,12 @@ public class CampaignDetailActivity extends BaseViewPagerActivity implements Com
 
     private Bundle mBundle;
 
+    private long updateQNTokenTime = 0;
 
     public static void showMatchDetail(Context context, MatchBean matchBean, boolean fromManager) {
         Intent intent = new Intent(context, CampaignDetailActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constants.MATCH_BEAN_DATA_KEY,matchBean);
+        bundle.putSerializable(Constants.MATCH_BEAN_DATA_KEY, matchBean);
         bundle.putBoolean(Constants.FROM_MAMAGER_KEY, fromManager);
         intent.putExtras(bundle);
         context.startActivity(intent);
@@ -61,7 +63,7 @@ public class CampaignDetailActivity extends BaseViewPagerActivity implements Com
 
     @Override
     public boolean initBundle(Bundle bundle) {
-        if(bundle != null) {
+        if (bundle != null) {
             mMatchBean = (MatchBean) bundle.getSerializable(Constants.MATCH_BEAN_DATA_KEY);
         }
 
@@ -84,16 +86,23 @@ public class CampaignDetailActivity extends BaseViewPagerActivity implements Com
         mPresenter.attachView(this);
 
 
-
     }
 
     @Override
     protected void initEventAndData() {
         super.initEventAndData();
 
-        if(mMatchBean != null) {
+        if (mMatchBean != null) {
             int matchId = mMatchBean.getId();
             mPresenter.doQueryCompetionDetail(matchId);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (System.currentTimeMillis() - updateQNTokenTime > (7200 * 1000)) {
+            mPresenter.doQueryPicInfo();
         }
     }
 
@@ -123,7 +132,7 @@ public class CampaignDetailActivity extends BaseViewPagerActivity implements Com
     @Override
     public void updateCompetionDetail(CompetionDetailResult result) {
         LogUtils.i(result.getMatch().toString());
-        if(result != null) {
+        if (result != null) {
             RxBus.getDefault().postSticky(result);
         }
     }
@@ -131,5 +140,13 @@ public class CampaignDetailActivity extends BaseViewPagerActivity implements Com
     @Override
     public void showError(String msg) {
 
+    }
+
+    @Override
+    public void updateQNToken(QNToken token) {
+        if (token != null) {
+            RxBus.getDefault().postSticky(token);
+            updateQNTokenTime = System.currentTimeMillis();
+        }
     }
 }

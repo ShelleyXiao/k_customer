@@ -19,16 +19,18 @@ import io.reactivex.Observable;
  */
 
 
-public class CreateMatchApi {
+public class AddMatchPicApi {
 
-    public static Observable<KidooApiResult<ReturnNullBean>> creatMatch(String customerId, String matchJSON) {
+    public static Observable<KidooApiResult<ReturnNullBean>> addMatchPicApi(String matchId, String pic, String picMini) {
         CustomerRequset requset = KidooApiManager.custom().build()
-                .params("matchJSON", matchJSON)
+                .params("matchId", matchId)
+                .params("pic", pic)
+                .params("picMini", picMini)
                 .params("customerId", String.valueOf(AccountHelper.getUserId()))
                 .params("token", TokenManager.getInstance().getToken());
 
         KidooApiService kidooApiService = requset.create(KidooApiService.class);
-        Observable<KidooApiResult<ReturnNullBean>> observable = requset.call(kidooApiService.createMatch(requset.getParams().urlParamsMap));
+        Observable<KidooApiResult<ReturnNullBean>> observable = requset.call(kidooApiService.addMatchPic(requset.getParams().urlParamsMap));
 
         return observable;
 

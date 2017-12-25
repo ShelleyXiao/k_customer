@@ -1,10 +1,11 @@
 package com.kidoo.customer.api.token;
 
+import android.os.SystemClock;
+
 import com.kidoo.customer.AppContext;
 import com.kidoo.customer.cache.ACache;
 import com.kidoo.customer.cipher.rsa.Base64Utils;
 import com.kidoo.customer.cipher.rsa.RSAUtil;
-import com.kidoo.customer.utils.LogUtils;
 
 import java.util.Date;
 
@@ -123,13 +124,21 @@ public class TokenManager {
         if (mRSAKey == null) {
             mRSAKey = getRSAKey(TokenManager.KEY_RSA);
         }
+        if(mRSAKey == null) {
+            int count = 5;
+
+            while ((mRSAKey == null) && count-- > 0) {
+                mRSAKey = getRSAKey(TokenManager.KEY_RSA);
+                SystemClock.sleep(100);
+            }
+        }
 
         long getTokenTime = mAuthModel.getGetTokenTime();
         long difTime = mAuthModel.getDifTime();
         long nowTime = new Date().getTime();
         String serverTime = String.valueOf(nowTime - difTime);
         try {
-            LogUtils.i(mRSAKey.getPublickKey());
+//            LogUtils.i(mRSAKey.getPublickKey());
             byte[] bytesToken = RSAUtil.encryptByPublicKey(serverTime, mRSAKey.getPublickKey());
             String token = Base64Utils.encode(bytesToken);
 
