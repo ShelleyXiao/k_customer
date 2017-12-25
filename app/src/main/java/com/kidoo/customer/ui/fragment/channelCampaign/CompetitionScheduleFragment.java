@@ -69,8 +69,10 @@ public class CompetitionScheduleFragment extends BaseFragment {
 
                             mScheduleAdapter.replaceData(result.getEpisodeList());
                         } else {
-                            elEmptylayout.setVisibility(View.VISIBLE);
-                            elEmptylayout.setErrorType(EmptyLayout.NODATA);
+                            if(elEmptylayout != null) {
+                                elEmptylayout.setVisibility(View.VISIBLE);
+                                elEmptylayout.setErrorType(EmptyLayout.NODATA);
+                            }
                         }
                     }
                 });

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/lay_4"
+                android:layout_marginTop="@dimen/lay_4"
+                android:background="@drawable/profile_bg"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.kidoo.customer.widget.KidooSubtitleView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:subtitle="@string/competion_node_msg_title" />
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/met_competion_node_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="@dimen/lay_12"
+                        android:gravity="start"
+                        android:hint="@string/create_competion_msg_hint"
+                        android:textSize="13sp"
+                        app:met_hideUnderline="true"
+                        app:met_textColor="@color/kidoo_hint_gray"
+                        app:met_textColorHint="@color/kidoo_hint_gray" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/met_competion_node_info_str_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/lay_4"
+                    android:gravity="bottom|right"
+                    android:paddingTop="8dp"
+                    android:text="0/50"
+                    android:textColor="@color/kidoo_black_text"
+                    android:textSize="13sp"
+                    tools:text="0/50" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_node_selectTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/profile_bg"
+                android:orientation="vertical">
+
+                <com.kidoo.customer.widget.KidooSubtitleView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:subtitle="@string/competion_node_time" />
+
+                <TextView
+                    android:id="@+id/tv_competion_select_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/competion_node_time_hint"
+                    android:textColor="@color/kidoo_hint_gray"
+                    android:textColorHint="@color/kidoo_hint_gray"
+                    android:layout_marginLeft="@dimen/lay_12"
+                    android:layout_marginTop="@dimen/lay_4"
+                    android:textSize="13sp"
+                    android:layout_marginBottom="@dimen/lay_4"
+                    tools:text="time"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/lay_4"
+                android:layout_marginTop="@dimen/lay_4"
+                android:background="@drawable/profile_bg"
+                android:orientation="vertical">
+
+                <com.kidoo.customer.widget.KidooSubtitleView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:subtitle="@string/competion_node_show_type" />
+
+                <RadioGroup
+                    android:id="@+id/rg_competion_fomat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/lay_8">
+                    _
+
+                    <RadioButton
+                        android:id="@+id/rb_competion_show_type_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/lay_12"
+                        android:layout_marginStart="@dimen/lay_12"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_bg"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:text="@string/competion_node_show_type_0"
+                        android:textColor="@drawable/radio_text_color_selector"
+                        android:textSize="@dimen/font_16"
+                        tools:text="test" />
+
+                    <RadioButton
+                        android:id="@+id/rb_competion_show_type_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/lay_12"
+                        android:layout_marginStart="@dimen/lay_12"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/competion_node_show_type_1"
+                        android:textColor="@drawable/radio_text_color_selector"
+                        android:textSize="@dimen/font_16"
+                        tools:text="test" />
+
+                    <RadioButton
+                        android:id="@+id/rb_competion_show_type_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/lay_12"
+                        android:layout_marginStart="@dimen/lay_12"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/competion_node_show_type_2"
+                        android:textColor="@drawable/radio_text_color_selector"
+                        android:textSize="@dimen/font_16"
+                        tools:text="test" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/lay_4"
+                android:layout_marginTop="@dimen/lay_4"
+                android:background="@drawable/profile_bg"
+                android:orientation="vertical">
+
+                <com.kidoo.customer.widget.KidooSubtitleView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:subtitle="@string/competion_node_pic" />
+
+                <ImageView
+                    android:id="@+id/iv_competion_log"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_156"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/lay_12"
+                    android:layout_marginStart="@dimen/lay_12"
+                    android:scaleType="centerCrop"
+                    android:transitionName="@string/transitional_image"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/bt_competion_node_upload_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/lay_12"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/lay_8"
+                    android:background="@drawable/btn_normal_bg"
+                    android:text="@string/competion_node_btn_select_pic"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/lay_4"
+                android:layout_marginTop="@dimen/lay_4"
+                android:background="@drawable/profile_bg"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/bt_competion_node_add_comfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/lay_12"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/lay_8"
+                    android:background="@drawable/btn_normal_bg"
+                    android:text="@string/competion_node_btn_add_confirm"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>
+

@@ -13,6 +13,7 @@ import com.kidoo.customer.mvp.contract.CheckAllTokenContract;
 import com.kidoo.customer.mvp.presenter.account.CheckAllTokenPresenterImpl;
 import com.kidoo.customer.ui.activity.MainActivity;
 import com.kidoo.customer.ui.activity.account.LoginActivity;
+import com.kidoo.customer.ui.activity.user.UserAddMatchNodeActivity;
 import com.kidoo.customer.ui.base.activities.BaseMvpActivity;
 import com.kidoo.customer.utils.SharePrefUtil;
 
@@ -102,7 +103,7 @@ public class SplashActivity extends BaseMvpActivity<CheckAllTokenPresenterImpl> 
     @Override
     public void goLogin() {
         Intent intent = new Intent();
-        intent.setClass(this, LoginActivity.class);
+        intent.setClass(this, UserAddMatchNodeActivity.class);
         this.startActivity(intent);
         this.finish();
     }
@@ -119,7 +120,7 @@ public class SplashActivity extends BaseMvpActivity<CheckAllTokenPresenterImpl> 
                 mPresenter.checkAllTokenAction();
 
             } else {
-                intent.setClass(this, LoginActivity.class);
+                intent.setClass(this, UserAddMatchNodeActivity.class);
                 this.startActivity(intent);
                 this.finish();
             }

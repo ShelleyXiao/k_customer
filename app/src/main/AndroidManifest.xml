@@ -163,6 +163,15 @@
         </activity>
 
         <activity
+            android:name=".ui.activity.user.UserAddMatchNodeActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/competion_node_add_title"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity
             android:name=".ui.activity.AreanMapActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/aren_map_title"

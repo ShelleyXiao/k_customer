@@ -1,13 +1,18 @@
 package com.kidoo.customer.ui.fragment.channelCampaign;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 
+import com.kidoo.customer.Constants;
 import com.kidoo.customer.R;
 import com.kidoo.customer.adapter.competion.CompetionNodeListAdapter;
 import com.kidoo.customer.bean.CompetionDetailResult;
 import com.kidoo.customer.bean.CompetionNodeBean;
+import com.kidoo.customer.bean.MatchBean;
 import com.kidoo.customer.component.RxBus;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
 import com.kidoo.customer.widget.EmptyLayout;
@@ -17,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -28,11 +34,26 @@ public class CompetionNodeListFragment extends BaseFragment {
     @BindView(R.id.rv_node)
     RecyclerView rvNodeList;
 
+    @BindView(R.id.bt_add_node)
+    Button btAddNode;
+
     @BindView(R.id.error_layout)
     EmptyLayout elEmptylayout;
 
     private List<CompetionNodeBean> mNodeDatas = new ArrayList<>();
     private CompetionNodeListAdapter nodeListAdapter;
+
+    private MatchBean mMatchBean;
+    private boolean fromManager = false;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        mMatchBean = (MatchBean) bundle.getSerializable(Constants.MATCH_BEAN_DATA_KEY);
+        fromManager = bundle.getBoolean(Constants.FROM_MAMAGER_KEY, false);
+    }
 
     @Override
     protected int getLayoutId() {
@@ -51,6 +72,10 @@ public class CompetionNodeListFragment extends BaseFragment {
         rvNodeList.addItemDecoration(new SquareListDivider(mContext, LinearLayoutManager.HORIZONTAL, 2,
                 getResources().getColor(R.color.list_divider_color)));
 
+        if (fromManager) {
+            btAddNode.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -67,10 +92,18 @@ public class CompetionNodeListFragment extends BaseFragment {
 
                             nodeListAdapter.replaceData(result.getNodeList());
                         } else {
-                            elEmptylayout.setVisibility(View.VISIBLE);
-                            elEmptylayout.setErrorType(EmptyLayout.NODATA);
+                            if (!fromManager && elEmptylayout != null) {
+                                elEmptylayout.setVisibility(View.VISIBLE);
+                                elEmptylayout.setErrorType(EmptyLayout.NODATA);
+                            }
                         }
                     }
                 });
+    }
+
+    @OnClick(R.id.bt_add_node)
+    public void addNode() {
+
+
     }
 }

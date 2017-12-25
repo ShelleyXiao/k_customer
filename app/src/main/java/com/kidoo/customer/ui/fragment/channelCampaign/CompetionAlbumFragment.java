@@ -138,7 +138,7 @@ public class CompetionAlbumFragment extends BaseFragment {
                         if (result != null && (result.getAlbumList() != null && result.getAlbumList().size() > 0)) {
                             albumAdapter.replaceData(result.getAlbumList());
                         } else {
-                            if (!fromManager) {
+                            if (!fromManager && elEmptylayout != null) {
                                 elEmptylayout.setVisibility(View.VISIBLE);
                                 elEmptylayout.setErrorType(EmptyLayout.NODATA);
                             }

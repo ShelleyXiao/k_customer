@@ -68,8 +68,10 @@ public class CompetionMedalListFragment extends BaseFragment {
 
                             medalListAdapter.replaceData(result.getMedalList());
                         } else {
-                            elEmptylayout.setVisibility(View.VISIBLE);
-                            elEmptylayout.setErrorType(EmptyLayout.NODATA);
+                            if(elEmptylayout != null) {
+                                elEmptylayout.setVisibility(View.VISIBLE);
+                                elEmptylayout.setErrorType(EmptyLayout.NODATA);
+                            }
                         }
                     }
                 });
