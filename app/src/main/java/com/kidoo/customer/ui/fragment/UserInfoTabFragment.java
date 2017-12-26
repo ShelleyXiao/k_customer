@@ -27,6 +27,7 @@ import com.kidoo.customer.ui.activity.setting.SettingActivity;
 import com.kidoo.customer.ui.activity.user.UserMatchManagerActivity;
 import com.kidoo.customer.ui.activity.user.UserMatchsListActivity;
 import com.kidoo.customer.ui.activity.user.UserDetailActivity;
+import com.kidoo.customer.ui.activity.user.UserTeamsActivity;
 import com.kidoo.customer.ui.base.fragment.BaseMvpFragment;
 import com.kidoo.customer.utils.LogUtils;
 import com.kidoo.customer.utils.TDevice;
@@ -192,6 +193,11 @@ public class UserInfoTabFragment extends BaseMvpFragment<UserInfoPresenterImpl> 
             case R.id.userinfo_item_campain_manager:
                 Intent intent3 = new Intent(getActivity(), UserMatchManagerActivity.class);
                 startActivity(intent3);
+                break;
+
+            case R.id.userinfo_item_team:
+                Intent intent4 = new Intent(getActivity(), UserTeamsActivity.class);
+                startActivity(intent4);
                 break;
         }
     }

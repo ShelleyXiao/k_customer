@@ -163,16 +163,20 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/lay_12"/>
+        android:layout_height="@dimen/lay_12"
+        android:visibility="gone"/>
 
     <com.kidoo.customer.widget.MyEnterLayout
+
         android:id="@+id/userinfo_item_challengerec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/list_item_normal_selector"
         android:clickable="true"
+        android:visibility="gone"
         app:itemIcon="@drawable/icon_challengerec"
-        app:itemTitle="@string/userinfo_tab_challengerec_item"/>
+        app:itemTitle="@string/userinfo_tab_challengerec_item"
+        />
 
 
     <View

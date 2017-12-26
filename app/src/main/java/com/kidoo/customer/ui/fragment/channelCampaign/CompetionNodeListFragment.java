@@ -1,5 +1,6 @@
 package com.kidoo.customer.ui.fragment.channelCampaign;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import com.kidoo.customer.bean.CompetionDetailResult;
 import com.kidoo.customer.bean.CompetionNodeBean;
 import com.kidoo.customer.bean.MatchBean;
 import com.kidoo.customer.component.RxBus;
+import com.kidoo.customer.ui.activity.user.UserAddMatchNodeActivity;
 import com.kidoo.customer.ui.base.fragment.BaseFragment;
 import com.kidoo.customer.widget.EmptyLayout;
 import com.kidoo.customer.widget.recylerview.SquareListDivider;
@@ -23,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -45,6 +48,8 @@ public class CompetionNodeListFragment extends BaseFragment {
 
     private MatchBean mMatchBean;
     private boolean fromManager = false;
+
+    private CompetionDetailResult mDetailResult;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,6 +96,8 @@ public class CompetionNodeListFragment extends BaseFragment {
                         if (result != null && (result.getNodeList() != null && result.getNodeList().size() > 0)) {
 
                             nodeListAdapter.replaceData(result.getNodeList());
+                            mDetailResult = result;
+
                         } else {
                             if (!fromManager && elEmptylayout != null) {
                                 elEmptylayout.setVisibility(View.VISIBLE);
@@ -99,11 +106,37 @@ public class CompetionNodeListFragment extends BaseFragment {
                         }
                     }
                 });
+
+        RxBus.getDefault().toObservableSticky(CompetionNodeBean.class).
+                subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CompetionNodeBean>() {
+                    @Override
+                    public void accept(CompetionNodeBean competionNodeBean) throws Exception {
+                        if (competionNodeBean != null) {
+                            nodeListAdapter.addData(competionNodeBean);
+                            List<CompetionNodeBean> nodeBeanList = mDetailResult.getNodeList();
+                            if (null != nodeBeanList) {
+                                nodeBeanList.add(competionNodeBean);
+                            } else {
+                                nodeBeanList = new ArrayList<>();
+                                nodeBeanList.add(competionNodeBean);
+                                mDetailResult.setNodeList(nodeBeanList);
+                                if (!fromManager && elEmptylayout != null) {
+                                    elEmptylayout.setVisibility(View.GONE);
+                                }
+                                nodeListAdapter.replaceData(nodeBeanList);
+                            }
+                        }
+                    }
+                });
     }
 
     @OnClick(R.id.bt_add_node)
     public void addNode() {
-
-
+        Intent intent = new Intent(getActivity(), UserAddMatchNodeActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.MATCH_ID_KEY, mMatchBean.getId());
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

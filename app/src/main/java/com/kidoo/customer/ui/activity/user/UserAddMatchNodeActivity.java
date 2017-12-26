@@ -1,7 +1,11 @@
 package com.kidoo.customer.ui.activity.user;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,14 +14,21 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.kidoo.customer.AppContext;
+import com.kidoo.customer.Constants;
 import com.kidoo.customer.R;
 import com.kidoo.customer.api.token.QNToken;
+import com.kidoo.customer.bean.CompetionNodeBean;
+import com.kidoo.customer.component.RxBus;
 import com.kidoo.customer.media.SelectImageActivity;
 import com.kidoo.customer.media.config.SelectOption;
-import com.kidoo.customer.ui.base.activities.BaseBackActivity;
+import com.kidoo.customer.mvp.contract.user.CompetionAddNodeContract;
+import com.kidoo.customer.mvp.presenter.user.CompetionAddNodePresenterImpl;
+import com.kidoo.customer.ui.base.activities.BaseBackMvpActivity;
 import com.kidoo.customer.utils.DateTimeUtils;
+import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.FileUtils;
 import com.kidoo.customer.utils.LogUtils;
+import com.kidoo.customer.widget.EditTextLengthFilter;
 import com.kidoo.customer.widget.dialog.CommonDialog;
 import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.http.ResponseInfo;
@@ -30,6 +41,9 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.text.ParseException;
+import java.util.Calendar;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -41,8 +55,8 @@ import top.zibin.luban.OnCompressListener;
  * Created by ShaudXiao on 2017/12/25.
  */
 
-public class UserAddMatchNodeActivity extends BaseBackActivity
-        implements View.OnClickListener {
+public class UserAddMatchNodeActivity extends BaseBackMvpActivity<CompetionAddNodePresenterImpl>
+        implements View.OnClickListener, CompetionAddNodeContract.View {
 
     @BindView(R.id.met_competion_node_info)
     MaterialEditText metNodeInfoInput;
@@ -68,7 +82,10 @@ public class UserAddMatchNodeActivity extends BaseBackActivity
     @BindView(R.id.bt_competion_node_add_comfirm)
     Button btNodeAddConfirm;
 
-    private DatePicker datePicker;
+    @Inject
+    CompetionAddNodePresenterImpl mPresenter;
+
+    private DatePicker mDatePicker;
     private int mShowType = 1;
     private long mNodeTimestamp;
 
@@ -79,6 +96,17 @@ public class UserAddMatchNodeActivity extends BaseBackActivity
     private QNToken mQNToken;
     private UploadManager mUploadManager;
     private long updateQNTokenTime = 0;
+
+    private int mMatchId = -1;
+    private CompetionNodeBean mNodeBean;
+
+    @Override
+    protected boolean initBundle(Bundle bundle) {
+        if (bundle != null) {
+            mMatchId = bundle.getInt(Constants.MATCH_ID_KEY, -1);
+        }
+        return super.initBundle(bundle);
+    }
 
     @Override
     protected int getContentView() {
@@ -99,11 +127,10 @@ public class UserAddMatchNodeActivity extends BaseBackActivity
 
         mUploadManager = new UploadManager(config);
 
-
-        datePicker = new DatePicker(this, DatePicker.YEAR_MONTH_DAY);
-        datePicker.setRangeStart(1970, 8, 29);//开始范围
-        datePicker.setRangeEnd(2022, 1, 1);//结束范围
-        datePicker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
+        mDatePicker = new DatePicker(this, DatePicker.YEAR_MONTH_DAY);
+        mDatePicker.setRangeStart(1970, 8, 29);//开始范围
+        mDatePicker.setRangeEnd(2022, 1, 1);//结束范围
+        mDatePicker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
             public void onDatePicked(String year, String month, String day) {
                 tvNodeSelectTime.setText(year + "-" + month + "-" + day);
@@ -117,13 +144,94 @@ public class UserAddMatchNodeActivity extends BaseBackActivity
             }
         });
 
+        rgShowType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_competion_show_type_0:
+                        mShowType = 1;
+                        break;
+                    case R.id.rb_competion_show_type_1:
+                        mShowType = 2;
+                        break;
+                    case R.id.rb_competion_show_type_2:
+                        mShowType = 3;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+        metNodeInfoInput.setFilters(new InputFilter[]{new EditTextLengthFilter(this, 500, tvNodeInfoStrCounter, null)});
 
     }
 
     @Override
     protected void initEventAndData() {
         super.initEventAndData();
+        Calendar calendar = Calendar.getInstance();
+        mNodeTimestamp = calendar.getTime().getTime();
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        mDatePicker.setSelectedItem(year, month, day);
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (System.currentTimeMillis() - updateQNTokenTime > (7200 * 1000)) {
+            mPresenter.doQueryPicInfo();
+        }
+    }
+
+    @Override
+    protected CompetionAddNodePresenterImpl initInjector() {
+        mActivityComponent.inject(this);
+        return mPresenter;
+    }
+
+    @Override
+    public void updateSuccess(boolean sccuss) {
+        dismissLoadingDialog();
+        CommonDialog dialog = new CommonDialog(UserAddMatchNodeActivity.this);
+        dialog.setTitle(null);
+
+        if (sccuss) {
+            dialog.setMessage(getString(R.string.competion_add_node_success_msg));
+            dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    if (mNodeBean != null) {
+                        RxBus.getDefault().postSticky(mNodeBean);
+                    }
+                    finish();
+                }
+            });
+        } else {
+            dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.setMessage(getString(R.string.competion_add_node_fiald_msg));
+        }
+        dialog.show();
+    }
+
+    @Override
+    public void updateQNToken(QNToken token) {
+        mQNToken = token;
+        updateQNTokenTime = System.currentTimeMillis();
+    }
+
 
     @OnClick({R.id.bt_competion_node_add_comfirm, R.id.bt_competion_node_upload_pic
             , R.id.ll_node_selectTime})
@@ -131,6 +239,24 @@ public class UserAddMatchNodeActivity extends BaseBackActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_competion_node_add_comfirm:
+                CommonDialog dialog = new CommonDialog(UserAddMatchNodeActivity.this);
+                dialog.setTitle(null);
+                dialog.setMessage(getString(R.string.competion_add_node_confirm));
+                dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        competionAddNodeAction();
+                    }
+                });
+                dialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
                 break;
             case R.id.bt_competion_node_upload_pic:
 
@@ -149,13 +275,36 @@ public class UserAddMatchNodeActivity extends BaseBackActivity
                         }).build());
                 break;
             case R.id.ll_node_selectTime:
-                if (!datePicker.isShowing()) {
-                    datePicker.show();
+                if (!mDatePicker.isShowing()) {
+                    mDatePicker.show();
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    private void competionAddNodeAction() {
+        String msg = metNodeInfoInput.getText().toString().trim();
+        if (TextUtils.isEmpty(msg)) {
+            Dialog dialog = DialogHelper.getWarningDailt(this,
+                    getString(R.string.empty_node_msg_input_prompt));
+            dialog.show();
+
+            return;
+        }
+
+        mNodeBean = new CompetionNodeBean();
+        mNodeBean.setCreateTime(mNodeTimestamp);
+        mNodeBean.setMatchId(mMatchId);
+        mNodeBean.setPic(mUploadPath);
+        mNodeBean.setPicMini(mUploadPath);
+        mNodeBean.setMsg(msg);
+
+        mPresenter.addCompetionNode(mMatchId + "", msg,
+                mNodeTimestamp + "", mShowType + "",
+                mUploadPath, mUploadPath);
+
     }
 
     private void uploadNewPhoto(File file) {

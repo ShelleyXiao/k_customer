@@ -26,7 +26,7 @@ import com.kidoo.customer.bean.MatchBean;
 import com.kidoo.customer.media.SelectImageActivity;
 import com.kidoo.customer.media.config.SelectOption;
 import com.kidoo.customer.mvp.contract.user.CreateCompetionContract;
-import com.kidoo.customer.mvp.presenter.user.CreateCompetionPresenter;
+import com.kidoo.customer.mvp.presenter.user.CreateCompetionPresenterImpl;
 import com.kidoo.customer.ui.base.activities.BaseBackMvpActivity;
 import com.kidoo.customer.utils.DialogHelper;
 import com.kidoo.customer.utils.FileUtils;
@@ -66,7 +66,7 @@ import top.zibin.luban.OnCompressListener;
  */
 
 
-public class UserCreateCompetionActivity extends BaseBackMvpActivity<CreateCompetionPresenter> implements View.OnClickListener
+public class UserCreateCompetionActivity extends BaseBackMvpActivity<CreateCompetionPresenterImpl> implements View.OnClickListener
         , SelectMenuView.OnMenuSelectDataChangedListener, EasyPermissions.PermissionCallbacks,
         CreateCompetionContract.View {
 
@@ -120,7 +120,7 @@ public class UserCreateCompetionActivity extends BaseBackMvpActivity<CreateCompe
     private int competionFormat = 1;
 
     @Inject
-    public CreateCompetionPresenter mPresenter;
+    public CreateCompetionPresenterImpl mPresenter;
 
     @Override
     protected int getContentView() {
@@ -129,7 +129,7 @@ public class UserCreateCompetionActivity extends BaseBackMvpActivity<CreateCompe
 
 
     @Override
-    protected CreateCompetionPresenter initInjector() {
+    protected CreateCompetionPresenterImpl initInjector() {
         mActivityComponent.inject(this);
         return mPresenter;
     }
@@ -170,7 +170,7 @@ public class UserCreateCompetionActivity extends BaseBackMvpActivity<CreateCompe
         super.initEventAndData();
 
         mtNameInput.setFilters(new InputFilter[]{new EditTextLengthFilter(this, 20, tvNameCounter, null)});
-        tvMsgCounter.setFilters(new InputFilter[]{new EditTextLengthFilter(this, 500, tvMsgCounter, null)});
+        metMsgInput.setFilters(new InputFilter[]{new EditTextLengthFilter(this, 500, tvMsgCounter, null)});
 
         rgCompetionLevel.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -271,17 +271,23 @@ public class UserCreateCompetionActivity extends BaseBackMvpActivity<CreateCompe
         CommonDialog dialog = new CommonDialog(UserCreateCompetionActivity.this);
         dialog.setTitle(null);
 
-        dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
         if (sccuss) {
             dialog.setMessage(getString(R.string.create_competion_success_msg));
+            dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    finish();
+                }
+            });
         } else {
             dialog.setMessage(getString(R.string.create_competion_fiald_msg));
+            dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
         }
         dialog.show();
     }

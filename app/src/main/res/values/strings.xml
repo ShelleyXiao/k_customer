@@ -318,6 +318,8 @@
     <string name="create_competion_success_msg">赛事创建成功</string>
     <string name="create_competion_fiald_msg">赛事创建失败</string>
 
+
+
     <string name="competion_node_add_title">上传赛况</string>
     <string name="competion_node_msg_title">节点信息</string>
     <string name="competion_node_msg_hint">请输入您的赛况信息(最多不超过500个字符)</string>
@@ -326,12 +328,16 @@
     <string name="competion_node_pic">图片</string>
     <string name="competion_node_show_type">显示类型</string>
     <string name="competion_node_btn_select_pic">选择图片</string>
-    <string name="competion_node_btn_add_confirm">选择图片</string>
+    <string name="competion_node_btn_add_confirm">确认添加</string>
 
     <string name="competion_node_show_type_0">所有人</string>
     <string name="competion_node_show_type_1">报名选手</string>
     <string name="competion_node_show_type_2">验证通过</string>
 
+    <string name="competion_add_node_confirm">确定要添加吗?</string>
+    <string name="competion_add_node_success_msg">赛况添加成功</string>
+    <string name="competion_add_node_fiald_msg">赛况添加失败</string>
+    <string name="empty_node_msg_input_prompt">赛况信息不能为空</string>
 
     <string name="query_team_empty">没有找到相依的战队</string>
     <string name="query_team_name_intput_emtpy">战队名不能为空哦！</string>
@@ -369,5 +375,8 @@
     <string name="team_modify_msg_limit">字数已超过限制</string>
 
     <string name="team_modify_confirm">确定要修改吗?</string>
+
+    <string name="user_teams_title">我的战队</string>
+    <string name="user_teams_create_team">创建战队</string>
 
 </resources>

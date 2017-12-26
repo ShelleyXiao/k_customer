@@ -128,6 +128,10 @@ public interface KidooApiService {
     @FormUrlEncoded
     Observable<KidooApiResult<QueryTeamResult>> queryTeamList(@FieldMap Map<String, String> maps);
 
+    @POST("customer/org/queryMyTeam")
+    @FormUrlEncoded
+    Observable<KidooApiResult<QueryTeamResult>> queryMyTeam(@FieldMap Map<String, String> maps);
+
     @POST("customer/match/createMatch")
     @FormUrlEncoded
     Observable<KidooApiResult<ReturnNullBean>> createMatch(@FieldMap Map<String, String> maps);
@@ -135,6 +139,10 @@ public interface KidooApiService {
     @POST("customer/match/addMatchPic")
     @FormUrlEncoded
     Observable<KidooApiResult<ReturnNullBean>> addMatchPic(@FieldMap Map<String, String> maps);
+
+    @POST("customer/match/addMatchNode")
+    @FormUrlEncoded
+    Observable<KidooApiResult<ReturnNullBean>> addMatchNode(@FieldMap Map<String, String> maps);
 
     @POST("customer/org/queryTeamDetail")
     @FormUrlEncoded

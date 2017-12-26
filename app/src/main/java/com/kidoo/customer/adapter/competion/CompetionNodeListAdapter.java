@@ -3,6 +3,7 @@ package com.kidoo.customer.adapter.competion;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
@@ -44,6 +45,7 @@ public class CompetionNodeListAdapter extends BaseQuickAdapter<CompetionNodeBean
 
         helper.setText(R.id.tv_node_msg, item.getMsg());
         GlideImageView ivNodePic = (GlideImageView) helper.getView(R.id.iv_node_pic);
+        FrameLayout imageLayout = helper.getView(R.id.left_image);
         if(!TextUtils.isEmpty(item.getPic())) {
 
             final CircleProgressView progressView = (CircleProgressView) helper.getView(R.id.pv_node_pic_progress);
@@ -62,7 +64,8 @@ public class CompetionNodeListAdapter extends BaseQuickAdapter<CompetionNodeBean
                 }
             });
         } else {
-            ivNodePic.setImageDrawable(mContex.getResources().getDrawable(R.color.placeholder));
+//            ivNodePic.setImageDrawable(mContex.getResources().getDrawable(R.color.placeholder));
+            imageLayout.setVisibility(View.GONE);
         }
 
     }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="@dimen/lay_4"
+        android:background="@drawable/profile_bg"
+        android:orientation="horizontal">
+
+
+        <com.weavey.loading.lib.LoadingLayout
+            android:id="@+id/loading_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/lay_4"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/bt_create_team"
+            app:isFirstVisible="false">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/swipe_target"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:scrollbars="none"/>
+
+
+        </com.weavey.loading.lib.LoadingLayout>
+
+        <Button
+            android:id="@+id/bt_create_team"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="9dp"
+            android:background="@drawable/btn_normal_bg"
+            android:text="@string/user_teams_create_team"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="visible"/>
+
+    </RelativeLayout>
+
+
+</FrameLayout>

@@ -19,13 +19,13 @@ import io.reactivex.disposables.Disposable;
  */
 
 
-public class CreateCompetionPresenter extends BasePresenterImpl<CreateCompetionContract.View> implements CreateCompetionContract.Presenter {
+public class CreateCompetionPresenterImpl extends BasePresenterImpl<CreateCompetionContract.View> implements CreateCompetionContract.Presenter {
 
     @Inject
     public CraeteCompetionInteractor mInteractor;
 
     @Inject
-    public CreateCompetionPresenter() {
+    public CreateCompetionPresenterImpl() {
     }
 
     @Override

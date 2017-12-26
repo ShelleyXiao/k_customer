@@ -251,6 +251,16 @@
         </activity>
 
         <activity
+            android:name=".ui.activity.user.UserTeamsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/user_teams_title"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+
+        <activity
             android:name=".ui.activity.ArenDetailActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/aren_info_title"
